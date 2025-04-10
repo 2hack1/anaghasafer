@@ -1,0 +1,134 @@
+nav {
+    height: auto;
+    background-color: white;
+    padding: 10px 2rem;
+
+    .nav-upper-part {
+        display: flex;
+        padding-bottom: 5px;
+
+        .right-part {
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            .tolls {
+                font-size: 0.9rem;
+                display: flex;
+                gap: 3px;
+                align-items: center;
+            }
+
+            .btns {
+                margin-left: auto;
+                display: flex;
+                gap: 3px;
+            }
+        }
+    }
+
+    .nav-bottom-part {
+        border: 0;
+        border-top: 1px solid rgb(202, 202, 202);
+        display: flex;
+        align-items: center;
+        padding-top: 5px;
+
+        .logo {
+            height: 30px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .right-part {
+            margin-left: auto;
+            display: flex;
+            gap: 5px;
+        }
+    }
+}
+
+.btn-login {
+    padding: 5px;
+    border: 0;
+    background: red;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+
+    .bi-people {
+        color: white;
+    }
+
+    &:hover {
+        background: rgb(15, 15, 15);
+    }
+}
+
+.menu {
+    .menu-items {
+        padding: 5px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: bold;
+
+        &:hover {
+
+            color: red;
+            transform: translateY(-2px);
+        }
+    }
+}
+
+.login__container {
+    position: relative;
+
+    .login__box {
+        top: 100%;
+        position: absolute;
+        right: 0;
+        // width: 200px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgb(168, 167, 167);
+        padding: 10px;
+        margin-top: 1rem;
+        border: 1px solid red;
+
+        .login__bottom form {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            input,
+            button {
+                padding: 5px;
+                border-radius: 5px;
+                outline: none;
+                border: 0;
+                background: white;
+            }
+
+
+        }
+
+        .login__box_image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10000px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
