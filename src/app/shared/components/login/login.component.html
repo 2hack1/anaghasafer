@@ -1,39 +1,60 @@
 <!-- Overlay -->
 <div class="overlay"></div>
 
-<!-- Modal -->
 <div class="modal">
-  <!-- Close Button -->
   <button class="close-btn" (click)="closeLogin()">&times;</button>
 
-  <!-- Logo -->
   <div class="logo-container">
     <img src="icons/logo.png" alt="Pinterest" class="logo" />
   </div>
 
-  <!-- Title -->
-  <h2 class="title">Login</h2>
+  <!-- login -->
+  <ng-container *ngIf="!isSignup">
+    <h2 class="title">Login.</h2>
+    <input type="email" placeholder="Email" class="input" />
+    <input type="password" placeholder="Password" class="input" />
+    <p class="forgot">Forgot your password?</p>
+    <button class="login-btn">Log in</button>
+    <p class="terms">
+      By continuing, you agree to AnaghaSafer
+      <span class="underline"><a href="#">Terms of Service</a></span> and
+      <span class="underline">Privacy Policy</span>.
+    </p>
+    <p class="signup">
+      Not on Pinterest yet?
+      <span class="link" (click)="isSignup = true">Sign up</span>
+    </p>
+  </ng-container>
 
-  <!-- Email -->
-  <input type="email" placeholder="Email" class="input" />
-
-  <!-- Password -->
-  <input type="password" placeholder="Password" class="input" />
-
-  <!-- Forgot -->
-  <p class="forgot">Forgot your password?</p>
-
-  <!-- Login Button -->
-  <button class="login-btn">Log in</button>
-
-
-  <p class="terms">
-    By continuing, you agree to AnaghaSafer <span class="underline"><a href="#">Terms of Service</a></span> and
-    <span class="underline">Privacy Policy</span>.
-  </p>
-
-  <!-- Sign up link -->
-  <p class="signup">
-    Not on Pinterest yet? <span class="link">Sign up</span>
-  </p>
+  <!-- sign up -->
+  <ng-container *ngIf="isSignup">
+    <h2 class="title">SIGN UP</h2>
+    <div class="select__name">
+      <select class="input">
+        <option>Mr</option>
+        <option>Mis</option>
+      </select>
+      <input type="email" placeholder="First Name" class="input" />
+      <input type="email" placeholder="Last Name" class="input" />
+    </div>
+    <input
+      type="text"
+      placeholder="Email ID will we your username"
+      class="input"
+    />
+    <input type="password" placeholder="Password" class="input" />
+    <input type="password" placeholder="Mobile No." class="input" />
+    <input type="password" placeholder="Password" class="input" />
+    <!-- <p class="forgot">Forgot your password?</p> -->
+    <button class="login-btn">Sign up</button>
+    <p class="terms">
+      By continuing, you agree to AnaghaSafer
+      <span class="underline"><a href="#">Terms of Service</a></span> and
+      <span class="underline">Privacy Policy</span>.
+    </p>
+    <p class="signup">
+      Not on Pinterest yet?
+      <span class="link" (click)="isSignup = false">Login </span>
+    </p>
+  </ng-container>
 </div>

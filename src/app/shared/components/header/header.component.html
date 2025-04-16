@@ -1,44 +1,40 @@
 <nav>
-    <div class="nav-upper-part">
-        <div class="right-part">
-            <!-- how to name divs ? -->
-            <div class="tolls">
-                <p>
-                    <span class="bi bi-telephone"></span>Toll no.XXXXXXXX
-                </p>|
-                <p>
-                    <span class="bi bi-telephone"></span>Toll no.XXXXXXXX
-                </p>
-            </div>
-            <div class="btns">
-                <div class="login__container">
-                    <button class="btn-login" (click)="isLogin = true">
-                        <span class="bi bi-people"></span> login
-                    </button>
-                </div>
-                <button class="btn-login">
-                    <span class="bi bi-people"></span> Sign up
-                </button>
-            </div>
+  <div class="nav-upper-part">
+    <div class="right-part">
+      <div class="tolls">
+        <p><span class="bi bi-telephone"></span>Toll no.XXXXXXXX</p>
+        |
+        <p><span class="bi bi-telephone"></span>Toll no.XXXXXXXX</p>
+      </div>
+      <div class="btns">
+        <div class="globe__right">
+          <span class="bi bi-globe"></span>
+          Gwalior, Madhya Pradesh, India
         </div>
+        <button class="btn-login" (click)="isLogin = true">
+          <span class="bi bi-people"></span> login
+        </button>
+      </div>
+    </div>
+  </div>
 
+  <div class="nav-bottom-part">
+    <div class="logo-sidebar">
+      <div class="logo">
+        <img src="icons/logo.png" alt="" />
+      </div>
     </div>
 
-    <div class="nav-bottom-part">
-        <div class="logo-sidebar">
-            <div class="logo">
-                <img src="icons/logo.png" alt="">
-            </div>
-        </div>
-
-        <div class="right-part menu">
-            <div *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]">
-                <p class="menu-items">Home</p>
-            </div>
-        </div>
+    <div class="right-part menu">
+      <div *ngFor="let item of [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]">
+        <p class="menu-items">Home</p>
+      </div>
     </div>
+  </div>
 </nav>
 
 <ng-container *ngIf="isLogin">
+  <div @fadeInOut>
     <app-login [(isLogin)]="isLogin"></app-login>
+  </div>
 </ng-container>

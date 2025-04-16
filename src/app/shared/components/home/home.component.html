@@ -1,0 +1,388 @@
+<div class="slider-wrapper">
+  <div class="slider">
+
+    <div class="slider-hero-content">
+      <h1>Customize & Book<br />Amazing Holiday Packages</h1>
+      <p>650+ Travel Agents serving 65+ Destinations worldwide</p>
+
+      <div class="form-row">
+        <input type="text" placeholder="Type a Destination" />
+        <select>
+          <option>Select duration</option>
+          <option>3 Days</option>
+          <option>5 Days</option>
+        </select>
+        <select>
+          <option>Select month</option>
+          <option>April</option>
+          <option>May</option>
+        </select>
+        <button>Explore</button>
+      </div>
+
+      <p class="note">Destination not sure? <a href="#">Click here!</a></p>
+    </div>
+
+
+    <!-- Sliding Images -->
+    <div class="slides" id="slideContainer">
+      <div class="slide" style="background-image: url('assets/slider12.png');"></div>
+      <div class="slide" style="background-image: url('assets/slider13.png');"></div>
+      <div class="slide" style="background-image: url('assets/slider14.png');"></div>
+    </div>
+
+    <div class="nav prev" (click)="prevSlide()">❮</div>
+    <div class="nav next" (click)="nextSlide()">❯</div>
+  </div>
+
+  <!-- ************************************Fixed Building Graphic at Bottom ********************************-->
+  <img src="assets/image.webp" alt="Buildings" class="building-graphic" />
+</div>
+<div class="container">
+  <div class="main-heading">
+    <h2> </h2>
+  </div>
+</div>
+
+<!-- *************************************this is the heading of on tranding Destinations********************** -->
+<div class="container">
+  <div class="header">
+    <h2>Top Trending Destinations</h2>
+    <a href="#">View All Tours <span>&#10140;</span></a>
+  </div>
+  <!-- 
+  <div class="scroll-wrapper">
+    <button class="scroll-btn left" (click)="scrollLeft()">&#8592;</button>
+
+    <div #scrollContainer class="scroll-container">
+      <div class="card" *NgFor="let place of destinations">
+        <img [src]="place.image" [alt]="place.name" />
+        <p>{{ place.packages }}</p>
+        <h3>{{ place.name }}</h3>
+      </div>
+    </div>
+
+    <button class="scroll-btn right" (click)="scrollRight()">&#8594;</button>
+  </div> -->
+
+  <div class="scroll-wrapper">
+    <button class="scroll-btn" (click)="scrollLeft()">&#8592;</button>
+
+    <div class="scroll-container" #scrollContainer>
+      <div class="card">
+        <img src="assets/uttarakhand.webp" alt="Uttarakhand" />
+        <p>50+ Packages</p>
+        <h3>Uttarakhand</h3>
+      </div>
+      <div class="card">
+        <img src="assets/kerala.webp" alt="Kerala" />
+        <p>40+ Packages</p>
+        <h3>Kerala</h3>
+      </div>
+      <div class="card">
+        <img src="assets/sikkim.webp" alt="Sikkim" />
+        <p>40+ Packages</p>
+        <h3>Sikkim</h3>
+      </div>
+      <div class="card">
+        <img src="assets/bhutan.webp" alt="Bhutan" />
+        <p>20+ Packages</p>
+        <h3>Bhutan</h3>
+      </div>
+      <div class="card">
+        <img src="assets/thailand.webp" alt="Thailand" />
+        <p>10+ Packages</p>
+        <h3>Thailand</h3>
+      </div>
+      <div class="card">
+        <img src="assets/uttarakhand.webp" alt="Thailand" />
+        <p>10+ Packages</p>
+        <h3>Thailand</h3>
+      </div>
+      <div class="card">
+        <img src="assets/kerala.webp" alt="Thailand" />
+        <p>10+ Packages</p>
+        <h3>Thailand</h3>
+      </div>
+      <div class="card">
+        <img src="assets/thailand.webp" alt="Thailand" />
+        <p>10+ Packages</p>
+        <h3>Thailand</h3>
+      </div>
+    </div>
+
+    <button class="scroll-btn" (click)="scrollRight()">&#8594;</button>
+  </div>
+
+</div>
+<!-- *************************four cards***************************  -->
+<section class="section01" style=" background: url('assets/fourcard.webp') no-repeat center center/cover;">
+
+  <h2>Tailored Solutions for Every Traveller</h2>
+  <div class="cards01">
+
+    <div class="card01">
+      <i class="fas fa-map-signs"></i>
+      <h3>Multi-Day Tours</h3>
+      <p>
+        Explore different parts of India by joining one of our small-group
+        <a href="#">Shared Tours</a>, or enjoy personalised experiences with
+        family and friends on our <a href="#">Private Tours</a>.
+      </p>
+    </div>
+
+    <div class="card01">
+      <i class="fas fa-building"></i>
+      <h3>City Tours</h3>
+      <p>
+        Enjoy short, immersive <a href="#">Mumbai Tours</a> or
+        <a href="#">Delhi Tours</a>, ranging from a few hours to a full day —
+        perfect for quick experiences or filling gaps in your schedule.
+      </p>
+    </div>
+
+    <div class="card01">
+      <i class="fas fa-suitcase-rolling"></i>
+      <h3>Independent Travel</h3>
+      <p>
+        Travel independently and enjoy a worry-free experience. We
+        <a href="#">Plan Your Trip</a>, based on your needs and manage all bookings
+        and logistics, so you can fully enjoy!
+      </p>
+    </div>
+
+    <div class="card01">
+      <i class="fas fa-puzzle-piece"></i>
+      <h3>Other Services</h3>
+      <p>
+        Navigate India with our expert services, including
+        <a href="#">Corporate Tours</a>, <a href="#">School & College Tours</a>,
+        <a href="#">Filming & Media Support</a>,
+        <a href="#">Vehicle & Driver Hire</a>, and
+        <a href="#">Emergency Help</a>.
+      </p>
+    </div>
+
+  </div>
+</section>
+<!-- ********************check images*********************** -->
+<div class="tour-container">
+  <div class="tour-subtitle"><span></span>OVERSEAS JOURNEY</div>
+  <h1 class="tour-heading">INTERNATIONAL TOUR</h1>
+  <p class="tour-description">
+    Travel India Tourism Services offer the finest tour packages, custom-tailored to your unique international travel
+    plans and preferences.
+  </p>
+
+  <div class="tour-cards">
+    <div class="tour-card" *ngFor="let tour of tours">
+      <img [src]="tour.image" [alt]="tour.name" />
+      <div class="tour-overlay">
+        <h2>{{ tour.name }}</h2>
+        <p>{{ tour.tours }} Tour</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- *****************************REVIEW ************************ -->
+
+<section class="testimonial-section">
+  <h2>My AnaghaSafer Story !</h2>
+  <p class="subtitle">Customer satisfaction is our major goal. See what our customers are saying about us.</p>
+
+  <div class="slider-container">
+    <button class="slider-btn left" onclick="SlideLeft()">&#10094;</button>
+
+    <div class="slider-track" id="sliderTrack">
+
+      <div class="testimonial-card">
+        <p class="quote">❝</p>
+        <p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus provident
+          consequatur ipsam impedit perspiciatis veniam incidunt autem sint officiis dolorem.<span class="more">...Show
+            More</span></p>
+        <div class="user">
+          <img src="assets/revies/r1.jpg" alt="User" />
+          <div>
+            <p class="name">robin jems</p>
+            <p class="date">Mar 27, 2025</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="quote">❝</p>
+        <p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus provident
+          consequatur ipsam impedit perspiciatis veniam incidunt autem sint officiis dolorem.<span class="more">...Show
+            More</span></p>
+        <div class="user">
+          <img src="assets/revies/r2.jpg" alt="User" />
+          <div>
+            <p class="name">jon ford</p>
+            <p class="date">Mar 01, 2023</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="quote">❝</p>
+        <p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus provident
+          consequatur ipsam impedit perspiciatis veniam incidunt autem sint officiis dolorem.<span class="more">...Show
+            More</span></p>
+        <div class="user">
+          <img src="assets/revies/r3.jpg" alt="User" />
+          <div>
+            <p class="name">Devidas Kulkarni</p>
+            <p class="date">Jan 15, 2024</p>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <button class="slider-btn right" onclick="SlideRight()">&#10095;</button>
+  </div>
+
+  <button class="see-all-btn">See All</button>
+</section>
+<!-- ********************* contect form*************************  -->
+<div class="container-check1">
+  <div class="container1">
+    <div class="form-box1">
+      <h2>Make your Own Trip</h2>
+      <p>Please fill in the details to make your trip.</p>
+      <form>
+        <div class="input-group1">
+          <input type="email" placeholder=" your address" required />
+          <input type="email" placeholder="detionation address" required />
+
+        </div>
+
+        <div class="input-group1" id="otherDestinationGroup1" style="display: none;">
+          <input type="text" placeholder="Enter Other Destination" />
+        </div>
+
+        <!-- Email -->
+        <div class="input-group1">
+          <input type="email" placeholder="Your Email" required />
+        </div>
+
+
+        <div class="input-group1">
+          <div>
+            <label>Check In</label>
+            <input type="date" />
+          </div>
+          <div>
+            <label>Check Out</label>
+            <input type="date" />
+          </div>
+        </div>
+
+
+        <div class="input-group1">
+          <div class="number-field1">
+            <label><i class="fas fa-user1"></i> Adults</label>
+            <input type="number" value="1" min="1" />
+          </div>
+          <div class="number-field1">
+            <label><i class="fas fa-child1"></i> Children</label>
+            <input type="number" value="0" min="0" />
+          </div>
+        </div>
+
+
+        <button type="submit1" id="button1"><i class="fas fa-search"></i> Search Now</button>
+      </form>
+    </div>
+
+    <div class="info-box1">
+      <h2>Contact Information</h2>
+      <p>If you have any questions, feel free to reach out to us.</p>
+      <ul>
+        <li><strong>Address:</strong><br />4b Long Street, Miami, USA</li>
+        <li><strong>Phone:</strong><br />+3230-45-45-67</li>
+        <li><strong>Email:</strong><br /><a [href]="'mailto:' + email">{{ email }}</a></li>
+        <li><strong>instagram:</strong><br /><a class="social-link" [href]="'https://www.instagram.com/' + instagramUsername" target="_blank">
+          {{ instagramUsername }}
+        </a></li>
+        <li><strong>facbook:</strong><br /><a [href]="'https://www.facebook.com/' + facebookUsername" target="_blank">
+          {{ facebookUsername }}
+        </a></li>
+      </ul>
+      <div class="social-icons1">
+        <i class="fab fa-facebook-f1"></i>
+        <i class="fab fa-twitter1"></i>
+        <i class="fab fa-youtube1"></i>
+        <i class="fab fa-google-plus-g1"></i>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ************************** footer************************************** -->
+<footer>
+  <div class="footer-container">
+
+    <div class="footer-column">
+      <h3>ABOUT US</h3>
+      <p><a href="#">Why Choose Us</a></p>
+      <p><a href="#">Social Impact</a></p>
+      <p><a href="#">Contact Us</a></p>
+      <p><a href="#">Terms and Conditions</a></p>
+      <p><a href="#">Privacy Policy</a></p>
+      <p><a href="#">Sitemap</a></p>
+      <p><a href="#">Blog</a></p>
+    </div>
+
+    <div class="footer-column">
+      <h3>TOP DESTINATIONS</h3>
+      <p><a href="#">Golden Triangle</a></p>
+      <p><a href="#">Rajasthan</a></p>
+      <p><a href="#">North India</a></p>
+      <p><a href="#">Kerala</a></p>
+      <p><a href="#">South India</a></p>
+      <p><a href="#">Delhi</a></p>
+      <p><a href="#">Mumbai</a></p>
+    </div>
+
+    <div class="footer-column">
+      <h3>RESPONSIBLE TOURISM AWARDS</h3>
+      <p>🏅 🌍 🦻 🚌</p>
+
+      <div class="newsletter">
+        <h3>NEWSLETTER</h3>
+        <div style="display: flex; gap: 5px; align-items: center;">
+          <input type="email" placeholder="Email Address" />
+          <button>SUBMIT</button>
+        </div>
+
+      </div>
+
+      <h3>FOLLOW US</h3>
+      <div class="social-icons">
+        <a href="#">📘</a>
+        <a href="#">📸</a>
+        <a href="#">💼</a>
+        <a href="#">▶️</a>
+        <a href="#">🧭</a>
+      </div>
+    </div>
+
+
+    <div class="footer-column">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114542.80185929636!2d78.19089894999999!3d26.21415585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3976c5d1792291fb%3A0xff4fb56d65bc3adf!2sGwalior%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1744789588075!5m2!1sen!2sin"
+        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    </div>
+
+
+  </div>
+  <div class="bottom-bar">
+    © Copyright 2025 Reality <strong>AnaghaSafer</strong> . All Rights Reserved.
+  </div>
+</footer>
