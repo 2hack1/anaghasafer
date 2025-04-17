@@ -1,9 +1,10 @@
 import { Component, OnInit ,ViewChild, ElementRef } from '@angular/core';
 import { ContainerComponent } from "../container/container.component";
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-home',
-  imports: [ CommonModule],
+  imports: [ CommonModule,RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

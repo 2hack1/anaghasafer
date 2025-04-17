@@ -47,23 +47,9 @@
 <!-- *************************************this is the heading of on tranding Destinations********************** -->
 <div class="container">
   <div class="header">
-    <h2>Top Trending Destinations</h2>
-    <a href="#">View All Tours <span>&#10140;</span></a>
+    <h2>Top Trending India's Destinations</h2>
+    <a class="hower" routerLink="states">View All Tours <span>&#10140;</span></a>
   </div>
-  <!-- 
-  <div class="scroll-wrapper">
-    <button class="scroll-btn left" (click)="scrollLeft()">&#8592;</button>
-
-    <div #scrollContainer class="scroll-container">
-      <div class="card" *NgFor="let place of destinations">
-        <img [src]="place.image" [alt]="place.name" />
-        <p>{{ place.packages }}</p>
-        <h3>{{ place.name }}</h3>
-      </div>
-    </div>
-
-    <button class="scroll-btn right" (click)="scrollRight()">&#8594;</button>
-  </div> -->
 
   <div class="scroll-wrapper">
     <button class="scroll-btn" (click)="scrollLeft()">&#8592;</button>
@@ -168,7 +154,7 @@
 <!-- ********************check images*********************** -->
 <div class="tour-container">
   <div class="tour-subtitle"><span></span>OVERSEAS JOURNEY</div>
-  <h1 class="tour-heading">INTERNATIONAL TOUR</h1>
+  <h1 class="tour-heading">INTERNATIONAL TOURS</h1>
   <p class="tour-description">
     Travel India Tourism Services offer the finest tour packages, custom-tailored to your unique international travel
     plans and preferences.
@@ -306,12 +292,13 @@
         <li><strong>Address:</strong><br />4b Long Street, Miami, USA</li>
         <li><strong>Phone:</strong><br />+3230-45-45-67</li>
         <li><strong>Email:</strong><br /><a [href]="'mailto:' + email">{{ email }}</a></li>
-        <li><strong>instagram:</strong><br /><a class="social-link" [href]="'https://www.instagram.com/' + instagramUsername" target="_blank">
-          {{ instagramUsername }}
-        </a></li>
+        <li><strong>instagram:</strong><br /><a class="social-link"
+            [href]="'https://www.instagram.com/' + instagramUsername" target="_blank">
+            {{ instagramUsername }}
+          </a></li>
         <li><strong>facbook:</strong><br /><a [href]="'https://www.facebook.com/' + facebookUsername" target="_blank">
-          {{ facebookUsername }}
-        </a></li>
+            {{ facebookUsername }}
+          </a></li>
       </ul>
       <div class="social-icons1">
         <i class="fab fa-facebook-f1"></i>
@@ -323,66 +310,3 @@
   </div>
 </div>
 <!-- ************************** footer************************************** -->
-<footer>
-  <div class="footer-container">
-
-    <div class="footer-column">
-      <h3>ABOUT US</h3>
-      <p><a href="#">Why Choose Us</a></p>
-      <p><a href="#">Social Impact</a></p>
-      <p><a href="#">Contact Us</a></p>
-      <p><a href="#">Terms and Conditions</a></p>
-      <p><a href="#">Privacy Policy</a></p>
-      <p><a href="#">Sitemap</a></p>
-      <p><a href="#">Blog</a></p>
-    </div>
-
-    <div class="footer-column">
-      <h3>TOP DESTINATIONS</h3>
-      <p><a href="#">Golden Triangle</a></p>
-      <p><a href="#">Rajasthan</a></p>
-      <p><a href="#">North India</a></p>
-      <p><a href="#">Kerala</a></p>
-      <p><a href="#">South India</a></p>
-      <p><a href="#">Delhi</a></p>
-      <p><a href="#">Mumbai</a></p>
-    </div>
-
-    <div class="footer-column">
-      <h3>RESPONSIBLE TOURISM AWARDS</h3>
-      <p>🏅 🌍 🦻 🚌</p>
-
-      <div class="newsletter">
-        <h3>NEWSLETTER</h3>
-        <div style="display: flex; gap: 5px; align-items: center;">
-          <input type="email" placeholder="Email Address" />
-          <button>SUBMIT</button>
-        </div>
-
-      </div>
-
-      <h3>FOLLOW US</h3>
-      <div class="social-icons">
-        <a href="#">📘</a>
-        <a href="#">📸</a>
-        <a href="#">💼</a>
-        <a href="#">▶️</a>
-        <a href="#">🧭</a>
-      </div>
-    </div>
-
-
-    <div class="footer-column">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114542.80185929636!2d78.19089894999999!3d26.21415585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3976c5d1792291fb%3A0xff4fb56d65bc3adf!2sGwalior%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1744789588075!5m2!1sen!2sin"
-        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-    </div>
-
-
-  </div>
-  <div class="bottom-bar">
-    © Copyright 2025 Reality <strong>AnaghaSafer</strong> . All Rights Reserved.
-  </div>
-</footer>
