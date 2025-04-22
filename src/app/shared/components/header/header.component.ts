@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit,HostListener } from '@angular/core';
 import { LoginComponent } from "../login/login.component";
 import { trigger, animate, style, state, transition } from "@angular/animations"
 
@@ -20,7 +20,31 @@ import { trigger, animate, style, state, transition } from "@angular/animations"
     ])
   ]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isLogin = false
 
+  isHidden = false;
+  lastScrollTop = 0;
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > this.lastScrollTop && currentScroll > 100) {
+      // 👇 Scroll down
+      this.isHidden = true;
+    } else {
+      // 👆 Scroll up
+      this.isHidden = false;
+    }
+
+    this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  }
+
+
+  ngOnInit(): void {
+    document.body.addEventListener('scroll', (event) => {
+      console.log(event)
+    })
+  }
 }

@@ -1,0 +1,59 @@
+<div class="mobile-header">
+    <button id="filter-toggle" (click)="toggleFilters()">{{ filterButtonText }}</button>
+</div>
+
+<div class="container">
+    <aside class="sidebar" [class.active]="showFilters" id="sidebar">
+        <div class="filter-section">
+            <h3> Package Filters </h3>
+            <label><input type="checkbox"> Air Package</label>
+            <label><input type="checkbox"> Land Package</label>
+            <label><input type="checkbox"> River Cruise Package</label>
+            <label><input type="checkbox"> Rail Tour Package</label>
+        </div>
+        <div class="filter-section">
+            <h3>Category</h3>
+            <label><input type="checkbox"> Holiday Package</label>
+            <label><input type="checkbox"> Rail Tour Package</label>
+            <label><input type="checkbox"> Deluxe Train</label>
+            <label><input type="checkbox"> Domestic Air Package</label>
+            <label><input type="checkbox"> Bharat Gaurav</label>
+            <label><input type="checkbox"> International Package</label>
+            <label><input type="checkbox"> Wellness</label>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div *ngFor="let pack of packages" class="package-card">
+            <div class="image-section">
+                <img [src]="pack.image" alt="{{ pack.title }}">
+            </div>
+            <div class="details-section">
+                <h2>{{ pack.title }}</h2>
+
+                <div class="grid-details-section">
+                    <div *ngFor="let item of pack.details" class="text">
+                        <p><strong>{{ item.label }}:</strong> <span>{{ item.value }}</span></p>
+                    </div>
+                </div>
+                <div class="icons">
+                    <li>
+
+                        <i class="fa-solid fa-bus-simple"></i>
+                        <i class="fa-solid fa-car-side"></i>
+                        <i class="fa-solid fa-train"></i>
+                        <i class="fa-solid fa-hotel"></i>
+                    </li>
+                </div>
+
+            </div>
+            <div class="price-section">
+                <p id="check">Starting from</p>
+                <h3>₹ {{ pack.price }}</h3>
+                <a [routerLink]="'/view'" class="view-details">View Details</a>
+                <button class="book-now">Book Now</button>
+            </div>
+        </div>
+    </main>
+
+</div>

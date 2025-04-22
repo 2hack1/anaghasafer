@@ -1,0 +1,93 @@
+<section class="trip-section">
+    <div class="trip-image">
+        <img src="/assets/slider12.png" alt="Spiti Road Trip">
+        <div class="wave">
+
+            <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path fill="#f8f9fa"
+                    d="M0,64 C60,100 90,250 180,180 C270,110 360,-30 450,100 C540,230 630,50 720,120 C810,190 900,60 990,130 C1080,200 1170,100 1260,140 C1350,180 1410,100 1440,90 L1440,320 L0,320 Z">
+                </path>
+            </svg>
+        </div>
+    </div>
+
+</section>
+<section class="trip-bottom">
+
+
+    <div class="trip-bottom-content">
+        <div class="left-content">
+            <span class="tag">Group Tour</span>
+            <h1>Spiti Road Trip 7 Days</h1>
+            <div class="rating-info">
+                <span>⭐⭐⭐⭐⭐ 4.7 (723)</span>
+            </div>
+
+            <div class="info-cards">
+                <div class="card">
+                    <img src="/assets/icons/cl.png" alt="Duration">
+                    <p><strong>Duration</strong><br>6N/7D</p>
+                </div>
+                <div class="card">
+                    <img src="/assets/icons/marker.png" alt="Spiti Road Trip">
+                    <p><strong>Location</strong><br>Spiti Valley</p>
+                </div>
+            </div>
+
+            <h2>Tour Overview</h2>
+            <p class="overview-text"><strong>
+                    The Winter Spiti Expedition is one of the best adventure trips anyone can do during the winters
+                    in the Himalayas to experience snow. Winter Spiti Expedition is all about a cold desert mountain
+                    valley high in the Himalayan Mountains in the Indian state of Himachal Pradesh’s north-eastern
+                    corner. The word “Spiti” means “Middle Ground,” referring to the region that lies between Tibet
+                    and India. </strong> </p>
+
+        </div>
+
+        <div class="right-card">
+            <div class="price">
+                <p class="old-price">Starting From <span>₹20,999</span></p>
+                <p class="new-price">₹14,999/- PP</p>
+            </div>
+
+            <h3>Highlights</h3>
+            <ul class="highlights-list">
+                <li>✔️ Almost Everything Included</li>
+                <li>✔️ Hand-picked accommodation</li>
+                <li>✔️ Guided Tour</li>
+                <li>✔️ Inner Line Permits Included</li>
+                <li>✔️ Visit Chicham Bridge</li>
+                <li>✔️ Visit Chandratal Lake</li>
+                <li>✔️ Visit Key Monastery</li>
+                <li>✔️ Visit World's Highest Post Office</li>
+                <li>✔️ Visit World's Highest Village</li>
+                <li>✔️ 24x7 Support</li>
+                <li>✔️ Memories for Lifetime</li>
+            </ul>
+
+            <a href="#" class="inquiry-btn">Quick Inquiry ➔</a>
+        </div>
+    </div>
+</section>
+<div class="itinerary1">
+<section class="itinerary">
+    <h2 style="margin-bottom:30px; font-size: 30px; font-family:system-ui; letter-spacing: 3px;">Itinerary</h2>
+    <div class="day"  *ngFor="let day of days; let i = index" [class.open]="day.open" (click)="toggleDay(i)">
+    
+    <div class="day-header">
+      <img src="/assets/icons/marker.png" alt="Spiti Road Trip">
+      <strong class="" style="font-size: 1.2rem; font-weight: normal;">{{ day.title }}</strong> <span style="font-size: 1.1rem;"> {{ day.subtitle }}</span>
+    
+      <button class="arrow-button" (click)="toggleDay(i)">
+        <img src="/assets/icons/arrow-down.png" alt="toggle" [ngClass]="{'rotate': day.open}">
+      </button>
+    </div>
+    
+    <div class="day-content">
+      <p>{{ day.description }}</p>
+    </div>
+
+  </div>
+
+</section>
+</div>
