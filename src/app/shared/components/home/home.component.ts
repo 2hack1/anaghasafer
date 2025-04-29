@@ -1,18 +1,18 @@
-import { Component, OnInit ,ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ContainerComponent } from "../container/container.component";
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-home',
-  imports: [ CommonModule,RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
   currentSlide = 0;
   totalSlides = 3;
-  facebookUsername="anaghasafer";
-  instagramUsername="anaghasafer";
+  facebookUsername = "anaghasafer";
+  instagramUsername = "anaghasafer";
 
 
   email = 'anaghasafer21@mail.com';
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   prevSlide() {
     this.showSlide(this.currentSlide - 1);
   }
-  
+
   // heading with slider***************************************************** 
 
   @ViewChild('scrollContainer', { read: ElementRef }) scrollContainer!: ElementRef
@@ -73,36 +73,3 @@ export class HomeComponent implements OnInit {
 
 
 
-
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-slider',
-//   templateUrl: './slider.component.html',
-//   styleUrls: ['./slider.component.css']
-// })
-// export class SliderComponent implements OnInit {
-//   currentSlide = 0;
-//   totalSlides = 3;
-
-//   ngOnInit(): void {
-//     setInterval(() => this.nextSlide(), 5000);
-//   }
-
-//   showSlide(index: number) {
-//     const container = document.getElementById('slideContainer') as HTMLElement;
-//     if (index >= this.totalSlides) this.currentSlide = 0;
-//     else if (index < 0) this.currentSlide = this.totalSlides - 1;
-//     else this.currentSlide = index;
-
-//     container.style.transform = `translateX(-${this.currentSlide * 100}%)`;
-//   }
-
-//   nextSlide() {
-//     this.showSlide(this.currentSlide + 1);
-//   }
-
-//   prevSlide() {
-//     this.showSlide(this.currentSlide - 1);
-//   }
-// }

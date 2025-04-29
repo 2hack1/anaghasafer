@@ -1,4 +1,4 @@
-<nav [class.hidden]="isHidden">
+<nav id="top" [class.hidden]="isHidden">
   <div class="nav-upper-part">
     <div class="right-part">
       <div class="tolls">
@@ -26,8 +26,11 @@
     </div>
 
     <div class="right-part menu">
-      <div *ngFor="let item of [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]">
+      <div *ngFor="let item of [1]" style="display: flex;">
         <p class="menu-items">Home</p>
+        <p class="menu-items">Contect</p>
+        <p class="menu-items">About</p>
+        <p class="menu-items">Tour & Trips </p>
       </div>
     </div>
   </div>

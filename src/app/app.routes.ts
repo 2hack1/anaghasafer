@@ -6,6 +6,8 @@ import { StatestoursComponent } from './shared/components/statestours/statestour
 import { DestinationtourComponent } from './shared/components/destinationtour/destinationtour.component';
 import { ViewDeatailsComponent } from './shared/components/view-deatails/view-deatails.component';
 
+
+
 export const routes: Routes = [
     {
         path: '',
@@ -22,3 +24,5 @@ export const routes: Routes = [
         component:ViewDeatailsComponent
     },
 ]
+
+  

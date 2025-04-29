@@ -1,18 +1,3 @@
-<!-- <section class="trip-section">
-    <div class="trip-image">
-        <img src="/assets/slider12.png" alt="Spiti Road Trip">
-        <div class="wave">
-
-            <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
-                <path fill="#f8f9fa"
-                    d="M0,64 C60,100 90,250 180,180 C270,110 360,-30 450,100 C540,230 630,50 720,120 C810,190 900,60 990,130 C1080,200 1170,100 1260,140 C1350,180 1410,100 1440,90 L1440,320 L0,320 Z">
-                </path>
-            </svg>
-        </div>
-    </div>
-
-</section> -->
-
 <section class="trip-section">
     <div class="slider">
         <div class="slides" [style.transform]="getTransform()">
@@ -127,57 +112,17 @@
     </div>
 
 </section>
-<!-- <div class="itinerary1">
-    <section class="itinerary">
-        <h2 style="margin-bottom:30px; font-size: 30px; font-family:system-ui; letter-spacing: 3px;">Itinerary</h2>
-        <div class="day" *ngFor="let day of days; let i = index" [class.open]="day.open" (click)="toggleDay(i)">
 
-            <div class="day-header">
-                <img src="/assets/icons/marker.png" alt="Spiti Road Trip">
-                <strong class="" style="font-size: 1.2rem; font-weight: normal;">{{ day.title }}</strong> <span
-                    style="font-size: 1.1rem;"> {{ day.subtitle }}</span>
-
-                <button class="arrow-button" (click)="toggleDay(i); $event.stopPropagation()">
-                    <img class="marker" src="/assets/icons/down-arrow.png" alt="toggle"
-                        [ngClass]="{ 'rotate': day.open }" />
-                </button>
-            </div>
-
-            <div class="day-content">
-                <p>{{ day.description }}</p>
-            </div>
-
-        </div>
-
-    </section>
-
-    <div class="container">
-        <h2>Tour Dates</h2>
-        <div class="months">
-            <button *ngFor="let month of months" class="month-btn" [class.active]="selectedMonth === month.key"
-                (click)="selectMonth(month.key)">
-                {{ month.label }}
-            </button>
-        </div>
-        <div class="size" style="height: auto; padding: 20px;">
-            <div class="card">
-                <div class="tour-date" *ngFor="let tour of tourData[selectedMonth]">
-                    <span>{{ tour.date }}</span>
-                    <span class="label" [ngClass]="tour.class">{{ tour.label }}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div> -->
+<!--**************************** Tour Dates Tab Content ************************* -->
 <div class="itinerary1">
     <!-- Tabs -->
     <div class="tabs">
-        <button class="tab-button" [class.active]="activeTab === 'itinerary'" (click)="activeTab = 'itinerary'">
-            Itinerary
-        </button>
+
         <button class="tab-button" [class.active]="activeTab === 'tourDates'" (click)="activeTab = 'tourDates'">
             Tour Dates
+        </button>
+        <button class="tab-button" [class.active]="activeTab === 'itinerary'" (click)="activeTab = 'itinerary'">
+            Itinerary
         </button>
     </div>
 
@@ -202,7 +147,7 @@
 
     </section>
 
-    <!-- Tour Dates Tab Content -->
+
     <div class="container" *ngIf="activeTab === 'tourDates'">
         <h2>Tour Dates</h2>
         <div class="months">
@@ -211,7 +156,7 @@
                 {{ month.label }}
             </button>
         </div>
-        <div class="size" style="height: auto; padding: 20px;">
+        <div class="size" style="height: auto; padding: 10px;">
             <div class="card">
                 <div class="tour-date" *ngFor="let tour of tourData[selectedMonth]">
                     <span>{{ tour.date }}</span>
@@ -243,35 +188,42 @@
         <!-- parent div of rooms  -->
         <div>
             <!-- Loop through rooms and display traveller information -->
-            <div class="travellers" *ngFor="let room of rooms; let roomIndex = index">
-                <div class="room-header">
-                    <p>Room {{ roomIndex + 1 }}
-                        <a (click)="removeRoom(roomIndex)" class="add-room">- Remove Room</a>
-                    </p>
-                </div>
+            <div class="travellers travellers-card" *ngFor="let room of rooms; let roomIndex = index">
+                <div class="travellers-inner-container">
+                    <div class="room-header">
+                        <p> {{ roomIndex + 1 }}
+                            <a (click)="removeRoom(roomIndex)" class="add-room">- Remove</a>
+                        </p>
+                    </div>
 
-                <div style="display: flex; gap: 1rem; ">
-                    <div class="traveller1" *ngFor="let traveller of room.travellers; let travellerIndex = index">
-                        <label>{{ traveller.type }}<br><span>({{ traveller.ageGroup }})</span></label>
-                        <div class="counter1">
-                            <button (click)="decreaseCount(roomIndex, traveller)">-</button>
-                            <span class="count">{{ traveller.count }}</span>
-                            <button (click)="increaseCount(roomIndex, traveller)">+</button>
+                    <div class="traveller1-container">
+                        <div class="traveller1" *ngFor="let traveller of room.travellers; let travellerIndex = index">
+                            <label class="traveller1-lbl">{{ traveller.type }}<br><span class="traveller1-age">({{
+                                    traveller.ageGroup
+                                    }})</span></label>
+                            <div class="counter1">
+                                <button class="counter1-btn" (click)="decreaseCount(roomIndex, traveller)"> - </button>
+                                <span class="count">{{ traveller.count }}</span>
+                                <!-- <button class="count counter1-btn"> {{ traveller.count }}</button> -->
+                                <button class=" counter1-btn" (click)="increaseCount(roomIndex, traveller)"> +
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+            </div>
+        </div>
+        <div class="form-section">
+            <label>Select With Going Trip</label>
+            <div class="icons">
+                <button *ngFor="let mode of transportModes" (click)="selectTransport(mode.key)"
+                    [ngClass]="{ 'active': selectedTransport === mode.key }" style="font-size: 2rem;">
+                    <i [class]="mode.icon"></i>
+                </button>
             </div>
         </div>
 
-        <!-- Form Section -->
-        <div class="form-section">
-            <!-- <label>Select With Going Trip</label> -->
-            <div style="margin-top: 20px; display: flex; gap: 3rem; font-size: 2rem;">
-                <a class="colorred"><i class="fi fi-ts-subway"></i></a>
-                <a class="colorred"><i class="fi fi-ts-bus-alt"></i></a>
-                <a class="colorred"><i class="fi fi-ts-plane-alt"></i></a>
-            </div>
-        </div>
 
         <div class="form-section">
             <label><i class="fa fa-calendar"></i> Date of Travel</label>

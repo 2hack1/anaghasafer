@@ -20,7 +20,7 @@ interface Month {
   styleUrl: './view-deatails.component.scss'
 })
 export class ViewDeatailsComponent {
-  activeTab: string = 'itinerary';
+  activeTab: string = 'tourDates';
   images: string[] = [
     '/assets/slider12.png',
     '/assets/slider13.png',
@@ -148,124 +148,50 @@ export class ViewDeatailsComponent {
     this.showPopup = false;
   }
 
-
-  // calculate price
-
-  //    rooms = [
-  //     {
-  //       travellers: [
-  //         { type: 'Adult', ageGroup: '(12+ yrs)', count: 2 },
-  //         { type: 'Child (With bed)', ageGroup: '(Below 12 yrs)', count: 0 },
-  //         { type: 'Infant', ageGroup: '(0-4 yrs)', count: 0 }
-  //       ]
-  //     }
-  //   ];
-  //   totalAmount: number = 0;
-  //   showPopup1: boolean = false; // Add this to control popup visibility
-
-
-
-  //   addRoom(): void {
-  //     const roomCount = this.rooms.length + 1;
-  //     this.rooms.push({
-  //       travellers: [
-  //         { type: 'Adult', ageGroup: '(12+ yrs)', count: 1 },
-  //         { type: 'Child (With bed)', ageGroup: '(Below 12 yrs)', count: 0 },
-  //         { type: 'Infant', ageGroup: '(0-4 yrs)', count: 0 }
-  //       ]
-  //     });
-  //   }
-
-  //   removeRoom(index: number): void {
-  //     this.rooms.splice(index, 1);
-  //     this.calculateTotalAmount();
-  //   }
-
-  //   increaseCount(roomIndex: number, traveller: any): void {
-  //     const label = traveller.type.toLowerCase();
-  //     const currentCount = traveller.count;
-
-  //     if (label.includes('adult') && currentCount >= 2) {
-  //       alert('Maximum 2 Adults allowed per room.');
-  //       return;
-  //     }
-  //     if (label.includes('child (with bed)') && currentCount >= 1) {
-  //       alert('Maximum 1 Child (with bed) allowed per room.');
-  //       return;
-  //     }
-  //     if (label.includes('infant') && currentCount >= 2) {
-  //       alert('Maximum 2 Infants allowed per room.');
-  //       return;
-  //     }
-
-  //     traveller.count++;
-  //     this.calculateTotalAmount();
-  //   }
-
-  //   decreaseCount(roomIndex: number, traveller: any): void {
-  //     if (traveller.count > 0) {
-  //       traveller.count--;
-  //       this.calculateTotalAmount();
-  //     }
-  //   }
-
-  //   randomRange(min: number, max: number): number {
-  //     return Math.floor(Math.random() * (max - min + 1)) + min;
-  //   }
-
-  //   calculateTotalAmount(): void {
-  //     const adultPrice = this.randomRange(4000, 6000);
-  //     const childPrice = this.randomRange(2000, 3000);
-  //     const roomCharge = this.randomRange(1000, 2000);
-
-  //     let totalAdults = 0;
-  //     let totalChildren = 0;
-  //     let totalRooms = this.rooms.length;
-
-  //     this.rooms.forEach(room => {
-  //       room.travellers.forEach(traveller => {
-  //         if (traveller.type.toLowerCase().includes('adult')) {
-  //           totalAdults += traveller.count;
-  //         }
-  //         if (traveller.type.toLowerCase().includes('child (with bed)')) {
-  //           totalChildren += traveller.count;
-  //         }
-  //       });
-  //     });
-
-  //     const totalAmount = (totalAdults * adultPrice) + (totalChildren * childPrice) + (totalRooms * roomCharge);
-  //     this.totalAmount = totalAmount;
-  //   }
-
-  //   togglePopup(): void {
-  //     this.showPopup1 = !this.showPopup1;  // Toggle the popup visibility
-  //   }
-  // }
-
-
+// *****************rooms calculations*****************
   rooms = [
     {
       travellers: [
-        { type: 'Adult', ageGroup: '(12+ yrs)', count: 2 },
-        { type: 'Child (With bed)', ageGroup: '(Below 12 yrs)', count: 0 },
-        { type: 'Infant', ageGroup: '(0-4 yrs)', count: 0 }
+        { type: 'Adult', ageGroup: '(12+ yrs)', count: 0 },
+        { type: 'Child ', ageGroup: '(12- yrs)', count: 0 },
+        { type: 'Infant', ageGroup: '(5- yrs)', count: 0 }
       ]
     }
   ];
+
+transportModes = [
+  { key: 'subway', amount: 1000, icon: 'fi fi-ts-subway' },
+  { key: 'bus', amount: 2000, icon: 'fi fi-ts-bus-alt' },
+  { key: 'plane', amount: 5000, icon: 'fi fi-ts-plane-alt' },
+  { key: 'car', amount: 3000, icon: 'fi fi-ts-car-side' }
+];
+
+selectedTransport: string = '';
+transportPrice: number = 0;
+
+selectTransport(key: string): void {
+  this.selectedTransport = key;
+
+  const selected = this.transportModes.find(mode => mode.key === key);
+  this.transportPrice = selected ? selected.amount : 0;
+
+  this.calculateTotalAmount();  // 💡 Update total when transport changes
+}
+ 
   totalAmount: number = 0;
   showPopup1: boolean = false;
 
   // Fix random prices once when component is loaded
-  adultPrice = this.randomRange(4000, 6000);
-  childPrice = this.randomRange(2000, 3000);
-  roomCharge = this.randomRange(1000, 2000);
+  adultPrice =  5000;
+  childPrice = 3000;
+  roomCharge = 2000;
 
   addRoom(): void {
     this.rooms.push({
       travellers: [
         { type: 'Adult', ageGroup: '(12+ yrs)', count: 1 },
-        { type: 'Child ', ageGroup: '(Below 12 yrs)', count: 0 },
-        { type: 'Infant', ageGroup: '(0-4 yrs)', count: 0 }
+        { type: 'Child ', ageGroup: '(12- yrs)', count: 0 },
+        { type: 'Infant', ageGroup: '(5- yrs)', count: 0 }
       ]
     });
     this.calculateTotalAmount();  // Important!
@@ -284,7 +210,7 @@ export class ViewDeatailsComponent {
       alert('Maximum 2 Adults allowed per room.');
       return;
     }
-    if (label.includes('child (with bed)') && currentCount >= 1) {
+    if (label.includes('child') && currentCount >= 1) {
       alert('Maximum 1 Child (with bed) allowed per room.');
       return;
     }
@@ -312,19 +238,23 @@ export class ViewDeatailsComponent {
     let totalAdults = 0;
     let totalChildren = 0;
     let totalRooms = this.rooms.length;
-
+    // let transport=this.transportPrice;
     this.rooms.forEach(room => {
       room.travellers.forEach(traveller => {
         if (traveller.type.toLowerCase().includes('adult')) {
           totalAdults += traveller.count;
         }
-        if (traveller.type.toLowerCase().includes('child (with bed)')) {
+        if (traveller.type.toLowerCase().includes('child')) {
           totalChildren += traveller.count;
-        }
+        } 
+       
       });
     });
+    if (totalAdults === 0 && totalChildren === 0) {
+      totalRooms = 0;
+    }
 
-    const totalAmount = (totalAdults * this.adultPrice) + (totalChildren * this.childPrice) + (totalRooms * this.roomCharge);
+    const totalAmount = (totalAdults * this.adultPrice) + (totalChildren * this.childPrice) + (totalRooms * this.roomCharge)+(this.transportPrice);
     this.totalAmount = totalAmount;
   }
 
@@ -340,5 +270,5 @@ export class ViewDeatailsComponent {
   closePopup11(): void {
     this.showPopup11 = false;
   }
-
+  
 }

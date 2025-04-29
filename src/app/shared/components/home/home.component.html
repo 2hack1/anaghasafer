@@ -17,7 +17,7 @@
           <option>April</option>
           <option>May</option>
         </select>
-        <button>Explore</button>
+        <button><i class="fas fa-search"></i> Explore</button>
       </div>
 
       <p class="note">Destination not sure? <a href="#">Click here!</a></p>
@@ -48,7 +48,7 @@
 <div class="container">
   <div class="header">
     <h2>Top Trending India's Destinations</h2>
-    <a class="hower" routerLink="states">View All Tours <span>&#10140;</span></a>
+    <a class="hower" href="states#stateTop">View All Tours <span>&#10140;</span></a>
   </div>
 
   <div class="scroll-wrapper">
@@ -164,8 +164,10 @@
     <div class="tour-card" *ngFor="let tour of tours">
       <img [src]="tour.image" [alt]="tour.name" />
       <div class="tour-overlay">
-        <h2>{{ tour.name }}</h2>
-        <p>{{ tour.tours }} Tour</p>
+        <a href="states#stateTop" style="color: rgb(255, 255, 255); text-decoration: none;">
+          <h2>{{ tour.name }}</h2>
+          <p>{{ tour.tours }} Tour</p>
+        </a>
       </div>
     </div>
   </div>
@@ -281,7 +283,7 @@
         </div>
 
 
-        <button type="submit1" id="button1"><i class="fas fa-search"></i> Search Now</button>
+        <button type="submit1" id="button1"> Submit Now</button>
       </form>
     </div>
 
