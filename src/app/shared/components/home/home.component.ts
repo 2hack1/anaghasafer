@@ -68,6 +68,18 @@ export class HomeComponent implements OnInit {
     { name: 'Thailand', image: 'assets/6 images/mp.jpg', tours: 1 }
   ];
 
+  destinations = [
+    { name: 'Uttarakhand', image: 'assets/uttarakhand.webp', packages: '50+' },
+    { name: 'Kerala', image: 'assets/kerala.webp', packages: '40+' },
+    { name: 'Sikkim', image: 'assets/sikkim.webp', packages: '40+' },
+    { name: 'Bhutan', image: 'assets/bhutan.webp', packages: '20+' },
+    { name: 'Thailand', image: 'assets/thailand.webp', packages: '10+' },
+    { name: 'Uttarakhand', image: 'assets/uttarakhand.webp', packages: '10+' },
+    { name: 'Kerala', image: 'assets/kerala.webp', packages: '10+' },
+    { name: 'Thailand', image: 'assets/thailand.webp', packages: '10+' },
+  ];
+  
+
 }
 
 

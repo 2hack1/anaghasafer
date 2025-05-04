@@ -2,13 +2,13 @@ nav {
     height: auto;
     background-color: white;
     padding: 10px 2rem;
-    
-        position: fixed;       
-        z-index: 1000;
-      top: 0;
-      left: 0;
-      right: 0;
-      
+
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+
     .nav-upper-part {
         display: flex;
         padding-bottom: 5px;
@@ -31,6 +31,8 @@ nav {
                 gap: 3px;
                 align-items: center;
             }
+
+          
         }
     }
 

@@ -27,10 +27,18 @@
 
     <div class="right-part menu">
       <div *ngFor="let item of [1]" style="display: flex;">
-        <p class="menu-items">Home</p>
-        <p class="menu-items">Contect</p>
-        <p class="menu-items">About</p>
-        <p class="menu-items">Tour & Trips </p>
+        <a [routerLink]="['/']" style="text-decoration: none; color: black;">
+          <p class="menu-items">Home</p>
+        </a>
+        <a [routerLink]="['/view']" style="text-decoration: none; color: black;">
+          <p class="menu-items">Contect</p>
+        </a>
+        <a [routerLink]="['/view']" style="text-decoration: none; color: black;">
+          <p class="menu-items">About</p>
+        </a>
+        <a [routerLink]="['/states']" style="text-decoration: none; color: black;">
+          <p class="menu-items">Tour & Trips</p>
+        </a>
       </div>
     </div>
   </div>

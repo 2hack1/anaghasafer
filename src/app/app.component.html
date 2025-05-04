@@ -1,5 +1,6 @@
-<app-container>
+<div class="app-container">
     <app-header></app-header>
-    <router-outlet></router-outlet>
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
     <app-footer></app-footer>
-</app-container>
+  </div>
+  

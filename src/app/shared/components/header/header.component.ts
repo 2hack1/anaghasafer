@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit,HostListener } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { LoginComponent } from "../login/login.component";
 import { trigger, animate, style, state, transition } from "@angular/animations"
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, LoginComponent],
+  imports: [CommonModule, LoginComponent, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   animations: [
