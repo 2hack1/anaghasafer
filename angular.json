@@ -51,7 +51,8 @@
                   "maximumError": "15kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/anaghasafer/dist/frontend/browser/"
             },
             "development": {
               "optimization": false,
