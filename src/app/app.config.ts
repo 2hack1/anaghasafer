@@ -11,9 +11,9 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimations(),
-    // {
-    //   provide: APP_BASE_HREF,
-    //   useValue: '/'
-    // }
+    {
+      provide: APP_BASE_HREF,
+      useValue: '/'
+    }
   ]
 };
