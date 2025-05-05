@@ -1,23 +1,26 @@
 <div class="slider-wrapper">
   <div class="slider">
-
     <div class="slider-hero-content">
       <h1>Customize & Book<br />Amazing Holiday Packages</h1>
-      <p>650+ Travel Agents serving 65+ Destinations worldwide</p>
+      <!-- <p>650+ Travel Agents serving 65+ Destinations worldwide</p> -->
 
       <div class="form-row">
-        <input type="text" placeholder="Type a Destination" />
-        <select>
-          <option>Select duration</option>
-          <option>3 Days</option>
-          <option>5 Days</option>
-        </select>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <input type="text" placeholder="Type a Destination" />
+          <select>
+            <option>Select duration</option>
+            <option>3 Days</option>
+            <option>5 Days</option>
+          </select>
+        </div>
         <select>
           <option>Select month</option>
           <option>April</option>
           <option>May</option>
         </select>
-        <button><i class="fas fa-search"></i> Explore</button>
+        <button>
+          <i class="fas fa-search"></i> Explore
+        </button>
       </div>
 
       <p class="note">Destination not sure? <a href="#">Click here!</a></p>
@@ -45,27 +48,111 @@
 </div>
 
 <!-- *************************************this is the heading of on tranding Destinations********************** -->
-<div class="container">
+<!-- <div class="container">
   <div class="header">
     <h2>Top Trending India's Destinations</h2>
-    <a class="hower" [routerLink]="['/states']" >View All Tours <span>&#10140;</span></a>
+    <a class="hower" href="states#stateTop">View All Tours <span>&#10140;</span></a>
   </div>
 
   <div class="scroll-wrapper">
     <button class="scroll-btn" (click)="scrollLeft()">&#8592;</button>
-    <div class="scroll-container" >
-      <div class="card" *ngFor="let destination of destinations" >
-        <a [routerLink]="['/view']"  class="tour-link" style="text-decoration: none;">
-          <img [src]="destination.image" [alt]="destination.name" />
-          <p>{{ destination.packages }} Packages</p>
-          <h3>{{ destination.name }}</h3>
+
+    <div class="scroll-container" #scrollContainer>
+      <div class="card">
+  <a href="states#stateTop" fragment="stateTop" class="tour-link">
+        <img src="assets/uttarakhand.webp" alt="Uttarakhand" />
+        <p>50+ Packages</p>
+        <h3>Uttarakhand</h3>
+</a>
+      </div>
+      <div class="card">
+        <a href="states#stateTop" fragment="stateTop" class="tour-link">
+          <img src="assets/kerala.webp" alt="Kerala" />
+          <p>40+ Packages</p>
+          <h3>Kerala</h3>
+        </a>
+      </div>
+      <div class="card">
+  <a href="states#stateTop" fragment="stateTop" class="tour-link">
+        <img src="assets/sikkim.webp" alt="Sikkim" />
+        <p>40+ Packages</p>
+        <h3>Sikkim</h3>
+</a>
+      </div>
+      <div class="card">
+  <a href="states#stateTop" fragment="stateTop" class="tour-link">
+        <img src="assets/bhutan.webp" alt="Bhutan" />
+        <p>20+ Packages</p>
+        <h3>Bhutan</h3>
+</a>
+      </div>
+      <div class="card">
+  <a href="states#stateTop" fragment="stateTop" class="tour-link">
+        <img src="assets/thailand.webp" alt="Thailand" />
+        <p>10+ Packages</p>
+        <h3>Thailand</h3>
+</a>
+      </div>
+      <div class="card">
+  <a href="states#stateTop" fragment="stateTop" class="tour-link">
+        <img src="assets/uttarakhand.webp" alt="Thailand" />
+        <p>10+ Packages</p>
+        <h3>Thailand</h3>
+</a>
+      </div>
+      <div class="card">
+  <a href="states#stateTop" fragment="stateTop" class="tour-link">
+        <img src="assets/kerala.webp" alt="Thailand" />
+        <p>10+ Packages</p>
+        <h3>Thailand</h3>
+</a>
+      </div>
+      <div class="card">
+  <a href="states#stateTop" fragment="stateTop" class="tour-link">
+        <img src="assets/thailand.webp" alt="Thailand" />
+        <p>10+ Packages</p>
+        <h3>Thailand</h3>
+</a>
+
+      </div>
+    </div>
+
+    <button class="scroll-btn" (click)="scrollRight()">&#8594;</button>
+  </div>
+
+</div>  -->
+
+
+<div class="container">
+  <div class="header">
+    <h2>Top Trending India's Destinations</h2>
+    <!-- <a class="hower " routerLink="/states" fragment="stateTop">View All Tours <span>&#10140;</span></a> -->
+  </div>
+
+  <div class="header" style="display: flex;justify-content: end;">
+    <a class="hower" routerLink="/states" fragment="stateTop">View All Tours
+      <span>&#10140;</span>
+    </a>
+  </div>
+  <div class="scroll-wrapper">
+
+    <button class="scroll-btn" (click)="scrollLeft()">&#10094;</button>
+
+    <div class="scroll-container" #scrollContainer>
+      <div class="card" *ngFor="let dest of destinations">
+        <a [routerLink]="['/states']" [fragment]="'stateTop'" class="tour-link" style="text-decoration: none;">
+          <img [src]="dest.image" [alt]="dest.name" />
+          <p>{{ dest.packages }} Packages</p>
+          <h3>{{ dest.name }}</h3>
         </a>
       </div>
     </div>
-    
-    <button class="scroll-btn" (click)="scrollRight()">&#8594;</button>
+
+    <button class="scroll-btn" (click)="scrollRight()">&#10095;</button>
   </div>
 </div>
+
+
 
 <!-- *************************four cards***************************  -->
 <section class="section01" style=" background: url('assets/fourcard.webp') no-repeat center center/cover;">
@@ -118,29 +205,6 @@
   </div>
 </section>
 <!-- ********************check images*********************** -->
-<!-- <div class="tour-container">
-  <div class="tour-subtitle"><span></span>OVERSEAS JOURNEY</div>
-  <h1 class="tour-heading">INTERNATIONAL TOURS</h1>
-  <p class="tour-description">
-    Travel India Tourism Services offer the finest tour packages, custom-tailored to your unique international travel
-    plans and preferences.
-  </p>
-
-  <div class="tour-cards">
-    <div class="tour-card" *ngFor="let tour of tours">
-      <a href="states#stateTop" >
-      <img [src]="tour.image" [alt]="tour.name" />
-    </a>
-      <div class="tour-overlay">
-        <a href="states#stateTop" style="color: rgb(255, 255, 255); text-decoration: none;">
-          <h2>{{ tour.name }}</h2>
-          <p>{{ tour.tours }} Tour</p>
-        </a>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <div class="tour-container">
   <div class="tour-subtitle"><span></span>OVERSEAS JOURNEY</div>
   <h1 class="tour-heading">INTERNATIONAL TOURS</h1>
@@ -162,15 +226,16 @@
   </div>
 </div>
 
-
 <!-- *****************************REVIEW ************************ -->
-
-<section class="testimonial-section">
+ <div class="check" style="position: relative;" >
+  <button class="slider-btn left hide" onclick="SlideLeft()" >&#10094;</button>
+  <button class="slider-btn right hide" onclick="SlideRight()">&#10095;</button>
+ <section class="testimonial-section">
   <h2>My AnaghaSafer Story !</h2>
   <p class="subtitle">Customer satisfaction is our major goal. See what our customers are saying about us.</p>
 
   <div class="slider-container">
-    <button class="slider-btn left" onclick="SlideLeft()">&#10094;</button>
+    <button class="slider-btn left   hides" onclick="SlideLeft()">&#10094;</button>
 
     <div class="slider-track" id="sliderTrack">
 
@@ -220,84 +285,85 @@
 
     </div>
 
-    <button class="slider-btn right" onclick="SlideRight()">&#10095;</button>
+    <button class="slider-btn right  hides" onclick="SlideRight()">&#10095;</button>
   </div>
 
   <button class="see-all-btn">See All</button>
-</section>
-<!-- ********************* contect form*************************  -->
-<div class="container-check1">
-  <div class="container1">
-    <div class="form-box1">
-      <h2>Make your Own Trip</h2>
-      <p>Please fill in the details to make your trip.</p>
-      <form>
-        <div class="input-group1">
-          <input type="email" placeholder=" your address" required />
-          <input type="email" placeholder="detionation address" required />
+  </section>
+</div>
+  <!-- ********************* contect form*************************  -->
+  <div class="container-check1">
+    <div class="container1">
+      <div class="form-box1">
+        <h2>Make your Own Trip</h2>
+        <p>Please fill in the details to make your trip.</p>
+        <form>
+          <div class="input-group1">
+            <input type="email" placeholder=" your address" required />
+            <input type="email" placeholder="detionation address" required />
 
-        </div>
-
-        <div class="input-group1" id="otherDestinationGroup1" style="display: none;">
-          <input type="text" placeholder="Enter Other Destination" />
-        </div>
-
-        <!-- Email -->
-        <div class="input-group1">
-          <input type="email" placeholder="Your Email" required />
-        </div>
-
-
-        <div class="input-group1">
-          <div>
-            <label>Check In</label>
-            <input type="date" />
           </div>
-          <div>
-            <label>Check Out</label>
-            <input type="date" />
+
+          <div class="input-group1" id="otherDestinationGroup1" style="display: none;">
+            <input type="text" placeholder="Enter Other Destination" />
           </div>
-        </div>
 
-
-        <div class="input-group1">
-          <div class="number-field1">
-            <label><i class="fas fa-user1"></i> Adults</label>
-            <input type="number" value="1" min="1" />
+          <!-- Email -->
+          <div class="input-group1">
+            <input type="email" placeholder="Your Email" required />
           </div>
-          <div class="number-field1">
-            <label><i class="fas fa-child1"></i> Children</label>
-            <input type="number" value="0" min="0" />
+
+
+          <div class="input-group1">
+            <div>
+              <label>Check In</label>
+              <input type="date" />
+            </div>
+            <div>
+              <label>Check Out</label>
+              <input type="date" />
+            </div>
           </div>
-        </div>
 
 
-        <button type="submit1" id="button1"> Submit Now</button>
-      </form>
-    </div>
+          <div class="input-group1">
+            <div class="number-field1">
+              <label><i class="fas fa-user1"></i> Adults</label>
+              <input type="number" value="1" min="1" />
+            </div>
+            <div class="number-field1">
+              <label><i class="fas fa-child1"></i> Children</label>
+              <input type="number" value="0" min="0" />
+            </div>
+          </div>
 
-    <div class="info-box1">
-      <h2>Contact Information</h2>
-      <p>If you have any questions, feel free to reach out to us.</p>
-      <ul>
-        <li><strong>Address:</strong><br />4b Long Street, Miami, USA</li>
-        <li><strong>Phone:</strong><br />+3230-45-45-67</li>
-        <li><strong>Email:</strong><br /><a [href]="'mailto:' + email">{{ email }}</a></li>
-        <li><strong>instagram:</strong><br /><a class="social-link"
-            [href]="'https://www.instagram.com/' + instagramUsername" target="_blank">
-            {{ instagramUsername }}
-          </a></li>
-        <li><strong>facbook:</strong><br /><a [href]="'https://www.facebook.com/' + facebookUsername" target="_blank">
-            {{ facebookUsername }}
-          </a></li>
-      </ul>
-      <div class="social-icons1">
-        <i class="fab fa-facebook-f1"></i>
-        <i class="fab fa-twitter1"></i>
-        <i class="fab fa-youtube1"></i>
-        <i class="fab fa-google-plus-g1"></i>
+
+          <button type="submit1" id="button1"> Submit Now</button>
+        </form>
       </div>
+
+       <div class="info-box1"> 
+        <h2>Contact Information</h2>
+        <p>If you have any questions, feel free to reach out to us.</p>
+        <ul>
+          <li><strong>Address:</strong><br />4b Long Street, Miami, USA</li>
+          <li><strong>Phone:</strong><br />+3230-45-45-67</li>
+          <li><strong>Email:</strong><br /><a [href]="'mailto:' + email">{{ email }}</a></li>
+          <li><strong>instagram:</strong><br /><a class="social-link"
+              [href]="'https://www.instagram.com/' + instagramUsername" target="_blank">
+              {{ instagramUsername }}
+            </a></li>
+          <li><strong>facbook:</strong><br /><a [href]="'https://www.facebook.com/' + facebookUsername" target="_blank">
+              {{ facebookUsername }}
+            </a></li>
+        </ul>
+        <div class="social-icons1">
+          <i class="fab fa-facebook-f1"></i>
+          <i class="fab fa-twitter1"></i>
+          <i class="fab fa-youtube1"></i>
+          <i class="fab fa-google-plus-g1"></i>
+        </div>
+      </div> -->
     </div>
   </div>
-</div>
-<!-- ************************** footer************************************** -->
+  <!-- ************************** footer************************************** -->

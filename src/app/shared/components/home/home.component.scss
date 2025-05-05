@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .slider-wrapper {
   // margin-top: 100px;
   position: relative;
@@ -61,10 +63,16 @@
 
 .prev {
   left: 10px;
+  @include respond-to-max(md){
+    display: none;
+  }
 }
 
 .next {
   right: 10px;
+  @include respond-to-max(md){
+    display: none;
+  }
 }
 
 .building-graphic {
@@ -158,6 +166,26 @@
   padding: 30px;
   border-radius: 16px;
   max-width: 700px;
+
+  @include respond-to-max(md) {
+    left: 43%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    .form-row {
+      width: 500px;
+
+      @include respond-to-max(sm) {
+        width: 300px;
+        
+      }
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+  }
 }
 
 .slider-hero-content h1 {
@@ -177,6 +205,16 @@
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 10px;
+
+  &>* {
+    flex-shrink: 0;
+    flex-grow: 1;
+  }
+
+  @include respond-to-max(md) {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }
 
 .form-row input,
@@ -214,6 +252,7 @@
 }
 
 // start tranding Destinations************************************************************************************
+
 .container {
   padding: 20px;
   max-width: 1200px;
@@ -311,30 +350,6 @@
   background-color: #f0f0f0;
 }
 
-
-
-// .footer-column p,
-//   .footer-column li,
-//   .footer-column a {
-//     font-size: 14px;
-//     color: #ddd;
-//     line-height: 1.6;
-//     text-decoration: none;
-//     list-style: none;
-//   transform:all 0.3s ease ;
-//   }
-//   .footer-column p:hover,
-//   .footer-column li:hover,
-//   .footer-column a:hover{
-//     text-decoration: none ;
-//      color: rgb(123, 127, 136);
-
-//   }
-
-
-
-
-
 /* Wrap the buttons and scroll-container in a flex row */
 .scroll-wrapper {
   display: flex;
@@ -352,6 +367,17 @@
   scroll-behavior: smooth;
   padding: 10px 0;
 }
+
+
+@media (max-width: 768px) {
+  .header h2 {
+    font-size: 1.3rem;
+    color: #1e1e2f;
+  }
+
+
+}
+
 
 // ******************************
 
@@ -442,7 +468,7 @@
   }
 }
 
-// *******************************************//
+// **************** review***************************//
 
 * {
   margin: 0;
@@ -554,14 +580,28 @@
   z-index: 10;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
+.hide{
+  display: none;
+}
 
 .slider-btn.left {
   left: 10px;
+ 
 }
 
 .slider-btn.right {
   right: 10px;
 }
+
+@include respond-to-max(md) {
+  .hides{
+    display: none;
+  }
+  .hide{
+    display:block;
+  margin-top: 25px;
+  }
+ }
 
 .see-all-btn {
   background-color: #e70040;
@@ -608,6 +648,10 @@
   min-width: 300px;
   flex-shrink: 0;
   margin-right: 20px;
+
+ @include respond-to-max(md){
+  margin-right: 0;
+ }
 }
 
 /* 6 images on the pagg  */
@@ -934,5 +978,44 @@
 .map-btn:hover {
   background-color: #3367d6;
 }
+
+@media (max-width: 768px) {
+  .container1 {
+    flex-direction: column; /* stack form and contact vertically */
+    width: 100%;
+  }
+
+  .form-box1,
+  .info-box1 {
+    padding: 20px;
+  }
+
+  .input-group1 {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .input-group1 input,
+  .input-group1 select {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .number-field1 input {
+    width: 100%;
+  }
+
+  #button1 {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .social-icons1 {
+    display: flex;
+    justify-content: center;
+  }
+}
+
 
 // footer start

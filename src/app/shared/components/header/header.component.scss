@@ -25,6 +25,10 @@ nav {
                 align-items: center;
             }
 
+            .hide {
+                display: none;
+            }
+
             .btns {
                 margin-left: auto;
                 display: flex;
@@ -32,7 +36,7 @@ nav {
                 align-items: center;
             }
 
-          
+
         }
     }
 
@@ -139,5 +143,31 @@ nav {
                 object-fit: cover;
             }
         }
+    }
+}
+
+
+.mobile-logo {
+    display: none; // Hidden by default
+
+    img {
+        height: 30px;
+        width: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .tolls {
+        display: none !important;
+    }
+
+    .hide {
+        display: block !important;
+        text-align: center;
+             border-top: none;
+    }
+
+    .mobile-logo {
+        display: block !important;
     }
 }

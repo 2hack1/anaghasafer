@@ -1,3 +1,5 @@
+@import 'mixins';
+
 * {
   margin: 0;
   padding: 0;
@@ -6,11 +8,13 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+
 }
 
 .trip-section {
   width: 100%;
   overflow: hidden;
+
 }
 
 .slider {
@@ -807,6 +811,10 @@ h2 {
 
 .room-section p {
   font-size: 16px;
+   
+@include respond-to-max(md){
+  margin-top: 5px;
+}
 }
 
 /* Add Room Link */
@@ -915,12 +923,16 @@ h2 {
     padding: 5px 10px;
     border-radius: 0;
     background-color: rgb(255, 87, 87);
-    // background-color: rgb(241, 241, 241);
-    transition: all 200ms ease;
+    transition: all 200ms ease ;
 
-    &:hover {
-      background-color: rgb(218, 218, 218);
-    }
+    // &:hover {
+    //   background-color: rgb(218, 218, 218);
+    // }
+    // @include respond-to-max(md){
+    //   &:hover {
+    //       display: none;
+    //     }
+    // }
   }
 }
 
@@ -981,6 +993,10 @@ h2 {
   gap: 10px;
   margin: 20px 0;
   font-size: 14px;
+  @include respond-to-max(md){
+
+    flex-wrap: nowrap;
+  }
 }
 
 .checkbox-section a {

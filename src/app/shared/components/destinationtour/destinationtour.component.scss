@@ -1,3 +1,5 @@
+@import 'mixins';
+
 * {
     margin: 0;
     padding: 0;
@@ -8,12 +10,17 @@ body {
     font-family: Arial, sans-serif;
     background: #f8f9fa;
     padding: 20px;
+
 }
 
 .mobile-header {
     display: none;
     text-align: right;
     margin-bottom: 10px;
+
+    @include respond-to-max(md) {
+        margin-top: 10px;
+    }
 }
 
 #filter-toggle {
@@ -34,7 +41,6 @@ body {
 /* Sidebar */
 .sidebar {
     flex: 0 0 250px;
-    /* background: #fff; */
     padding: 20px;
     border-radius: 8px;
     height: fit-content;
@@ -92,7 +98,6 @@ body {
 
     h2 {
         font-size: 20px;
-
     }
 }
 
@@ -216,11 +221,6 @@ body {
     }
 }
 
-// .text p span:hover {
-//     color: #b62c27;
-//     transition: color 0.3s ease;
-// }
-
 .icons {
 
     li {
@@ -230,7 +230,7 @@ body {
 
         i {
             font-size: 22px;
-             color: #0d125e;
+            color: #0d125e;
         }
     }
 }
@@ -241,5 +241,4 @@ body {
     color: #c51414;
     transform: scale(1.2);
     transition: all 0.3s ease;
-  }
-  
+}
