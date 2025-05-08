@@ -7,6 +7,7 @@ import { DestinationtourComponent } from './shared/components/destinationtour/de
 import { ViewDeatailsComponent } from './shared/components/view-deatails/view-deatails.component';
 import { combineLatest } from 'rxjs';
 import { ContactusComponent } from './shared/components/contactus/contactus.component';
+import { AboutusComponent } from './shared/components/aboutus/aboutus.component';
 
 
 
@@ -28,6 +29,9 @@ export const routes: Routes = [
     {
        path:"contact",
         component:ContactusComponent
+    },
+    {path:"about",
+        component: AboutusComponent
     },
 ]
 

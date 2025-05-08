@@ -1,4 +1,4 @@
-@import 'mixins';
+@use 'mixins' as *;
 
 .slider-wrapper {
   // margin-top: 100px;

@@ -1,4 +1,4 @@
-@import 'mixins';
+@use 'mixins' as *;
 
 * {
     margin: 0;
@@ -110,6 +110,9 @@ body {
     flex-direction: column;
     justify-content: center;
 
+    @include respond-to-max(md){
+        display: flex;
+    }
 
     #check {
         font-size: 24px;
@@ -120,6 +123,10 @@ body {
 .price-section h3 {
     margin: 10px 0;
     color: #333;
+    // @include respond-to-max(md){
+    //     display: flex;
+    // }
+ 
 }
 
 .view-details {
@@ -127,6 +134,9 @@ body {
     text-decoration: underline;
     margin-bottom: 10px;
     display: inline-block;
+    @include respond-to-max(md){
+        margin-left: 14px;
+    }
 }
 
 .book-now {
@@ -137,6 +147,12 @@ body {
     font-weight: bold;
     cursor: pointer;
     border-radius: 4px;
+    @include respond-to-max(md){
+        height: 40px;
+       display: flex;        
+        align-items: center;
+        
+    }
 }
 
 .book-now:hover {
@@ -172,7 +188,7 @@ body {
     .details-section,
     .price-section {
         max-width: 100%;
-        flex: 1 1 100%;
+        flex: 1 1 90%
     }
 
     .price-section {

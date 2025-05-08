@@ -1,4 +1,4 @@
-<div class="mobile-header" >
+<div class="mobile-header">
     <button id="filter-toggle" (click)="toggleFilters()">{{ filterButtonText }}</button>
 </div>
 
@@ -47,15 +47,18 @@
                 </div>
 
             </div>
-            
+
             <div class="price-section">
-             
-                <p id="check">Starting from</p>          
-                <h3>₹ {{ pack.price }}</h3>
+
+                <p id="check">Starting from</p>
+                <h3 style="text-wrap: nowrap;">₹ {{ pack.price }}</h3>
                 <a [routerLink]="'/view'" class="view-details" style="text-decoration: none;">View Details</a>
-              <button [routerLink]="'/view'" class="book-now">Book Now </button>
+                <button [routerLink]="'/view'" class="book-now">Book Now </button>
+
+
+
             </div>
-           
+
         </div>
     </main>
 

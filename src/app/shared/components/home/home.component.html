@@ -130,7 +130,7 @@
   </div>
 
   <div class="header" style="display: flex;justify-content: end;">
-    <a class="hower" routerLink="/states" fragment="stateTop">View All Tours
+    <a class="hower" routerLink="/states" >View All Tours
       <span>&#10140;</span>
     </a>
   </div>
@@ -140,7 +140,7 @@
 
     <div class="scroll-container" #scrollContainer>
       <div class="card" *ngFor="let dest of destinations">
-        <a [routerLink]="['/states']" [fragment]="'stateTop'" class="tour-link" style="text-decoration: none;">
+        <a [routerLink]="['/states']"  class="tour-link" style="text-decoration: none;">
           <img [src]="dest.image" [alt]="dest.name" />
           <p>{{ dest.packages }} Packages</p>
           <h3>{{ dest.name }}</h3>
