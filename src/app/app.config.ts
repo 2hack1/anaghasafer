@@ -5,9 +5,9 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { routes } from './app.routes';
 import { APP_BASE_HREF } from '@angular/common';
-
+import { provideHttpClient } from '@angular/common/http';
 export const appConfig: ApplicationConfig = {
-  providers: [
+  providers: [provideHttpClient(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimations(),
@@ -17,3 +17,13 @@ export const appConfig: ApplicationConfig = {
     }
   ]
 };
+
+
+
+// import { bootstrapApplication } from '@angular/platform-browser';
+// import { provideHttpClient } from '@angular/common/http';
+// import { AppComponent } from './app/app.component';
+
+// bootstrapApplication(AppComponent, {
+//   providers: [provideHttpClient()],
+// });

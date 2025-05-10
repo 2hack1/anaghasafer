@@ -28,12 +28,18 @@
 
 
     <!-- Sliding Images -->
-    <div class="slides" id="slideContainer">
+    <!-- <div class="slides" id="slideContainer">
       <div class="slide" style="background-image: url('assets/slider12.png');"></div>
       <div class="slide" style="background-image: url('assets/slider13.png');"></div>
       <div class="slide" style="background-image: url('assets/slider14.png');"></div>
-    </div>
+    </div> -->
 
+    <div class="slides" id="slideContainer">
+  <div 
+    class="slide" 
+    *ngFor="let img of images; let i = index"
+    [style.backgroundImage]="'url(' + img + ')'"></div>  
+</div>
     <div class="nav prev" (click)="prevSlide()">❮</div>
     <div class="nav next" (click)="nextSlide()">❯</div>
   </div>

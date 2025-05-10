@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ContainerComponent } from "../container/container.component";
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { AxiosService } from '../../../core/services/axios/axios.service';
 @Component({
   selector: 'app-home',
   imports: [CommonModule, RouterLink],
@@ -13,12 +14,29 @@ export class HomeComponent implements OnInit {
   totalSlides = 3;
   facebookUsername = "anaghasafer";
   instagramUsername = "anaghasafer";
-
-
   email = 'anaghasafer21@mail.com';
+
+    images: any[] = [];
+    constructor(private as_:AxiosService){}
+
   ngOnInit(): void {
     setInterval(() => this.nextSlide(), 5000);
+    this.getImages();
   }
+
+getImages() {
+  this.as_.getimg()
+    .then(res => {
+      console.log('API Response:', res.data);
+      // Extract only the image URLs from the response
+      this.images = res.data.map((item: any) => item.url);
+    })
+    .catch(err => {
+      console.error('API Error:', err);
+    });
+}
+
+
 
   showSlide(index: number) {
     const container = document.getElementById('slideContainer') as HTMLElement;
