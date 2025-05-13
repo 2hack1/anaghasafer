@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "npm run host",
     "build": "ng build",
+    "build:prod": "ng build --base-href /anaghasafer/dist/frontend/browser/ --configuration production && git add . && git commit -m \"Auto commit\" && git push",
     "host": "ng serve --host 0.0.0.0 --port 4200",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
