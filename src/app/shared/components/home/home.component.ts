@@ -3,6 +3,7 @@ import { ContainerComponent } from "../container/container.component";
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
+import { AxiosResponse } from 'axios';
 @Component({
   selector: 'app-home',
   imports: [CommonModule, RouterLink],
@@ -103,8 +104,8 @@ export class HomeComponent implements OnInit {
     { name: 'Bali', image: 'assets/6 images/maharatra.jpg', tours: 1 },
     { name: 'Thailand', image: 'assets/6 images/mp.jpg', tours: 1 }
   ];
-  getsub: any[] = [];
-subDes:any[]=[];
+  getsub: any = [];
+  subDes: any[] = [];
   // getSubLimit(destination_id: any) {
   //   this.as_.getSubDesLimit(destination_id)
   //     .then(res => {  
@@ -118,7 +119,7 @@ subDes:any[]=[];
   //     .catch(err => {
   //       console.error("Some error occurred:", err);
   //     });
-    
+
   //   // return this.as_.getSubDesLimit(destination_id:any)
   //   // .then(res => {
   //   //   const destination = res.data[0]; // get first destination
@@ -133,28 +134,27 @@ subDes:any[]=[];
   //   //   console.log("Destination ID:", destinationId);
   //   //   console.log("Sub-destinations:", subDestinations);
 
-     
+
   //   // })
   //   // .catch(err => {
   //   //   console.error("Error fetching destinations:", err);
   //   //   return null;
   //   // });
   // }
-getSubLimit(destination_id: any) {
-  this.as_.getSubDesLimit(destination_id)
-    .then(res => {  
-      this.getsub = res.data;
-      console.log("++++++++++ Raw sub data:", this.getsub);
+  getSubLimit(destination_id: any) {
+    this.as_.getSubDesLimit(destination_id)
+      .then((res: AxiosResponse) => {
+        this.getsub = res.data;
+        console.log("++++++++++ Raw sub data:", this.getsub);
 
-      // Combine all sub_destinations into one array
-      this.subDes = this.getsub.flatMap((item: any) => item.sub_destinations);
-
-      console.log("Combined sub-destinations:", this.subDes);
-    })
-    .catch(err => {
-      console.error("Some error occurred:", err);
-    });
-}
+        // Combine all sub_destinations into one array
+        this.subDes = this.getsub.sub_destinations;
+        console.log("Combined sub-destinations:", this.subDes);
+      })
+      .catch(err => {
+        console.error("Some error occurred:", err);
+      });
+  }
 
   destinations = [
     { name: 'Uttarakhand', image: 'assets/uttarakhand.webp', packages: '50+' },
