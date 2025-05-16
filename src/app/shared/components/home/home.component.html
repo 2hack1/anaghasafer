@@ -68,7 +68,7 @@
 
     <button class="scroll-btn" (click)="scrollLeft()">&#10094;</button>
 
-    <div class="scroll-container" #scrollContainer>
+    <!-- <div class="scroll-container" #scrollContainer>
       <div class="card" *ngFor="let dest of destinations">
         <a [routerLink]="['/states']"  class="tour-link" style="text-decoration: none;">
           <img [src]="dest.image" [alt]="dest.name" />
@@ -76,8 +76,19 @@
           <h3>{{ dest.name }}</h3>
         </a>
       </div>
+    </div> -->
+
+    <div class="scroll-container" #scrollContainer>
+      <div class="card" *ngFor="let sub of subDes let i=index">
+        <a [routerLink]="['/states']"  class="tour-link" style="text-decoration: none;">
+      <img [src]="'https://yourdomain.com/' + sub.image_url" [alt]="sub.name" />
+          <p>{{ i+1 }} Packages</p>
+          <h3>{{sub.name}}</h3>
+        </a>
+      </div>
     </div>
 
+   
     <button class="scroll-btn" (click)="scrollRight()">&#10095;</button>
   </div>
 </div>

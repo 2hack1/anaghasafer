@@ -106,41 +106,6 @@ export class HomeComponent implements OnInit {
   ];
   getsub: any = [];
   subDes: any[] = [];
-  // getSubLimit(destination_id: any) {
-  //   this.as_.getSubDesLimit(destination_id)
-  //     .then(res => {  
-  //       this.getsub=res.data;
-  //       console.log("++++++++++",this.getsub);
-  //       this.getsub.map((req:any)=>{
-  //         this.subDes=req.sub_destinations;
-  //         // console.log(req.sub_destinations);
-  //       })
-  //     })
-  //     .catch(err => {
-  //       console.error("Some error occurred:", err);
-  //     });
-
-  //   // return this.as_.getSubDesLimit(destination_id:any)
-  //   // .then(res => {
-  //   //   const destination = res.data[0]; // get first destination
-  //   //   const destinationId = destination.destination_id;
-  //   //   const subDestinations = destination.sub_destinations;
-
-  //   //   this.stores = destinationId; // save destination_id
-  //   //   this.getsub = subDestinations; // save sub_destinations
-
-  //   //   console.log("Destination ID:", res.data);
-  //   //   console.log("Destination ID:", destination);
-  //   //   console.log("Destination ID:", destinationId);
-  //   //   console.log("Sub-destinations:", subDestinations);
-
-
-  //   // })
-  //   // .catch(err => {
-  //   //   console.error("Error fetching destinations:", err);
-  //   //   return null;
-  //   // });
-  // }
   getSubLimit(destination_id: any) {
     this.as_.getSubDesLimit(destination_id)
       .then((res: AxiosResponse) => {
@@ -150,10 +115,12 @@ export class HomeComponent implements OnInit {
         // Combine all sub_destinations into one array
         this.subDes = this.getsub.sub_destinations;
         console.log("Combined sub-destinations:", this.subDes);
+        
       })
       .catch(err => {
         console.error("Some error occurred:", err);
       });
+      return this.subDes;
   }
 
   destinations = [
