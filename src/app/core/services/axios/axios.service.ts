@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios, { AxiosInstance } from 'axios';
+import { environment } from '../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class AxiosService {
 
   constructor() {
     this.api = axios.create({
-      baseURL: 'http://localhost:8000/api', // Laravel API base URL
+      baseURL: environment.base_url, // Laravel API base URL
       withCredentials: false, // set to true only if using cookies/sessions
       headers: {
         'Content-Type': 'application/json',
@@ -22,8 +23,17 @@ export class AxiosService {
     return this.api.get('/greeting'); // Laravel route: /api/greeting
   }
 
-  getimg(){
-    return this.api.get('/topimagess')
+  getimg() {
+    return this.api.get('/topimagess');
+  }
+
+  // get destinations
+  getdes() {
+    return this.api.get('/destination/all/des')
+  }
+  
+  getSubDesLimit(id: any) {
+    return this.api.get(`/destination/${id}/limit`);
   }
 
 }

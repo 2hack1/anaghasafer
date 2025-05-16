@@ -15,27 +15,45 @@ export class HomeComponent implements OnInit {
   facebookUsername = "anaghasafer";
   instagramUsername = "anaghasafer";
   email = 'anaghasafer21@mail.com';
-
-    images: any[] = [];
-    constructor(private as_:AxiosService){}
+  stores: any;
+  destinationsid: any[] = [];
+  images: any[] = [];
+  constructor(private as_: AxiosService) { }
 
   ngOnInit(): void {
     setInterval(() => this.nextSlide(), 5000);
     this.getImages();
+
+    (async () => {
+      this.stores = await this.getdestination();
+      console.log("asdasdasd", this.stores)
+      this.getSubLimit(this.stores);
+    })()
   }
 
-getImages() {
-  this.as_.getimg()
-    .then(res => {
-      console.log('API Response:', res.data);
-      // Extract only the image URLs from the response
-      this.images = res.data.map((item: any) => item.url);
-    })
-    .catch(err => {
-      console.error('API Error:', err);
-    });
-}
+  getImages() {
+    this.as_.getimg()
+      .then(res => {
+        console.log('API Response:', res.data);
+        this.images = res.data.map((item: any) => item.url);
+      })
+      .catch(err => {
+        console.error('API Error:', err);
+      });
+  }
 
+
+  async getdestination() {
+    await this.as_.getdes()
+      .then(res => {
+        // console.log("Full response:", res.data);
+        this.destinationsid = res.data.map((item: any) => item.destination_id);
+      })
+      .catch(err => {
+        console.error("Error fetching destinations:", err);
+      });
+    return this.destinationsid[0]
+  }
 
 
   showSlide(index: number) {
@@ -85,6 +103,58 @@ getImages() {
     { name: 'Bali', image: 'assets/6 images/maharatra.jpg', tours: 1 },
     { name: 'Thailand', image: 'assets/6 images/mp.jpg', tours: 1 }
   ];
+  getsub: any[] = [];
+subDes:any[]=[];
+  // getSubLimit(destination_id: any) {
+  //   this.as_.getSubDesLimit(destination_id)
+  //     .then(res => {  
+  //       this.getsub=res.data;
+  //       console.log("++++++++++",this.getsub);
+  //       this.getsub.map((req:any)=>{
+  //         this.subDes=req.sub_destinations;
+  //         // console.log(req.sub_destinations);
+  //       })
+  //     })
+  //     .catch(err => {
+  //       console.error("Some error occurred:", err);
+  //     });
+    
+  //   // return this.as_.getSubDesLimit(destination_id:any)
+  //   // .then(res => {
+  //   //   const destination = res.data[0]; // get first destination
+  //   //   const destinationId = destination.destination_id;
+  //   //   const subDestinations = destination.sub_destinations;
+
+  //   //   this.stores = destinationId; // save destination_id
+  //   //   this.getsub = subDestinations; // save sub_destinations
+
+  //   //   console.log("Destination ID:", res.data);
+  //   //   console.log("Destination ID:", destination);
+  //   //   console.log("Destination ID:", destinationId);
+  //   //   console.log("Sub-destinations:", subDestinations);
+
+     
+  //   // })
+  //   // .catch(err => {
+  //   //   console.error("Error fetching destinations:", err);
+  //   //   return null;
+  //   // });
+  // }
+getSubLimit(destination_id: any) {
+  this.as_.getSubDesLimit(destination_id)
+    .then(res => {  
+      this.getsub = res.data;
+      console.log("++++++++++ Raw sub data:", this.getsub);
+
+      // Combine all sub_destinations into one array
+      this.subDes = this.getsub.flatMap((item: any) => item.sub_destinations);
+
+      console.log("Combined sub-destinations:", this.subDes);
+    })
+    .catch(err => {
+      console.error("Some error occurred:", err);
+    });
+}
 
   destinations = [
     { name: 'Uttarakhand', image: 'assets/uttarakhand.webp', packages: '50+' },
@@ -96,7 +166,7 @@ getImages() {
     { name: 'Kerala', image: 'assets/kerala.webp', packages: '10+' },
     { name: 'Thailand', image: 'assets/thailand.webp', packages: '10+' },
   ];
-  
+
 
 }
 

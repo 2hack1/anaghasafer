@@ -63,10 +63,11 @@ For more information on using the Angular CLI, including detailed command refere
 ## How to build
 
 ``` bash
-ng build --base-href /anaghasafer/dist/frontend/browser/  --configurations productions
+ng build --base-href /anaghasafer/dist/frontend/browser/ --configuration production
 ```
 
-And add this config
+And add this in app.config.ts
+
 ![update app.config.ts](image.png)
 
 <hr>
