@@ -1,19 +1,23 @@
 <div class="header">
     <h2>Top Trading State's Holiday Packages :-</h2>
 </div>
-<div class="checkpadding">
-    <div class="slider-container" *ngFor="let group of sliderGroups">
-        <a class="card" *ngFor="let destination of group" [routerLink]="['/des']" style="color: white; text-decoration: none;">
-          <img [src]="destination.image" [alt]="destination.name" />
-          <div class="card-content">
-            <h3>{{ destination.name }}</h3>
-            <p>{{ destination.packages }} Packages</p>
-          </div>
-        </a>
+
+
+  <div class="checkpadding">
+  <div class="slider-container" *ngFor="let group of sliderGroups">
+    <a class="card" *ngFor="let destination of group" [routerLink]="['/des',destination.sub_destination_id
+]" style="color: white; text-decoration: none;">
+      <img [src]="destination.image" [alt]="destination.name" />
+      <div class="card-content">
+        <h3>{{ destination.name }}</h3>
+        <p>{{ destination.packages }} Packages</p>
       </div>
-      
+    </a>
   </div>
-  
+</div>
+
+
+
 <div class="content1">
     <p>For travelers, India is a treasure trove of exploration and experiences. From the bustling cities to serene rural
         landscapes, India offers a diverse range of attractions, such as historical monuments, palaces, temples,

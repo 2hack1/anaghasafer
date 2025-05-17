@@ -16,11 +16,11 @@ export const routes: Routes = [
         path: '',
         component: HomeComponent,
     }, {
-        path: "states",
+        path: 'states/:id',
         component: StatestoursComponent
     },
     {
-        path: "des",
+        path: 'des/:id',
         component: DestinationtourComponent
     },{
         path:"view",

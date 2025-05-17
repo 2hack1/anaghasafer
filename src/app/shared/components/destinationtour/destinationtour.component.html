@@ -23,7 +23,7 @@
         </div>
     </aside>
 
-    <main class="main-content">
+    <!-- <main class="main-content">
         <div *ngFor="let pack of packages" class="package-card">
             <div class="image-section">
                 <img [src]="pack.image" alt="{{ pack.title }}">
@@ -60,6 +60,42 @@
             </div>
 
         </div>
-    </main>
+    </main> -->
+
+    <main class="main-content">
+  <div *ngFor="let pack of package" class="package-card">
+    <div class="image-section">
+      <img [src]="pack.image" alt="{{ pack.place_name
+ }}">
+    </div>
+    <div class="details-section">
+      <h2>{{ pack.place_name }}</h2>
+      <div class="grid-details-section">
+        <div  class="text">
+          <p><strong>Duration:</strong> <span>{{ pack.duration_days }}</span></p>
+          <p><strong>Origin:</strong> <span>{{ pack.origin }}</span></p>
+          <p><strong>Departure:</strong> <span>{{ pack.departure_point }}</span></p>
+          <p><strong>Package:</strong> <span>{{ pack.package_code }}</span></p>
+          <p><strong>Destination:</strong> <span>Dwarka / Nageshwar / Porbandar / Somnath</span></p>
+          <p><strong>Date Of Journey:</strong> <span>Multiple Options</span></p>
+        </div>
+      </div>
+      <div class="icons">
+        <li>
+          <i class="fa-solid fa-bus-simple"></i>
+          <i class="fa-solid fa-car-side"></i>
+          <i class="fa-solid fa-train"></i>
+          <i class="fa-solid fa-hotel"></i>
+        </li>
+      </div>
+    </div>
+    <div class="price-section">
+      <p id="check">Starting from</p>
+      <h3 style="text-wrap: nowrap;">₹ {{ pack.price_trip }}</h3>
+      <a [routerLink]="'/view'" class="view-details" style="text-decoration: none;">View Details</a>
+      <button [routerLink]="'/view'" class="book-now">Book Now</button>
+    </div>
+  </div>
+</main>
 
 </div>

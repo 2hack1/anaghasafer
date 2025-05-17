@@ -19,6 +19,15 @@ export class AxiosService {
     });
   }
 
+ chunkArray(arr: any[], chunkSize: number): any[][] {
+    const result = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+      result.push(arr.slice(i, i + chunkSize));
+    }
+    return result;
+  }
+
+
   getGreeting() {
     return this.api.get('/greeting'); // Laravel route: /api/greeting
   }
@@ -36,4 +45,11 @@ export class AxiosService {
     return this.api.get(`/destination/${id}/limit`);
   }
 
+  getSubDesAll(id:any){
+    return this.api.get(`/destination/${id}`);
+  }
+  getPackages(id:any){
+        return this.api.get(`/packages/${id}`);
+
+  }
 }

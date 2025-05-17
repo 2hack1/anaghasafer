@@ -1,16 +1,36 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { AxiosService } from '../../../core/services/axios/axios.service';
 
 @Component({
   selector: 'app-destinationtour',
-  imports: [CommonModule ,RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './destinationtour.component.html',
   styleUrl: './destinationtour.component.scss'
 })
-export class DestinationtourComponent {
+export class DestinationtourComponent implements OnInit {
 
+  constructor(private routes: ActivatedRoute,private as_:AxiosService) { }
+  catchRouteId: any | null = null;
+package: any[]=[];
 
+  ngOnInit(): void {
+    this.catchRouteId = this.routes.snapshot.paramMap.get('id');
+    console.log(this.catchRouteId);
+    this.getpackages(this.catchRouteId);
+  }
+
+  getpackages( id:any){
+    this.as_.getPackages(id).then((res)=>{
+      console.log(res.data);
+      this.package=res.data;
+    }).
+    catch((err)=>{
+      console.error(err);
+    });
+
+  }
   showFilters: boolean = false;
   filterButtonText: string = 'Show Filters';
 
@@ -44,7 +64,7 @@ export class DestinationtourComponent {
         { label: 'Package Code', value: 'WAH11' },
         { label: 'Destination', value: 'Dwarka / Nageshwar / Porbandar / Somnath' },
         { label: ' Date Of Journey', value: ' Multiple Options' },
-       
+
       ],
       price: 20600
     },
@@ -58,7 +78,7 @@ export class DestinationtourComponent {
         { label: 'Package Code', value: 'WAH11' },
         { label: 'Destination', value: 'Dwarka / Nageshwar / Porbandar / Somnath' },
         { label: ' Date Of Journey', value: ' Multiple Options' },
-       
+
       ],
       price: 20600
     },
@@ -72,7 +92,7 @@ export class DestinationtourComponent {
         { label: 'Package Code', value: 'WAH11' },
         { label: 'Destination', value: 'Dwarka / Nageshwar / Porbandar / Somnath' },
         { label: ' Date Of Journey', value: ' Multiple Options' },
-       
+
       ],
       price: 20600
     },
@@ -86,7 +106,7 @@ export class DestinationtourComponent {
         { label: 'Package Code', value: 'WAH11' },
         { label: 'Destination', value: 'Dwarka / Nageshwar / Porbandar / Somnath' },
         { label: ' Date Of Journey', value: ' Multiple Options' },
-       
+
       ],
       price: 20600
     },
@@ -100,7 +120,7 @@ export class DestinationtourComponent {
         { label: 'Package Code', value: 'WAH11' },
         { label: 'Destination', value: 'Dwarka / Nageshwar / Porbandar / Somnath' },
         { label: ' Date Of Journey', value: ' Multiple Options' },
-       
+
       ],
       price: 20600
     },
@@ -108,4 +128,3 @@ export class DestinationtourComponent {
   ];
 
 }
- 
