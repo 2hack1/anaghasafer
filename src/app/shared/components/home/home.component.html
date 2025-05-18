@@ -59,8 +59,8 @@
     <!-- <a class="hower " routerLink="/states" fragment="stateTop">View All Tours <span>&#10140;</span></a> -->
   </div>
 
-  <div class="header" style="display: flex;justify-content: end;">
-    <a class="hower" routerLink="/states" >View All Tours
+  <div class="header"   style="display: flex;justify-content: end;"  >
+    <a class="hower" [routerLink]="['/states',stores]" >View All Tours
       <span>&#10140;</span>
     </a>
   </div>
@@ -68,20 +68,11 @@
 
     <button class="scroll-btn" (click)="scrollLeft()">&#10094;</button>
 
-    <!-- <div class="scroll-container" #scrollContainer>
-      <div class="card" *ngFor="let dest of destinations">
-        <a [routerLink]="['/states']"  class="tour-link" style="text-decoration: none;">
-          <img [src]="dest.image" [alt]="dest.name" />
-          <p>{{ dest.packages }} Packages</p>
-          <h3>{{ dest.name }}</h3>
-        </a>
-      </div>
-    </div> -->
-
+  
     <div class="scroll-container" #scrollContainer>
       <div class="card" *ngFor="let sub of subDes let i=index">
         <a [routerLink]="['/states',sub.sub_destination_id]"  class="tour-link" style="text-decoration: none;">
-      <img [src]="'https://yourdomain.com/' + sub.image_url" [alt]="sub.name" />
+      <img [src]="'http://localhost:8000/storage/' + sub.image_url" [alt]="sub.name" />
           <p>{{ i+1 }} Packages</p>
           <h3>{{sub.name}}</h3>
         </a>

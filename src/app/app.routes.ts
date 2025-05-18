@@ -23,7 +23,7 @@ export const routes: Routes = [
         path: 'des/:id',
         component: DestinationtourComponent
     },{
-        path:"view",
+        path:'view/:id',
         component:ViewDeatailsComponent
     },
     {

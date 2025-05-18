@@ -5,9 +5,8 @@
 
   <div class="checkpadding">
   <div class="slider-container" *ngFor="let group of sliderGroups">
-    <a class="card" *ngFor="let destination of group" [routerLink]="['/des',destination.sub_destination_id
-]" style="color: white; text-decoration: none;">
-      <img [src]="destination.image" [alt]="destination.name" />
+    <a class="card" *ngFor="let destination of group" [routerLink]="['/des',destination.sub_destination_id]" style="color: white; text-decoration: none;">
+      <img [src]="'http://localhost:8000/storage/'+destination.image_url" [alt]="destination.name" />
       <div class="card-content">
         <h3>{{ destination.name }}</h3>
         <p>{{ destination.packages }} Packages</p>

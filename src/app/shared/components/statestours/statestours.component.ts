@@ -26,19 +26,25 @@ export class StatestoursComponent implements OnInit {
     console.log('Route ID:', this.getroute);
     this.getsubDestinations(this.getroute);
   }
-
   getsubDestinations(id: any) {
     this.as_.getSubDesAll(id).then((res) => {
       console.log("API Response:", res.data);
       this.getallsubdes = res.data.sub_destinations;
+     
       console.log("All Sub Destinations:", this.getallsubdes);
 
-      // ✅ Group data into chunks of 4 after data is fetched
-      this.sliderGroups = this.as_.chunkArray(this.getallsubdes, 4);
+      this.sliderGroups = this.chunkArray(this.getallsubdes, 5);
     }).catch((err) => {
       console.error("Error fetching data:", err);
     });
   }
 
+ chunkArray(arr: any[], chunkSize: number): any[][] {
+    const result = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+      result.push(arr.slice(i, i + chunkSize));
+    }
+    return result;
+  }
  
 }

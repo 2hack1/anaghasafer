@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Route } from '@angular/router';
+import { AxiosService } from '../../../core/services/axios/axios.service';
+import { routes } from '../../../app.routes';
 
 
 interface Tour {
@@ -19,7 +22,7 @@ interface Month {
   templateUrl: './view-deatails.component.html',
   styleUrl: './view-deatails.component.scss'
 })
-export class ViewDeatailsComponent {
+export class ViewDeatailsComponent implements OnInit {
   activeTab: string = 'tourDates';
   images: string[] = [
     '/assets/slider12.png',
@@ -28,16 +31,43 @@ export class ViewDeatailsComponent {
   ];
   currentIndex = 0;
   autoSlideInterval: any;
-
+  constructor(private Route: ActivatedRoute, private as_: AxiosService) { }
+  packageId: any | null = null;
+  selectedMonth: any;
   ngOnInit() {
+    this.packageId = this.Route.snapshot.paramMap.get('id');
+    console.log("package id:", this.packageId);
+    this.getpackagesdetails(this.packageId);
+    this.getmonthAndDate(this.packageId);
+    console.log("++++++++++", this.selectMonth);
     this.autoSlideInterval = setInterval(() => {
       this.nextSlide();
     }, 4000);
+  }
 
+  packageDetails: any = [];
+  packag: any[] = [];
+  monthDate: any = [];
+  getpackagesdetails(id: any) {
+    this.as_.getPackagesDetails(id).then((res) => {
+      this.packageDetails = res.data[0];
+      this.packag = res.data[0].images;
 
+    }).catch((err) => {
+      console.error("error", err);
+    })
+  }
 
+  getmonthAndDate(packagesId: any) {
+    this.as_.getMonthandDate(packagesId).then((res) => {
+      console.log("chaek:", res.data);
+      this.monthDate = res.data;
+    }).catch((err) => {
+      console.error("error", err);
+    })
 
   }
+
 
   ngOnDestroy() {
     clearInterval(this.autoSlideInterval);
@@ -84,32 +114,33 @@ export class ViewDeatailsComponent {
   toggleDay(index: number): void {
     this.days[index].open = !this.days[index].open;
   }
-
+  
   // Optional: toggle all days
   toggleAll(): void {
     const allOpen = this.days.every(day => day.open);
     this.days.forEach(day => day.open = !allOpen);
   }
+  
 
   // **********************************DATE OF TOURS***************************************
-
-
-
-  months: Month[] = [
-    { key: 'may', label: "May '25" },
-    { key: 'jun', label: "Jun '25" },
-    { key: 'jul', label: "Jul '25" },
-    { key: 'aug', label: "Aug '25" },
-    { key: 'sep', label: "Sep '25" }
-  ];
-
-  tourData: { [key: string]: Tour[] } = {
-    may: [
-      { date: '04–May–25 to 13–May–25', label: 'Open', class: 'open1' },
-      { date: '07–May–25 to 16–May–25', label: 'Filling Fast', class: 'filling' },
-      { date: '11–May–25 to 20–May–25', label: '12 Seats Left', class: 'seats-left' },
-      { date: '14–May–25 to 23–May–25', label: 'Filling Fast', class: 'filling' }
-    ],
+  
+  
+  
+  // months: Month[] = [
+    //   { key: 'may', label: "May '25" },
+    //   { key: 'jun', label: "Jun '25" },
+    //   { key: 'jul', label: "Jul '25" },
+    //   { key: 'aug', label: "Aug '25" },
+    //   { key: 'sep', label: "Sep '25" }
+    // ];
+    
+    tourData: { [key: string]: Tour[] } = {
+      may: [
+        { date: '04–May–25 to 13–May–25', label: 'Open', class: 'open1' },
+        { date: '07–May–25 to 16–May–25', label: 'Filling Fast', class: 'filling' },
+        { date: '11–May–25 to 20–May–25', label: '12 Seats Left', class: 'seats-left' },
+        { date: '14–May–25 to 23–May–25', label: 'Filling Fast', class: 'filling' }
+      ],
     jun: [
       { date: '04–Jun–25 to 13–Jun–25', label: 'Open', class: 'open1' },
       { date: '07–Jun–25 to 16–Jun–25', label: 'Filling Fast', class: 'filling' },
@@ -133,22 +164,19 @@ export class ViewDeatailsComponent {
     ]
   };
 
-  selectedMonth: string = 'may';
-
-  selectMonth(key: string): void {
-    this.selectedMonth = key;
-  }
+  // selectedMonth: any|null = null;
+  
   showPopup: boolean = false;
 
   openPopup(): void {
     this.showPopup = true;
   }
-
+  
   closePopup(): void {
     this.showPopup = false;
   }
-
-// *****************rooms calculations*****************
+  
+  // *****************rooms calculations*****************
   rooms = [
     {
       travellers: [
@@ -158,33 +186,51 @@ export class ViewDeatailsComponent {
       ]
     }
   ];
+  
+  transportModes = [
+    { key: 'subway', amount: 1000, icon: 'fi fi-ts-subway' },
+    { key: 'bus', amount: 2000, icon: 'fi fi-ts-bus-alt' },
+    { key: 'plane', amount: 5000, icon: 'fi fi-ts-plane-alt' },
+    { key: 'car', amount: 3000, icon: 'fi fi-ts-car-side' }
+  ];
+  
+  selectedTransport: string = '';
+  transportPrice: number = 0;
+  
+  selectTransport(key: string): void {
+    this.selectedTransport = key;
+    
+    const selected = this.transportModes.find(mode => mode.key === key);
+    this.transportPrice = selected ? selected.amount : 0;
+    
+    this.calculateTotalAmount();  // 💡 Update total when transport changes
+  }
 
-transportModes = [
-  { key: 'subway', amount: 1000, icon: 'fi fi-ts-subway' },
-  { key: 'bus', amount: 2000, icon: 'fi fi-ts-bus-alt' },
-  { key: 'plane', amount: 5000, icon: 'fi fi-ts-plane-alt' },
-  { key: 'car', amount: 3000, icon: 'fi fi-ts-car-side' }
-];
-
-selectedTransport: string = '';
-transportPrice: number = 0;
-
-selectTransport(key: string): void {
-  this.selectedTransport = key;
-
-  const selected = this.transportModes.find(mode => mode.key === key);
-  this.transportPrice = selected ? selected.amount : 0;
-
-  this.calculateTotalAmount();  // 💡 Update total when transport changes
-}
- 
+  
   totalAmount: number = 0;
   showPopup1: boolean = false;
-
+  
   // Fix random prices once when component is loaded
-  adultPrice =  5000;
+  adultPrice = 5000;
   childPrice = 3000;
   roomCharge = 2000;
+  
+  date:any[]=[];
+  getdate(id:any){
+
+    this.as_.getdate(id).then((res)=>{
+      console.log("dates",res.data);
+      // this.date=res.data;
+
+    }).catch((err)=>{
+       console.error("error",err);
+    })
+  }
+  selectMonth(key: any): void {
+    this.selectedMonth = key;
+    console.log("sakfpoasfoasdo", this.selectedMonth);
+    this.getdate(this.selectedMonth);
+  }
 
   addRoom(): void {
     this.rooms.push({
@@ -196,7 +242,7 @@ selectTransport(key: string): void {
     });
     this.calculateTotalAmount();  // Important!
   }
-
+  
   removeRoom(index: number): void {
     this.rooms.splice(index, 1);
     this.calculateTotalAmount();
@@ -246,15 +292,15 @@ selectTransport(key: string): void {
         }
         if (traveller.type.toLowerCase().includes('child')) {
           totalChildren += traveller.count;
-        } 
-       
+        }
+
       });
     });
     if (totalAdults === 0 && totalChildren === 0) {
       totalRooms = 0;
     }
 
-    const totalAmount = (totalAdults * this.adultPrice) + (totalChildren * this.childPrice) + (totalRooms * this.roomCharge)+(this.transportPrice);
+    const totalAmount = (totalAdults * this.adultPrice) + (totalChildren * this.childPrice) + (totalRooms * this.roomCharge) + (this.transportPrice);
     this.totalAmount = totalAmount;
   }
 
@@ -270,5 +316,5 @@ selectTransport(key: string): void {
   closePopup11(): void {
     this.showPopup11 = false;
   }
-  
+
 }

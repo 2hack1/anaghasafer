@@ -1,7 +1,7 @@
 <section class="trip-section">
     <div class="slider">
         <div class="slides" [style.transform]="getTransform()">
-            <img *ngFor="let image of images" [src]="image" alt="Trip Slide">
+            <img *ngFor="let image of packag" [src]="'http://localhost:8000/storage/'+image.img" alt="Trip Slide">
         </div>
 
         <button class="prev" (click)="prevSlide()">&#10094;</button>
@@ -24,7 +24,7 @@
     <div class="trip-bottom-content">
         <div class="left-content">
             <span class="tag">Group Tour</span>
-            <h1>Spiti Road Trip 7 Days</h1>
+            <h1>{{packageDetails.place_name}} Road Trip 7 Days</h1>
             <div class="rating-info">
                 <span>⭐⭐⭐⭐⭐ 4.7 (723)</span>
             </div>
@@ -32,21 +32,22 @@
             <div class="info-cards">
                 <div class="card">
                     <img src="/assets/6 images/cl.png" alt="Duration">
-                    <p><strong>Duration</strong><br>6N/7D</p>
+                    <p><strong>Duration</strong><br>{{packageDetails.duration_days}}N/7D</p>
                 </div>
                 <div class="card">
                     <img src="/assets/icons/marker.png" alt="Spiti Road Trip">
-                    <p><strong>Location</strong><br>Spiti Valley</p>
+                    <p><strong>Location</strong><br>{{packageDetails.place_name}}</p>
                 </div>
             </div>
 
             <h2>Tour Overview</h2>
-            <p class="overview-text"><strong>
-                    The Winter Spiti Expedition is one of the best adventure trips anyone can do during the winters
+            <p class="overview-text"><strong>{{packageDetails.about_trip}}
+                    <!-- The Winter Spiti Expedition is one of the best adventure trips anyone can do during the winters
                     in the Himalayas to experience snow. Winter Spiti Expedition is all about a cold desert mountain
                     valley high in the Himalayan Mountains in the Indian state of Himachal Pradesh’s north-eastern
                     corner. The word “Spiti” means “Middle Ground,” referring to the region that lies between Tibet
-                    and India. </strong> </p>
+                    and India.  -->
+                </strong> </p>
 
         </div>
 
@@ -147,8 +148,8 @@
 
     </section>
 
-
-    <div class="container" *ngIf="activeTab === 'tourDates'">
+    <!-- 
+   <div class="container" *ngIf="activeTab === 'tourDates'">
         <h2>Tour Dates</h2>
         <div class="months">
             <button *ngFor="let month of months" class="month-btn" [class.active]="selectedMonth === month.key"
@@ -161,6 +162,28 @@
                 <div class="tour-date" *ngFor="let tour of tourData[selectedMonth]">
                     <span>{{ tour.date }}</span>
                     <span class="label" [ngClass]="tour.class" (click)=" openPopup11()">{{ tour.label }}</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+
+
+    <div class="container" *ngIf="activeTab === 'tourDates'">
+        <h2>Tour Dates</h2>
+        <div class="months">
+            <button *ngFor="let months of monthDate" class="month-btn" [class.active]="selectedMonth === months.month"
+                (click)="selectMonth(months.tour_month_id)">{{months.month}}'
+                {{ months.year }}
+            </button>
+        </div>
+        <div class="size" style="height: auto; padding: 10px;">
+            <div class="card">
+                <div class="tour-date" *ngFor="let tours of selectedMonth">
+
+                    <span>{{ tours.start_date }}  to  {{tours.end_date}}</span>
+                    <span class="label open1">{{ tours.availability }}</span>
                 </div>
             </div>
         </div>

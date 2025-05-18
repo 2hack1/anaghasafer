@@ -19,13 +19,6 @@ export class AxiosService {
     });
   }
 
- chunkArray(arr: any[], chunkSize: number): any[][] {
-    const result = [];
-    for (let i = 0; i < arr.length; i += chunkSize) {
-      result.push(arr.slice(i, i + chunkSize));
-    }
-    return result;
-  }
 
 
   getGreeting() {
@@ -50,6 +43,16 @@ export class AxiosService {
   }
   getPackages(id:any){
         return this.api.get(`/packages/${id}`);
+  }
 
+  getPackagesDetails(id:any){
+    return this.api.get(`/packages/${id}/details`);
+  }
+
+  getMonthandDate(id:any){
+    return this.api.get(`/months/${id}`);
+  }
+  getdate(id:any){
+    return this.api.get(`/dateOfTour/${id}`);
   }
 }

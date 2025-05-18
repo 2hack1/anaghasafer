@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   stores: any;
   destinationsid: any[] = [];
   images: any[] = [];
+  desId:any|null=null;
   constructor(private as_: AxiosService) { }
 
   ngOnInit(): void {
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
       this.stores = await this.getdestination();
       console.log("asdasdasd", this.stores)
       this.getSubLimit(this.stores);
+      // this.desId=this.stores
     })()
   }
 
