@@ -55,4 +55,11 @@ export class AxiosService {
   getdate(id:any){
     return this.api.get(`/dateOfTour/${id}`);
   }
+  getIteries(id:any){
+    return this.api.get(`/itineraries/${id}`);
+  }
+
+  getTransport(id:any){
+    return this.api.get(`/transports/${id}`)
+  }
 }

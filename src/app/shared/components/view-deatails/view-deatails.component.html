@@ -130,45 +130,22 @@
     <!-- Itinerary Tab Content -->
     <section class="itinerary" *ngIf="activeTab === 'itinerary'">
         <h2 style="margin-bottom:30px; font-size: 30px; font-family:system-ui; letter-spacing: 3px;">Itinerary</h2>
-        <div class="day" *ngFor="let day of days; let i = index" [class.open]="day.open" (click)="toggleDay(i)">
+        <div class="day" *ngFor="let days of itenaries; let i = index" [class.open]={opens} >
             <div class="day-header">
                 <img src="/assets/icons/marker.png" alt="Spiti Road Trip">
-                <strong class="" style="font-size: 1.2rem; font-weight: normal;">{{ day.title }}</strong>
-                <span style="font-size: 1.1rem;"> {{ day.subtitle }}</span>
-                <button class="arrow-button" (click)="toggleDay(i); $event.stopPropagation()">
-                    <img class="marker" src="/assets/icons/down-arrow.png" alt="toggle"
-                        [ngClass]="{ 'rotate': day.open }" />
+                <strong class="" style="font-size: 1.2rem; font-weight: normal;">{{days.day}}: </strong>
+                <span style="font-size: 1.1rem;"> {{ days.title }}</span>
+                <button class="arrow-button" [ngClass]="{ 'rotate': {opens} }">
+                    
                 </button>
             </div>
             <div class="day-content">
-                <p>{{ day.description }}</p>
+                <p>{{ days.detail }}</p>
             </div>
         </div>
 
 
     </section>
-
-    <!-- 
-   <div class="container" *ngIf="activeTab === 'tourDates'">
-        <h2>Tour Dates</h2>
-        <div class="months">
-            <button *ngFor="let month of months" class="month-btn" [class.active]="selectedMonth === month.key"
-                (click)="selectMonth(month.key)">
-                {{ month.label }}
-            </button>
-        </div>
-        <div class="size" style="height: auto; padding: 10px;">
-            <div class="card">
-                <div class="tour-date" *ngFor="let tour of tourData[selectedMonth]">
-                    <span>{{ tour.date }}</span>
-                    <span class="label" [ngClass]="tour.class" (click)=" openPopup11()">{{ tour.label }}</span>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-
-
 
     <div class="container" *ngIf="activeTab === 'tourDates'">
         <h2>Tour Dates</h2>
@@ -180,10 +157,10 @@
         </div>
         <div class="size" style="height: auto; padding: 10px;">
             <div class="card">
-                <div class="tour-date" *ngFor="let tours of selectedMonth">
+                <div class="tour-date" *ngFor="let tours of date">
 
                     <span>{{ tours.start_date }}  to  {{tours.end_date}}</span>
-                    <span class="label open1">{{ tours.availability }}</span>
+                    <span class="label open1" (click)=" openPopup11()">{{ tours.availability }}</span>
                 </div>
             </div>
         </div>
@@ -237,7 +214,7 @@
 
             </div>
         </div>
-        <div class="form-section">
+        <!-- <div class="form-section">
             <label>Select With Going Trip</label>
             <div class="icons">
                 <button *ngFor="let mode of transportModes" (click)="selectTransport(mode.key)"
@@ -245,7 +222,19 @@
                     <i [class]="mode.icon"></i>
                 </button>
             </div>
-        </div>
+        </div> -->
+
+<div class="form-section">
+  <label>Select With Going Trip</label>
+  <div class="icons">
+    <button *ngFor="let mode of getAvailableModes()"
+            (click)="selectTransport(mode.key)"
+            [ngClass]="{ 'active': selectedTransport === mode.key }"
+            style="font-size: 2rem;">
+      <i [class]="mode.icon"></i>
+    </button>
+  </div>
+</div>
 
 
         <div class="form-section">

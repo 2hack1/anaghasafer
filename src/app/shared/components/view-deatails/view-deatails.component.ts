@@ -39,6 +39,8 @@ export class ViewDeatailsComponent implements OnInit {
     console.log("package id:", this.packageId);
     this.getpackagesdetails(this.packageId);
     this.getmonthAndDate(this.packageId);
+    this.getiteraries(this.packageId);
+    this.gettransport(this.packageId);
     console.log("++++++++++", this.selectMonth);
     this.autoSlideInterval = setInterval(() => {
       this.nextSlide();
@@ -48,6 +50,7 @@ export class ViewDeatailsComponent implements OnInit {
   packageDetails: any = [];
   packag: any[] = [];
   monthDate: any = [];
+  itenaries:any=[];
   getpackagesdetails(id: any) {
     this.as_.getPackagesDetails(id).then((res) => {
       this.packageDetails = res.data[0];
@@ -67,7 +70,46 @@ export class ViewDeatailsComponent implements OnInit {
     })
 
   }
+  selectMonth(key: any): void {
+    this.selectedMonth = key;
+    console.log("sakfpoasfoasdo", this.selectedMonth);
+    this.getdate(this.selectedMonth);
 
+  }
+
+  date: any[] = [];
+  getdate(id: any) {
+
+    this.as_.getdate(id).then((res) => {
+      console.log("dates", res.data);
+      this.date = res.data;
+      console.log(this.date);
+    }).catch((err) => {
+      console.error("error", err);
+    })
+  }
+
+  getiteraries(id:any){
+    this.as_.getIteries(id).then((res)=>{
+      console.log("itineries",res.data[0].day_wise_details);
+      this.itenaries=res.data[0].day_wise_details;
+    }).catch((err)=>{
+     console.log("error",err);
+    })
+  }
+   
+  trans:any=[];
+   gettransport(id:any){
+    this.as_.getTransport(id).then((res)=>{
+      console.log("Trasports",res.data);
+       this.trans=res.data[0].mode;
+           console.log("Mode",res.data[0].mode);
+  
+    }).catch((err)=>{
+     console.log("error",err);
+    })
+  }
+  
 
   ngOnDestroy() {
     clearInterval(this.autoSlideInterval);
@@ -84,98 +126,18 @@ export class ViewDeatailsComponent implements OnInit {
   getTransform(): string {
     return `translateX(-${this.currentIndex * 100}%)`;
   }
+ opens :boolean=false;
 
-  days = [
-    {
-      title: 'Day 1:',
-      subtitle: 'Delhi to Manali',
-      description: 'The Spiti Valley Road Trip expedition will start from Delhi; our team will be receiving you from the pickup point.',
-      open: false
-    },
-    {
-      title: 'Day 2:',
-      subtitle: 'Arrive Manali & Explore Local',
-      description: 'Full day in Manali exploring the local culture, monasteries, temples and nearby points of interest.',
-      open: false
-    },
-    {
-      title: 'Day 3:',
-      subtitle: 'Arrive Manali & Explore Local',
-      description: 'Full day in Manali exploring the local culture, monasteries, temples and nearby points of interest.',
-      open: false
-    },
-    {
-      title: 'Day 4:',
-      subtitle: 'Arrive Manali & Explore Local',
-      description: 'Full day in Manali exploring the local culture, monasteries, temples and nearby points of interest.',
-      open: false
-    }
-  ];
-  toggleDay(index: number): void {
-    this.days[index].open = !this.days[index].open;
-  }
-  
-  // Optional: toggle all days
-  toggleAll(): void {
-    const allOpen = this.days.every(day => day.open);
-    this.days.forEach(day => day.open = !allOpen);
-  }
-  
-
-  // **********************************DATE OF TOURS***************************************
-  
-  
-  
-  // months: Month[] = [
-    //   { key: 'may', label: "May '25" },
-    //   { key: 'jun', label: "Jun '25" },
-    //   { key: 'jul', label: "Jul '25" },
-    //   { key: 'aug', label: "Aug '25" },
-    //   { key: 'sep', label: "Sep '25" }
-    // ];
-    
-    tourData: { [key: string]: Tour[] } = {
-      may: [
-        { date: '04–May–25 to 13–May–25', label: 'Open', class: 'open1' },
-        { date: '07–May–25 to 16–May–25', label: 'Filling Fast', class: 'filling' },
-        { date: '11–May–25 to 20–May–25', label: '12 Seats Left', class: 'seats-left' },
-        { date: '14–May–25 to 23–May–25', label: 'Filling Fast', class: 'filling' }
-      ],
-    jun: [
-      { date: '04–Jun–25 to 13–Jun–25', label: 'Open', class: 'open1' },
-      { date: '07–Jun–25 to 16–Jun–25', label: 'Filling Fast', class: 'filling' },
-      { date: '11–Jun–25 to 20–Jun–25', label: '12 Seats Left', class: 'seats-left' },
-      { date: '14–Jun–25 to 23–Jun–25', label: 'Filling Fast', class: 'filling' },
-      { date: '18–Jun–25 to 27–Jun–25', label: 'Open', class: 'open1' },
-      { date: '21–Jun–25 to 30–Jun–25', label: '09 Seats Left', class: 'seats-left' },
-      { date: '28–Jun–25 to 07–Jul–25', label: 'Open', class: 'open1' }
-    ],
-    jul: [
-      { date: '04–Jul–25 to 13–Jul–25', label: 'Open', class: 'open1' },
-      { date: '07–Jul–25 to 16–Jul–25', label: 'Filling Fast', class: 'filling' }
-    ],
-    aug: [
-      { date: '04–Aug–25 to 13–Aug–25', label: 'Open', class: 'open1' },
-      { date: '07–Aug–25 to 16–Aug–25', label: 'Filling Fast', class: 'filling' }
-    ],
-    sep: [
-      { date: '04–Sep–25 to 13–Sep–25', label: 'Open', class: 'open1' },
-      { date: '07–Sep–25 to 16–Sep–25', label: 'Filling Fast', class: 'filling' }
-    ]
-  };
-
-  // selectedMonth: any|null = null;
-  
   showPopup: boolean = false;
 
   openPopup(): void {
     this.showPopup = true;
   }
-  
+
   closePopup(): void {
     this.showPopup = false;
   }
-  
+
   // *****************rooms calculations*****************
   rooms = [
     {
@@ -186,51 +148,41 @@ export class ViewDeatailsComponent implements OnInit {
       ]
     }
   ];
-  
+
   transportModes = [
-    { key: 'subway', amount: 1000, icon: 'fi fi-ts-subway' },
+    { key: 'train', amount: 1000, icon: 'fi fi-ts-subway' },
     { key: 'bus', amount: 2000, icon: 'fi fi-ts-bus-alt' },
     { key: 'plane', amount: 5000, icon: 'fi fi-ts-plane-alt' },
     { key: 'car', amount: 3000, icon: 'fi fi-ts-car-side' }
   ];
-  
+
+
+  getAvailableModes(): any[] {
+  const transKeys = this.trans.map((t: any) => t.key);
+  return this.transportModes.filter(mode => transKeys.includes(mode.key));
+}
+
   selectedTransport: string = '';
   transportPrice: number = 0;
-  
+
   selectTransport(key: string): void {
     this.selectedTransport = key;
-    
+
     const selected = this.transportModes.find(mode => mode.key === key);
     this.transportPrice = selected ? selected.amount : 0;
-    
+
     this.calculateTotalAmount();  // 💡 Update total when transport changes
   }
 
-  
+
   totalAmount: number = 0;
   showPopup1: boolean = false;
-  
+
   // Fix random prices once when component is loaded
   adultPrice = 5000;
   childPrice = 3000;
   roomCharge = 2000;
-  
-  date:any[]=[];
-  getdate(id:any){
 
-    this.as_.getdate(id).then((res)=>{
-      console.log("dates",res.data);
-      // this.date=res.data;
-
-    }).catch((err)=>{
-       console.error("error",err);
-    })
-  }
-  selectMonth(key: any): void {
-    this.selectedMonth = key;
-    console.log("sakfpoasfoasdo", this.selectedMonth);
-    this.getdate(this.selectedMonth);
-  }
 
   addRoom(): void {
     this.rooms.push({
@@ -242,7 +194,7 @@ export class ViewDeatailsComponent implements OnInit {
     });
     this.calculateTotalAmount();  // Important!
   }
-  
+
   removeRoom(index: number): void {
     this.rooms.splice(index, 1);
     this.calculateTotalAmount();
