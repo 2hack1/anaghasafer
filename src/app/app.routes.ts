@@ -32,7 +32,9 @@ export const routes: Routes = [
     },
     {path:"about",
         component: AboutusComponent
-    },
+    },{path:"home",
+        component: HomeComponent
+    }
 ]
 
   

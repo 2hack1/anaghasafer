@@ -3,6 +3,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { LoginComponent } from "../login/login.component";
 import { trigger, animate, style, state, transition } from "@angular/animations"
 import { RouterLink } from '@angular/router';
+import { UserServicesService } from '../../../core/services/userService/user-services.service';
 
 @Component({
   selector: 'app-header',
@@ -22,10 +23,15 @@ import { RouterLink } from '@angular/router';
   ]
 })
 export class HeaderComponent implements OnInit {
+
+  constructor(private us_:UserServicesService){}
   isLogin = false
 
   isHidden = false;
   lastScrollTop = 0;
+
+// login =false;
+// logout=true;
 
   @HostListener('window:scroll', [])
   onScroll(): void {
@@ -42,10 +48,28 @@ export class HeaderComponent implements OnInit {
     this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   }
 
+isLoggedIn: boolean = false;
 
+  
   ngOnInit(): void {
+  //     const token = localStorage.getItem('token');
+  // this.isLoggedIn = !!token; 
+
+   this.us_.isLoggedIn$.subscribe((status: boolean) => {
+    this.isLoggedIn = status;
+  });
     document.body.addEventListener('scroll', (event) => {
       console.log(event)
     })
+  }
+
+
+
+ logout() {
+    this.us_.logout();
+  }
+
+  openLoginModal() {
+    this.isLogin = true;
   }
 }

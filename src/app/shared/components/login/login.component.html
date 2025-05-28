@@ -7,14 +7,21 @@
   <div class="logo-container">
     <img src="icons/logo.png" alt="Pinterest" class="logo" />
   </div>
-
   <!-- login -->
   <ng-container *ngIf="!isSignup">
     <h2 class="title">Login.</h2>
-    <input type="email" placeholder="Email" class="input" />
-    <input type="password" placeholder="Password" class="input" />
+    
+    <form [formGroup]="formModel">
+    <input type="email" placeholder="Email" class="input" formControlName="email" />
+    <input type="password" placeholder="Password" class="input" formControlName="password" />
+     <!-- <div class="password-wrapper">
+  <input [type]="showPasswords ? 'text' : 'password'" placeholder="Password" class="input"  />
+  <span class="eye-icon" (click)="showPasswords = !showPasswords">
+    {{ showPasswords ?   '👁️':'🙈' }}
+  </span>
+</div> -->
     <p class="forgot">Forgot your password?</p>
-    <button class="login-btn">Log in</button>
+    <button type="submit" class="login-btn" (click)="login()">Log in</button>
     <p class="terms">
       By continuing, you agree to AnaghaSafer
       <span class="underline"><a href="#">Terms of Service</a></span> and
@@ -24,29 +31,44 @@
       Not on Pinterest yet?
       <span class="link" (click)="isSignup = true">Sign up</span>
     </p> 
+  </form>
   </ng-container>
+
+
 
   <!-- sign up -->
   <ng-container *ngIf="isSignup">
     <h2 class="title">SIGN UP</h2>
-    <div class="select__name">
-      <select class="input">
+    <form [formGroup]="myform">
+      <div *ngIf="passwordMismatch" style="color: red; font-size: 14px; margin-top: 5px;"> Password and Confirm Password do not match.</div>
+      <div *ngIf="passwordTooShort" style="color: red;">Password Must be exactly 6 characters</div>
+      <div class="select__name">
+      <select class="input" formControlName="nfa">
         <option>Mr</option>
         <option>Mis</option>
       </select>
-      <input type="email" placeholder="First Name" class="input" />
-      <input type="email" placeholder="Last Name" class="input" />
+      <input type="email" placeholder="First Name" class="input" formControlName="name" />
+      <input type="email" placeholder="Last Name" class="input" formControlName="last_name" />
     </div>
-    <input
-      type="text"
-      placeholder="Email ID will we your username"
-      class="input"
-    />
-    <input type="password" placeholder="Password" class="input" />
-    <input type="password" placeholder="Mobile No." class="input" />
-    <input type="password" placeholder="Password" class="input" />
-    <!-- <p class="forgot">Forgot your password?</p> --> 
-    <button class="login-btn">Sign up</button>
+    <input  type="text"   placeholder="Email ID will we your username"  class="input" formControlName="email"/>
+    <!-- <input type="password" placeholder="Password" class="input" formControlName="pass" />
+    <input type="password" placeholder="Confirm_Password" class="input" formControlName="confirm" /> -->
+    <div class="password-wrapper">
+  <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" class="input" formControlName="pass" />
+  <span class="eye-icon" (click)="showPassword = !showPassword">
+    {{ showPassword ?   '👁️':'🙈' }}
+  </span>
+</div>
+
+<!-- Confirm Password Field -->
+<div class="password-wrapper">
+  <input [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm_Password" class="input" formControlName="confirm" />
+  <span class="eye-icon" (click)="showConfirmPassword = !showConfirmPassword">
+    {{ showConfirmPassword ?  '👁️':'🙈'  }}
+  </span>
+</div>
+    <!-- <input type="text" placeholder="Mobile No." class="input" formControlName="mobile" /> -->
+    <button class="login-btn" (click)="signUp()">Sign up</button>
     <p class="terms">
       By continuing, you agree to AnaghaSafer
       <span class="underline"><a href="#">Terms of Service</a></span> and
@@ -56,5 +78,9 @@
       Not on Pinterest yet?
       <span class="link" (click)="isSignup = false">Login </span>
     </p>
+
+      </form>
+      
   </ng-container>
+
 </div>

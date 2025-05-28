@@ -62,4 +62,12 @@ export class AxiosService {
   getTransport(id:any){
     return this.api.get(`/transports/${id}`)
   }
+
+
+// get four cards
+
+getFourCard(){
+  return this.api.get(`/four-cards`)
+}
+
 }

@@ -4,7 +4,7 @@ import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from "./shared/components/login/login.component";
 
 import { Router, NavigationEnd } from '@angular/router';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',

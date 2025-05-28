@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   instagramUsername = "anaghasafer";
   email = 'anaghasafer21@mail.com';
   stores: any;
+  international: any;
   destinationsid: any[] = [];
   images: any[] = [];
   desId:any|null=null;
@@ -25,12 +26,19 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     setInterval(() => this.nextSlide(), 5000);
     this.getImages();
+    this.getcards();
 
     (async () => {
-      this.stores = await this.getdestination();
-      console.log("asdasdasd", this.stores)
+      this.stores = await this.getdestination(0);
+      console.log("store",this.stores)
+
       this.getSubLimit(this.stores);
-      // this.desId=this.stores
+
+      this.international=await this.getdestination(2);
+       this.getSubInternationalLimit(this.international);
+      console.log("data",this.international)
+      // this.getSubLimit(this.international);
+
     })()
   }
 
@@ -46,17 +54,30 @@ export class HomeComponent implements OnInit {
   }
 
 
-  async getdestination() {
+  async getdestination(id:any) {
     await this.as_.getdes()
       .then(res => {
-        // console.log("Full response:", res.data);
         this.destinationsid = res.data.map((item: any) => item.destination_id);
       })
       .catch(err => {
         console.error("Error fetching destinations:", err);
       });
-    return this.destinationsid[0]
+    return this.destinationsid[id]
   }
+
+
+  // async getinternationalDes(id:any) {
+  //   await this.as_.getdes()
+  //     .then(res => {
+       
+  //       console.log("international tour:",res.data)
+  //       this.destinationsid = res.data.map((item: any) => item.destination_id);
+  //     })
+  //     .catch(err => {
+  //       console.error("Error fetching destinations:", err);
+  //     });
+  //   return this.destinationsid[id]
+  // }
 
 
   showSlide(index: number) {
@@ -108,21 +129,40 @@ export class HomeComponent implements OnInit {
   ];
   getsub: any = [];
   subDes: any[] = [];
+
   getSubLimit(destination_id: any) {
     this.as_.getSubDesLimit(destination_id)
       .then((res: AxiosResponse) => {
         this.getsub = res.data;
-        console.log("++++++++++ Raw sub data:", this.getsub);
-
         // Combine all sub_destinations into one array
         this.subDes = this.getsub.sub_destinations;
-        console.log("Combined sub-destinations:", this.subDes);
+      
         
       })
       .catch(err => {
         console.error("Some error occurred:", err);
       });
       return this.subDes;
+  }
+
+
+ getsubinter: any = [];
+  subDesinter: any[] = [];
+
+   getSubInternationalLimit(destination_id: any) {
+    this.as_.getSubDesLimit(destination_id)
+      .then((res: AxiosResponse) => {
+        this.getsubinter = res.data;
+        // Combine all sub_destinations into one array
+        this.subDesinter = this.getsubinter.sub_destinations;
+        console.log("ihnternationsl",this.subDesinter)
+
+        
+      })
+      .catch(err => {
+        console.error("Some error occurred:", err);
+      });
+      return this.subDesinter;
   }
 
   destinations = [
@@ -136,9 +176,15 @@ export class HomeComponent implements OnInit {
     { name: 'Thailand', image: 'assets/thailand.webp', packages: '10+' },
   ];
 
+  fourcart:any=[];
+  // four cards
+   getcards(){
+    this.as_.getFourCard().then((res:any)=>{
+      this.fourcart=res.data;
+    })
+   }
 
 }
-
 
 
 

@@ -2,8 +2,6 @@
   <div class="slider">
     <div class="slider-hero-content">
       <h1>Customize & Book<br />Amazing Holiday Packages</h1>
-      <!-- <p>650+ Travel Agents serving 65+ Destinations worldwide</p> -->
-
       <div class="form-row">
         <div style="display: flex; align-items: center; gap: 1rem;">
           <input type="text" placeholder="Type a Destination" />
@@ -26,20 +24,9 @@
       <p class="note">Destination not sure? <a href="#">Click here!</a></p>
     </div>
 
-
-    <!-- Sliding Images -->
-    <!-- <div class="slides" id="slideContainer">
-      <div class="slide" style="background-image: url('assets/slider12.png');"></div>
-      <div class="slide" style="background-image: url('assets/slider13.png');"></div>
-      <div class="slide" style="background-image: url('assets/slider14.png');"></div>
-    </div> -->
-
     <div class="slides" id="slideContainer">
-  <div 
-    class="slide" 
-    *ngFor="let img of images; let i = index"
-    [style.backgroundImage]="'url(' + img + ')'"></div>  
-</div>
+      <div class="slide" *ngFor="let img of images; let i = index" [style.backgroundImage]="'url(' + img + ')'"></div>
+    </div>
     <div class="nav prev" (click)="prevSlide()">❮</div>
     <div class="nav next" (click)="nextSlide()">❯</div>
   </div>
@@ -56,11 +43,10 @@
 <div class="container">
   <div class="header">
     <h2>Top Trending India's Destinations</h2>
-    <!-- <a class="hower " routerLink="/states" fragment="stateTop">View All Tours <span>&#10140;</span></a> -->
   </div>
 
-  <div class="header"   style="display: flex;justify-content: end;"  >
-    <a class="hower" [routerLink]="['/states',stores]" >View All Tours
+  <div class="header" style="display: flex;justify-content: end;">
+    <a class="hower" [routerLink]="['/states',stores]">View All Tours
       <span>&#10140;</span>
     </a>
   </div>
@@ -68,18 +54,18 @@
 
     <button class="scroll-btn" (click)="scrollLeft()">&#10094;</button>
 
-  
+
     <div class="scroll-container" #scrollContainer>
       <div class="card" *ngFor="let sub of subDes let i=index">
-        <a [routerLink]="['/states',sub.sub_destination_id]"  class="tour-link" style="text-decoration: none;">
-      <img [src]="'http://localhost:8000/storage/' + sub.image_url" [alt]="sub.name" />
+        <a [routerLink]="['/states',sub.sub_destination_id]" class="tour-link" style="text-decoration: none;">
+          <img [src]="'http://localhost:8000/storage/' + sub.image_url" [alt]="sub.name" />
           <p>{{ i+1 }} Packages</p>
           <h3>{{sub.name}}</h3>
         </a>
       </div>
     </div>
 
-   
+
     <button class="scroll-btn" (click)="scrollRight()">&#10095;</button>
   </div>
 </div>
@@ -92,48 +78,13 @@
   <h2>Tailored Solutions for Every Traveller</h2>
   <div class="cards01">
 
-    <div class="card01">
-      <i class="fas fa-map-signs"></i>
-      <h3>Multi-Day Tours</h3>
-      <p>
-        Explore different parts of India by joining one of our small-group
-        <a href="#">Shared Tours</a>, or enjoy personalised experiences with
-        family and friends on our <a href="#">Private Tours</a>.
-      </p>
-    </div>
-
-    <div class="card01">
-      <i class="fas fa-building"></i>
-      <h3>City Tours</h3>
-      <p>
-        Enjoy short, immersive <a href="#">Mumbai Tours</a> or
-        <a href="#">Delhi Tours</a>, ranging from a few hours to a full day —
-        perfect for quick experiences or filling gaps in your schedule.
-      </p>
-    </div>
-
-    <div class="card01">
-      <i class="fas fa-suitcase-rolling"></i>
-      <h3>Independent Travel</h3>
-      <p>
-        Travel independently and enjoy a worry-free experience. We
-        <a href="#">Plan Your Trip</a>, based on your needs and manage all bookings
-        and logistics, so you can fully enjoy!
-      </p>
-    </div>
-
-    <div class="card01">
-      <i class="fas fa-puzzle-piece"></i>
-      <h3>Other Services</h3>
-      <p>
-        Navigate India with our expert services, including
-        <a href="#">Corporate Tours</a>, <a href="#">School & College Tours</a>,
-        <a href="#">Filming & Media Support</a>,
-        <a href="#">Vehicle & Driver Hire</a>, and
-        <a href="#">Emergency Help</a>.
-      </p>
-    </div>
-
+    <div class="cards01">
+  <div class="card01" *ngFor="let card of fourcart">
+    <i [class]="card.icon_class"></i>
+    <h3>{{ card.heading }}</h3>
+    <p >{{card.headingData}}</p>
+  </div>
+</div>
   </div>
 </section>
 <!-- ********************check images*********************** -->
@@ -146,12 +97,13 @@
   </p>
 
   <div class="tour-cards">
-    <div class="tour-card" *ngFor="let tour of tours">
-      <a [routerLink]="['/states']" class="tour-link">
-        <img [src]="tour.image" [alt]="tour.name" />
+    <div class="tour-card" *ngFor="let tour of subDesinter let i=index">
+      <a [routerLink]="['/states',tour.sub_destination_id]" class="tour-link">
+        <img [src]="'http://localhost:8000/storage/' + tour.image_url" [alt]="tour.name" />
         <div class="tour-overlay">
           <h2>{{ tour.name }}</h2>
-          <p>{{ tour.tours }} Tour</p>
+          <!-- <p>{{ tour.tours }} Tour</p> -->
+          <p>{{i+1}} Tour</p>
         </div>
       </a>
     </div>
@@ -159,143 +111,143 @@
 </div>
 
 <!-- *****************************REVIEW ************************ -->
- <div class="check" style="position: relative;" >
-  <button class="slider-btn left hide" onclick="SlideLeft()" >&#10094;</button>
+<div class="check" style="position: relative;">
+  <button class="slider-btn left hide" onclick="SlideLeft()">&#10094;</button>
   <button class="slider-btn right hide" onclick="SlideRight()">&#10095;</button>
- <section class="testimonial-section">
-  <h2>My AnaghaSafer Story !</h2>
-  <p class="subtitle">Customer satisfaction is our major goal. See what our customers are saying about us.</p>
+  <section class="testimonial-section">
+    <h2>My AnaghaSafer Story !</h2>
+    <p class="subtitle">Customer satisfaction is our major goal. See what our customers are saying about us.</p>
 
-  <div class="slider-container">
-    <button class="slider-btn left   hides" onclick="SlideLeft()">&#10094;</button>
+    <div class="slider-container">
+      <button class="slider-btn left   hides" onclick="SlideLeft()">&#10094;</button>
 
-    <div class="slider-track" id="sliderTrack">
+      <div class="slider-track" id="sliderTrack">
 
-      <div class="testimonial-card">
-        <p class="quote">❝</p>
-        <p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus provident
-          consequatur ipsam impedit perspiciatis veniam incidunt autem sint officiis dolorem.<span class="more">...Show
-            More</span></p>
-        <div class="user">
-          <img src="assets/revies/r1.jpg" alt="User" />
-          <div>
-            <p class="name">robin jems</p>
-            <p class="date">Mar 27, 2025</p>
+        <div class="testimonial-card">
+          <p class="quote">❝</p>
+          <p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus provident
+            consequatur ipsam impedit perspiciatis veniam incidunt autem sint officiis dolorem.<span
+              class="more">...Show
+              More</span></p>
+          <div class="user">
+            <img src="assets/revies/r1.jpg" alt="User" />
+            <div>
+              <p class="name">robin jems</p>
+              <p class="date">Mar 27, 2025</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="quote">❝</p>
+          <p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus provident
+            consequatur ipsam impedit perspiciatis veniam incidunt autem sint officiis dolorem.<span
+              class="more">...Show
+              More</span></p>
+          <div class="user">
+            <img src="assets/revies/r2.jpg" alt="User" />
+            <div>
+              <p class="name">jon ford</p>
+              <p class="date">Mar 01, 2023</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="quote">❝</p>
+          <p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus provident
+            consequatur ipsam impedit perspiciatis veniam incidunt autem sint officiis dolorem.<span
+              class="more">...Show
+              More</span></p>
+          <div class="user">
+            <img src="assets/revies/r3.jpg" alt="User" />
+            <div>
+              <p class="name">Devidas Kulkarni</p>
+              <p class="date">Jan 15, 2024</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="testimonial-card">
-        <p class="quote">❝</p>
-        <p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus provident
-          consequatur ipsam impedit perspiciatis veniam incidunt autem sint officiis dolorem.<span class="more">...Show
-            More</span></p>
-        <div class="user">
-          <img src="assets/revies/r2.jpg" alt="User" />
-          <div>
-            <p class="name">jon ford</p>
-            <p class="date">Mar 01, 2023</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="quote">❝</p>
-        <p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus provident
-          consequatur ipsam impedit perspiciatis veniam incidunt autem sint officiis dolorem.<span class="more">...Show
-            More</span></p>
-        <div class="user">
-          <img src="assets/revies/r3.jpg" alt="User" />
-          <div>
-            <p class="name">Devidas Kulkarni</p>
-            <p class="date">Jan 15, 2024</p>
-          </div>
-        </div>
-      </div>
-
-
-
+      <button class="slider-btn right  hides" onclick="SlideRight()">&#10095;</button>
     </div>
 
-    <button class="slider-btn right  hides" onclick="SlideRight()">&#10095;</button>
-  </div>
-
-  <button class="see-all-btn">See All</button>
+    <button class="see-all-btn">See All</button>
   </section>
 </div>
-  <!-- ********************* contect form*************************  -->
-  <div class="container-check1">
-    <div class="container1">
-      <div class="form-box1">
-        <h2>Make your Own Trip</h2>
-        <p>Please fill in the details to make your trip.</p>
-        <form>
-          <div class="input-group1">
-            <input type="email" placeholder=" your address" required />
-            <input type="email" placeholder="detionation address" required />
+<!-- ********************* contect form*************************  -->
+<div class="container-check1">
+  <div class="container1">
+    <div class="form-box1">
+      <h2>Make your Own Trip</h2>
+      <p>Please fill in the details to make your trip.</p>
+      <form>
+        <div class="input-group1">
+          <input type="email" placeholder=" your address" required />
+          <input type="email" placeholder="detionation address" required />
 
-          </div>
-
-          <div class="input-group1" id="otherDestinationGroup1" style="display: none;">
-            <input type="text" placeholder="Enter Other Destination" />
-          </div>
-
-          <!-- Email -->
-          <div class="input-group1">
-            <input type="email" placeholder="Your Email" required />
-          </div>
-
-
-          <div class="input-group1">
-            <div>
-              <label>Check In</label>
-              <input type="date" />
-            </div>
-            <div>
-              <label>Check Out</label>
-              <input type="date" />
-            </div>
-          </div>
-
-
-          <div class="input-group1">
-            <div class="number-field1">
-              <label><i class="fas fa-user1"></i> Adults</label>
-              <input type="number" value="1" min="1" />
-            </div>
-            <div class="number-field1">
-              <label><i class="fas fa-child1"></i> Children</label>
-              <input type="number" value="0" min="0" />
-            </div>
-          </div>
-
-
-          <button type="submit1" id="button1"> Submit Now</button>
-        </form>
-      </div>
-
-       <div class="info-box1"> 
-        <h2>Contact Information</h2>
-        <p>If you have any questions, feel free to reach out to us.</p>
-        <ul>
-          <li><strong>Address:</strong><br />4b Long Street, Miami, USA</li>
-          <li><strong>Phone:</strong><br />+3230-45-45-67</li>
-          <li><strong>Email:</strong><br /><a [href]="'mailto:' + email">{{ email }}</a></li>
-          <li><strong>instagram:</strong><br /><a class="social-link"
-              [href]="'https://www.instagram.com/' + instagramUsername" target="_blank">
-              {{ instagramUsername }}
-            </a></li>
-          <li><strong>facbook:</strong><br /><a [href]="'https://www.facebook.com/' + facebookUsername" target="_blank">
-              {{ facebookUsername }}
-            </a></li>
-        </ul>
-        <div class="social-icons1">
-          <i class="fab fa-facebook-f1"></i>
-          <i class="fab fa-twitter1"></i>
-          <i class="fab fa-youtube1"></i>
-          <i class="fab fa-google-plus-g1"></i>
         </div>
-      </div> -->
+
+        <div class="input-group1" id="otherDestinationGroup1" style="display: none;">
+          <input type="text" placeholder="Enter Other Destination" />
+        </div>
+
+        <!-- Email -->
+        <div class="input-group1">
+          <input type="email" placeholder="Your Email" required />
+        </div>
+
+
+        <div class="input-group1">
+          <div>
+            <label>Check In</label>
+            <input type="date" />
+          </div>
+          <div>
+            <label>Check Out</label>
+            <input type="date" />
+          </div>
+        </div>
+
+
+        <div class="input-group1">
+          <div class="number-field1">
+            <label><i class="fas fa-user1"></i> Adults</label>
+            <input type="number" value="1" min="1" />
+          </div>
+          <div class="number-field1">
+            <label><i class="fas fa-child1"></i> Children</label>
+            <input type="number" value="0" min="0" />
+          </div>
+        </div>
+
+
+        <button type="submit1" id="button1"> Submit Now</button>
+      </form>
     </div>
+
+    <div class="info-box1">
+      <h2>Contact Information</h2>
+      <p>If you have any questions, feel free to reach out to us.</p>
+      <ul>
+        <li><strong>Address:</strong><br />4b Long Street, Miami, USA</li>
+        <li><strong>Phone:</strong><br />+3230-45-45-67</li>
+        <li><strong>Email:</strong><br /><a [href]="'mailto:' + email">{{ email }}</a></li>
+        <li><strong>instagram:</strong><br /><a class="social-link"
+            [href]="'https://www.instagram.com/' + instagramUsername" target="_blank">
+            {{ instagramUsername }}
+          </a></li>
+        <li><strong>facbook:</strong><br /><a [href]="'https://www.facebook.com/' + facebookUsername" target="_blank">
+            {{ facebookUsername }}
+          </a></li>
+      </ul>
+      <div class="social-icons1">
+        <i class="fab fa-facebook-f1"></i>
+        <i class="fab fa-twitter1"></i>
+        <i class="fab fa-youtube1"></i>
+        <i class="fab fa-google-plus-g1"></i>
+      </div>
+    </div> -->
   </div>
-  <!-- ************************** footer************************************** -->
+</div>
+<!-- ************************** footer************************************** -->
