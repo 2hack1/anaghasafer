@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios, { AxiosInstance } from 'axios';
 import { environment } from '../../../../environments/environment.development';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,31 @@ export class AxiosService {
     return this.api.get(`/packages/${id}/details`);
   }
 
+  // *********************** with filer
+
+  // getPackagesWithfilter(id: any){
+  //    return this.api.get(`/packages/${id}/details/filter`);
+  // }
+//   getPackagesWithFilter(id: any, filters: string[]) {
+//   return this.api.get(`/packages/${id}/details/filter`, {
+//     params: { filters }
+//   });
+// }
+
+// getPackagesWithFilter(subDesId: number, filters: string[]): Observable<any> {
+//   return this.api.post(`/api/packages/${subDesId}/fil`, { filters });
+// }
+// getPackagesWithFilter(id: any, filters: string[]) {
+//   return this.api.get(`/packages/${id}/details/filter`, {
+//     params: { filters }
+//   });
+// }
+
+// getPackagesWithFilter(subDesId: number, filters: string[]) {
+//   return this.api.post(`/packages/${subDesId}/details/filter`, {
+//     filters: filters
+//   });
+// }
   getMonthandDate(id:any){
     return this.api.get(`/months/${id}`);
   }
@@ -69,5 +95,12 @@ export class AxiosService {
 getFourCard(){
   return this.api.get(`/four-cards`)
 }
+
+makeYourtrip(data:any){
+return this.api.post(`/trips`,data)
+
+}
+
+
 
 }

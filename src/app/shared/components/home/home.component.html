@@ -57,7 +57,7 @@
 
     <div class="scroll-container" #scrollContainer>
       <div class="card" *ngFor="let sub of subDes let i=index">
-        <a [routerLink]="['/states',sub.sub_destination_id]" class="tour-link" style="text-decoration: none;">
+        <a [routerLink]="['/des',sub.sub_destination_id]" class="tour-link" style="text-decoration: none;">
           <img [src]="'http://localhost:8000/storage/' + sub.image_url" [alt]="sub.name" />
           <p>{{ i+1 }} Packages</p>
           <h3>{{sub.name}}</h3>
@@ -181,31 +181,28 @@
     <div class="form-box1">
       <h2>Make your Own Trip</h2>
       <p>Please fill in the details to make your trip.</p>
-      <form>
+      <form [formGroup]="formModel">
         <div class="input-group1">
-          <input type="email" placeholder=" your address" required />
-          <input type="email" placeholder="detionation address" required />
+          <input type="text" placeholder=" your address" formControlName="your_address" required  />
+          <input type="email" placeholder="detionation address" formControlName="destination_address"  required />
 
         </div>
 
-        <div class="input-group1" id="otherDestinationGroup1" style="display: none;">
-          <input type="text" placeholder="Enter Other Destination" />
-        </div>
-
-        <!-- Email -->
+        <!-- Email --> <div *ngIf="checkEmail" style="color: red; font-size: 14px; margin-top: 5px;"> Password and Confirm Password do not match.</div>
         <div class="input-group1">
-          <input type="email" placeholder="Your Email" required />
+          
+          <input type="email" placeholder="Your Email" formControlName="email" required />
         </div>
 
 
         <div class="input-group1">
           <div>
             <label>Check In</label>
-            <input type="date" />
+            <input type="date" formControlName="check_in" />
           </div>
           <div>
             <label>Check Out</label>
-            <input type="date" />
+            <input type="date" formControlName="check_out" />
           </div>
         </div>
 
@@ -213,16 +210,16 @@
         <div class="input-group1">
           <div class="number-field1">
             <label><i class="fas fa-user1"></i> Adults</label>
-            <input type="number" value="1" min="1" />
+            <input type="number" value="1" min="1" formControlName="adults" />
           </div>
           <div class="number-field1">
             <label><i class="fas fa-child1"></i> Children</label>
-            <input type="number" value="0" min="0" />
+            <input type="number" value="0" min="0" formControlName="children" />
           </div>
         </div>
 
 
-        <button type="submit1" id="button1"> Submit Now</button>
+        <button type="submit1" id="button1"  (click)="makeMytrip()"> Submit Now</button>
       </form>
     </div>
 

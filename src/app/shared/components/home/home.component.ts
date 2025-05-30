@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ContainerComponent } from "../container/container.component";
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { AxiosResponse } from 'axios';
+import { ReactiveFormsModule,FormsModule,FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink,ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -21,7 +21,19 @@ export class HomeComponent implements OnInit {
   destinationsid: any[] = [];
   images: any[] = [];
   desId:any|null=null;
-  constructor(private as_: AxiosService) { }
+  formModel!: FormGroup;
+  constructor(private as_: AxiosService,private FB_ : FormBuilder) {
+    this.formModel=FB_.group({
+      your_address: [null,Validators.required],
+      destination_address: [null,Validators.required],
+      email: [null,Validators.required],
+      check_in: [null,Validators.required],
+      check_out: [null,Validators.required],
+      adults:[null,Validators.required],
+      children:[null,Validators.required]
+    })
+
+   }
 
   ngOnInit(): void {
     setInterval(() => this.nextSlide(), 5000);
@@ -64,20 +76,6 @@ export class HomeComponent implements OnInit {
       });
     return this.destinationsid[id]
   }
-
-
-  // async getinternationalDes(id:any) {
-  //   await this.as_.getdes()
-  //     .then(res => {
-       
-  //       console.log("international tour:",res.data)
-  //       this.destinationsid = res.data.map((item: any) => item.destination_id);
-  //     })
-  //     .catch(err => {
-  //       console.error("Error fetching destinations:", err);
-  //     });
-  //   return this.destinationsid[id]
-  // }
 
 
   showSlide(index: number) {
@@ -165,17 +163,6 @@ export class HomeComponent implements OnInit {
       return this.subDesinter;
   }
 
-  destinations = [
-    { name: 'Uttarakhand', image: 'assets/uttarakhand.webp', packages: '50+' },
-    { name: 'Kerala', image: 'assets/kerala.webp', packages: '40+' },
-    { name: 'Sikkim', image: 'assets/sikkim.webp', packages: '40+' },
-    { name: 'Bhutan', image: 'assets/bhutan.webp', packages: '20+' },
-    { name: 'Thailand', image: 'assets/thailand.webp', packages: '10+' },
-    { name: 'Uttarakhand', image: 'assets/uttarakhand.webp', packages: '10+' },
-    { name: 'Kerala', image: 'assets/kerala.webp', packages: '10+' },
-    { name: 'Thailand', image: 'assets/thailand.webp', packages: '10+' },
-  ];
-
   fourcart:any=[];
   // four cards
    getcards(){
@@ -183,6 +170,37 @@ export class HomeComponent implements OnInit {
       this.fourcart=res.data;
     })
    }
+
+checkEmail=false;
+ makeMytrip() {
+  const formValue = this.formModel.value;
+  const email = formValue.email;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+ console.log("formmodel:",this.formModel.value);
+  if (!emailRegex.test(email)) {
+    this.checkEmail = true;
+    return;
+  }
+  
+
+  const formData = new FormData();
+  for (const key in formValue) {
+    formData.append(key, formValue[key]);
+  }
+
+  // Example for file (if you have one)
+  // formData.append('document', this.selectedFile);
+
+  this.as_.makeYourtrip(formData)
+    .then((res: any) => {
+      console.log(res.data);
+      this.formModel.reset();
+    })
+    .catch((err) => {
+      console.log("come error:", err);
+    });
+}
+
 
 }
 

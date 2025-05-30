@@ -4,23 +4,36 @@
 
 <div class="container">
   <aside class="sidebar" [class.active]="showFilters" id="sidebar">
+    <!-- <div class="filter-section">
+      <h3>  Price Filters </h3>
+      <label><input type="checkbox"> Expensive Tours </label>
+      <label><input type="checkbox"> Under of Price 10000</label>
+      <label><input type="checkbox"> over of Price 6000</label>
+      <label><input type="checkbox"> low priceing </label>
+    </div> -->
+
     <div class="filter-section">
-      <h3> Package Filters </h3>
-      <label><input type="checkbox"> Air Package</label>
-      <label><input type="checkbox"> Land Package</label>
-      <label><input type="checkbox"> River Cruise Package</label>
-      <label><input type="checkbox"> Rail Tour Package</label>
-    </div>
-    <div class="filter-section">
-      <h3>Category</h3>
-      <label><input type="checkbox"> Holiday Package</label>
-      <label><input type="checkbox"> Rail Tour Package</label>
-      <label><input type="checkbox"> Deluxe Train</label>
-      <label><input type="checkbox"> Domestic Air Package</label>
-      <label><input type="checkbox"> Bharat Gaurav</label>
-      <label><input type="checkbox"> International Package</label>
-      <label><input type="checkbox"> Wellness</label>
-    </div>
+  <h3>Package Filters</h3>
+  <label *ngFor="let key of objectKeys(filters)">
+    <input
+      type="checkbox"
+      [(ngModel)]="filters[key]"
+      (ngModelChange)="getPackagesWithFilters(2)"
+    />
+    {{ filterLabels[key] }}
+  </label>
+</div>
+   <div class="filter-section">
+  <h3>Price Filters</h3>
+  <label *ngFor="let key of objectKeys(priceFilters)">
+    <input
+      type="checkbox"
+      [(ngModel)]="priceFilters[key]"
+      (ngModelChange)="getPackagesWithFilters(2)"
+    />
+    {{ priceLabels[key] }}
+  </label>
+</div>
   </aside>
 
 
