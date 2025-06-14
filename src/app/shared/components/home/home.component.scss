@@ -63,14 +63,16 @@
 
 .prev {
   left: 10px;
-  @include respond-to-max(md){
+
+  @include respond-to-max(md) {
     display: none;
   }
 }
 
 .next {
   right: 10px;
-  @include respond-to-max(md){
+
+  @include respond-to-max(md) {
     display: none;
   }
 }
@@ -177,7 +179,7 @@
 
       @include respond-to-max(sm) {
         width: 300px;
-        
+
       }
     }
 
@@ -580,13 +582,14 @@
   z-index: 10;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
-.hide{
+
+.hide {
   display: none;
 }
 
 .slider-btn.left {
   left: 10px;
- 
+
 }
 
 .slider-btn.right {
@@ -594,14 +597,15 @@
 }
 
 @include respond-to-max(md) {
-  .hides{
+  .hides {
     display: none;
   }
-  .hide{
-    display:block;
-  margin-top: 25px;
+
+  .hide {
+    display: block;
+    margin-top: 25px;
   }
- }
+}
 
 .see-all-btn {
   background-color: #e70040;
@@ -649,9 +653,9 @@
   flex-shrink: 0;
   margin-right: 20px;
 
- @include respond-to-max(md){
-  margin-right: 0;
- }
+  @include respond-to-max(md) {
+    margin-right: 0;
+  }
 }
 
 /* 6 images on the pagg  */
@@ -913,7 +917,6 @@
 .info-box1 {
   background: linear-gradient(to bottom right, rgba(0, 0, 0, 1.35), rgba(0, 0, 0, 0.5)),
     url('/assets/6 images/contectform.jpeg');
-  // https://images.unsplash.com/photo-1549924231-f129b911e442?fit=crop&w=900&q=80
   background-size: cover;
   color: #fff;
 }
@@ -981,7 +984,8 @@
 
 @media (max-width: 768px) {
   .container1 {
-    flex-direction: column; /* stack form and contact vertically */
+    flex-direction: column;
+    /* stack form and contact vertically */
     width: 100%;
   }
 
@@ -1017,5 +1021,13 @@
   }
 }
 
+// ****************** top input fileds
+.circular-select {
+
+  text-align: center;
+  font-size: 14px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+}
 
 // footer start

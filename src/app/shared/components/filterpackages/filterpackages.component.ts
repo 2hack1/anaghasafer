@@ -1,18 +1,19 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../../environments/environment.development';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
-import { environment } from '../../../../environments/environment.development';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-destinationtour',
-  imports: [CommonModule, RouterLink,FormsModule],
-  templateUrl: './destinationtour.component.html',
-  styleUrl: './destinationtour.component.scss'
+  selector: 'app-filterpackages',
+  imports: [RouterLink,FormsModule,CommonModule],
+  templateUrl: './filterpackages.component.html',
+  styleUrl: './filterpackages.component.scss'
 })
-export class DestinationtourComponent implements OnInit {
-  backendUrl = environment.backend_url + '/storage/';
+export class FilterpackagesComponent implements OnInit {
+
+ backendUrl = environment.backend_url + '/storage/';
 
   constructor(private routes: ActivatedRoute, private as_: AxiosService) { }
   catchRouteId: any | null = null;
@@ -21,27 +22,48 @@ export class DestinationtourComponent implements OnInit {
 // filters:any;
 
 
-
-
   ngOnInit(): void {
     this.catchRouteId = this.routes.snapshot.paramMap.get('id');
   //  this.getpackafewithfilter(this.catchRouteId);
   this.getPackagesWithFilters();
     this.getpackages(this.catchRouteId);
-  }
+      // get data by homw page 
+ this.routes.queryParams.subscribe(params => {
+    const fileter={
+       destination : params['place_name'],
+       price : params['price'],
+       duration : params['duration']
+    };
+      // console.log('Destination:', destination);
+      // console.log('Price:', price);
+      // console.log('Duration:', duration);
 
- 
+      // Now you can call your API using these parameters
+      this.getallfilpackages(fileter);
+    });
+}
+check:any;
+getallfilpackages(data : any){
+  // console.log("data:",data)
+this.as_.getfilterpackages(data).then((res:any)=>{
+    this.check=res.data.data;
+
+      console.log("check:",this.check);
+}).catch((erro)=>{
+
+  console.log(erro);
+})
+}
 
   getpackages(id:any) {
     this.as_.getPackages(id).then((res) => {
       console.log("ALL Packages :",res.data);
-
-      // this.package = res.data;
-    }).
+    
+         }).
       catch((err) => {
         console.error(err);
       });
-
+  // vpo-35
   }
   showFilters: boolean = false;
   filterButtonText: string = 'Show Filters';
@@ -85,7 +107,7 @@ export class DestinationtourComponent implements OnInit {
     lowPricing: "Low Pricing"
   };
 
-  // constructor(private apiService: ApiService) {}
+
 
   objectKeys = Object.keys;
 
@@ -110,4 +132,5 @@ export class DestinationtourComponent implements OnInit {
       });
   }
 
+  
 }

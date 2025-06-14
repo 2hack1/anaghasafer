@@ -38,9 +38,9 @@
 
 
     <main class="main-content">
-    <div *ngFor="let pack of package" class="package-card">
+    <div *ngFor="let pack of check" class="package-card">
       <div class="image-section">
-        <ng-container *ngFor="let image of pack.images">
+        <ng-container *ngFor="let image of check.images">
           <img [src]="backendUrl + image.img" alt="{{ pack.place_name }}">
         </ng-container>
       </div>

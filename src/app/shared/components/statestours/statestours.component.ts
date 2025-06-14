@@ -34,6 +34,7 @@ export class StatestoursComponent implements OnInit {
       console.log("All Sub Destinations:", this.getallsubdes);
 
       this.sliderGroups = this.chunkArray(this.getallsubdes, 5);
+      console.log("slidergroups:",this.sliderGroups);
     }).catch((err) => {
       console.error("Error fetching data:", err);
     });

@@ -42,6 +42,9 @@ export class AxiosService {
   getSubDesAll(id:any){
     return this.api.get(`/destination/${id}`);
   }
+  getfilterpackages(data:any){
+     return this.api.post(`/filter/homepage`,data);
+  }
   getPackages(id:any){
         return this.api.get(`/packages/${id}`);
   }
@@ -52,29 +55,11 @@ export class AxiosService {
 
   // *********************** with filer
 
-  // getPackagesWithfilter(id: any){
-  //    return this.api.get(`/packages/${id}/details/filter`);
-  // }
-//   getPackagesWithFilter(id: any, filters: string[]) {
-//   return this.api.get(`/packages/${id}/details/filter`, {
-//     params: { filters }
-//   });
-// }
-
-// getPackagesWithFilter(subDesId: number, filters: string[]): Observable<any> {
-//   return this.api.post(`/api/packages/${subDesId}/fil`, { filters });
-// }
-// getPackagesWithFilter(id: any, filters: string[]) {
-//   return this.api.get(`/packages/${id}/details/filter`, {
-//     params: { filters }
-//   });
-// }
-
-// getPackagesWithFilter(subDesId: number, filters: string[]) {
-//   return this.api.post(`/packages/${subDesId}/details/filter`, {
-//     filters: filters
-//   });
-// }
+getPackagesWithFilter(subDesId: number, filters: string[]) {
+  return this.api.post(`/packages/${subDesId}/details/filter`, {
+    filters: filters
+  });
+}
   getMonthandDate(id:any){
     return this.api.get(`/months/${id}`);
   }

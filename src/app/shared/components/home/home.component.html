@@ -2,24 +2,79 @@
   <div class="slider">
     <div class="slider-hero-content">
       <h1>Customize & Book<br />Amazing Holiday Packages</h1>
-      <div class="form-row">
+      <!-- <div class="form-row">
         <div style="display: flex; align-items: center; gap: 1rem;">
-          <input type="text" placeholder="Type a Destination" />
-          <select>
-            <option>Select duration</option>
-            <option>3 Days</option>
-            <option>5 Days</option>
+          <input type="text" placeholder="Enter a Destination" />
+
+          <select [(ngModel)]="selectedPrice" (change)="onPriceChange()" *ngIf="!showOtherInput">
+            <option value="" disabled selected>Select Your Under Price</option>
+            <option value="5000">Under ₹5000</option>
+            <option value="10000">Under ₹10000</option>
+            <option value="other">Other</option>
           </select>
+
+          <div *ngIf="showOtherInput">
+            <input type="text" [(ngModel)]="customPrice" placeholder="Enter your price" />
+          </div>
         </div>
-        <select>
-          <option>Select month</option>
+        <select class="circular-select">
+          <option selected disabled >Day's Of Tour</option>
+          <option>January</option>
+          <option>February</option>
+          <option>March</option>
           <option>April</option>
           <option>May</option>
+          <option>June</option>
+          <option>July</option>
+          <option>August</option>
+          <option>September</option>
+          <option>October</option>
+          <option>November</option>
+          <option>December</option>
         </select>
         <button>
           <i class="fas fa-search"></i> Explore
         </button>
+      </div> -->
+
+      <div class="form-row">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <!-- Destination input -->
+          <input type="text" placeholder="Enter a Destination" [(ngModel)]="destination" name="destination" />
+
+          <!-- Price dropdown -->
+          <select [(ngModel)]="selectedPrice" (change)="onPriceChange()" *ngIf="!showOtherInput" name="selectedPrice">
+            <option value="" disabled selected>Select Your Under Price</option>
+            <option value="5000">Under ₹5000</option>
+            <option value="10000">Under ₹10000</option>
+            <option value="other">Other</option>
+          </select>
+
+          <!-- Custom price input (if "other" is selected) -->
+          <div *ngIf="showOtherInput">
+            <input type="text" [(ngModel)]="customPrice" placeholder="Enter your price" name="customPrice" />
+          </div>
+        </div>
+
+        <!-- Month dropdown -->
+        <select class="circular-select" [(ngModel)]="selectedMonth" name="selectedMonth">
+          <option value="" selected disabled>Duration Of Tour</option>
+          <option>1 day's</option>
+          <option>2 day's</option>
+          <option>3 day's</option>
+          <option>4 day's</option>
+          <option>5 day's</option>
+          <option>6 day's</option>
+          <option>more day's</option>
+
+        </select>
+
+        <!-- Button -->
+        <button (click)="submitSearch()">
+          <i class="fas fa-search"></i> Explore
+        </button>
       </div>
+
 
       <p class="note">Destination not sure? <a href="#">Click here!</a></p>
     </div>
@@ -79,12 +134,12 @@
   <div class="cards01">
 
     <div class="cards01">
-  <div class="card01" *ngFor="let card of fourcart">
-    <i [class]="card.icon_class"></i>
-    <h3>{{ card.heading }}</h3>
-    <p >{{card.headingData}}</p>
-  </div>
-</div>
+      <div class="card01" *ngFor="let card of fourcart">
+        <i [class]="card.icon_class"></i>
+        <h3>{{ card.heading }}</h3>
+        <p>{{card.headingData}}</p>
+      </div>
+    </div>
   </div>
 </section>
 <!-- ********************check images*********************** -->
@@ -183,14 +238,16 @@
       <p>Please fill in the details to make your trip.</p>
       <form [formGroup]="formModel">
         <div class="input-group1">
-          <input type="text" placeholder=" your address" formControlName="your_address" required  />
-          <input type="email" placeholder="detionation address" formControlName="destination_address"  required />
+          <input type="text" placeholder=" your address" formControlName="your_address" required />
+          <input type="email" placeholder="detionation address" formControlName="destination_address" required />
 
         </div>
 
-        <!-- Email --> <div *ngIf="checkEmail" style="color: red; font-size: 14px; margin-top: 5px;"> Password and Confirm Password do not match.</div>
+        <!-- Email -->
+        <div *ngIf="checkEmail" style="color: red; font-size: 14px; margin-top: 5px;"> Password and Confirm Password do
+          not match.</div>
         <div class="input-group1">
-          
+
           <input type="email" placeholder="Your Email" formControlName="email" required />
         </div>
 
@@ -219,7 +276,7 @@
         </div>
 
 
-        <button type="submit1" id="button1"  (click)="makeMytrip()"> Submit Now</button>
+        <button type="submit1" id="button1" (click)="makeMytrip()"> Submit Now</button>
       </form>
     </div>
 
