@@ -24,14 +24,14 @@ import { UserServicesService } from '../../../core/services/userService/user-ser
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private us_:UserServicesService){}
+  constructor(private us_: UserServicesService) { }
   isLogin = false
 
   isHidden = false;
   lastScrollTop = 0;
 
-// login =false;
-// logout=true;
+  // login =false;
+  // logout=true;
 
   @HostListener('window:scroll', [])
   onScroll(): void {
@@ -48,24 +48,21 @@ export class HeaderComponent implements OnInit {
     this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   }
 
-isLoggedIn: boolean = false;
+  isLoggedIn: boolean = false;
 
-  
+
   ngOnInit(): void {
-  //     const token = localStorage.getItem('token');
-  // this.isLoggedIn = !!token; 
+    //     const token = localStorage.getItem('token');
+    // this.isLoggedIn = !!token; 
 
-   this.us_.isLoggedIn$.subscribe((status: boolean) => {
-    this.isLoggedIn = status;
-  });
-    document.body.addEventListener('scroll', (event) => {
-      console.log(event)
-    })
+    this.us_.isLoggedIn$.subscribe((status: boolean) => {
+      this.isLoggedIn = status;
+    });
   }
 
 
 
- logout() {
+  logout() {
     this.us_.logout();
   }
 
