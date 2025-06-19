@@ -17,14 +17,11 @@
     </div>
 </section>
 
-
 <section class="trip-bottom">
-
-
     <div class="trip-bottom-content">
         <div class="left-content">
             <span class="tag">Group Tour</span>
-            <h1>{{packageDetails.place_name}} Road Trip 7 Days</h1>
+            <h1>{{packageDetails.place_name}} Road Trip{{packageDetails.duration_days}} Days</h1>
             <div class="rating-info">
                 <span>⭐⭐⭐⭐⭐ 4.7 (723)</span>
             </div>
@@ -32,7 +29,7 @@
             <div class="info-cards">
                 <div class="card">
                     <img src="/assets/6 images/cl.png" alt="Duration">
-                    <p><strong>Duration</strong><br>{{packageDetails.duration_days}}N/7D</p>
+                    <p><strong>Duration</strong><br>{{packageDetails.duration_days-1}}N/{{packageDetails.duration_days}}D</p>
                 </div>
                 <div class="card">
                     <img src="/assets/icons/marker.png" alt="Spiti Road Trip">
@@ -53,8 +50,8 @@
 
         <div class="right-card">
             <div class="price">
-                <p class="old-price">Starting Per Adult <span>₹20,999</span></p>
-                <p class="new-price">₹14,999/- RS</p>
+                <p class="old-price">Starting Per Adult <span>₹{{packageDetails.price_trip +2000}}</span></p>
+                <p class="new-price">₹{{packageDetails.price_trip}}/- RS</p>
             </div>
 
             <h3>Highlights</h3>

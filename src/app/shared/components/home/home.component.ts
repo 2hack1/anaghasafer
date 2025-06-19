@@ -4,6 +4,7 @@ import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { AxiosResponse } from 'axios';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, FormBuilder, Validators, NgModel, NgModelGroup } from '@angular/forms';
+
 @Component({
   selector: 'app-home',
   imports: [CommonModule, RouterLink, ReactiveFormsModule, FormsModule, RouterModule],
@@ -109,24 +110,6 @@ export class HomeComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   getImages() {
     this.as_.getimg()
       .then(res => {
@@ -181,15 +164,26 @@ export class HomeComponent implements OnInit {
   }
   @ViewChild('sliderTrack', { static: true }) sliderTrack!: ElementRef;
 
-  SlideLeft() {
-    const slider = this.sliderTrack.nativeElement;
-    slider.scrollLeft -= 300;
-  }
+SlideLeft() {
+  const slider = this.sliderTrack.nativeElement;
+  slider.scrollLeft -= 300;
+}
 
-  SlideRight() {
-    const slider = this.sliderTrack.nativeElement;
-    slider.scrollLeft += 300;
-  }
+SlideRight() {
+  const slider = this.sliderTrack.nativeElement;
+  slider.scrollLeft += 300;
+}
+  // @ViewChild('sliderTrack', { static: true }) sliderTrack!: ElementRef;
+
+  // SlideLeft() {
+  //   const slider = this.sliderTrack.nativeElement;
+  //   slider.scrollLeft -= 300;
+  // }
+
+  // SlideRight() {
+  //   const slider = this.sliderTrack.nativeElement;
+  //   slider.scrollLeft += 300;
+  // }
   tours = [
     { name: 'Dubai', image: 'assets/6 images/delhi.jpg', tours: 1 },
     { name: 'Malaysia', image: 'assets/6 images/gujrat.jpg', tours: 1 },

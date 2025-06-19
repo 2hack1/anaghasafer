@@ -45,8 +45,12 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    this.formModel.value;
-    this.us_.userLogin(this.formModel.value).subscribe((res: any) => {
+    // this.formModel.value;
+ const formData = new FormData();
+formData.append('password', this.formModel.get('password')?.value);
+formData.append('email', this.formModel.get('email')?.value);
+formData.append('role', "user"); // For a file input
+    this.us_.userLogin(formData).subscribe((res: any) => {
       this.us_.login(res.access_token);
       this.closeLogin();
       this.route.navigateByUrl('/home');
@@ -58,6 +62,7 @@ export class LoginComponent implements OnInit {
 
   passwordMismatch: boolean = false;
   passwordTooShort:boolean=false;
+  
   signUp() {
     const formValue = this.myform.value; // use the correct form group
 
@@ -68,6 +73,7 @@ export class LoginComponent implements OnInit {
       email: formValue.email,
       password: formValue.pass,
       password_confirmation: formValue.confirm,
+     
     };
 
 
