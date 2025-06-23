@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
-import { routes } from '../../../app.routes';
 
 
 interface Tour {
