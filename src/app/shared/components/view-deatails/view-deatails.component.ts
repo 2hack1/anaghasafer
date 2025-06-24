@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
+import { FormsModule } from '@angular/forms';
 
 
 interface Tour {
@@ -17,7 +18,7 @@ interface Month {
 
 @Component({
   selector: 'app-view-deatails',
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './view-deatails.component.html',
   styleUrl: './view-deatails.component.scss'
 })
@@ -32,7 +33,9 @@ export class ViewDeatailsComponent implements OnInit {
   autoSlideInterval: any;
   constructor(private Route: ActivatedRoute, private as_: AxiosService) { }
   packageId: any | null = null;
+startdate:any;
   selectedMonth: any;
+  packageprice: any = 0;
   ngOnInit() {
     this.packageId = this.Route.snapshot.paramMap.get('id');
     console.log("package id:", this.packageId);
@@ -45,14 +48,21 @@ export class ViewDeatailsComponent implements OnInit {
       this.nextSlide();
     }, 4000);
   }
-
   packageDetails: any = [];
   packag: any[] = [];
   monthDate: any = [];
-  itenaries:any=[];
+  itenaries: any = [];
+  getEmailsesstion:any
   getpackagesdetails(id: any) {
     this.as_.getPackagesDetails(id).then((res) => {
       this.packageDetails = res.data[0];
+      console.log("pakage data", this.packageDetails);
+      this.packageprice = this.packageDetails.price_trip;
+
+      this.adultPrice = this.packageprice;
+      this.childPrice = (this.packageprice/2);
+
+      console.log("pakage price", this.packageprice)
       this.packag = res.data[0].images;
 
     }).catch((err) => {
@@ -88,27 +98,27 @@ export class ViewDeatailsComponent implements OnInit {
     })
   }
 
-  getiteraries(id:any){
-    this.as_.getIteries(id).then((res)=>{
-      console.log("itineries",res.data[0].day_wise_details);
-      this.itenaries=res.data[0].day_wise_details;
-    }).catch((err)=>{
-     console.log("error",err);
+  getiteraries(id: any) {
+    this.as_.getIteries(id).then((res) => {
+      console.log("itineries", res.data[0].day_wise_details);
+      this.itenaries = res.data[0].day_wise_details;
+    }).catch((err) => {
+      console.log("error", err);
     })
   }
-   
-  trans:any=[];
-   gettransport(id:any){
-    this.as_.getTransport(id).then((res)=>{
-      console.log("Trasports",res.data);
-       this.trans=res.data[0].mode;
-           console.log("Mode",res.data[0].mode);
-  
-    }).catch((err)=>{
-     console.log("error",err);
+
+  trans: any = [];
+  gettransport(id: any) {
+    this.as_.getTransport(id).then((res) => {
+      console.log("Trasports", res.data);
+      this.trans = res.data[0].mode;
+      console.log("Mode", res.data[0].mode);
+
+    }).catch((err) => {
+      console.log("error", err);
     })
   }
-  
+
 
   ngOnDestroy() {
     clearInterval(this.autoSlideInterval);
@@ -125,7 +135,7 @@ export class ViewDeatailsComponent implements OnInit {
   getTransform(): string {
     return `translateX(-${this.currentIndex * 100}%)`;
   }
- opens :boolean=false;
+  opens: boolean = false;
 
   showPopup: boolean = false;
 
@@ -149,17 +159,17 @@ export class ViewDeatailsComponent implements OnInit {
   ];
 
   transportModes = [
-    { key: 'train', amount: 1000, icon: 'fi fi-ts-subway' },
-    { key: 'bus', amount: 2000, icon: 'fi fi-ts-bus-alt' },
-    { key: 'plane', amount: 5000, icon: 'fi fi-ts-plane-alt' },
-    { key: 'car', amount: 3000, icon: 'fi fi-ts-car-side' }
+    { key: 'train', amount: 0, icon: 'fi fi-ts-subway' },
+    { key: 'bus', amount: 0, icon: 'fi fi-ts-bus-alt' },
+    { key: 'plane', amount: 0, icon: 'fi fi-ts-plane-alt' },
+    { key: 'car', amount: 0, icon: 'fi fi-ts-car-side' }
   ];
 
 
   getAvailableModes(): any[] {
-  const transKeys = this.trans.map((t: any) => t.key);
-  return this.transportModes.filter(mode => transKeys.includes(mode.key));
-}
+    const transKeys = this.trans.map((t: any) => t.key);
+    return this.transportModes.filter(mode => transKeys.includes(mode.key));
+  }
 
   selectedTransport: string = '';
   transportPrice: number = 0;
@@ -178,43 +188,43 @@ export class ViewDeatailsComponent implements OnInit {
   showPopup1: boolean = false;
 
   // Fix random prices once when component is loaded
-  adultPrice = 5000;
-  childPrice = 3000;
-  roomCharge = 2000;
+  adultPrice:any;
+  childPrice:any;
+  // roomCharge = 2000;
 
 
-  addRoom(): void {
-    this.rooms.push({
-      travellers: [
-        { type: 'Adult', ageGroup: '(12+ yrs)', count: 1 },
-        { type: 'Child ', ageGroup: '(12- yrs)', count: 0 },
-        { type: 'Infant', ageGroup: '(5- yrs)', count: 0 }
-      ]
-    });
-    this.calculateTotalAmount();  // Important!
-  }
+  // addRoom(): void {
+  //   this.rooms.push({
+  //     travellers: [
+  //       { type: 'Adult', ageGroup: '(12+ yrs)', count: 1 },
+  //       { type: 'Child ', ageGroup: '(12- yrs)', count: 0 },
+  //       { type: 'Infant', ageGroup: '(5- yrs)', count: 0 }
+  //     ]
+  //   });
+  //   this.calculateTotalAmount();  // Important!
+  // }
 
-  removeRoom(index: number): void {
-    this.rooms.splice(index, 1);
-    this.calculateTotalAmount();
-  }
+  // removeRoom(index: number): void {
+  //   this.rooms.splice(index, 1);
+  //   this.calculateTotalAmount();
+  // }
 
   increaseCount(roomIndex: number, traveller: any): void {
     const label = traveller.type.toLowerCase();
     const currentCount = traveller.count;
 
-    if (label.includes('adult') && currentCount >= 2) {
-      alert('Maximum 2 Adults allowed per room.');
-      return;
-    }
-    if (label.includes('child') && currentCount >= 1) {
-      alert('Maximum 1 Child (with bed) allowed per room.');
-      return;
-    }
-    if (label.includes('infant') && currentCount >= 2) {
-      alert('Maximum 2 Infants allowed per room.');
-      return;
-    }
+    // if (label.includes('adult') && currentCount >= 2) {
+    //   alert('Maximum 2 Adults allowed per room.');
+    //   return;
+    // }
+    // if (label.includes('child') && currentCount >= 1) {
+    //   alert('Maximum 1 Child (with bed) allowed per room.');
+    //   return;
+    // }
+    // if (label.includes('infant') && currentCount >= 2) {
+    //   alert('Maximum 2 Infants allowed per room.');
+    //   return;
+    // }
 
     traveller.count++;
     this.calculateTotalAmount();
@@ -234,7 +244,7 @@ export class ViewDeatailsComponent implements OnInit {
   calculateTotalAmount(): void {
     let totalAdults = 0;
     let totalChildren = 0;
-    let totalRooms = this.rooms.length;
+    // let totalRooms = this.rooms.length;
     // let transport=this.transportPrice;
     this.rooms.forEach(room => {
       room.travellers.forEach(traveller => {
@@ -248,10 +258,10 @@ export class ViewDeatailsComponent implements OnInit {
       });
     });
     if (totalAdults === 0 && totalChildren === 0) {
-      totalRooms = 0;
+      // totalRooms = 0;
     }
 
-    const totalAmount = (totalAdults * this.adultPrice) + (totalChildren * this.childPrice) + (totalRooms * this.roomCharge) + (this.transportPrice);
+    const totalAmount = (totalAdults * this.adultPrice) + (totalChildren * this.childPrice) + (this.transportPrice);
     this.totalAmount = totalAmount;
   }
 
@@ -260,8 +270,15 @@ export class ViewDeatailsComponent implements OnInit {
   }
   showPopup11: boolean = false;
 
-  openPopup11(): void {
+  openPopup11(id:any,starttourdate:any,endtourdate:any): void {
     this.showPopup11 = true;
+   this.getEmailsesstion= sessionStorage.getItem('email')
+    this.startdate=starttourdate+"  TO  "+endtourdate;
+    // const endtdate=endtourdate;
+    // console.log("dateid",id);
+    // console.log("tourdate",this.startdate);
+    // console.log("tourmonth",endtourdate);
+    // console.log("tourmonth",this.selectedMonth);
   }
 
   closePopup11(): void {

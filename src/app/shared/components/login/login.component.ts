@@ -51,7 +51,7 @@ formData.append('password', this.formModel.get('password')?.value);
 formData.append('email', this.formModel.get('email')?.value);
 formData.append('role', "user"); // For a file input
     this.us_.userLogin(formData).subscribe((res: any) => {
-      this.us_.login(res.access_token);
+      this.us_.login(res.access_token,res.email);
       this.closeLogin();
       this.route.navigateByUrl('/home');
 
@@ -91,7 +91,7 @@ this.passwordTooShort = f.length !== 6;
 
       this.us_.userRegister(this.all_data).subscribe((res: any) => {
 
-        this.us_.login(res.access_token);
+        this.us_.login(res.access_token,res.email);
         this.closeLogin();
 
         this.route.navigateByUrl('/home');

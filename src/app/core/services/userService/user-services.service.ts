@@ -39,13 +39,17 @@ userRegister(data:any) {
     return this.loggedIn.asObservable();
   }
 
-  login(token: string) {
-    localStorage.setItem('token', token);
-    this.loggedIn.next(true);
+  login(token: string,email:string) {
+   
+    sessionStorage.setItem('token',token);
+    sessionStorage.setItem('email',email);
+
+    this.loggedIn.next(true);                                
   }
 
   logout() {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+    sessionStorage.clear();
     this.loggedIn.next(false);
   }
 

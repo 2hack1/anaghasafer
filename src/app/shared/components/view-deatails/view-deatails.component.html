@@ -157,7 +157,7 @@
                 <div class="tour-date" *ngFor="let tours of date">
 
                     <span>{{ tours.start_date }}  to  {{tours.end_date}}</span>
-                    <span class="label open1" (click)=" openPopup11()">{{ tours.availability }}</span>
+                    <span class="label open1" (click)=" openPopup11(tours.date_id,tours.start_date,tours.end_date)">{{ tours.availability }}</span>
                 </div>
             </div>
         </div>
@@ -179,7 +179,8 @@
 
         <!-- Add Room Button -->
         <div class="room-section">
-            <p>Room 1 <a (click)="addRoom()" class="add-room">+ Add Room</a></p>
+            <!-- <p>Room 1 <a  class="add-room">+ Add Room</a></p> -->
+        
         </div>
 
         <!-- parent div of rooms  -->
@@ -188,9 +189,10 @@
             <div class="travellers travellers-card" *ngFor="let room of rooms; let roomIndex = index">
                 <div class="travellers-inner-container">
                     <div class="room-header">
-                        <p> {{ roomIndex + 1 }}
-                            <a (click)="removeRoom(roomIndex)" class="add-room">- Remove</a>
-                        </p>
+                        <!-- <p> {{ roomIndex + 1 }} -->
+                            <!-- <a (click)="removeRoom(roomIndex)" class="add-room">- Remove</a> -->
+                            <!-- <a  class="add-room">- Remove</a> -->
+                        <!-- </p> -->
                     </div>
 
                     <div class="traveller1-container">
@@ -200,6 +202,7 @@
                                     }})</span></label>
                             <div class="counter1">
                                 <button class="counter1-btn" (click)="decreaseCount(roomIndex, traveller)"> - </button>
+                                <!-- <button class="counter1-btn" (click)="decreaseCount(roomIndex, traveller)"> - </button> -->
                                 <span class="count">{{ traveller.count }}</span>
                                 <!-- <button class="count counter1-btn"> {{ traveller.count }}</button> -->
                                 <button class=" counter1-btn" (click)="increaseCount(roomIndex, traveller)"> +
@@ -227,12 +230,12 @@
 
         <div class="form-section">
             <label><i class="fa fa-calendar"></i> Date of Travel</label>
-            <input type="date" class="input">
+            <input type="text" class="input" [(ngModel)]="startdate" readonly>
 
             <label><i class="fa fa-phone"></i> Your Contact Details</label>
             <div class="contact-details">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
+                <input type="text" placeholder="Phone Number" >
+                <input type="email" placeholder="Email Address" [(ngModel)]="getEmailsesstion">
             </div>
 
             <div class="checkbox-section">
@@ -243,7 +246,7 @@
 
             <div style="display: flex; gap: 5px;">
                 <!-- <button class="submit-btn" (click)="calculateTotalAmount()">Calculate Package Price</button> -->
-                <button class="submit-btn" style="background-color: blueviolet;">Pay ₹{{ totalAmount }}</button>
+                <button class="submit-btn" style="background-color: blueviolet;">Make Slip With = ₹{{ totalAmount }}</button>
             </div>
         </div>
     </div>

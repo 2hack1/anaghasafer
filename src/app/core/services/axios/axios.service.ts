@@ -21,7 +21,7 @@ export class AxiosService {
   }
 
 
-
+//  pakageprice:any;
   getGreeting() {
     return this.api.get('/greeting'); // Laravel route: /api/greeting
   }
