@@ -4,6 +4,7 @@ import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { AxiosResponse } from 'axios';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, FormBuilder, Validators, NgModel, NgModelGroup } from '@angular/forms';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,8 @@ export class HomeComponent implements OnInit {
   images: any[] = [];
   desId: any | null = null;
   formModel!: FormGroup;
+  env = environment
+
   constructor(private as_: AxiosService, private FB_: FormBuilder, private router: Router) {
     this.formModel = FB_.group({
       your_address: [null, Validators.required],
@@ -164,15 +167,15 @@ export class HomeComponent implements OnInit {
   }
   @ViewChild('sliderTrack', { static: true }) sliderTrack!: ElementRef;
 
-SlideLeft() {
-  const slider = this.sliderTrack.nativeElement;
-  slider.scrollLeft -= 300;
-}
+  SlideLeft() {
+    const slider = this.sliderTrack.nativeElement;
+    slider.scrollLeft -= 300;
+  }
 
-SlideRight() {
-  const slider = this.sliderTrack.nativeElement;
-  slider.scrollLeft += 300;
-}
+  SlideRight() {
+    const slider = this.sliderTrack.nativeElement;
+    slider.scrollLeft += 300;
+  }
   // @ViewChild('sliderTrack', { static: true }) sliderTrack!: ElementRef;
 
   // SlideLeft() {
