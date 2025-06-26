@@ -76,7 +76,7 @@ formData.append('role', "user"); // For a file input
      
     };
 
-
+ 
 // formValue.confirm === formValue.pass && formValue.pass.length === 6
  
 const f = formValue.pass || '';  // Ensure it's a string

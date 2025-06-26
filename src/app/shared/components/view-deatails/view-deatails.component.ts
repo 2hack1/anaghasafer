@@ -33,9 +33,21 @@ export class ViewDeatailsComponent implements OnInit {
   autoSlideInterval: any;
   constructor(private Route: ActivatedRoute, private as_: AxiosService) { }
   packageId: any | null = null;
-startdate:any;
   selectedMonth: any;
   packageprice: any = 0;
+  slip=false;
+  avoidSlip=true;
+  // startdate: string = '';
+  
+  packageDetails: any = [];
+  packag: any[] = [];
+  monthDate: any = [];
+  itenaries: any = [];
+  // data validation
+  phoneNumber: string = '';
+  termsAccepted: boolean = false;
+  startdate:any;
+  getEmailsesstion:any
   ngOnInit() {
     this.packageId = this.Route.snapshot.paramMap.get('id');
     console.log("package id:", this.packageId);
@@ -48,11 +60,7 @@ startdate:any;
       this.nextSlide();
     }, 4000);
   }
-  packageDetails: any = [];
-  packag: any[] = [];
-  monthDate: any = [];
-  itenaries: any = [];
-  getEmailsesstion:any
+
   getpackagesdetails(id: any) {
     this.as_.getPackagesDetails(id).then((res) => {
       this.packageDetails = res.data[0];
@@ -259,12 +267,76 @@ startdate:any;
     });
     if (totalAdults === 0 && totalChildren === 0) {
       // totalRooms = 0;
-    }
+    } 
 
     const totalAmount = (totalAdults * this.adultPrice) + (totalChildren * this.childPrice) + (this.transportPrice);
     this.totalAmount = totalAmount;
   }
 
+  // payment validation
+
+  validateForm(): boolean {
+    // for (const room of this.rooms) {
+    //   for (const traveller of room.travellers) {
+    //     if (!traveller.count || traveller.count < 1) {
+    //       alert("Each traveller must have a count of at least 1.");
+    //       return false;
+    //     }
+    //   }
+    // }
+    for (let i = 0; i < this.rooms.length; i++) {
+  const room = this.rooms[i];
+
+  // Check if any traveller has count >= 1
+  const hasValidTraveller = room.travellers.some(traveller => traveller.count && traveller.count >= 1);
+
+  if (!hasValidTraveller) {
+    alert(`Room ${i + 1} must have at least one traveller (Adult, Child, or Infant).`);
+    return false;
+  }
+}
+
+
+  if (!this.startdate) {
+    alert("Please select a travel date.");
+    return false;
+  }
+  
+// if (!this.getEmailsesstion || !this.getEmailsesstion.trim() || !this.getEmailsesstion.includes('@')) {
+//   alert("Please enter a valid email.");
+//   return false;
+// }
+const email = this.getEmailsesstion?.trim();
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!email || !emailRegex.test(email)) {
+  alert("Please enter a valid email address.");
+  return false;
+}
+  
+  const phone = this.phoneNumber;
+
+const phoneRegex = /^\d{10}$/;
+
+if (!phone || !phoneRegex.test(phone.trim())) {
+  alert("Please enter a valid 10-digit phone number.");
+  return false;
+}
+
+  if (!this.termsAccepted) {
+    alert("You must accept the terms and conditions.");
+    return false;
+  }
+
+  if (!this.selectedTransport) {
+    alert("Please select a transport option.");
+    return false;
+  }
+
+
+  return true;
+}
+  
   togglePopup(): void {
     this.showPopup1 = !this.showPopup1;
   }
@@ -284,5 +356,17 @@ startdate:any;
   closePopup11(): void {
     this.showPopup11 = false;
   }
+
+
+  submitForm() {
+  if (this.validateForm()) {
+   this.slip=!this.slip;
+  this.avoidSlip=!this.avoidSlip;
+    console.log("chck")
+    this.showPopup11=false;
+  }
+}
+
+ 
 
 }

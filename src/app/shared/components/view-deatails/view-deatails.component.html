@@ -1,4 +1,6 @@
-<section class="trip-section">
+
+
+<section class="trip-section" *ngIf="avoidSlip">
     <div class="slider">
         <div class="slides" [style.transform]="getTransform()">
             <img *ngFor="let image of packag" [src]="'http://localhost:8000/storage/'+image.img" alt="Trip Slide">
@@ -17,7 +19,7 @@
     </div>
 </section>
 
-<section class="trip-bottom">
+<section class="trip-bottom" *ngIf="avoidSlip">
     <div class="trip-bottom-content">
         <div class="left-content">
             <span class="tag">Group Tour</span>
@@ -112,7 +114,7 @@
 </section>
 
 <!--**************************** Tour Dates Tab Content ************************* -->
-<div class="itinerary1">
+<div class="itinerary1" *ngIf="avoidSlip">
     <!-- Tabs -->
     <div class="tabs">
 
@@ -151,7 +153,7 @@
                 (click)="selectMonth(months.tour_month_id)">{{months.month}}'
                 {{ months.year }}
             </button>
-        </div>
+        </div> 
         <div class="size" style="height: auto; padding: 10px;">
             <div class="card">
                 <div class="tour-date" *ngFor="let tours of date">
@@ -179,20 +181,12 @@
 
         <!-- Add Room Button -->
         <div class="room-section">
-            <!-- <p>Room 1 <a  class="add-room">+ Add Room</a></p> -->
-        
         </div>
-
-        <!-- parent div of rooms  -->
         <div>
-            <!-- Loop through rooms and display traveller information -->
-            <div class="travellers travellers-card" *ngFor="let room of rooms; let roomIndex = index">
+           <div class="travellers travellers-card" *ngFor="let room of rooms; let roomIndex = index">
                 <div class="travellers-inner-container">
                     <div class="room-header">
-                        <!-- <p> {{ roomIndex + 1 }} -->
-                            <!-- <a (click)="removeRoom(roomIndex)" class="add-room">- Remove</a> -->
-                            <!-- <a  class="add-room">- Remove</a> -->
-                        <!-- </p> -->
+  
                     </div>
 
                     <div class="traveller1-container">
@@ -202,9 +196,9 @@
                                     }})</span></label>
                             <div class="counter1">
                                 <button class="counter1-btn" (click)="decreaseCount(roomIndex, traveller)"> - </button>
-                                <!-- <button class="counter1-btn" (click)="decreaseCount(roomIndex, traveller)"> - </button> -->
+                              
                                 <span class="count">{{ traveller.count }}</span>
-                                <!-- <button class="count counter1-btn"> {{ traveller.count }}</button> -->
+                               
                                 <button class=" counter1-btn" (click)="increaseCount(roomIndex, traveller)"> +
                                 </button>
                             </div>
@@ -234,20 +228,121 @@
 
             <label><i class="fa fa-phone"></i> Your Contact Details</label>
             <div class="contact-details">
-                <input type="text" placeholder="Phone Number" >
+                <input type="text" placeholder="Phone Number" [(ngModel)]="phoneNumber" >
                 <input type="email" placeholder="Email Address" [(ngModel)]="getEmailsesstion">
             </div>
 
             <div class="checkbox-section">
-                <input type="checkbox" id="accept">
+                <input type="checkbox" id="accept"  [(ngModel)]="termsAccepted">
                 <label for="accept">I accept the <a href="#">Privacy Policy</a> & <a href="#">Terms &
                         Conditions</a></label>
             </div>
 
             <div style="display: flex; gap: 5px;">
                 <!-- <button class="submit-btn" (click)="calculateTotalAmount()">Calculate Package Price</button> -->
-                <button class="submit-btn" style="background-color: blueviolet;">Make Slip With = ₹{{ totalAmount }}</button>
+                <button type="submit" class="submit-btn" style="background-color: blueviolet;" (click)="submitForm()">Make Slip With = ₹{{ totalAmount }}</button>
             </div>
         </div>
     </div>
+</div>
+
+
+
+<!-- 
+<div class="top"  *ngIf="slip">
+    <div class="page" *ngIf="slip" >
+
+      <h2>ExploreWorld Tours</h2>
+      <h3>Tour Slip – June 2025</h3>
+
+      <div class="section info">
+        <p><strong>Name:</strong> Anagha Solutions</p>
+        <p><strong>Email:</strong> anaghagmailexample.com</p>
+        <p><strong>Mobile:</strong> +91-9876543210</p>
+      </div>
+
+      <div class="section">
+        <h3>Tour Details</h3>
+        <table>
+          <tr><th>Field</th><th>Information</th></tr>
+          <tr><td>Duration</td><td>5 Days / 4 Nights</td></tr>
+          <tr><td>Origin</td><td>Pune</td></tr>
+          <tr><td>Departure</td><td>Ahmedabad</td></tr>
+          <tr><td>Package</td><td>Spiritual Retreat</td></tr>
+          <tr><td>Destination</td><td>Dwarka</td></tr>
+          <tr><td>Start Date</td><td>10 June 2025</td></tr>
+          <tr><td>End Date</td><td>14 June 2025</td></tr>
+          <tr><td>Price</td><td>₹18,000</td></tr>
+        </table>
+      </div>
+
+      <div class="section">
+        <h3>Date-wise Itinerary</h3>
+        <table>
+          <tr><th>Day</th><th>Date</th><th>Activities</th></tr>
+          <tr><td>Day 1</td><td>10 June</td><td>Arrival, Check-in, Local Temple Visit</td></tr>
+          <tr><td>Day 2</td><td>11 June</td><td>Dwarkadhish Temple Darshan, Beach Walk</td></tr>
+          <tr><td>Day 3</td><td>12 June</td><td>Bet Dwarka Ferry Ride, Nageshwar Jyotirlinga</td></tr>
+          <tr><td>Day 4</td><td>13 June</td><td>Free Time, Shopping, Cultural Program</td></tr>
+          <tr><td>Day 5</td><td>14 June</td><td>Check-out, Return Journey</td></tr>
+        </table>
+      </div>
+
+      <div class="section center">
+        <button class="total-price-btn">Total Price: ₹18,000</button>
+      </div>
+
+    </div>
+ 
+
+    <button class="print-btn" onclick="window.print()">🖨️ Print Tour Slip</button>
+  </div> -->
+
+
+<div id="printArea"  *ngIf="slip">
+
+    <div   *ngIf="slip">
+        <div class="page">
+            <h2>ExploreWorld Tours</h2>
+            <h3>Tour Slip – June 2025</h3>
+            
+            <div class="section info">
+                <p><strong>Name:</strong> Anagha Solutions</p>
+                <p><strong>Email:</strong> anaghaxample.com</p>
+                <p><strong>Mobile:</strong> +91-9876543210</p>
+            </div>
+            
+            <div class="section">
+                <h3>Tour Details</h3>
+                <table>
+                    <tr><th>Field</th><th>Information</th></tr>
+                    <tr><td>Duration</td><td>5 Days / 4 Nights</td></tr>
+                    <tr><td>Origin</td><td>Pune</td></tr>
+                    <tr><td>Departure</td><td>Ahmedabad</td></tr>
+                    <tr><td>Package</td><td>Spiritual Retreat</td></tr>
+                    <tr><td>Destination</td><td>Dwarka</td></tr>
+                    <tr><td>Start Date</td><td>10 June 2025</td></tr>
+                    <tr><td>End Date</td><td>14 June 2025</td></tr>
+                    <tr><td>Price</td><td>₹18,000</td></tr>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h3>Date-wise Itinerary</h3>
+                <table>
+                    <tr><th>Day</th><th>Date</th><th>Activities</th></tr>
+                    <tr><td>Day 1</td><td>10 June</td><td>Arrival, Check-in, Local Temple Visit</td></tr>
+                    <tr><td>Day 2</td><td>11 June</td><td>Dwarkadhish Temple Darshan, Beach Walk</td></tr>
+                    <tr><td>Day 3</td><td>12 June</td><td>Bet Dwarka Ferry Ride, Nageshwar Jyotirlinga</td></tr>
+                    <tr><td>Day 4</td><td>13 June</td><td>Free Time, Shopping, Cultural Program</td></tr>
+                    <tr><td>Day 5</td><td>14 June</td><td>Check-out, Return Journey</td></tr>
+                </table>
+            </div>
+            
+      <div class="section center">
+          <button class="total-price-btn">Total Price: ₹18,000</button>
+        </div>
+    </div>
+</div>
+<button class="print-btn" onclick="window.print()">🖨️ Print Tour Slip</button>
 </div>

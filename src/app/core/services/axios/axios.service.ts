@@ -29,7 +29,7 @@ export class AxiosService {
   getimg() {
     return this.api.get('/topimagess');
   }
-
+ 
   // get destinations
   getdes() {
     return this.api.get('/destination/all/des')
