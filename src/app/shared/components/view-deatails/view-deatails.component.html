@@ -299,7 +299,7 @@
   </div> -->
 
 
-<div id="printArea"  *ngIf="slip">
+<!-- <div id="printArea"  *ngIf="slip">
 
     <div   *ngIf="slip">
         <div class="page">
@@ -345,4 +345,60 @@
     </div>
 </div>
 <button class="print-btn" onclick="window.print()">🖨️ Print Tour Slip</button>
+</div> -->
+<!-- Button to trigger printing -->
+
+
+<!-- Slip content to be printed -->
+<button class="print-btn" (click)="printSlip()">🖨️ Print Tour Slip</button>
+<div id="printArea" *ngIf="slip">
+  <div class="page">
+
+    <div class="header-row">
+    
+      <h2>ExploreWorld Tours</h2>
+      <h3>Tour Slip – {{convertmonth}}</h3>
+      <!-- <h3>Tour Slip – June 2025</h3> -->
+    </div>
+
+    <div class="section info">
+      <p><strong>Name:</strong> {{nameOfUser}}</p>
+      <p><strong>Email:</strong> {{getEmailsesstion}}</p>
+      <p><strong>Mobile:</strong> +91-{{phoneNumber}}</p>
+    </div>
+
+    <div class="section">
+      <h3>Tour Details</h3>
+      <table>
+        <tr><th>Field</th><th>Information</th></tr>
+        <tr><td>Duration</td><td>{{packageDetails.duration_days}}Days / {{packageDetails.duration_days-1}}Nights</td></tr>
+        <tr><td>Origin</td><td>{{packageDetails.origin}}</td></tr>
+        <tr><td>Departure</td><td>{{packageDetails.departure_point}}</td></tr>
+        <tr><td>Destination</td><td>{{packageDetails.place_name}}</td></tr>
+        <tr><td>Start Date</td><td>{{showstartdate}}</td></tr>
+        <tr><td>End Date</td><td>{{endtdate}}</td></tr>
+        <tr><td>Price</td><td>₹{{packageDetails.price_trip}}</td></tr>
+      </table>
+    </div>
+
+    
+
+    <div class="section">
+      <h3>Date-wise Itinerary</h3>
+      <table  >
+        <tr><th>Day</th><th>Date</th><th>Activities</th></tr>
+        <tr *ngFor="let days of itenaries; let i = index"><td>{{days.day}}</td><td>{{ days.title }}</td><td>{{ days.detail }}</td></tr>
+      </table>
+    </div>
+    <div class="section">
+         <h3>about of trip </h3>
+        <p> 
+        {{packageDetails.about_trip}}
+        </p>
+    </div>
+    <div class="section center">
+      <button class="total-price-btn">Confirm Your Trip With Pay ₹18,000</button>
+    </div>
+    
+  </div>
 </div>

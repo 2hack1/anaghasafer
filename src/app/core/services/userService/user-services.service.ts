@@ -18,12 +18,6 @@ export class UserServicesService {
      }
 
 
-  // login(data:any) {
-  //   let path = `${this.url}/admin/user/login`;
-  //   return this.http.post(path,data);
-  // }
-
-
 userRegister(data:any) {
   let path = `${this.baseUrl}/register-user`;
     return this.http.post(path,data);
@@ -33,16 +27,17 @@ userRegister(data:any) {
     return this.http.post(path,data);
   }
 
- private loggedIn = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
+ private loggedIn = new BehaviorSubject<boolean>(!!sessionStorage.getItem('token'));
 
   get isLoggedIn$() {
     return this.loggedIn.asObservable();
   }
 
-  login(token: string,email:string) {
+  login(token: string,email:string,name:string) {
    
     sessionStorage.setItem('token',token);
     sessionStorage.setItem('email',email);
+    sessionStorage.setItem('name',name);
 
     this.loggedIn.next(true);                                
   }

@@ -48,6 +48,7 @@ export class ViewDeatailsComponent implements OnInit {
   termsAccepted: boolean = false;
   startdate:any;
   getEmailsesstion:any
+  // afterpay=false;
   ngOnInit() {
     this.packageId = this.Route.snapshot.paramMap.get('id');
     console.log("package id:", this.packageId);
@@ -108,7 +109,7 @@ export class ViewDeatailsComponent implements OnInit {
 
   getiteraries(id: any) {
     this.as_.getIteries(id).then((res) => {
-      console.log("itineries", res.data[0].day_wise_details);
+      // console.log("itineries", res.data[0].day_wise_details);
       this.itenaries = res.data[0].day_wise_details;
     }).catch((err) => {
       console.log("error", err);
@@ -302,10 +303,7 @@ export class ViewDeatailsComponent implements OnInit {
     return false;
   }
   
-// if (!this.getEmailsesstion || !this.getEmailsesstion.trim() || !this.getEmailsesstion.includes('@')) {
-//   alert("Please enter a valid email.");
-//   return false;
-// }
+
 const email = this.getEmailsesstion?.trim();
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -341,32 +339,131 @@ if (!phone || !phoneRegex.test(phone.trim())) {
     this.showPopup1 = !this.showPopup1;
   }
   showPopup11: boolean = false;
-
+showstartdate:string='';
+endtdate:string='';
+convertmonth:any;
   openPopup11(id:any,starttourdate:any,endtourdate:any): void {
     this.showPopup11 = true;
    this.getEmailsesstion= sessionStorage.getItem('email')
     this.startdate=starttourdate+"  TO  "+endtourdate;
-    // const endtdate=endtourdate;
+    this.showstartdate=starttourdate;
+    this.endtdate=endtourdate;
+    this.convertmonth=this.converMonth(starttourdate);
+  
     // console.log("dateid",id);
     // console.log("tourdate",this.startdate);
     // console.log("tourmonth",endtourdate);
     // console.log("tourmonth",this.selectedMonth);
+  }
+  
+  // conver month  no. to string 
+  converMonth(date:string):string{
+
+    if(!date) return '';
+    const[year, month, day]=date.split('-').map(Number);
+    const datee=new Date(year,month-1,day);
+    console.log("convert month date:",datee)
+    // return datee.toLocaleString('default',{month:'short'},{year:'numer'});
+    return datee.toLocaleString('default', { month: 'short', year: 'numeric' });
+
   }
 
   closePopup11(): void {
     this.showPopup11 = false;
   }
 
-
+nameOfUser:any;
   submitForm() {
+    if(!sessionStorage.getItem('token')){
+      alert('please firstly login or signUp')
+      return;
+    }
   if (this.validateForm()) {
    this.slip=!this.slip;
   this.avoidSlip=!this.avoidSlip;
     console.log("chck")
     this.showPopup11=false;
+    this.nameOfUser=sessionStorage.getItem('name');
   }
 }
 
  
+printSlip() {
+    const printContents = document.getElementById('printArea')?.innerHTML;
+    if (!printContents) return;
+
+    const popupWin = document.createElement('iframe');
+    popupWin.style.position = 'absolute';
+    popupWin.style.top = '-1000px';
+    popupWin.style.left = '-1000px';
+
+    document.body.appendChild(popupWin);
+    const doc = popupWin.contentWindow?.document;
+    if (!doc) return;
+
+    doc.open();
+    doc.write(`
+      <html>
+        <head>
+          <title>Print Tour Slip</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              padding: 20px;
+              color: #000;
+            }
+
+            .logo {
+              width: 120px;
+              float: right;
+            }
+
+            h2, h3 {
+              text-align: center;
+              margin: 0;
+            }
+
+            .section {
+              margin-top: 20px;
+            }
+
+            table {
+              width: 100%;
+              border-collapse: collapse;
+              font-size: 14px;
+              margin-top: 10px;
+            }
+
+            th, td {
+              border: 1px solid black;
+              padding: 8px;
+              text-align: left;
+            }
+
+            th {
+              background-color: #f2f2f2;
+            }
+
+            .total-price-btn {
+              background-color: purple;
+              color: white;
+              padding: 10px 20px;
+              font-size: 18px;
+              border: none;
+              border-radius: 6px;
+              width: 100%;
+              max-width: 300px;
+              text-align: center;
+              margin: 20px auto;
+            }
+          </style>
+        </head>
+        <body onload="window.print(); setTimeout(() => window.close(), 100);">
+          ${printContents}
+        </body>
+      </html>
+    `);
+    doc.close();
+  }
 
 }

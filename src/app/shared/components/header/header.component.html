@@ -21,15 +21,15 @@
           <span class="bi bi-globe"></span>
           Gwalior, Madhya Pradesh, India
         </div>
-        
-     <button *ngIf="!isLoggedIn" class="btn-login" (click)="openLoginModal()">
-  <span class="bi bi-people"></span> Login
-</button>
 
-<!-- Show Logout if logged in -->
-<button *ngIf="isLoggedIn" class="btn-login" (click)="logout()">
-  <span class="bi bi-box-arrow-right"></span> Logout
-</button>
+        <button *ngIf="!isLoggedIn" class="btn-login" (click)="openLoginModal()">
+          <span class="bi bi-people"></span> Login
+        </button>
+
+        <!-- Show Logout if logged in -->
+        <button *ngIf="isLoggedIn" class="btn-login" (click)="logout()">
+          <span class="bi bi-box-arrow-right"></span> Logout
+        </button>
       </div>
     </div>
   </div>
@@ -38,6 +38,7 @@
     <div class="logo-sidebar tolls">
       <div class="logo">
         <img src="icons/logo.png" alt="" />
+        <!--   you can check this logo               <img src="icons/anaghasafer.png" alt="" /> -->
       </div>
     </div>
 
@@ -47,7 +48,7 @@
           <p class="menu-items">Home</p>
         </a>
         <a [routerLink]="['/contact']" style="text-decoration: none; color: black;">
-          <p class="menu-items">Contect</p>
+          <p class="menu-items">Contact</p>
         </a>
         <a [routerLink]="['/about']" style="text-decoration: none; color: black;">
           <p class="menu-items">About</p>

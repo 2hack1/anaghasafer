@@ -1093,138 +1093,91 @@ h2 {
 
 
 // slip page
- .page {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-      border: 3px solid #00704a;
-      background: #fff;
-      color: #000;
-      font-family: Arial, sans-serif;
-    }
 
-    .page h2, .page h3 {
-      text-align: center;
-      margin: 5px 0;
-    }
 
-    .section {
-      margin-top: 20px;
-    }
 
-    .section.info p {
-      margin: 5px 0;
-    }
+.page {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  border: 3px solid #00704a;
+  background: #fff;
+  color: #000;
+  font-family: Arial, sans-serif;
+}
 
-    .section.center {
-      text-align: center;
-    }
+.header-row {
+  position: relative;
+  margin-bottom: 10px;
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      font-size: 14px;
-    }
+// .logo {
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   width: 120px;
+//   height: auto;
+// }
 
-    th, td {
-      border: 1px solid black;
-      padding: 8px;
-      text-align: left;
-    }
+h2, h3 {
+  text-align: center;
+  margin: 5px 0;
+}
 
-    th {
-      background-color: #f2f2f2;
-    }
+.section {
+  margin-top: 20px;
+}
 
-    .total-price-btn {
-      background-color: purple;
-      color: white;
-      padding: 10px 20px;
-      font-size: 18px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      width: 100%;
-      max-width: 300px;
-    }
+.section.info p {
+  margin: 5px 0;
+}
 
-    .total-price-btn:hover {
-      background-color: darkviolet;
-    }
+.section.center {
+  text-align: center;
+}
 
-    .print-btn {
-      display: block;
-      margin: 30px auto;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #444;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 14px;
 
-    @media print {
-      body * {
-        visibility: hidden;
-      }
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
 
-      #printArea, #printArea * {
-        visibility: visible;
-      }
+  th {
+    background-color: #f2f2f2;
+  }
+}
 
-      #printArea {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-      }
+.total-price-btn {
+  background-color: purple;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 300px;
 
-      .print-btn {
-        display: none;
-      }
-    }
+  &:hover {
+    background-color: darkviolet;
+  }
+}
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .page {
-        padding: 15px;
-        border-width: 2px;
-      }
+.print-btn {
+  display: block;
+  margin: 30px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #444;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
 
-      table, th, td {
-        font-size: 13px;
-      }
-
-      .total-price-btn {
-        font-size: 16px;
-        padding: 8px 16px;
-      }
-
-      .print-btn {
-        font-size: 14px;
-        padding: 8px 16px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .page h2 {
-        font-size: 20px;
-      }
-
-      .page h3 {
-        font-size: 16px;
-      }
-
-      table, th, td {
-        font-size: 12px;
-        padding: 6px;
-      }
-
-      .total-price-btn {
-        font-size: 15px;
-      }
-    }
