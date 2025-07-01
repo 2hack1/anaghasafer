@@ -32,6 +32,8 @@ export class ViewDeatailsComponent implements OnInit {
   currentIndex = 0;
   autoSlideInterval: any;
   constructor(private Route: ActivatedRoute, private as_: AxiosService) { }
+  galleryImages:any;
+  isnotgallary:any;
   packageId: any | null = null;
   selectedMonth: any;
   packageprice: any = 0;
@@ -56,6 +58,7 @@ export class ViewDeatailsComponent implements OnInit {
     this.getmonthAndDate(this.packageId);
     this.getiteraries(this.packageId);
     this.gettransport(this.packageId);
+    this.getGallary(this.packageId);
     console.log("++++++++++", this.selectMonth);
     this.autoSlideInterval = setInterval(() => {
       this.nextSlide();
@@ -466,4 +469,42 @@ printSlip() {
     doc.close();
   }
 
+
+  getGallary(packageId:number){
+ 
+    this.as_.getGallaryForImage(packageId).then((res:any)=>{
+      
+this.galleryImages=res.data.data[0].images;
+
+if(!this.galleryImages){
+
+  this.isnotgallary=false
+  return;
+}
+ 
+this.isnotgallary=true;
+    }).catch((err)=>{
+      console.error("error:",err);
+    })
+  }
+
+
+  
+
+    showGallery = false;
+
+openGallery() {
+    this.showGallery = true;
+  }
+
+  closeGallery() {
+    this.showGallery = false;
+  }
+   
+selectedImage: string | null = null;
+
+viewImage(imageUrl: string) {
+  this.selectedImage = imageUrl;
+};
+  
 }

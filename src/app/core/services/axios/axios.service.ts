@@ -92,7 +92,12 @@ return this.api.post(`/trips`,data)
 
 InternationalPackages(id:number){
 
-  return this.api.post(`/packages/limit/${id}`)
+  return this.api.post(`/packages/limit/${id}`);
 }
 
+
+getGallaryForImage(packageId:number){
+
+  return this.api.get(`/gellery/${packageId}`);
+}
 }

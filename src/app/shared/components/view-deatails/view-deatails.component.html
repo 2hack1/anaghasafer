@@ -1,9 +1,13 @@
-
-
 <section class="trip-section" *ngIf="avoidSlip">
     <div class="slider">
-        <div class="slides" [style.transform]="getTransform()">
+        <div class="slides" [style.transform]="getTransform()" *ngIf="!isnotgallary">
             <img *ngFor="let image of packag" [src]="'http://localhost:8000/storage/'+image.img" alt="Trip Slide">
+        </div>
+
+
+        <div class="slides" [style.transform]="getTransform()" *ngIf="isnotgallary">
+            <img *ngFor="let image of galleryImages" [src]="'http://localhost:8000/storage/'+image.url"
+                alt="Trip Slide">
         </div>
 
         <button class="prev" (click)="prevSlide()">&#10094;</button>
@@ -31,13 +35,21 @@
             <div class="info-cards">
                 <div class="card">
                     <img src="/assets/6 images/cl.png" alt="Duration">
-                    <p><strong>Duration</strong><br>{{packageDetails.duration_days-1}}N/{{packageDetails.duration_days}}D</p>
+                    <p><strong>Duration</strong><br>{{packageDetails.duration_days-1}}N/{{packageDetails.duration_days}}D
+                    </p>
                 </div>
                 <div class="card">
                     <img src="/assets/icons/marker.png" alt="Spiti Road Trip">
                     <p><strong>Location</strong><br>{{packageDetails.place_name}}</p>
                 </div>
+                <div class="card" *ngIf="isnotgallary"  (click)="openGallery()">
+                    <p><strong>Gallery </strong><br>{{packageDetails.place_name}}</p>
+                    <img src="/icons/gallery.png" alt="Gallery Icon"
+                        style="height: 2rem; width: 2rem; transition: transform 0.3s;"
+                        onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+                </div>
             </div>
+
 
             <h2>Tour Overview</h2>
             <p class="overview-text"><strong>{{packageDetails.about_trip}}
@@ -129,13 +141,13 @@
     <!-- Itinerary Tab Content -->
     <section class="itinerary" *ngIf="activeTab === 'itinerary'">
         <h2 style="margin-bottom:30px; font-size: 30px; font-family:system-ui; letter-spacing: 3px;">Itinerary</h2>
-        <div class="day" *ngFor="let days of itenaries; let i = index" [class.open]={opens} >
+        <div class="day" *ngFor="let days of itenaries; let i = index" [class.open]={opens}>
             <div class="day-header">
                 <img src="/assets/icons/marker.png" alt="Spiti Road Trip">
                 <strong class="" style="font-size: 1.2rem; font-weight: normal;">{{days.day}}: </strong>
                 <span style="font-size: 1.1rem;"> {{ days.title }}</span>
                 <button class="arrow-button" [ngClass]="{ 'rotate': {opens} }">
-                    
+
                 </button>
             </div>
             <div class="day-content">
@@ -153,13 +165,14 @@
                 (click)="selectMonth(months.tour_month_id)">{{months.month}}'
                 {{ months.year }}
             </button>
-        </div> 
+        </div>
         <div class="size" style="height: auto; padding: 10px;">
             <div class="card">
                 <div class="tour-date" *ngFor="let tours of date">
 
-                    <span>{{ tours.start_date }}  to  {{tours.end_date}}</span>
-                    <span class="label open1" (click)=" openPopup11(tours.date_id,tours.start_date,tours.end_date)">{{ tours.availability }}</span>
+                    <span>{{ tours.start_date }} to {{tours.end_date}}</span>
+                    <span class="label open1" (click)=" openPopup11(tours.date_id,tours.start_date,tours.end_date)">{{
+                        tours.availability }}</span>
                 </div>
             </div>
         </div>
@@ -183,10 +196,10 @@
         <div class="room-section">
         </div>
         <div>
-           <div class="travellers travellers-card" *ngFor="let room of rooms; let roomIndex = index">
+            <div class="travellers travellers-card" *ngFor="let room of rooms; let roomIndex = index">
                 <div class="travellers-inner-container">
                     <div class="room-header">
-  
+
                     </div>
 
                     <div class="traveller1-container">
@@ -196,9 +209,9 @@
                                     }})</span></label>
                             <div class="counter1">
                                 <button class="counter1-btn" (click)="decreaseCount(roomIndex, traveller)"> - </button>
-                              
+
                                 <span class="count">{{ traveller.count }}</span>
-                               
+
                                 <button class=" counter1-btn" (click)="increaseCount(roomIndex, traveller)"> +
                                 </button>
                             </div>
@@ -209,17 +222,15 @@
             </div>
         </div>
 
-<div class="form-section">
-  <label>Select With Going Trip</label>
-  <div class="icons">
-    <button *ngFor="let mode of getAvailableModes()"
-            (click)="selectTransport(mode.key)"
-            [ngClass]="{ 'active': selectedTransport === mode.key }"
-            style="font-size: 2rem;">
-      <i [class]="mode.icon"></i>
-    </button>
-  </div>
-</div>
+        <div class="form-section">
+            <label>Select With Going Trip</label>
+            <div class="icons">
+                <button *ngFor="let mode of getAvailableModes()" (click)="selectTransport(mode.key)"
+                    [ngClass]="{ 'active': selectedTransport === mode.key }" style="font-size: 2rem;">
+                    <i [class]="mode.icon"></i>
+                </button>
+            </div>
+        </div>
 
 
         <div class="form-section">
@@ -228,75 +239,143 @@
 
             <label><i class="fa fa-phone"></i> Your Contact Details</label>
             <div class="contact-details">
-                <input type="text" placeholder="Phone Number" [(ngModel)]="phoneNumber" >
+                <input type="text" placeholder="Phone Number" [(ngModel)]="phoneNumber">
                 <input type="email" placeholder="Email Address" [(ngModel)]="getEmailsesstion">
             </div>
 
             <div class="checkbox-section">
-                <input type="checkbox" id="accept"  [(ngModel)]="termsAccepted">
+                <input type="checkbox" id="accept" [(ngModel)]="termsAccepted">
                 <label for="accept">I accept the <a href="#">Privacy Policy</a> & <a href="#">Terms &
                         Conditions</a></label>
             </div>
 
             <div style="display: flex; gap: 5px;">
                 <!-- <button class="submit-btn" (click)="calculateTotalAmount()">Calculate Package Price</button> -->
-                <button type="submit" class="submit-btn" style="background-color: blueviolet;" (click)="submitForm()">Make Slip With = ₹{{ totalAmount }}</button>
+                <button type="submit" class="submit-btn" style="background-color: blueviolet;"
+                    (click)="submitForm()">Make Slip With = ₹{{ totalAmount }}</button>
             </div>
         </div>
     </div>
 </div>
 
 
-<!-- Slip content to be printed -->
-<button class="print-btn" (click)="printSlip()">🖨️ Print Tour Slip</button>
-<div id="printArea" *ngIf="slip">
-  <div class="page">
-
-    <div class="header-row">
-    
-      <h2>ExploreWorld Tours</h2>
-      <h3>Tour Slip – {{convertmonth}}</h3>
-      <!-- <h3>Tour Slip – June 2025</h3> -->
+<div class="gallery-modal" *ngIf="showGallery">
+  <div class="gallery-content">
+    <div class="gallery-header">
+      <h2>Anagha <span>Safar</span></h2>
     </div>
 
-    <div class="section info">
-      <p><strong>Name:</strong> {{nameOfUser}}</p>
-      <p><strong>Email:</strong> {{getEmailsesstion}}</p>
-      <p><strong>Mobile:</strong> +91-{{phoneNumber}}</p>
+    <button class="close-btn" (click)="closeGallery()" style="color: white;">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <div class="image-grid">
+      <div class="image-card" *ngFor="let img of galleryImages" (click)="viewImage('http://localhost:8000/storage/' + img.url)">
+        <img [src]="'http://localhost:8000/storage/' + img.url" />
+        <div class="image-meta">
+          <div class="price">{{ img.price }} $</div>
+          <div class="author">{{ img.author }}</div>
+        </div>
+      </div>
     </div>
 
-    <div class="section">
-      <h3>Tour Details</h3>
-      <table>
-        <tr><th>Field</th><th>Information</th></tr>
-        <tr><td>Duration</td><td>{{packageDetails.duration_days}}Days / {{packageDetails.duration_days-1}}Nights</td></tr>
-        <tr><td>Origin</td><td>{{packageDetails.origin}}</td></tr>
-        <tr><td>Departure</td><td>{{packageDetails.departure_point}}</td></tr>
-        <tr><td>Destination</td><td>{{packageDetails.place_name}}</td></tr>
-        <tr><td>Start Date</td><td>{{showstartdate}}</td></tr>
-        <tr><td>End Date</td><td>{{endtdate}}</td></tr>
-        <tr><td>Price</td><td>₹{{packageDetails.price_trip}}</td></tr>
-      </table>
+    <div class="gallery-footer">
+      <span>1</span> / <span>3</span>
     </div>
-
-    
-
-    <div class="section">
-      <h3>Date-wise Itinerary</h3>
-      <table  >
-        <tr><th>Day</th><th>Date</th><th>Activities</th></tr>
-        <tr *ngFor="let days of itenaries; let i = index"><td>{{days.day}}</td><td>{{ days.title }}</td><td>{{ days.detail }}</td></tr>
-      </table>
-    </div>
-    <div class="section">
-         <h3>about of trip </h3>
-        <p> 
-        {{packageDetails.about_trip}}
-        </p>
-    </div>
-    <div class="section center">
-      <button class="total-price-btn">Confirm Your Trip With Pay ₹18,000</button>
-    </div>
-    
   </div>
+
+  <div class="fullscreen-image" *ngIf="selectedImage" (click)="selectedImage = null">
+    <img [src]="selectedImage" />
+    <button class="fullscreen-close" (click)="selectedImage = null; $event.stopPropagation()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+</div>
+
+
+
+<!-- Slip content to be printed -->
+<button class="print-btn" (click)="printSlip()" *ngIf="slip">🖨️ Print Tour Slip</button>
+<div id="printArea" *ngIf="slip">
+    <div class="page">
+
+        <div class="header-row">
+
+            <h2>ExploreWorld Tours</h2>
+            <h3>Tour Slip – {{convertmonth}}</h3>
+            <!-- <h3>Tour Slip – June 2025</h3> -->
+        </div>
+
+        <div class="section info">
+            <p><strong>Name:</strong> {{nameOfUser}}</p>
+            <p><strong>Email:</strong> {{getEmailsesstion}}</p>
+            <p><strong>Mobile:</strong> +91-{{phoneNumber}}</p>
+        </div>
+
+        <div class="section">
+            <h3>Tour Details</h3>
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Information</th>
+                </tr>
+                <tr>
+                    <td>Duration</td>
+                    <td>{{packageDetails.duration_days}}Days / {{packageDetails.duration_days-1}}Nights</td>
+                </tr>
+                <tr>
+                    <td>Origin</td>
+                    <td>{{packageDetails.origin}}</td>
+                </tr>
+                <tr>
+                    <td>Departure</td>
+                    <td>{{packageDetails.departure_point}}</td>
+                </tr>
+                <tr>
+                    <td>Destination</td>
+                    <td>{{packageDetails.place_name}}</td>
+                </tr>
+                <tr>
+                    <td>Start Date</td>
+                    <td>{{showstartdate}}</td>
+                </tr>
+                <tr>
+                    <td>End Date</td>
+                    <td>{{endtdate}}</td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td>₹{{packageDetails.price_trip}}</td>
+                </tr>
+            </table>
+        </div>
+
+
+
+        <div class="section">
+            <h3>Date-wise Itinerary</h3>
+            <table>
+                <tr>
+                    <th>Day</th>
+                    <th>Date</th>
+                    <th>Activities</th>
+                </tr>
+                <tr *ngFor="let days of itenaries; let i = index">
+                    <td>{{days.day}}</td>
+                    <td>{{ days.title }}</td>
+                    <td>{{ days.detail }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="section">
+            <h3>about of trip </h3>
+            <p>
+                {{packageDetails.about_trip}}
+            </p>
+        </div>
+        <div class="section center">
+            <button class="total-price-btn">Confirm Your Trip With Pay ₹18,000</button>
+        </div>
+
+    </div>
 </div>
