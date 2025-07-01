@@ -83,33 +83,6 @@ export class HomeComponent implements OnInit {
 
     this.router.navigate(['/dss'], { queryParams });
 
-
-    //   const price = this.selectedPrice === 'other' ? this.customPrice : this.selectedPrice;
-
-
-    //   const payload = {
-    //     place_name: this.destination,
-    //     price: price,
-    //     duration: this.selectedMonth
-    //   };
-
-    //   console.log("payload:",payload);
-    //  this.as_.getfilterpackages(payload).then((res:any)=>{
-    //    console.log("filtered data:",res.data.data);
-    //    console.log("filtered data only res:",res);
-
-
-    //     this.destination = '';
-    //       this.selectedPrice = '';
-    //       this.customPrice = null;
-    //       this.selectedMonth = '';
-    //       this.showOtherInput = false;
-
-    //  }).catch((error)=>{
-
-    //     console.log(error);
-    //  })
-
   }
 
 
@@ -176,17 +149,6 @@ export class HomeComponent implements OnInit {
     const slider = this.sliderTrack.nativeElement;
     slider.scrollLeft += 300;
   }
-  // @ViewChild('sliderTrack', { static: true }) sliderTrack!: ElementRef;
-
-  // SlideLeft() {
-  //   const slider = this.sliderTrack.nativeElement;
-  //   slider.scrollLeft -= 300;
-  // }
-
-  // SlideRight() {
-  //   const slider = this.sliderTrack.nativeElement;
-  //   slider.scrollLeft += 300;
-  // }
   tours = [
     { name: 'Dubai', image: 'assets/6 images/delhi.jpg', tours: 1 },
     { name: 'Malaysia', image: 'assets/6 images/gujrat.jpg', tours: 1 },
@@ -218,14 +180,14 @@ export class HomeComponent implements OnInit {
   subDesinter: any[] = [];
 
   getSubInternationalLimit(destination_id: any) {
-    this.as_.getSubDesLimit(destination_id)
+    this.as_.InternationalPackages(16)
       .then((res: AxiosResponse) => {
         this.getsubinter = res.data;
-        // Combine all sub_destinations into one array
-        this.subDesinter = this.getsubinter.sub_destinations;
-        console.log("ihnternationsl", this.subDesinter)
-
-
+        this.subDesinter = res.data;
+        // this.subDesinter = this.getsubinter.sub_destinations;
+        // console.log("ihnternationsl", this.subDesinter);
+        console.log("packages response ",res);
+        console.log("package data ",this.getsubinter);
       })
       .catch(err => {
         console.error("Some error occurred:", err);
@@ -258,8 +220,6 @@ export class HomeComponent implements OnInit {
       formData.append(key, formValue[key]);
     }
 
-    // Example for file (if you have one)
-    // formData.append('document', this.selectedFile);
 
     this.as_.makeYourtrip(formData)
       .then((res: any) => {

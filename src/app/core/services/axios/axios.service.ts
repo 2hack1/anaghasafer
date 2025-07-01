@@ -86,6 +86,13 @@ return this.api.post(`/trips`,data)
 
 }
 
+// get intenational pakages
 
+// http://localhost:8000/api/packages/limit/16
+
+InternationalPackages(id:number){
+
+  return this.api.post(`/packages/limit/${id}`)
+}
 
 }

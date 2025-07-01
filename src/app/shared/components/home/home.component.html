@@ -174,17 +174,22 @@
     </p>
 
     <div class="tour-cards">
-        <div class="tour-card" *ngFor="let tour of subDesinter let i=index">
-            <a [routerLink]="['/states',tour.sub_destination_id]" class="tour-link">
-                <img [src]="'http://localhost:8000/storage/' + tour.image_url" [alt]="tour.name" />
-                <div class="tour-overlay">
-                    <h2>{{ tour.name }}</h2>
-                    <!-- <p>{{ tour.tours }} Tour</p> -->
-                    <p>{{i+1}} Tour</p>
-                </div>
-            </a>
-        </div>
-    </div>
+  <div class="tour-card" *ngFor="let tour of subDesinter; let i = index">
+    <a [routerLink]="['/view', tour.package_id]" class="tour-link">
+      <img 
+        [src]="'http://localhost:8000/storage/' + (tour.images?.[0]?.img || 'default.jpg')" 
+        [alt]="tour.place_name" 
+      />
+      <div class="tour-overlay">
+        <h2>{{ tour.place_name }}</h2>
+        <p>Price: ₹{{ tour.price_trip }}</p>
+        <p>Duration: {{ tour.duration_days }} days</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+
 </div>
 
 <!-- *****************************REVIEW ************************ -->
