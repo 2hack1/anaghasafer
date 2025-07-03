@@ -124,6 +124,8 @@ export class ViewDeatailsComponent implements OnInit {
     this.as_.getTransport(id).then((res) => {
       console.log("Trasports", res.data);
       this.trans = res.data[0].mode;
+ 
+
       console.log("Mode", res.data[0].mode);
 
     }).catch((err) => {
@@ -179,8 +181,25 @@ export class ViewDeatailsComponent implements OnInit {
 
 
   getAvailableModes(): any[] {
-    const transKeys = this.trans.map((t: any) => t.key);
+
+    
+
+    
+  if (Array.isArray(this.trans)) {
+  if (typeof this.trans[0] === 'object') {
+    let transKeys = this.trans.map((t: any) => t.key);
+    console.log("trans key:", transKeys);
     return this.transportModes.filter(mode => transKeys.includes(mode.key));
+  } else {
+    let transKeys = (this.trans as string[]).map(t => t.toLowerCase());
+    console.log("trans:", transKeys);
+    return this.transportModes.filter(mode => transKeys.includes(mode.key));
+  }
+} else {
+  console.warn("Invalid value for 'trans':", this.trans);
+  return [];
+}
+
   }
 
   selectedTransport: string = '';
@@ -188,7 +207,6 @@ export class ViewDeatailsComponent implements OnInit {
 
   selectTransport(key: string): void {
     this.selectedTransport = key;
-
     const selected = this.transportModes.find(mode => mode.key === key);
     this.transportPrice = selected ? selected.amount : 0;
 
