@@ -8,8 +8,6 @@ import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, FormBuilder, 
 import { environment } from '../../../../environments/environment.development';
 import $ from 'jquery';
 
-
-
 @Component({
   selector: 'app-home',
   imports: [CommonModule, RouterLink, ReactiveFormsModule, FormsModule, RouterModule],

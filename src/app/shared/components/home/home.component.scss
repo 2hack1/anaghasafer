@@ -1191,6 +1191,17 @@
         p.destination {
           font-size: 2rem;
         }
+
+        .dropdown-modal {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          z-index: 1100;
+          border: 1px solid;
+          height: 100px;
+          background-color: black;
+        }
       }
     }
   }
