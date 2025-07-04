@@ -1,10 +1,14 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { AxiosResponse } from 'axios';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, FormBuilder, Validators, NgModel, NgModelGroup } from '@angular/forms';
 import { environment } from '../../../../environments/environment.development';
+import $ from 'jquery';
+
+
 
 @Component({
   selector: 'app-home',
@@ -12,7 +16,7 @@ import { environment } from '../../../../environments/environment.development';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   currentSlide = 0;
   totalSlides = 3;
   facebookUsername = "anaghasafer";
@@ -39,6 +43,10 @@ export class HomeComponent implements OnInit {
 
   }
 
+  ngAfterViewInit(): void {
+    // console.log($('#home-front-page').hide())
+  }
+
   ngOnInit(): void {
     setInterval(() => this.nextSlide(), 5000);
     this.getImages();
@@ -56,6 +64,7 @@ export class HomeComponent implements OnInit {
       // this.getSubLimit(this.international);
 
     })()
+
   }
 
   destination: string = '';
@@ -70,7 +79,7 @@ export class HomeComponent implements OnInit {
 
 
 
-  
+
   submitSearch() {
 
 
@@ -186,8 +195,8 @@ export class HomeComponent implements OnInit {
         this.subDesinter = res.data;
         // this.subDesinter = this.getsubinter.sub_destinations;
         // console.log("ihnternationsl", this.subDesinter);
-        console.log("packages response ",res);
-        console.log("package data ",this.getsubinter);
+        console.log("packages response ", res);
+        console.log("package data ", this.getsubinter);
       })
       .catch(err => {
         console.error("Some error occurred:", err);

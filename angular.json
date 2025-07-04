@@ -43,7 +43,9 @@
               "src/styles/_breakpoints.scss",
               "src/styles/_mixins.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js"
+            ]
           },
           "configurations": {
             "production": {
