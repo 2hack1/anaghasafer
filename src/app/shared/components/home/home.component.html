@@ -101,18 +101,29 @@
 				<div class="menu_container">
 					<div class="items">
 						<div class="item destination">
-							<div style="display: flex; align-items: center; gap: 2rem; position: relative;">
+							<div data-modalname="hotel-destination-modal"
+								style="display: flex; align-items: center; gap: 2rem; position: relative;">
 								<i class="bi bi-search" style="font-size: 2rem"></i>
 								<div>
 									<h4 class="">Destinations</h4>
 									<p class="destination" id="destination-name" style="margin-top: 5px">
-										<strong>Gwalior</strong>
+										<strong style="text-transform: capitalize;">{{hotel.destination}}</strong>
 									</p>
 								</div>
 							</div>
 
-							<div class="dropdown-modal">
-asdasd
+							<!-- modal -->
+							<div class="dropdown-modal" id="hotel-destination-modal" style="display: none;">
+								<input type="text" (ngModel)="hotel.destination" class="input-field"
+									placeholder="Search for destination">
+								<div style="padding:5px;">
+									<p class="header">Enter destination name</p>
+
+									<ng-container *ngFor="let i of [1,1,1,1]">
+										<button type="button" class="select-destionation-button"
+											(click)="hotel.destination = i + '' ; closeAllModal() ">tests</button>
+									</ng-container>
+								</div>
 							</div>
 						</div>
 						<div class="divider">

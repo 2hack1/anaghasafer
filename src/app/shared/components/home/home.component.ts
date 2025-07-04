@@ -15,6 +15,18 @@ import $ from 'jquery';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit, AfterViewInit {
+  hotel = {
+    destination: "Gwalior",
+    checkIn: "",
+    checkOut: "",
+    extra: {
+      rooms: 1,
+      adults: 1,
+      childrens: 1,
+      guests: 1
+    }
+  }
+
   currentSlide = 0;
   totalSlides = 3;
   facebookUsername = "anaghasafer";
@@ -42,7 +54,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // console.log($('#home-front-page').hide())
+
+    $(document).on('click', function (event) {
+      const $target = $(event.target);
+
+      if (
+        !$target.closest('.dropdown-modal').length &&
+        !$target.closest('[data-modalname]').length
+      ) {
+        $('.dropdown-modal').fadeOut(200, function () {
+          $(this).hide()
+        })
+      }
+    });
+
+    $('[data-modalname]').on('click', function () {
+      const modalId = $(this).attr('data-modalname');
+      $('.dropdown-modal').hide();
+      $('#' + modalId).fadeIn(200);
+    });
   }
 
   ngOnInit(): void {
@@ -238,16 +268,26 @@ export class HomeComponent implements OnInit, AfterViewInit {
       });
   }
 
-  getMailOnMakeMyTrip( data:FormData){
+  getMailOnMakeMyTrip(data: FormData) {
 
-    this.as_.makeMyFormMail(data).then(()=>{
-   
+    this.as_.makeMyFormMail(data).then(() => {
+
       console.log("succussfully send mail");
-    }).catch((err)=>{
-           console.log("not email send ",err);
+    }).catch((err) => {
+      console.log("not email send ", err);
     })
-    }
+  }
 
+
+  closeAllModal() {
+    $('.dropdown-modal').each(function () {
+      $(this).hide();
+    });
+  }
+
+  openThisAssociatedModal() {
+
+  }
 }
 
 
