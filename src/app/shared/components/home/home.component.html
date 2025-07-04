@@ -47,8 +47,7 @@
 					<input type="text" placeholder="Enter a Destination" [(ngModel)]="destination" name="destination" />
 
 					<!-- Price dropdown -->
-					<select [(ngModel)]="selectedPrice" (change)="onPriceChange()" *ngIf="!showOtherInput"
-						name="selectedPrice">
+					<select [(ngModel)]="selectedPrice" (change)="onPriceChange()" *ngIf="!showOtherInput" name="selectedPrice">
 						<option value="" disabled selected>Select Your Under Price</option>
 						<option value="5000">Under ₹5000</option>
 						<option value="10000">Under ₹10000</option>
@@ -57,8 +56,7 @@
 
 					<!-- Custom price input (if "other" is selected) -->
 					<div *ngIf="showOtherInput">
-						<input type="text" [(ngModel)]="customPrice" placeholder="Enter your price"
-							name="customPrice" />
+						<input type="text" [(ngModel)]="customPrice" placeholder="Enter your price" name="customPrice" />
 					</div>
 				</div>
 
@@ -126,10 +124,11 @@
 								</div>
 							</div>
 						</div>
-						<div class="divider">
-						</div>
+						<div class="divider"></div>
+
 						<div class="item check-in-out">
-							<div style="display: flex; align-items: center; gap: 2rem; height: 100%;">
+							<div data-modalname="hotel-checkin-modal"
+								style="display: flex; align-items: center; gap: 2rem; height: 100%;">
 								<div style="display: flex;flex-direction: column;flex: 1;height: 100%;">
 									<h4 class="">Check in</h4>
 									<p class="check-in-out" style="margin-top: auto">
@@ -137,7 +136,20 @@
 									</p>
 								</div>
 							</div>
+							<div class="dropdown-modal" id="hotel-checkin-modal" style="display: none;">
+								<input type="text" (ngModel)="hotel.destination" class="input-field"
+									placeholder="Search for destination">
+								<div style="padding:5px;">
+									<p class="header">Enter destination name</p>
+
+									<ng-container *ngFor="let i of [1,1,1,1]">
+										<button type="button" class="select-destionation-button"
+											(click)="hotel.destination = i + '' ; closeAllModal() ">tests</button>
+									</ng-container>
+								</div>
+							</div>
 						</div>
+
 						<div class="divider"></div>
 						<div class="item check-in-out">
 							<div style="display: flex; align-items: center; gap: 2rem; height: 100%;">
@@ -262,8 +274,7 @@
 	<div class="tour-cards">
 		<div class="tour-card" *ngFor="let tour of subDesinter; let i = index">
 			<a [routerLink]="['/view', tour.package_id]" class="tour-link">
-				<img [src]="`${env.backend_url}/storage/` + (tour.images?.[0]?.img || 'default.jpg')"
-					[alt]="tour.place_name" />
+				<img [src]="`${env.backend_url}/storage/` + (tour.images?.[0]?.img || 'default.jpg')" [alt]="tour.place_name" />
 				<div class="tour-overlay">
 					<h2>{{ tour.place_name }}</h2>
 					<p>Price: ₹{{ tour.price_trip }}</p>
@@ -359,8 +370,7 @@
 			<form [formGroup]="formModel">
 				<div class="input-group1">
 					<input type="text" placeholder=" your address" formControlName="your_address" required />
-					<input type="email" placeholder="detionation address" formControlName="destination_address"
-						required />
+					<input type="email" placeholder="detionation address" formControlName="destination_address" required />
 				</div>
 
 				<!-- Email -->
@@ -418,8 +428,7 @@
 					</a>
 				</li>
 				<li>
-					<strong>facbook:</strong><br /><a [href]="'https://www.facebook.com/' + facebookUsername"
-						target="_blank">
+					<strong>facbook:</strong><br /><a [href]="'https://www.facebook.com/' + facebookUsername" target="_blank">
 						AnaghaSafar
 					</a>
 				</li>

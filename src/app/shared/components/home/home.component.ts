@@ -62,9 +62,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         !$target.closest('.dropdown-modal').length &&
         !$target.closest('[data-modalname]').length
       ) {
-        $('.dropdown-modal').fadeOut(200, function () {
-          $(this).hide()
-        })
+        $('.dropdown-modal').fadeOut(200)
+        setTimeout(() => $('.dropdown-modal').hide(), 200);
       }
     });
 
