@@ -213,8 +213,6 @@ export class HomeComponent implements OnInit {
       this.checkEmail = true;
       return;
     }
-
-
     const formData = new FormData();
     for (const key in formValue) {
       formData.append(key, formValue[key]);
@@ -224,13 +222,24 @@ export class HomeComponent implements OnInit {
     this.as_.makeYourtrip(formData)
       .then((res: any) => {
         console.log(res.data);
+        this.getMailOnMakeMyTrip(formData);
         this.formModel.reset();
+
       })
       .catch((err) => {
         console.log("come error:", err);
       });
   }
 
+  getMailOnMakeMyTrip( data:FormData){
+
+    this.as_.makeMyFormMail(data).then(()=>{
+   
+      console.log("succussfully send mail");
+    }).catch((err)=>{
+           console.log("not email send ",err);
+    })
+    }
 
 }
 

@@ -51,8 +51,8 @@ export class ViewDeatailsComponent implements OnInit {
   startdate:any;
   getEmailsesstion:any
   // afterpay=false;
-  ngOnInit() {
-    this.packageId = this.Route.snapshot.paramMap.get('id');
+    ngOnInit() {
+      this.packageId = this.Route.snapshot.paramMap.get('id');
     console.log("package id:", this.packageId);
     this.getpackagesdetails(this.packageId);
     this.getmonthAndDate(this.packageId);
