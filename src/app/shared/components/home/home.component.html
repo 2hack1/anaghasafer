@@ -1,176 +1,206 @@
 <div class="slider-wrapper">
-    <div class="slider">
-        <!-- This is hidden for now  -->
-        <div class="slider-hero-content" style="display: none">
-            <h1>Customize & Book<br />Amazing Holiday Packages</h1>
-            <!-- <div class="form-row">
-        <div style="display: flex; align-items: center; gap: 1rem;">
-          <input type="text" placeholder="Enter a Destination" />
+	<div class="slider">
+		<!-- This is hidden for now  -->
+		<div class="slider-hero-content" style="display: none">
+			<h1>Customize & Book<br />Amazing Holiday Packages</h1>
 
-          <select [(ngModel)]="selectedPrice" (change)="onPriceChange()" *ngIf="!showOtherInput">
-            <option value="" disabled selected>Select Your Under Price</option>
-            <option value="5000">Under ₹5000</option>
-            <option value="10000">Under ₹10000</option>
-            <option value="other">Other</option>
-          </select>
 
-          <div *ngIf="showOtherInput">
-            <input type="text" [(ngModel)]="customPrice" placeholder="Enter your price" />
-          </div>
-        </div>
-        <select class="circular-select">
-          <option selected disabled >Day's Of Tour</option>
-          <option>January</option>
-          <option>February</option>
-          <option>March</option>
-          <option>April</option>
-          <option>May</option>
-          <option>June</option>
-          <option>July</option>
-          <option>August</option>
-          <option>September</option>
-          <option>October</option>
-          <option>November</option>
-          <option>December</option>
-        </select>
-        <button>
-          <i class="fas fa-search"></i> Explore
-        </button>
+			<!-- DONT REMOVE THIS  -->
+			<!-- <div class="form-row">
+			<div style="display: flex; align-items: center; gap: 1rem;">
+			<input type="text" placeholder="Enter a Destination" />
+
+			<select [(ngModel)]="selectedPrice" (change)="onPriceChange()" *ngIf="!showOtherInput">
+				<option value="" disabled selected>Select Your Under Price</option>
+				<option value="5000">Under ₹5000</option>
+				<option value="10000">Under ₹10000</option>
+				<option value="other">Other</option>
+			</select>
+
+			<div *ngIf="showOtherInput">
+				<input type="text" [(ngModel)]="customPrice" placeholder="Enter your price" />
+			</div>
+			</div>
+			<select class="circular-select">
+			<option selected disabled >Day's Of Tour</option>
+			<option>January</option>
+			<option>February</option>
+			<option>March</option>
+			<option>April</option>
+			<option>May</option>
+			<option>June</option>
+			<option>July</option>
+			<option>August</option>
+			<option>September</option>
+			<option>October</option>
+			<option>November</option>
+			<option>December</option>
+			</select>
+			<button>
+			<i class="fas fa-search"></i> Explore
+			</button>
       </div> -->
 
-            <div class="form-row">
-                <div style="display: flex; align-items: center; gap: 1rem">
-                    <!-- Destination input -->
-                    <input type="text" placeholder="Enter a Destination" [(ngModel)]="destination" name="destination" />
+			<div class="form-row">
+				<div style="display: flex; align-items: center; gap: 1rem">
+					<!-- Destination input -->
+					<input type="text" placeholder="Enter a Destination" [(ngModel)]="destination" name="destination" />
 
-                    <!-- Price dropdown -->
-                    <select [(ngModel)]="selectedPrice" (change)="onPriceChange()" *ngIf="!showOtherInput"
-                        name="selectedPrice">
-                        <option value="" disabled selected>Select Your Under Price</option>
-                        <option value="5000">Under ₹5000</option>
-                        <option value="10000">Under ₹10000</option>
-                        <option value="other">Other</option>
-                    </select>
+					<!-- Price dropdown -->
+					<select [(ngModel)]="selectedPrice" (change)="onPriceChange()" *ngIf="!showOtherInput" name="selectedPrice">
+						<option value="" disabled selected>Select Your Under Price</option>
+						<option value="5000">Under ₹5000</option>
+						<option value="10000">Under ₹10000</option>
+						<option value="other">Other</option>
+					</select>
 
-                    <!-- Custom price input (if "other" is selected) -->
-                    <div *ngIf="showOtherInput">
-                        <input type="text" [(ngModel)]="customPrice" placeholder="Enter your price"
-                            name="customPrice" />
-                    </div>
-                </div>
+					<!-- Custom price input (if "other" is selected) -->
+					<div *ngIf="showOtherInput">
+						<input type="text" [(ngModel)]="customPrice" placeholder="Enter your price" name="customPrice" />
+					</div>
+				</div>
 
-                <!-- Month dropdown -->
-                <select class="circular-select" [(ngModel)]="selectedMonth" name="selectedMonth">
-                    <option value="" selected disabled>Duration Of Tour</option>
-                    <option>1 day's</option>
-                    <option>2 day's</option>
-                    <option>3 day's</option>
-                    <option>4 day's</option>
-                    <option>5 day's</option>
-                    <option>6 day's</option>
-                    <option>more day's</option>
-                </select>
+				<!-- Month dropdown -->
+				<select class="circular-select" [(ngModel)]="selectedMonth" name="selectedMonth">
+					<option value="" selected disabled>Duration Of Tour</option>
+					<option>1 day's</option>
+					<option>2 day's</option>
+					<option>3 day's</option>
+					<option>4 day's</option>
+					<option>5 day's</option>
+					<option>6 day's</option>
+					<option>more day's</option>
+				</select>
 
-                <!-- Button -->
-                <button (click)="submitSearch()">
-                    <i class="fas fa-search"></i> Explore
-                </button>
-            </div>
+				<!-- Button -->
+				<button (click)="submitSearch()">
+					<i class="fas fa-search"></i> Explore
+				</button>
+			</div>
 
-            <p class="note">Destination not sure? <a href="#">Click here!</a></p>
-        </div>
+			<p class="note">Destination not sure? <a href="#">Click here!</a></p>
+		</div>
 
-        <div class="__bg_white_menu">
-            <!-- menus -->
-            <div class="menu_options cus-shadow">
-                <button>
-                    <i class="bi bi-map active"></i>
-                </button>
-                <button>
-                    <i class="bi bi-building"></i>
-                </button>
-                <button>
-                    <i class="bi bi-train-front"></i>
-                </button>
-            </div>
+		<div class="__bg_white_menu">
+			<!-- menus -->
+			<div class="menu_options cus-shadow">
+				<button>
+					<i class="bi bi-map active"></i>
+				</button>
+				<button>
+					<i class="bi bi-building"></i>
+				</button>
+				<button>
+					<i class="bi bi-train-front"></i>
+				</button>
+			</div>
 
-            <div style="height: 100%; width: 100%; position: relative">
-                <div class="menu_container">
-                    <div class="items">
-                        <div class="item destination">
-                            <div style="display: flex; align-items: center; gap: 2rem">
-                                <i class="bi bi-search" style="font-size: 2rem"></i>
-                                <div>
-                                    <h4 class="">Destinations</h4>
-                                    <p class="destination" style="margin-top: 5px">
-                                        <strong>Gwalior</strong>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divider">
-                        </div>
-                        <div class="item check-in-out">
-                            <div style="display: flex; align-items: center; gap: 2rem; height: 100%;">
-                                <div style="display: flex;flex-direction: column;flex: 1;height: 100%;">
-                                    <h4 class="">Check in</h4>
-                                    <p class="check-in-out" style="margin-top: auto">
-                                        <strong>--/--/--</strong>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="item check-in-out">
-                            <div style="display: flex; align-items: center; gap: 2rem; height: 100%;">
-                                <div style="display: flex;flex-direction: column;flex: 1;height: 100%;">
-                                    <h4 class="">Check Out</h4>
-                                    <p class="check-in-out" style="margin-top: auto">
-                                        <strong>--/--/--</strong>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="item">
-                            <div style="display: flex; align-items: center; gap: 2rem; height: 100%;">
-                                <i class="bi bi-person"></i>
-                                <div style="display: flex;flex-direction: column;flex: 1;height: 100%;">
-                                    <h4 class="">Room and Guest</h4>
-                                    <p class="check-in-out" style="margin-top: auto">
-                                        <strong>2 Guests, 1 Room</strong>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+			<div style="height: 100%; width: 100%; position: relative">
+				<div class="menu_container">
+					<div class="items">
+						<div class="item destination">
+							<div data-modalname="hotel-destination-modal"
+								style="display: flex; align-items: center; gap: 2rem; position: relative;">
+								<i class="bi bi-search" style="font-size: 2rem"></i>
+								<div>
+									<h4 class="">Destinations</h4>
+									<p class="destination" id="destination-name" style="margin-top: 5px">
+										<strong style="text-transform: capitalize;">{{hotel.destination}}</strong>
+									</p>
+								</div>
+							</div>
 
-                <div class="btn-container">
-                    <button class="btn-search cus-shadow">Search</button>
-                </div>
-            </div>
-        </div>
+							<!-- modal -->
+							<div class="dropdown-modal" id="hotel-destination-modal" style="display: none;">
+								<input type="text" (ngModel)="hotel.destination" class="input-field"
+									placeholder="Search for destination">
+								<div style="padding:5px;">
+									<p class="header">Enter destination name</p>
 
-        <div class="slides" id="slideContainer">
-            <div class="slide" *ngFor="let img of images; let i = index" [style.backgroundImage]="'url(' + img + ')'">
-            </div>
-        </div>
-        <div class="nav prev" (click)="prevSlide()">❮</div>
-        <div class="nav next" (click)="nextSlide()">❯</div>
-    </div>
+									<ng-container *ngFor="let i of [1,1,1,1]">
+										<button type="button" class="select-destionation-button"
+											(click)="hotel.destination = i + '' ; closeAllModal() ">tests</button>
+									</ng-container>
+								</div>
+							</div>
+						</div>
+						<div class="divider"></div>
 
-    <!-- ************************************Fixed Building Graphic at Bottom ********************************-->
-    <!-- <img src="assets/image.webp" alt="Buildings" class="building-graphic" /> -->
+						<div class="item check-in-out">
+							<div data-modalname="hotel-checkin-modal"
+								style="display: flex; align-items: center; gap: 2rem; height: 100%;">
+								<div style="display: flex;flex-direction: column;flex: 1;height: 100%;">
+									<h4 class="">Check in</h4>
+									<p class="check-in-out" style="margin-top: auto">
+										<strong>--/--/--</strong>
+									</p>
+								</div>
+							</div>
+							<div class="dropdown-modal" id="hotel-checkin-modal" style="display: none;">
+								<input type="text" (ngModel)="hotel.destination" class="input-field"
+									placeholder="Search for destination">
+								<div style="padding:5px;">
+									<p class="header">Enter destination name</p>
+
+									<ng-container *ngFor="let i of [1,1,1,1]">
+										<button type="button" class="select-destionation-button"
+											(click)="hotel.destination = i + '' ; closeAllModal() ">tests</button>
+									</ng-container>
+								</div>
+							</div>
+						</div>
+
+						<div class="divider"></div>
+						<div class="item check-in-out">
+							<div style="display: flex; align-items: center; gap: 2rem; height: 100%;">
+								<div style="display: flex;flex-direction: column;flex: 1;height: 100%;">
+									<h4 class="">Check Out</h4>
+									<p class="check-in-out" style="margin-top: auto">
+										<strong>--/--/--</strong>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="divider"></div>
+						<div class="item">
+							<div style="display: flex; align-items: center; gap: 2rem; height: 100%;">
+								<i class="bi bi-person"></i>
+								<div style="display: flex;flex-direction: column;flex: 1;height: 100%;">
+									<h4 class="">Room and Guest</h4>
+									<p class="check-in-out" style="margin-top: auto">
+										<strong>2 Guests, 1 Room</strong>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="btn-container">
+					<button class="btn-search cus-shadow">Search</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="slides" id="slideContainer">
+			<div class="slide" *ngFor="let img of images; let i = index" [style.backgroundImage]="'url(' + img + ')'">
+			</div>
+		</div>
+		<div class="nav prev" (click)="prevSlide()">❮</div>
+		<div class="nav next" (click)="nextSlide()">❯</div>
+	</div>
+
+	<!-- ************************************Fixed Building Graphic at Bottom ********************************-->
+	<!-- <img src="assets/image.webp" alt="Buildings" class="building-graphic" /> -->
 </div>
 <div class="container">
-    <div class="main-heading">
-        <h2></h2>
-    </div>
+	<div class="main-heading">
+		<h2></h2>
+	</div>
 </div>
 
 <div class="container">
-    <!-- <div class="header">
+	<!-- <div class="header">
         <h2>Top Trending India's Destinations</h2>
     </div>
     <div class="header" style="display: flex;justify-content: end;">
@@ -179,241 +209,238 @@
         </a>
     </div> -->
 
-    <div class="header">
-        <div>
-            <!-- give me description about this  -->
-            <h2>Top Trending India's Destinations</h2>
-            <small>
-                Discover the most popular travel spots across India, handpicked for
-                their beauty, culture, and adventure. From serene beaches to majestic
-                mountains, explore destinations that are capturing the hearts of
-                travelers this season.
-            </small>
-        </div>
-        <a [routerLink]="['/states', stores]">
-            View all tours
-            <i class="bi bi-arrow-right-short" style="font-size: 1.5rem"></i>
-        </a>
-    </div>
-    <div class="scroll-wrapper">
-        <button class="scroll-btn left" (click)="scrollLeft()">&#10094;</button>
-        <div class="scroll-container" #scrollContainer>
-            <div class="card" *ngFor="let sub of subDes; let i = index">
-                <!-- <a [routerLink]="['/des',sub.sub_destination_id]" class="tour-link" style="text-decoration: none;"> -->
-                <img [src]="`${env.backend_url}/storage/${sub.image_url}`" [alt]="sub.name" />
-                <div class="card-bottom">
-                    <!-- <p class="m-0 p-0 display-2">{{ i+1 }} Packages</p> -->
-                    <h3 class="m-0 p-0">{{ sub.name }}</h3>
-                    <a [routerLink]="['/des', sub.sub_destination_id]" class="button">
-                        See Packages
-                        <i class="bi bi-arrow-right-short"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <button class="scroll-btn right" (click)="scrollRight()">&#10095;</button>
-    </div>
+	<div class="header">
+		<div>
+			<!-- give me description about this  -->
+			<h2>Top Trending India's Destinations</h2>
+			<small>
+				Discover the most popular travel spots across India, handpicked for
+				their beauty, culture, and adventure. From serene beaches to majestic
+				mountains, explore destinations that are capturing the hearts of
+				travelers this season.
+			</small>
+		</div>
+		<a [routerLink]="['/states', stores]">
+			View all tours
+			<i class="bi bi-arrow-right-short" style="font-size: 1.5rem"></i>
+		</a>
+	</div>
+	<div class="scroll-wrapper">
+		<button class="scroll-btn left" (click)="scrollLeft()">&#10094;</button>
+		<div class="scroll-container" #scrollContainer>
+			<div class="card" *ngFor="let sub of subDes; let i = index">
+				<!-- <a [routerLink]="['/des',sub.sub_destination_id]" class="tour-link" style="text-decoration: none;"> -->
+				<img [src]="`${env.backend_url}/storage/${sub.image_url}`" [alt]="sub.name" />
+				<div class="card-bottom">
+					<!-- <p class="m-0 p-0 display-2">{{ i+1 }} Packages</p> -->
+					<h3 class="m-0 p-0">{{ sub.name }}</h3>
+					<a [routerLink]="['/des', sub.sub_destination_id]" class="button">
+						See Packages
+						<i class="bi bi-arrow-right-short"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+		<button class="scroll-btn right" (click)="scrollRight()">&#10095;</button>
+	</div>
 </div>
 
 <!-- *************************four cards***************************  -->
 <section class="section01" style="background: url('assets/fourcard.webp') no-repeat center center/cover">
-    <h2>Tailored Solutions for Every Traveller</h2>
-    <!-- <div class=""> -->
+	<h2>Tailored Solutions for Every Traveller</h2>
+	<!-- <div class=""> -->
 
-    <div class="cards01">
-        <div class="card01" *ngFor="let card of fourcart">
-            <div class="card01-wrapper">
-                <i [class]="card.icon_class"></i>
-                <h3>{{ card.heading }}</h3>
-            </div>
-            <p>{{ card.headingData }}</p>
-        </div>
-    </div>
-    <!-- </div> -->
+	<div class="cards01">
+		<div class="card01" *ngFor="let card of fourcart">
+			<div class="card01-wrapper">
+				<i [class]="card.icon_class"></i>
+				<h3>{{ card.heading }}</h3>
+			</div>
+			<p>{{ card.headingData }}</p>
+		</div>
+	</div>
+	<!-- </div> -->
 </section>
 <!-- ********************check images*********************** -->
 <div class="tour-container">
-    <div class="tour-subtitle"><span></span>OVERSEAS JOURNEY</div>
-    <h1 class="tour-heading">INTERNATIONAL TOURS</h1>
-    <p class="tour-description">
-        Travel India Tourism Services offer the finest tour packages,
-        custom-tailored to your unique international travel plans and preferences.
-    </p>
+	<div class="tour-subtitle"><span></span>OVERSEAS JOURNEY</div>
+	<h1 class="tour-heading">INTERNATIONAL TOURS</h1>
+	<p class="tour-description">
+		Travel India Tourism Services offer the finest tour packages,
+		custom-tailored to your unique international travel plans and preferences.
+	</p>
 
-    <!-- <<<<<<< HEAD -->
-    <div class="tour-cards">
-        <div class="tour-card" *ngFor="let tour of subDesinter; let i = index">
-            <a [routerLink]="['/view', tour.package_id]" class="tour-link">
-                <img [src]="`${env.backend_url}/storage/` + (tour.images?.[0]?.img || 'default.jpg')"
-                    [alt]="tour.place_name" />
-                <div class="tour-overlay">
-                    <h2>{{ tour.place_name }}</h2>
-                    <p>Price: ₹{{ tour.price_trip }}</p>
-                    <p>Duration: {{ tour.duration_days }} days</p>
-                </div>
-            </a>
-        </div>
-    </div>
+	<!-- <<<<<<< HEAD -->
+	<div class="tour-cards">
+		<div class="tour-card" *ngFor="let tour of subDesinter; let i = index">
+			<a [routerLink]="['/view', tour.package_id]" class="tour-link">
+				<img [src]="`${env.backend_url}/storage/` + (tour.images?.[0]?.img || 'default.jpg')" [alt]="tour.place_name" />
+				<div class="tour-overlay">
+					<h2>{{ tour.place_name }}</h2>
+					<p>Price: ₹{{ tour.price_trip }}</p>
+					<p>Duration: {{ tour.duration_days }} days</p>
+				</div>
+			</a>
+		</div>
+	</div>
 
 
 </div>
 
 <!-- *****************************REVIEW ************************ -->
 <div class="check" style="position: relative">
-    <button class="slider-btn left hide" onclick="SlideLeft()">&#10094;</button>
-    <button class="slider-btn right hide" onclick="SlideRight()">&#10095;</button>
-    <section class="testimonial-section">
-        <h2>My AnaghaSafar Story !</h2>
-        <p class="subtitle">
-            Customer satisfaction is our major goal. See what our customers are saying
-            about us.
-        </p>
+	<button class="slider-btn left hide" onclick="SlideLeft()">&#10094;</button>
+	<button class="slider-btn right hide" onclick="SlideRight()">&#10095;</button>
+	<section class="testimonial-section">
+		<h2>My AnaghaSafar Story !</h2>
+		<p class="subtitle">
+			Customer satisfaction is our major goal. See what our customers are saying
+			about us.
+		</p>
 
-        <div class="slider-container">
-            <button class="slider-btn left hides" onclick="SlideLeft()">
-                &#10094;
-            </button>
+		<div class="slider-container">
+			<button class="slider-btn left hides" onclick="SlideLeft()">
+				&#10094;
+			</button>
 
-            <div class="slider-track" #sliderTrack>
-                <div class="testimonial-card">
-                    <p class="quote">❝</p>
-                    <p class="message">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus
-                        provident consequatur ipsam impedit perspiciatis veniam incidunt
-                        autem sint officiis dolorem.<span class="more">...Show More</span>
-                    </p>
-                    <div class="user">
-                        <img src="assets/revies/r1.jpg" alt="User" />
-                        <div>
-                            <p class="name">robin jems</p>
-                            <p class="date">Mar 27, 2025</p>
-                        </div>
-                    </div>
-                </div>
+			<div class="slider-track" #sliderTrack>
+				<div class="testimonial-card">
+					<p class="quote">❝</p>
+					<p class="message">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus
+						provident consequatur ipsam impedit perspiciatis veniam incidunt
+						autem sint officiis dolorem.<span class="more">...Show More</span>
+					</p>
+					<div class="user">
+						<img src="assets/revies/r1.jpg" alt="User" />
+						<div>
+							<p class="name">robin jems</p>
+							<p class="date">Mar 27, 2025</p>
+						</div>
+					</div>
+				</div>
 
-                <div class="testimonial-card">
-                    <p class="quote">❝</p>
-                    <p class="message">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus
-                        provident consequatur ipsam impedit perspiciatis veniam incidunt
-                        autem sint officiis dolorem.<span class="more">...Show More</span>
-                    </p>
-                    <div class="user">
-                        <img src="assets/revies/r2.jpg" alt="User" />
-                        <div>
-                            <p class="name">jon ford</p>
-                            <p class="date">Mar 01, 2023</p>
-                        </div>
-                    </div>
-                </div>
+				<div class="testimonial-card">
+					<p class="quote">❝</p>
+					<p class="message">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus
+						provident consequatur ipsam impedit perspiciatis veniam incidunt
+						autem sint officiis dolorem.<span class="more">...Show More</span>
+					</p>
+					<div class="user">
+						<img src="assets/revies/r2.jpg" alt="User" />
+						<div>
+							<p class="name">jon ford</p>
+							<p class="date">Mar 01, 2023</p>
+						</div>
+					</div>
+				</div>
 
-                <div class="testimonial-card">
-                    <p class="quote">❝</p>
-                    <p class="message">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus
-                        provident consequatur ipsam impedit perspiciatis veniam incidunt
-                        autem sint officiis dolorem.<span class="more">...Show More</span>
-                    </p>
-                    <div class="user">
-                        <img src="assets/revies/r3.jpg" alt="User" />
-                        <div>
-                            <p class="name">Devidas Kulkarni</p>
-                            <p class="date">Jan 15, 2024</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+				<div class="testimonial-card">
+					<p class="quote">❝</p>
+					<p class="message">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus
+						provident consequatur ipsam impedit perspiciatis veniam incidunt
+						autem sint officiis dolorem.<span class="more">...Show More</span>
+					</p>
+					<div class="user">
+						<img src="assets/revies/r3.jpg" alt="User" />
+						<div>
+							<p class="name">Devidas Kulkarni</p>
+							<p class="date">Jan 15, 2024</p>
+						</div>
+					</div>
+				</div>
+			</div>
 
-            <button class="slider-btn right hides" onclick="SlideRight()">
-                &#10095;
-            </button>
-        </div>
+			<button class="slider-btn right hides" onclick="SlideRight()">
+				&#10095;
+			</button>
+		</div>
 
-        <button class="see-all-btn">See All</button>
-    </section>
+		<button class="see-all-btn">See All</button>
+	</section>
 </div>
 <!-- ********************* contect form*************************  -->
 <div class="container-check1">
-    <div class="container1">
-        <div class="form-box1">
-            <h2>Make your Own Trip</h2>
-            <p>Please fill in the details to make your trip.</p>
-            <form [formGroup]="formModel">
-                <div class="input-group1">
-                    <input type="text" placeholder=" your address" formControlName="your_address" required />
-                    <input type="email" placeholder="detionation address" formControlName="destination_address"
-                        required />
-                </div>
+	<div class="container1">
+		<div class="form-box1">
+			<h2>Make your Own Trip</h2>
+			<p>Please fill in the details to make your trip.</p>
+			<form [formGroup]="formModel">
+				<div class="input-group1">
+					<input type="text" placeholder=" your address" formControlName="your_address" required />
+					<input type="email" placeholder="detionation address" formControlName="destination_address" required />
+				</div>
 
-                <!-- Email -->
-                <div *ngIf="checkEmail" style="color: red; font-size: 14px; margin-top: 5px">
-                    Password and Confirm Password do not match.
-                </div>
-                <div class="input-group1">
-                    <input type="email" placeholder="Your Email" formControlName="email" required />
-                </div>
+				<!-- Email -->
+				<div *ngIf="checkEmail" style="color: red; font-size: 14px; margin-top: 5px">
+					Password and Confirm Password do not match.
+				</div>
+				<div class="input-group1">
+					<input type="email" placeholder="Your Email" formControlName="email" required />
+				</div>
 
-                <div class="input-group1">
-                    <div>
-                        <label>Check In</label>
-                        <input type="date" formControlName="check_in" />
-                    </div>
-                    <div>
-                        <label>Check Out</label>
-                        <input type="date" formControlName="check_out" />
-                    </div>
-                </div>
+				<div class="input-group1">
+					<div>
+						<label>Check In</label>
+						<input type="date" formControlName="check_in" />
+					</div>
+					<div>
+						<label>Check Out</label>
+						<input type="date" formControlName="check_out" />
+					</div>
+				</div>
 
-                <div class="input-group1">
-                    <div class="number-field1">
-                        <label><i class="fas fa-user1"></i> Adults</label>
-                        <input type="number" value="1" min="1" formControlName="adults" />
-                    </div>
-                    <div class="number-field1">
-                        <label><i class="fas fa-child1"></i> Children</label>
-                        <input type="number" value="0" min="0" formControlName="children" />
-                    </div>
-                </div>
+				<div class="input-group1">
+					<div class="number-field1">
+						<label><i class="fas fa-user1"></i> Adults</label>
+						<input type="number" value="1" min="1" formControlName="adults" />
+					</div>
+					<div class="number-field1">
+						<label><i class="fas fa-child1"></i> Children</label>
+						<input type="number" value="0" min="0" formControlName="children" />
+					</div>
+				</div>
 
-                <button type="submit1" id="button1" (click)="makeMytrip()">
-                    Submit Now
-                </button>
-            </form>
-        </div>
+				<button type="submit1" id="button1" (click)="makeMytrip()">
+					Submit Now
+				</button>
+			</form>
+		</div>
 
-        <div class="info-box1">
-            <h2>Contact Information</h2>
-            <p>If you have any questions, feel free to reach out to us.</p>
-            <ul>
-                <li>
-                    <strong>Address:</strong><br />alkapuri city center gwalior (MP)
-                </li>
-                <li><strong>Phone:</strong><br />+9755-54-97-33</li>
-                <li>
-                    <strong>Email:</strong><br /><a [href]="'mailto:' + email">Anaghasolutions1.gmail.com</a>
-                </li>
-                <li>
-                    <strong>instagram:</strong><br /><a class="social-link"
-                        [href]="'https://www.instagram.com/' + instagramUsername" target="_blank">
-                        <!-- {{ instagramUsername }} -->
-                        AnaghaSafar
-                    </a>
-                </li>
-                <li>
-                    <strong>facbook:</strong><br /><a [href]="'https://www.facebook.com/' + facebookUsername"
-                        target="_blank">
-                        AnaghaSafar
-                    </a>
-                </li>
-            </ul>
-            <div class="social-icons1">
-                <i class="fab fa-facebook-f1"></i>
-                <i class="fab fa-twitter1"></i>
-                <i class="fab fa-youtube1"></i>
-                <i class="fab fa-google-plus-g1"></i>
-            </div>
-        </div>
-        -->
-    </div>
+		<div class="info-box1">
+			<h2>Contact Information</h2>
+			<p>If you have any questions, feel free to reach out to us.</p>
+			<ul>
+				<li>
+					<strong>Address:</strong><br />alkapuri city center gwalior (MP)
+				</li>
+				<li><strong>Phone:</strong><br />+9755-54-97-33</li>
+				<li>
+					<strong>Email:</strong><br /><a [href]="'mailto:' + email">Anaghasolutions1.gmail.com</a>
+				</li>
+				<li>
+					<strong>instagram:</strong><br /><a class="social-link"
+						[href]="'https://www.instagram.com/' + instagramUsername" target="_blank">
+						<!-- {{ instagramUsername }} -->
+						AnaghaSafar
+					</a>
+				</li>
+				<li>
+					<strong>facbook:</strong><br /><a [href]="'https://www.facebook.com/' + facebookUsername" target="_blank">
+						AnaghaSafar
+					</a>
+				</li>
+			</ul>
+			<div class="social-icons1">
+				<i class="fab fa-facebook-f1"></i>
+				<i class="fab fa-twitter1"></i>
+				<i class="fab fa-youtube1"></i>
+				<i class="fab fa-google-plus-g1"></i>
+			</div>
+		</div>
+		-->
+	</div>
 </div>
 <!-- ************************** footer************************************** -->

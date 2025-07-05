@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { AxiosResponse } from 'axios';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, FormBuilder, Validators, NgModel, NgModelGroup } from '@angular/forms';
 import { environment } from '../../../../environments/environment.development';
+import $ from 'jquery';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,19 @@ import { environment } from '../../../../environments/environment.development';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
+  hotel = {
+    destination: "Gwalior",
+    checkIn: "",
+    checkOut: "",
+    extra: {
+      rooms: 1,
+      adults: 1,
+      childrens: 1,
+      guests: 1
+    }
+  }
+
   currentSlide = 0;
   totalSlides = 3;
   facebookUsername = "anaghasafer";
@@ -39,6 +53,27 @@ export class HomeComponent implements OnInit {
 
   }
 
+  ngAfterViewInit(): void {
+
+    $(document).on('click', function (event) {
+      const $target = $(event.target);
+
+      if (
+        !$target.closest('.dropdown-modal').length &&
+        !$target.closest('[data-modalname]').length
+      ) {
+        $('.dropdown-modal').fadeOut(200)
+        setTimeout(() => $('.dropdown-modal').hide(), 200);
+      }
+    });
+
+    $('[data-modalname]').on('click', function () {
+      const modalId = $(this).attr('data-modalname');
+      $('.dropdown-modal').hide();
+      $('#' + modalId).fadeIn(200);
+    });
+  }
+
   ngOnInit(): void {
     setInterval(() => this.nextSlide(), 5000);
     this.getImages();
@@ -56,6 +91,7 @@ export class HomeComponent implements OnInit {
       // this.getSubLimit(this.international);
 
     })()
+
   }
 
   destination: string = '';
@@ -70,7 +106,7 @@ export class HomeComponent implements OnInit {
 
 
 
-  
+
   submitSearch() {
 
 
@@ -186,8 +222,8 @@ export class HomeComponent implements OnInit {
         this.subDesinter = res.data;
         // this.subDesinter = this.getsubinter.sub_destinations;
         // console.log("ihnternationsl", this.subDesinter);
-        console.log("packages response ",res);
-        console.log("package data ",this.getsubinter);
+        console.log("packages response ", res);
+        console.log("package data ", this.getsubinter);
       })
       .catch(err => {
         console.error("Some error occurred:", err);
@@ -231,14 +267,26 @@ export class HomeComponent implements OnInit {
       });
   }
 
+
   getMailOnMakeMyTrip( data:FormData){
     this.as_.makeMyFormMail(data).then(()=>{
-      console.log("succussfully send mail");
-    }).catch((err)=>{
-           console.log("not email send ",err);
-    })
-    }
 
+      console.log("succussfully send mail");
+    }).catch((err) => {
+      console.log("not email send ", err);
+    })
+  }
+
+
+  closeAllModal() {
+    $('.dropdown-modal').each(function () {
+      $(this).hide();
+    });
+  }
+
+  openThisAssociatedModal() {
+
+  }
 }
 
 
