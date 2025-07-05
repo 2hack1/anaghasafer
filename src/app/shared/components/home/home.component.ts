@@ -267,9 +267,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       });
   }
 
-  getMailOnMakeMyTrip(data: FormData) {
 
-    this.as_.makeMyFormMail(data).then(() => {
+  getMailOnMakeMyTrip( data:FormData){
+    this.as_.makeMyFormMail(data).then(()=>{
 
       console.log("succussfully send mail");
     }).catch((err) => {
