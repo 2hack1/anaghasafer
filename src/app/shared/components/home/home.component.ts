@@ -15,7 +15,7 @@ import { BigWhiteCardComponent } from './big-white-card/big-white-card.component
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
   hotel = {
     destination: "Gwalior",
     checkIn: "",
@@ -53,28 +53,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     })
 
   }
-
-  ngAfterViewInit(): void {
-
-    $(document).on('click', function (event) {
-      const $target = $(event.target);
-
-      if (
-        !$target.closest('.dropdown-modal').length &&
-        !$target.closest('[data-modalname]').length
-      ) {
-        $('.dropdown-modal').hide()
-        // setTimeout(() => $('.dropdown-modal').hide(), 200);
-      }
-    });
-
-    $('[data-modalname]').on('click', function () {
-      const modalId = $(this).attr('data-modalname');
-      $('.dropdown-modal').hide();
-      $('#' + modalId).fadeIn(200);
-    });
-  }
-
   ngOnInit(): void {
     setInterval(() => this.nextSlide(), 5000);
     this.getImages();
