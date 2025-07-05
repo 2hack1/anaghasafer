@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
@@ -18,7 +18,7 @@ interface Month {
 
 @Component({
   selector: 'app-view-deatails',
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './view-deatails.component.html',
   styleUrl: './view-deatails.component.scss'
 })
@@ -31,27 +31,30 @@ export class ViewDeatailsComponent implements OnInit {
   ];
   currentIndex = 0;
   autoSlideInterval: any;
-  constructor(private Route: ActivatedRoute, private as_: AxiosService,private Fb :FormBuilder) { 
+  constructor(private Route: ActivatedRoute, private as_: AxiosService, private Fb: FormBuilder) {
 
-    this.userOrder=Fb.group({
+    this.userOrder = Fb.group({
 
       phoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       email: ['', [Validators.required, Validators.email]],
       startdate: [''],
       termsAccepted: [false, Validators.requiredTrue],
-      selectedTransport: ['']
+      selectedTransport: [''],
+      Adult: [Validators.required],
+      childern: [''],
+      insect: ['']
     })
   }
 
-  galleryImages:any;
-  isnotgallary:any;
+  galleryImages: any;
+  isnotgallary: any;
   packageId: any | null = null;
   selectedMonth: any;
   packageprice: any = 0;
-  slip=false;
-  avoidSlip=true;
+  slip = false;
+  avoidSlip = true;
   // startdate: string = '';
-  
+
   packageDetails: any = [];
   packag: any[] = [];
   monthDate: any = [];
@@ -59,16 +62,16 @@ export class ViewDeatailsComponent implements OnInit {
   // data validation
   phoneNumber: string = '';
   termsAccepted: boolean = false;
-  startdate:any;
-  getEmailsesstion:any
+  startdate: any;
+  getEmailsesstion: any
 
   userOrder!: FormGroup;
 
-  
-  // afterpay=false;
-    ngOnInit() {
 
-      this.packageId = this.Route.snapshot.paramMap.get('id');
+  // afterpay=false;
+  ngOnInit() {
+
+    this.packageId = this.Route.snapshot.paramMap.get('id');
     console.log("package id:", this.packageId);
     this.getpackagesdetails(this.packageId);
     this.getmonthAndDate(this.packageId);
@@ -88,7 +91,7 @@ export class ViewDeatailsComponent implements OnInit {
       this.packageprice = this.packageDetails.price_trip;
 
       this.adultPrice = this.packageprice;
-      this.childPrice = (this.packageprice/2);
+      this.childPrice = (this.packageprice / 2);
 
       console.log("pakage price", this.packageprice)
       this.packag = res.data[0].images;
@@ -141,11 +144,11 @@ export class ViewDeatailsComponent implements OnInit {
     this.as_.getTransport(id).then((res) => {
       console.log("Trasports", res.data);
       this.trans = res.data[0].mode;
- 
+
 
       console.log("Mode", res.data[0].mode);
-      this.availableModes=this.getAvailableModes();
-      console.log("available modes",this.availableModes);
+      this.availableModes = this.getAvailableModes();
+      console.log("available modes", this.availableModes);
     }).catch((err) => {
       console.log("error", err);
     })
@@ -200,20 +203,20 @@ export class ViewDeatailsComponent implements OnInit {
 
   getAvailableModes(): any[] {
 
-  if (Array.isArray(this.trans)) {
-  if (typeof this.trans[0] === 'object') {
-    let transKeys = this.trans.map((t: any) => t.key);
-    console.log("trans key:", transKeys);
-    return this.transportModes.filter(mode => transKeys.includes(mode.key));
-  } else {
-    let transKeys = (this.trans as string[]).map(t => t.toLowerCase());
-    console.log("trans:", transKeys);
-    return this.transportModes.filter(mode => transKeys.includes(mode.key));
-  }
-} else {
-  console.warn("Invalid value for 'trans':", this.trans);
-  return [];
-}
+    if (Array.isArray(this.trans)) {
+      if (typeof this.trans[0] === 'object') {
+        let transKeys = this.trans.map((t: any) => t.key);
+        console.log("trans key:", transKeys);
+        return this.transportModes.filter(mode => transKeys.includes(mode.key));
+      } else {
+        let transKeys = (this.trans as string[]).map(t => t.toLowerCase());
+        console.log("trans:", transKeys);
+        return this.transportModes.filter(mode => transKeys.includes(mode.key));
+      }
+    } else {
+      console.warn("Invalid value for 'trans':", this.trans);
+      return [];
+    }
 
   }
 
@@ -233,8 +236,8 @@ export class ViewDeatailsComponent implements OnInit {
   showPopup1: boolean = false;
 
   // Fix random prices once when component is loaded
-  adultPrice:any;
-  childPrice:any;
+  adultPrice: any;
+  childPrice: any;
   // roomCharge = 2000;
 
 
@@ -304,7 +307,7 @@ export class ViewDeatailsComponent implements OnInit {
     });
     if (totalAdults === 0 && totalChildren === 0) {
       // totalRooms = 0;
-    } 
+    }
 
     const totalAmount = (totalAdults * this.adultPrice) + (totalChildren * this.childPrice) + (this.transportPrice);
     this.totalAmount = totalAmount;
@@ -322,83 +325,83 @@ export class ViewDeatailsComponent implements OnInit {
     //   }
     // }
     for (let i = 0; i < this.rooms.length; i++) {
-  const room = this.rooms[i];
+      const room = this.rooms[i];
 
-  // Check if any traveller has count >= 1
-  const hasValidTraveller = room.travellers.some(traveller => traveller.count && traveller.count >= 1);
+      // Check if any traveller has count >= 1
+      const hasValidTraveller = room.travellers.some(traveller => traveller.count && traveller.count >= 1);
 
-  if (!hasValidTraveller) {
-    alert(`Room ${i + 1} must have at least one traveller (Adult, Child, or Infant).`);
-    return false;
+      if (!hasValidTraveller) {
+        alert(`Room ${i + 1} must have at least one traveller (Adult, Child, or Infant).`);
+        return false;
+      }
+    }
+
+
+    if (!this.startdate) {
+      alert("Please select a travel date.");
+      return false;
+    }
+
+
+    const email = this.getEmailsesstion?.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email || !emailRegex.test(email)) {
+      alert("Please enter a valid email address.");
+      return false;
+    }
+
+    const phone = this.phoneNumber;
+
+    const phoneRegex = /^\d{10}$/;
+
+    if (!phone || !phoneRegex.test(phone.trim())) {
+      alert("Please enter a valid 10-digit phone number.");
+      return false;
+    }
+
+    if (!this.termsAccepted) {
+      alert("You must accept the terms and conditions.");
+      return false;
+    }
+
+    if (!this.selectedTransport) {
+      alert("Please select a transport option.");
+      return false;
+    }
+
+
+    return true;
   }
-}
 
-
-  if (!this.startdate) {
-    alert("Please select a travel date.");
-    return false;
-  }
-  
-
-const email = this.getEmailsesstion?.trim();
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-if (!email || !emailRegex.test(email)) {
-  alert("Please enter a valid email address.");
-  return false;
-}
-  
-  const phone = this.phoneNumber;
-
-const phoneRegex = /^\d{10}$/;
-
-if (!phone || !phoneRegex.test(phone.trim())) {
-  alert("Please enter a valid 10-digit phone number.");
-  return false;
-}
-
-  if (!this.termsAccepted) {
-    alert("You must accept the terms and conditions.");
-    return false;
-  }
-
-  if (!this.selectedTransport) {
-    alert("Please select a transport option.");
-    return false;
-  }
-
-
-  return true;
-}
-  
   togglePopup(): void {
     this.showPopup1 = !this.showPopup1;
   }
   showPopup11: boolean = false;
-showstartdate:string='';
-endtdate:string='';
-convertmonth:any;
-  openPopup11(id:any,starttourdate:any,endtourdate:any): void {
+  showstartdate: string = '';
+  endtdate: string = '';
+  convertmonth: any;
+  openPopup11(id: any, starttourdate: any, endtourdate: any): void {
     this.showPopup11 = true;
-   this.getEmailsesstion= sessionStorage.getItem('email')
-    this.startdate=starttourdate+"  TO  "+endtourdate;
-    this.showstartdate=starttourdate;
-    this.endtdate=endtourdate;
-    this.convertmonth=this.converMonth(starttourdate);
-  
+    this.getEmailsesstion = sessionStorage.getItem('email')
+    this.startdate = starttourdate + "  TO  " + endtourdate;
+    this.showstartdate = starttourdate;
+    this.endtdate = endtourdate;
+    this.convertmonth = this.converMonth(starttourdate);
+
     // console.log("dateid",id);
     // console.log("tourdate",this.startdate);
     // console.log("tourmonth",endtourdate);
     // console.log("tourmonth",this.selectedMonth);
   }
-  
-  // conver month  no. to string 
-  converMonth(date:string):string{
 
-    if(!date) return '';
-    const[year, month, day]=date.split('-').map(Number);
-    const datee=new Date(year,month-1,day);
-    console.log("convert month date:",datee)
+  // conver month  no. to string 
+  converMonth(date: string): string {
+
+    if (!date) return '';
+    const [year, month, day] = date.split('-').map(Number);
+    const datee = new Date(year, month - 1, day);
+    console.log("convert month date:", datee)
     // return datee.toLocaleString('default',{month:'short'},{year:'numer'});
     return datee.toLocaleString('default', { month: 'short', year: 'numeric' });
 
@@ -408,41 +411,70 @@ convertmonth:any;
     this.showPopup11 = false;
   }
 
-nameOfUser:any;
-
-
+  nameOfUser: any;
+  order: any
   submitForm() {
-    if(!sessionStorage.getItem('token')){
+    if (!sessionStorage.getItem('token')) {
       alert('please firstly login or signUp')
       return;
     }
-  
-        for (let i = 0; i < this.rooms.length; i++) {
-  const room = this.rooms[i];
+    this.order = new FormData;
+    this.order.append("email", this.getEmailsesstion)
+    // console.log("email",this.getEmailsesstion);
+    this.order.append(" date", this.startdate);
+    // console.log("start date",this.startdate);
+    this.order.append("mobile no", this.phoneNumber);
+    // console.log("mobile no.", this.phoneNumber);
+    this.order.append("transport", this.selectedTransport)
+    console.log("trnsport", this.selectedTransport);
+    this.countTravler(); // conunt travler persions
 
-  // Check if any traveller has count >= 1
-  const hasValidTraveller = room.travellers.some(traveller => traveller.count && traveller.count >= 1);
 
- console.log("no. of member to be trable",hasValidTraveller);
-}
-    
-    console.log("email",this.getEmailsesstion);
-    console.log("start date",this.startdate);
-    console.log("mobile no.", this.phoneNumber);
-    console.log("term",this.termsAccepted)
-    console.log("trnsport",this.selectedTransport);
-
-  if (this.validateForm()) {
-   this.slip=!this.slip;
-  this.avoidSlip=!this.avoidSlip;
-    console.log("chck")
-    this.showPopup11=false;
-    this.nameOfUser=sessionStorage.getItem('name');
+    if (this.validateForm()) {
+      this.slip = !this.slip;
+      this.avoidSlip = !this.avoidSlip;
+      console.log("chck")
+      this.showPopup11 = false;
+      this.nameOfUser = sessionStorage.getItem('name');
+    }
   }
-}
 
- 
-printSlip() {
+
+
+  countTravler() {
+    let totalAdults = 0;
+    let totalChildren = 0;
+    let totalInfants = 0;
+
+    for (const room of this.rooms) {
+      for (const traveller of room.travellers) {
+        const type = traveller.type.trim().toLowerCase(); // Normalize string
+
+        switch (type) {
+          case 'adult':
+            totalAdults += traveller.count || 0;
+            break;
+          case 'child':
+            totalChildren += traveller.count || 0;
+            break;
+          case 'infant':
+            totalInfants += traveller.count || 0;
+            break;
+        }
+      }
+    }
+
+    this.order.append("Adults",totalAdults);
+    this.order.append("Children",totalChildren);
+    this.order.append("Infants",totalInfants);
+    for (const pair of this.order.entries()) {
+  console.log("order data",`${pair[0]}: ${pair[1]}`);
+  
+  // ******************************************************************************************************************** upadete form
+}
+  }
+
+  printSlip() {
     const printContents = document.getElementById('printArea')?.innerHTML;
     if (!printContents) return;
 
@@ -521,41 +553,41 @@ printSlip() {
   }
 
 
-  getGallary(packageId:number){
- 
-    this.as_.getGallaryForImage(packageId).then((res:any)=>{
-      
-this.galleryImages=res.data.data[0].images;
+  getGallary(packageId: number) {
 
-if(!this.galleryImages){
+    this.as_.getGallaryForImage(packageId).then((res: any) => {
 
-  this.isnotgallary=false
-  return;
-}
- 
-this.isnotgallary=true;
-    }).catch((err)=>{
-      console.error("error:",err);
+      this.galleryImages = res.data.data[0].images;
+
+      if (!this.galleryImages) {
+
+        this.isnotgallary = false
+        return;
+      }
+
+      this.isnotgallary = true;
+    }).catch((err) => {
+      console.error("error:", err);
     })
   }
 
 
-  
 
-    showGallery = false;
 
-openGallery() {
+  showGallery = false;
+
+  openGallery() {
     this.showGallery = true;
   }
 
   closeGallery() {
     this.showGallery = false;
   }
-   
-selectedImage: string | null = null;
 
-viewImage(imageUrl: string) {
-  this.selectedImage = imageUrl;
-};
-  
+  selectedImage: string | null = null;
+
+  viewImage(imageUrl: string) {
+    this.selectedImage = imageUrl;
+  };
+
 }
