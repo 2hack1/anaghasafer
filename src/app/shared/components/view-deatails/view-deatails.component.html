@@ -180,6 +180,10 @@
 
 </div>
 
+
+
+
+
 <div class="modal-itinerary" *ngIf="showPopup11">
     <div class="container1 modal-itinerary-child">
         <div>
@@ -195,6 +199,7 @@
         <!-- Add Room Button -->
         <div class="room-section">
         </div>
+
         <div>
             <div class="travellers travellers-card" *ngFor="let room of rooms; let roomIndex = index">
                 <div class="travellers-inner-container">
@@ -204,14 +209,11 @@
 
                     <div class="traveller1-container">
                         <div class="traveller1" *ngFor="let traveller of room.travellers; let travellerIndex = index">
-                            <label class="traveller1-lbl">{{ traveller.type }}<br><span class="traveller1-age">({{
-                                    traveller.ageGroup
-                                    }})</span></label>
+                            <label class="traveller1-lbl">{{ traveller.type }}<br><span class="traveller1-age">
+                                ({{traveller.ageGroup  }})</span></label>
                             <div class="counter1">
                                 <button class="counter1-btn" (click)="decreaseCount(roomIndex, traveller)"> - </button>
-
                                 <span class="count">{{ traveller.count }}</span>
-
                                 <button class=" counter1-btn" (click)="increaseCount(roomIndex, traveller)"> +
                                 </button>
                             </div>
@@ -222,10 +224,10 @@
             </div>
         </div>
 
-        <div class="form-section">
+        <div class="form-section">  
             <label>Select With Going Trip</label>
             <div class="icons">
-                <button *ngFor="let mode of getAvailableModes()" (click)="selectTransport(mode.key)"
+                <button *ngFor="let mode of availableModes" (click)="selectTransport(mode.key)"
                     [ngClass]="{ 'active': selectedTransport === mode.key }" style="font-size: 2rem;">
                     <i [class]="mode.icon"></i>
                 </button>
@@ -257,6 +259,11 @@
         </div>
     </div>
 </div>
+
+
+
+
+
 
 
 <div class="gallery-modal" *ngIf="showGallery">

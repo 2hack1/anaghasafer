@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 
 interface Tour {
@@ -18,7 +18,7 @@ interface Month {
 
 @Component({
   selector: 'app-view-deatails',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule],
   templateUrl: './view-deatails.component.html',
   styleUrl: './view-deatails.component.scss'
 })
@@ -31,7 +31,18 @@ export class ViewDeatailsComponent implements OnInit {
   ];
   currentIndex = 0;
   autoSlideInterval: any;
-  constructor(private Route: ActivatedRoute, private as_: AxiosService) { }
+  constructor(private Route: ActivatedRoute, private as_: AxiosService,private Fb :FormBuilder) { 
+
+    this.userOrder=Fb.group({
+
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      startdate: [''],
+      termsAccepted: [false, Validators.requiredTrue],
+      selectedTransport: ['']
+    })
+  }
+
   galleryImages:any;
   isnotgallary:any;
   packageId: any | null = null;
@@ -50,8 +61,13 @@ export class ViewDeatailsComponent implements OnInit {
   termsAccepted: boolean = false;
   startdate:any;
   getEmailsesstion:any
+
+  userOrder!: FormGroup;
+
+  
   // afterpay=false;
     ngOnInit() {
+
       this.packageId = this.Route.snapshot.paramMap.get('id');
     console.log("package id:", this.packageId);
     this.getpackagesdetails(this.packageId);
@@ -99,6 +115,7 @@ export class ViewDeatailsComponent implements OnInit {
   }
 
   date: any[] = [];
+  availableModes: any[] = [];
   getdate(id: any) {
 
     this.as_.getdate(id).then((res) => {
@@ -127,7 +144,8 @@ export class ViewDeatailsComponent implements OnInit {
  
 
       console.log("Mode", res.data[0].mode);
-
+      this.availableModes=this.getAvailableModes();
+      console.log("available modes",this.availableModes);
     }).catch((err) => {
       console.log("error", err);
     })
@@ -182,9 +200,6 @@ export class ViewDeatailsComponent implements OnInit {
 
   getAvailableModes(): any[] {
 
-    
-
-    
   if (Array.isArray(this.trans)) {
   if (typeof this.trans[0] === 'object') {
     let transKeys = this.trans.map((t: any) => t.key);
@@ -394,11 +409,29 @@ convertmonth:any;
   }
 
 nameOfUser:any;
+
+
   submitForm() {
     if(!sessionStorage.getItem('token')){
       alert('please firstly login or signUp')
       return;
     }
+  
+        for (let i = 0; i < this.rooms.length; i++) {
+  const room = this.rooms[i];
+
+  // Check if any traveller has count >= 1
+  const hasValidTraveller = room.travellers.some(traveller => traveller.count && traveller.count >= 1);
+
+ console.log("no. of member to be trable",hasValidTraveller);
+}
+    
+    console.log("email",this.getEmailsesstion);
+    console.log("start date",this.startdate);
+    console.log("mobile no.", this.phoneNumber);
+    console.log("term",this.termsAccepted)
+    console.log("trnsport",this.selectedTransport);
+
   if (this.validateForm()) {
    this.slip=!this.slip;
   this.avoidSlip=!this.avoidSlip;
