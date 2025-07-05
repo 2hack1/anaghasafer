@@ -1,0 +1,206 @@
+.__bg_white_menu {
+  background-color: white;
+  // position: relative;
+  box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.2);
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  margin: auto;
+  margin-top: 20px;
+  z-index: 2;
+  width: 80%;
+  height: fit-content;
+  border-radius: 18px;
+  border: 1px solid #eee;
+
+  .menu_options {
+    width: fit-content;
+    padding: 10px;
+    height: fit-content;
+    background-color: #ff5f5f;
+    position: absolute;
+    top: -2rem;
+    z-index: 3;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    button {
+      border: 0;
+      background: transparent;
+      margin: 10px;
+      padding: 0;
+      margin: 0;
+      margin: 10px 0;
+      cursor: pointer;
+      &:hover {
+        i {
+          background-color: rgba(255, 255, 255, 0.11);
+        }
+      }
+
+      i {
+        color: rgb(255, 179, 179);
+        font-size: 2rem;
+        padding: 10px;
+        border-radius: 9px;
+
+        &.active {
+          color: white;
+          background-color: rgba(255, 255, 255, 0.212);
+        }
+      }
+    }
+  }
+
+  .menu_container {
+    max-height: 300px;
+    width: 100%;
+    margin-top: 20px;
+    padding: 2rem;
+    padding-bottom: 3rem;
+
+    .items {
+      height: 90px;
+      display: flex;
+      padding: 5px;
+      border-radius: 9px;
+      border: 1px solid #ddd;
+
+      .divider {
+        width: 1px;
+        background: #ddd;
+        align-self: stretch;
+        margin: 0 5px;
+      }
+
+      .item {
+        flex-shrink: 0;
+        flex-grow: 1;
+        padding: 10px;
+        border-radius: 9px;
+        border: 0;
+        cursor: pointer;
+        transition: all 300ms ease;
+        position: relative;
+
+        &:hover {
+          background: #eee;
+        }
+
+        &.destination {
+          max-width: 350px;
+        }
+
+        &.check-in-out {
+          max-width: 150px;
+        }
+
+        i {
+          color: #c0c0c0;
+        }
+
+        h4 {
+          font-weight: normal;
+          // color: #c0c0c0;
+          color: #333;
+        }
+
+        p.destination {
+          font-size: 2rem;
+          // overflow: hidden;
+        }
+
+        .dropdown-modal {
+          position: absolute;
+          top: 50%;
+          left: 0;
+          right: 0;
+          z-index: 10;
+          border: 1px solid #ddd;
+          height: 100px;
+          border-radius: 9px;
+          // padding: 10px;
+          overflow: hidden;
+          background-color: white;
+          min-height: 250px;
+          cursor: default;
+
+          p.header {
+            color: #858585;
+            padding: 5px;
+            font-weight: bold;
+            font-size: 13px;
+          }
+
+          .select-destionation-button {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            padding-left: 10px;
+            border: 0;
+            margin: 5px 0;
+            text-align: start;
+            border-radius: 18px;
+            background-color: rgb(248, 252, 255);
+            cursor: pointer;
+          }
+        }
+
+        .input-field {
+          width: 100%;
+          padding: 10px;
+          border: none;
+          background-color: #eee;
+          outline: none;
+        }
+      }
+    }
+
+    ul.trending-places {
+      padding: 0;
+      margin: auto;
+      // border: 1px solid;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      justify-content: center;
+
+      small {
+        color: #777;
+      }
+
+      .trending-place {
+        border-radius: 5px;
+        padding: 5px 10px;
+        background-color: #eee;
+        font-size: 12px;
+        list-style: none;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .btn-container {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+
+    .btn-search {
+      padding: 10px 2rem;
+      border-radius: 1000px;
+      border: 0;
+      outline: none;
+      background: #ff5f5f;
+      color: white;
+      font-weight: 400;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  }
+}

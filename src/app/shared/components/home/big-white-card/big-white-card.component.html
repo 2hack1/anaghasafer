@@ -1,0 +1,187 @@
+<div style="
+width: 100%;
+height: 400px;
+position: relative;">
+
+    <!-- Background image -->
+    <div style="
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+	">
+        <img src="/assets/images/header-image.jpg" alt="" style="
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	">
+    </div>
+
+    <!-- contianer -->
+    <div class="container" style="width: 100%;">
+        <div class="__bg_white_menu">
+            <!-- menus -->
+            <div class="menu_options cus-shadow">
+                <button>
+                    <i class="bi bi-map active"></i>
+                </button>
+                <button>
+                    <i class="bi bi-building"></i>
+                </button>
+                <button>
+                    <i class="bi bi-train-front"></i>
+                </button>
+
+            </div>
+
+            <!-- center Direction box -->
+            <div style="height: 100%; width: 100%; position: relative;">
+                <div class="menu_container">
+
+                    <!-- hotel text -->
+                    <p
+                        style="color: #666;margin: 0; text-align: center; font-size: 14px; padding: 1rem 0;font-weight: bold;">
+                        Book your
+                        perfect stay and
+                        customize your
+                        hotel package just the
+                        way you
+                        like it!</p>
+
+                    <div class="items">
+                        <div class="item destination">
+                            <div data-modalname="hotel-destination-modal" style="
+								display: flex;
+								align-items: center;
+								gap: 2rem;
+								position: relative;">
+                                <i class="bi bi-search" style="font-size: 2rem"></i>
+                                <div>
+                                    <h4>City or Location</h4>
+                                    <p class="destination" id="destination-name" style="margin-top: 5px">
+                                        <strong style="text-transform: capitalize">{{
+                                            hotel.destination
+                                            }}</strong>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- modal -->
+                            <div class="dropdown-modal" id="hotel-destination-modal" style="display: none">
+                                <input type="text" (ngModel)="(hotel.destination)" class="input-field"
+                                    placeholder="Search for destination" />
+                                <div style="padding: 5px">
+                                    <p class="header">Enter destination name</p>
+
+                                    <ng-container *ngFor="let i of [1, 1, 1, 1]">
+                                        <button type="button" class="select-destionation-button"
+                                            (click)="hotel.destination = i + ''; closeAllModal()">
+                                            tests
+                                        </button>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+
+                        <div class="item check-in-out">
+                            <div data-modalname="hotel-checkin-modal" style="
+                  display: flex;
+                  align-items: center;
+                  gap: 2rem;
+                  height: 100%;
+                ">
+                                <div style="
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    height: 100%;
+                  ">
+                                    <h4 class="">Check in</h4>
+                                    <p class="check-in-out" style="margin-top: auto">
+                                        <strong>--/--/--</strong>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="dropdown-modal" id="hotel-checkin-modal" style="display: none">
+                                <input type="text" (ngModel)="(hotel.destination)" class="input-field"
+                                    placeholder="Search for destination" />
+                                <div style="padding: 5px">
+                                    <p class="header">Enter destination name</p>
+
+                                    <ng-container *ngFor="let i of [1, 1, 1, 1]">
+                                        <button type="button" class="select-destionation-button"
+                                            (click)="hotel.destination = i + ''; closeAllModal()">
+                                            tests
+                                        </button>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="divider"></div>
+                        <div class="item check-in-out">
+                            <div style="
+                  display: flex;
+                  align-items: center;
+                  gap: 2rem;
+                  height: 100%;
+                ">
+                                <div style="
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    height: 100%;
+                  ">
+                                    <h4 class="">Check Out</h4>
+                                    <p class="check-in-out" style="margin-top: auto">
+                                        <strong>--/--/--</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="item">
+                            <div style="
+                  display: flex;
+                  align-items: center;
+                  gap: 2rem;
+                  height: 100%;">
+                                <i class="bi bi-person"></i>
+                                <div style="
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    height: 100%;
+                  ">
+                                    <h4 class="">Room and Guest</h4>
+                                    <p class="check-in-out" style="margin-top: auto">
+                                        <strong>2 Guests, 1 Room</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- trending hotels -->
+                    <div style="text-align: center; flex: 1;margin-top: 10px;">
+                        <ul class="trending-places">
+                            <small>
+                                Trending Places
+                            </small>
+                            <li class="trending-place">Delhi</li>
+                            <li class="trending-place">Delhi</li>
+                            <li class="trending-place">Delhi</li>
+                        </ul>
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-search cus-shadow">Search</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
