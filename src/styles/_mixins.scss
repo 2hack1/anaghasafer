@@ -1,15 +1,13 @@
-@use 'breakpoints' as * ;
+@use 'breakpoints' as *;
 
 @mixin respond-to-max($breakpoint) {
-    $size : map-get($breakpoints, $breakpoint );
+  $size: map-get($breakpoints, $breakpoint);
 
-    @if $size !=null {
-        @media (max-width : $size) {
-            @content;
-        }
+  @if $size !=null {
+    @media (max-width: $size) {
+      @content;
     }
-
-    @else {
-        @warn "Breakpoint `#{$breakpoints}` not found.";
-    }
+  } @else {
+    @warn "Breakpoint `#{$breakpoints}` not found.";
+  }
 }
