@@ -232,9 +232,7 @@ export class HomeComponent implements OnInit {
   }
 
   getMailOnMakeMyTrip( data:FormData){
-
     this.as_.makeMyFormMail(data).then(()=>{
-   
       console.log("succussfully send mail");
     }).catch((err)=>{
            console.log("not email send ",err);
