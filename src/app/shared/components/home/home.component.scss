@@ -1140,9 +1140,9 @@ color: #333;
   }
 
   .menu_container {
-    height: 300px;
+    max-height: 300px;
     width: 100%;
-    margin-top: 80px;
+    margin-top: 20px;
     padding: 2rem;
 
     .items {
@@ -1236,7 +1236,31 @@ color: #333;
           padding: 10px;
           border: none;
           background-color: #eee;
+          outline: none;
         }
+      }
+    }
+
+    ul.trending-places {
+      padding: 0;
+      margin: auto;
+      // border: 1px solid;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      justify-content: center;
+
+      small {
+        color: #777;
+      }
+
+      .trending-place {
+        border-radius: 5px;
+        padding: 5px 10px;
+        background-color: #eee;
+        font-size: 12px;
+        list-style: none;
+        cursor: pointer;
       }
     }
   }

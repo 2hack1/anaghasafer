@@ -4,7 +4,6 @@
 		<div class="slider-hero-content" style="display: none">
 			<h1>Customize & Book<br />Amazing Holiday Packages</h1>
 
-
 			<!-- DONT REMOVE THIS  -->
 			<!-- <div class="form-row">
 			<div style="display: flex; align-items: center; gap: 1rem;">
@@ -47,7 +46,8 @@
 					<input type="text" placeholder="Enter a Destination" [(ngModel)]="destination" name="destination" />
 
 					<!-- Price dropdown -->
-					<select [(ngModel)]="selectedPrice" (change)="onPriceChange()" *ngIf="!showOtherInput" name="selectedPrice">
+					<select [(ngModel)]="selectedPrice" (change)="onPriceChange()" *ngIf="!showOtherInput"
+						name="selectedPrice">
 						<option value="" disabled selected>Select Your Under Price</option>
 						<option value="5000">Under ₹5000</option>
 						<option value="10000">Under ₹10000</option>
@@ -56,7 +56,8 @@
 
 					<!-- Custom price input (if "other" is selected) -->
 					<div *ngIf="showOtherInput">
-						<input type="text" [(ngModel)]="customPrice" placeholder="Enter your price" name="customPrice" />
+						<input type="text" [(ngModel)]="customPrice" placeholder="Enter your price"
+							name="customPrice" />
 					</div>
 				</div>
 
@@ -95,31 +96,47 @@
 				</button>
 			</div>
 
+			<!-- center Direction box -->
 			<div style="height: 100%; width: 100%; position: relative">
 				<div class="menu_container">
+
+					<p style="color: #666;margin: 0; text-align: center; font-size: 14px; padding: 1rem 0;">Book your
+						perfect stay and
+						customize your
+						hotel package just the
+						way you
+						like it!</p>
+
 					<div class="items">
 						<div class="item destination">
-							<div data-modalname="hotel-destination-modal"
-								style="display: flex; align-items: center; gap: 2rem; position: relative;">
+							<div data-modalname="hotel-destination-modal" style="
+								display: flex;
+								align-items: center;
+								gap: 2rem;
+								position: relative;">
 								<i class="bi bi-search" style="font-size: 2rem"></i>
 								<div>
-									<h4 class="">Destinations</h4>
+									<h4>City or Location</h4>
 									<p class="destination" id="destination-name" style="margin-top: 5px">
-										<strong style="text-transform: capitalize;">{{hotel.destination}}</strong>
+										<strong style="text-transform: capitalize">{{
+											hotel.destination
+											}}</strong>
 									</p>
 								</div>
 							</div>
 
 							<!-- modal -->
-							<div class="dropdown-modal" id="hotel-destination-modal" style="display: none;">
-								<input type="text" (ngModel)="hotel.destination" class="input-field"
-									placeholder="Search for destination">
-								<div style="padding:5px;">
+							<div class="dropdown-modal" id="hotel-destination-modal" style="display: none">
+								<input type="text" (ngModel)="(hotel.destination)" class="input-field"
+									placeholder="Search for destination" />
+								<div style="padding: 5px">
 									<p class="header">Enter destination name</p>
 
-									<ng-container *ngFor="let i of [1,1,1,1]">
+									<ng-container *ngFor="let i of [1, 1, 1, 1]">
 										<button type="button" class="select-destionation-button"
-											(click)="hotel.destination = i + '' ; closeAllModal() ">tests</button>
+											(click)="hotel.destination = i + ''; closeAllModal()">
+											tests
+										</button>
 									</ng-container>
 								</div>
 							</div>
@@ -127,24 +144,35 @@
 						<div class="divider"></div>
 
 						<div class="item check-in-out">
-							<div data-modalname="hotel-checkin-modal"
-								style="display: flex; align-items: center; gap: 2rem; height: 100%;">
-								<div style="display: flex;flex-direction: column;flex: 1;height: 100%;">
+							<div data-modalname="hotel-checkin-modal" style="
+                  display: flex;
+                  align-items: center;
+                  gap: 2rem;
+                  height: 100%;
+                ">
+								<div style="
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    height: 100%;
+                  ">
 									<h4 class="">Check in</h4>
 									<p class="check-in-out" style="margin-top: auto">
 										<strong>--/--/--</strong>
 									</p>
 								</div>
 							</div>
-							<div class="dropdown-modal" id="hotel-checkin-modal" style="display: none;">
-								<input type="text" (ngModel)="hotel.destination" class="input-field"
-									placeholder="Search for destination">
-								<div style="padding:5px;">
+							<div class="dropdown-modal" id="hotel-checkin-modal" style="display: none">
+								<input type="text" (ngModel)="(hotel.destination)" class="input-field"
+									placeholder="Search for destination" />
+								<div style="padding: 5px">
 									<p class="header">Enter destination name</p>
 
-									<ng-container *ngFor="let i of [1,1,1,1]">
+									<ng-container *ngFor="let i of [1, 1, 1, 1]">
 										<button type="button" class="select-destionation-button"
-											(click)="hotel.destination = i + '' ; closeAllModal() ">tests</button>
+											(click)="hotel.destination = i + ''; closeAllModal()">
+											tests
+										</button>
 									</ng-container>
 								</div>
 							</div>
@@ -152,8 +180,18 @@
 
 						<div class="divider"></div>
 						<div class="item check-in-out">
-							<div style="display: flex; align-items: center; gap: 2rem; height: 100%;">
-								<div style="display: flex;flex-direction: column;flex: 1;height: 100%;">
+							<div style="
+                  display: flex;
+                  align-items: center;
+                  gap: 2rem;
+                  height: 100%;
+                ">
+								<div style="
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    height: 100%;
+                  ">
 									<h4 class="">Check Out</h4>
 									<p class="check-in-out" style="margin-top: auto">
 										<strong>--/--/--</strong>
@@ -163,9 +201,18 @@
 						</div>
 						<div class="divider"></div>
 						<div class="item">
-							<div style="display: flex; align-items: center; gap: 2rem; height: 100%;">
+							<div style="
+                  display: flex;
+                  align-items: center;
+                  gap: 2rem;
+                  height: 100%;">
 								<i class="bi bi-person"></i>
-								<div style="display: flex;flex-direction: column;flex: 1;height: 100%;">
+								<div style="
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    height: 100%;
+                  ">
 									<h4 class="">Room and Guest</h4>
 									<p class="check-in-out" style="margin-top: auto">
 										<strong>2 Guests, 1 Room</strong>
@@ -174,12 +221,28 @@
 							</div>
 						</div>
 					</div>
+					<!-- trending hotels -->
+					<div style="text-align: center; flex: 1;margin-top: 10px;">
+						<ul class="trending-places">
+							<small>
+								Trending Places
+							</small>
+							<li class="trending-place">Delhi</li>
+							<li class="trending-place">Delhi</li>
+							<li class="trending-place">Delhi</li>
+						</ul>
+					</div>
 				</div>
 
-				<div class="btn-container">
-					<button class="btn-search cus-shadow">Search</button>
-				</div>
+				<!-- <div class=" btn-container">
+								<button class="btn-search cus-shadow">Search</button>
+					</div> -->
+
 			</div>
+
+
+
+
 		</div>
 
 		<div class="slides" id="slideContainer">
@@ -274,7 +337,8 @@
 	<div class="tour-cards">
 		<div class="tour-card" *ngFor="let tour of subDesinter; let i = index">
 			<a [routerLink]="['/view', tour.package_id]" class="tour-link">
-				<img [src]="`${env.backend_url}/storage/` + (tour.images?.[0]?.img || 'default.jpg')" [alt]="tour.place_name" />
+				<img [src]="`${env.backend_url}/storage/` + (tour.images?.[0]?.img || 'default.jpg')"
+					[alt]="tour.place_name" />
 				<div class="tour-overlay">
 					<h2>{{ tour.place_name }}</h2>
 					<p>Price: ₹{{ tour.price_trip }}</p>
@@ -283,8 +347,6 @@
 			</a>
 		</div>
 	</div>
-
-
 </div>
 
 <!-- *****************************REVIEW ************************ -->
@@ -370,7 +432,8 @@
 			<form [formGroup]="formModel">
 				<div class="input-group1">
 					<input type="text" placeholder=" your address" formControlName="your_address" required />
-					<input type="email" placeholder="detionation address" formControlName="destination_address" required />
+					<input type="email" placeholder="detionation address" formControlName="destination_address"
+						required />
 				</div>
 
 				<!-- Email -->
@@ -428,7 +491,8 @@
 					</a>
 				</li>
 				<li>
-					<strong>facbook:</strong><br /><a [href]="'https://www.facebook.com/' + facebookUsername" target="_blank">
+					<strong>facbook:</strong><br /><a [href]="'https://www.facebook.com/' + facebookUsername"
+						target="_blank">
 						AnaghaSafar
 					</a>
 				</li>
