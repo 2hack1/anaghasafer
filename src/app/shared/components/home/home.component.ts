@@ -7,10 +7,11 @@ import { AxiosResponse } from 'axios';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, FormBuilder, Validators, NgModel, NgModelGroup } from '@angular/forms';
 import { environment } from '../../../../environments/environment.development';
 import $ from 'jquery';
+import { BigWhiteCardComponent } from './big-white-card/big-white-card.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink, ReactiveFormsModule, FormsModule, RouterModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, FormsModule, RouterModule, BigWhiteCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -268,8 +269,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
 
-  getMailOnMakeMyTrip( data:FormData){
-    this.as_.makeMyFormMail(data).then(()=>{
+  getMailOnMakeMyTrip(data: FormData) {
+    this.as_.makeMyFormMail(data).then(() => {
 
       console.log("succussfully send mail");
     }).catch((err) => {
