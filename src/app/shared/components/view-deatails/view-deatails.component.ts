@@ -33,17 +33,17 @@ export class ViewDeatailsComponent implements OnInit {
   autoSlideInterval: any;
   constructor(private Route: ActivatedRoute, private as_: AxiosService, private Fb: FormBuilder) {
 
-    this.userOrder = Fb.group({
+    // this.userOrder = Fb.group({
 
-      phoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-      email: ['', [Validators.required, Validators.email]],
-      startdate: [''],
-      termsAccepted: [false, Validators.requiredTrue],
-      selectedTransport: [''],
-      Adult: [Validators.required],
-      childern: [''],
-      insect: ['']
-    })
+    //   phoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+    //   email: ['', [Validators.required, Validators.email]],
+    //   startdate: [''],
+    //   termsAccepted: [false, Validators.requiredTrue],
+    //   selectedTransport: [''],
+    //   Adult: [Validators.required],
+    //   childern: [''],
+    //   insect: ['']
+    // })
   }
 
   galleryImages: any;
@@ -65,7 +65,7 @@ export class ViewDeatailsComponent implements OnInit {
   startdate: any;
   getEmailsesstion: any
 
-  userOrder!: FormGroup;
+  // userOrder!: FormGroup;
 
 
   // afterpay=false;
