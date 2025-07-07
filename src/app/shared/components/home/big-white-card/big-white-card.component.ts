@@ -41,10 +41,32 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
             const modalId = $(this).attr('data-modalname');
             $('.dropdown-modal').hide();
 
-            console.log(modalId)
+            // console.log(modalId)
+            const $el = $('.dropdown-modal#' + modalId);
 
-            $('.dropdown-modal#' + modalId).show();
+            // if ($el.is('input')) {
+            if ($el.is('input')) {
+                $el.show();
+                $el.trigger('click')
+            }
+            else {
+                $el.show();
+            }
         });
+
+
+        $('.checkin-date').on('change', function () {
+            let value = $(this).val()
+            const minDate = new Date(value.toString());
+            const formattedMin = minDate.toISOString().split('T')[0];
+            
+            $('.checkout-date').attr('min', formattedMin);
+        })
+
+        $('.checkout-date').on('change', function () {
+            let value = $(this).val()
+            console.log(value)
+        })
     }
     ngOnInit(): void { }
 
