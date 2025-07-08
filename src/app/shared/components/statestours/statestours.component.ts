@@ -23,6 +23,7 @@ export class StatestoursComponent implements OnInit {
 
   ngOnInit(): void {
     this.getroute = this.routes.snapshot.paramMap.get('id');
+    this.as_.destination_id=this.getroute;
     console.log('Route ID:', this.getroute);
     this.getsubDestinations(this.getroute);
   }

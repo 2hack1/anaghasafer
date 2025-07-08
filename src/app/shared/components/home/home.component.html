@@ -308,7 +308,8 @@
 					<div class="card-bottom">
 						<!-- <p class="m-0 p-0 display-2">{{ i+1 }} Packages</p> -->
 						<h3 class="m-0 p-0">{{ sub.name }}</h3>
-						<a [routerLink]="['/des', sub.sub_destination_id]" class="button">
+						<a (click)="randerToDestination(sub.sub_destination_id,sub.destination_id)" class="button">
+							<!-- [routerLink]="['/des', sub.sub_destination_id]" -->
 							See Packages
 							<i class="bi bi-arrow-right-short"></i>
 						</a>
@@ -347,7 +348,8 @@
 		<!-- <<<<<<< HEAD -->
 		<div class="tour-cards">
 			<div class="tour-card" *ngFor="let tour of subDesinter; let i = index">
-				<a [routerLink]="['/view', tour.package_id]" class="tour-link">
+				<a (click)="randerinternations(tour.package_id,tour.sub_destination_id)" class="tour-link">
+					<!-- [routerLink]="['/view', tour.package_id]" -->
 					<img [src]="`${env.backend_url}/storage/` + (tour.images?.[0]?.img || 'default.jpg')"
 						[alt]="tour.place_name" />
 					<div class="tour-overlay">

@@ -84,11 +84,12 @@ export class HomeComponent implements OnInit {
   }
 
 
-
+randerToDestination(sub_desId:number,destId:number){
+  this.as_.destination_id=destId;
+  this.router.navigate(['/des',sub_desId]);
+}
 
   submitSearch() {
-
-
     const price = this.selectedPrice === 'other' ? this.customPrice : this.selectedPrice;
     const queryParams = {
       place_name: this.destination,
@@ -96,7 +97,7 @@ export class HomeComponent implements OnInit {
       duration: this.selectedMonth
     };
 
-    this.router.navigate(['/dss'], { queryParams });
+    this.router.navigate(['/des'], { queryParams });
 
   }
 
@@ -265,6 +266,14 @@ export class HomeComponent implements OnInit {
 
   openThisAssociatedModal() {
 
+  }
+
+  randerinternations(package_id:number,subdesid:number){
+
+   this.as_.subdes_id=subdesid;
+   this.as_.destination_id=5;
+   this.router.navigate(['/view',package_id]);
+  //  console.log("subdesid",subdesid);
   }
 }
 

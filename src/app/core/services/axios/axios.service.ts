@@ -9,6 +9,18 @@ import { Observable } from 'rxjs';
 export class AxiosService {
   api: AxiosInstance;
 
+
+
+// for  set in the order in backand db  of this variable date 
+
+destination_id:number;
+subdes_id:number;
+package_id:number;
+month_id:number;
+date_id:number;
+user_id:any;
+
+
   constructor() {
     this.api = axios.create({
       baseURL: environment.base_url, // Laravel API base URL

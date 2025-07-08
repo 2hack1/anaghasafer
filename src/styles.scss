@@ -37,12 +37,12 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
 }
 
-.container {
-  // padding: 20px;
-  max-width: 1200px;
-  margin: auto;
+// .container {
+//   // padding: 20px;
+//   max-width: 1200px;
+//   margin: auto;
 
-  @include respond-to-max(md) {
-    max-width: 500px;
-  }
-}
+//   @include respond-to-max(md) {
+//     max-width: 500px;
+//   }
+// }

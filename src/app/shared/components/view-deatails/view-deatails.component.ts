@@ -72,6 +72,7 @@ export class ViewDeatailsComponent implements OnInit {
   ngOnInit() {
 
     this.packageId = this.Route.snapshot.paramMap.get('id');
+    this.as_.package_id = this.packageId;
     console.log("package id:", this.packageId);
     this.getpackagesdetails(this.packageId);
     this.getmonthAndDate(this.packageId);
@@ -112,6 +113,7 @@ export class ViewDeatailsComponent implements OnInit {
   }
   selectMonth(key: any): void {
     this.selectedMonth = key;
+    this.as_.month_id = key;
     console.log("sakfpoasfoasdo", this.selectedMonth);
     this.getdate(this.selectedMonth);
 
@@ -382,6 +384,7 @@ export class ViewDeatailsComponent implements OnInit {
   endtdate: string = '';
   convertmonth: any;
   openPopup11(id: any, starttourdate: any, endtourdate: any): void {
+    this.as_.date_id = id;
     this.showPopup11 = true;
     this.getEmailsesstion = sessionStorage.getItem('email')
     this.startdate = starttourdate + "  TO  " + endtourdate;
@@ -419,15 +422,17 @@ export class ViewDeatailsComponent implements OnInit {
       return;
     }
     this.order = new FormData;
-    this.order.append("email", this.getEmailsesstion)
-    // console.log("email",this.getEmailsesstion);
-    this.order.append(" date", this.startdate);
-    // console.log("start date",this.startdate);
-    this.order.append("mobile no", this.phoneNumber);
-    // console.log("mobile no.", this.phoneNumber);
-    this.order.append("transport", this.selectedTransport)
-    console.log("trnsport", this.selectedTransport);
+    // this.order.append("email", this.getEmailsesstion)
+    // // console.log("email",this.getEmailsesstion);
+    // this.order.append(" date", this.startdate);
+    // // console.log("start date",this.startdate);
+    // this.order.append("mobile no", this.phoneNumber);
+    // // console.log("mobile no.", this.phoneNumber);
+    // this.order.append("transport", this.selectedTransport)
     this.countTravler(); // conunt travler persions
+
+
+
 
 
     if (this.validateForm()) {
@@ -436,6 +441,7 @@ export class ViewDeatailsComponent implements OnInit {
       console.log("chck")
       this.showPopup11 = false;
       this.nameOfUser = sessionStorage.getItem('name');
+      // yahan per  order api chalegi
     }
   }
 
@@ -464,20 +470,38 @@ export class ViewDeatailsComponent implements OnInit {
       }
     }
 
-    this.order.append("Adults",totalAdults);
-    this.order.append("Children",totalChildren);
-    this.order.append("Infants",totalInfants);
+    console.log("fgrtghwerty ervbeyt",sessionStorage.getItem('userid'))
+
+    this.as_.user_id = Number(sessionStorage.getItem('userid'));
+
+    this.order.append("Adults", totalAdults);
+    this.order.append("Children", totalChildren);
+    this.order.append("Infants", totalInfants);
+    this.order.append('destinationId', this.as_.destination_id);
+    this.order.append('subdesId', this.as_.subdes_id);
+    this.order.append('packagesId', this.as_.package_id);
+    this.order.append('monthId', this.as_.month_id);
+    this.order.append('dateId', this.as_.date_id);
+    this.order.append('userId', this.as_.user_id);
+
     for (const pair of this.order.entries()) {
-  console.log("order data",`${pair[0]}: ${pair[1]}`);
-  
-  // ******************************************************************************************************************** upadete form
-}
+      console.log("order data", `${pair[0]}: ${pair[1]}`);
+
+      // ******************************************************************************************************************** upadete form
+    }
   }
 
   printSlip() {
     const printContents = document.getElementById('printArea')?.innerHTML;
     if (!printContents) return;
 
+
+    // console.log("des id", this.as_.destination_id);
+    // console.log("sub des id", this.as_.subdes_id);
+    // console.log("month id", this.as_.month_id);
+    // console.log("date", this.as_.date_id);
+    // console.log("package", this.as_.package_id);
+    // console.log("userid", this.as_.user_id);
     const popupWin = document.createElement('iframe');
     popupWin.style.position = 'absolute';
     popupWin.style.top = '-1000px';

@@ -33,11 +33,12 @@ userRegister(data:any) {
     return this.loggedIn.asObservable();
   }
 
-  login(token: string,email:string,name:string) {
+  login(token: string,email:string,name:string,id:any) {
    
     sessionStorage.setItem('token',token);
     sessionStorage.setItem('email',email);
     sessionStorage.setItem('name',name);
+    sessionStorage.setItem('userid',id);
 
     this.loggedIn.next(true);                                
   }

@@ -25,6 +25,7 @@ export class DestinationtourComponent implements OnInit {
 
   ngOnInit(): void {
     this.catchRouteId = this.routes.snapshot.paramMap.get('id');
+    this.as_.subdes_id=this.catchRouteId;
   //  this.getpackafewithfilter(this.catchRouteId);
   this.getPackagesWithFilters();
     this.getpackages(this.catchRouteId);
