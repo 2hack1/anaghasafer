@@ -10,7 +10,8 @@
   <!-- login -->
   <ng-container *ngIf="!isSignup">
     <h2 class="title">Login.</h2>
-    
+    <p style="color: red;  margin-bottom: 1 rem; " *ngIf="check"> Please fill in all required fields. </p>
+    <p style="color: red;  margin-bottom: 1 rem; " *ngIf="check1"> Please check again youre data</p>
     <form [formGroup]="formModel">
     <input type="email" placeholder="Email" class="input" formControlName="email" />
     <input type="password" placeholder="Password" class="input" formControlName="password" />
@@ -21,7 +22,11 @@
   </span>
 </div> -->
     <p class="forgot">Forgot your password?</p>
-    <button type="submit" class="login-btn" (click)="login()">Log in</button>
+    <!-- <button type="submit" class="login-btn" (click)="login()">Log in</button> -->
+     <button type="submit" class="login-btn" (click)="login()" [disabled]="loading">
+  <span *ngIf="loading" class="spinner"></span>
+  {{ loading ? 'Processing...' : 'Log in' }}
+</button>
     <p class="terms">
       By continuing, you agree to AnaghaSafer
       <span class="underline"><a href="#">Terms of Service</a></span> and
@@ -67,9 +72,12 @@
     {{ showConfirmPassword ?  '👁️':'🙈'  }}
   </span>
 </div>
-    <!-- <input type="text" placeholder="Mobile No." class="input" formControlName="mobile" /> -->
-    <button class="login-btn" (click)="signUp()">Sign up</button>
-    <p class="terms">
+        <!-- <button class="login-btn" (click)="signUp()">Sign up</button> -->
+   <button class="login-btn" (click)="signUp()" [disabled]="signupLoading">
+  <span *ngIf="signupLoading" class="spinner"></span>
+  {{ signupLoading ? 'Processing...' : 'Sign up' }}
+</button>
+        <p class="terms">
       By continuing, you agree to AnaghaSafer
       <span class="underline"><a href="#">Terms of Service</a></span> and
       <span class="underline">Privacy Policy</span>.

@@ -21,7 +21,10 @@ export class LoginComponent implements OnInit {
   showPassword: boolean = false;
   showPassworda: boolean = false;
   showConfirmPassword: boolean = false;
-
+  check:boolean=false;
+  check1:boolean=false;
+loading = false;
+signupLoading = false;
 
   constructor(private FB_: FormBuilder, private us_: UserServicesService, private route: Router) {
 
@@ -45,19 +48,38 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    // this.formModel.value;
- const formData = new FormData();
-formData.append('password', this.formModel.get('password')?.value);
-formData.append('email', this.formModel.get('email')?.value);
-formData.append('role', "user"); // For a file input
-    this.us_.userLogin(formData).subscribe((res: any) => {
-      this.us_.login(res.access_token,res.user.email,res.user.name,res.user.id);
-      console.log("data on login",res);
-      console.log("data on login",res.user.id);
-      this.closeLogin();
-      this.route.navigateByUrl('/home');
 
-    });
+    const formData = new FormData();
+  formData.append('password', this.formModel.get('password')?.value);
+  formData.append('email', this.formModel.get('email')?.value);
+  formData.append('role', "user"); // For a file input
+
+   this.check=false;
+
+  if(!this.formModel.get('password').value &&  !this.formModel.get('email').value){
+     this.loading = true;
+     setTimeout(() => {
+       this.loading = false;
+       //  alert("check true");
+      }, 500);
+      this.check=true;
+     
+      return;
+  }
+  this.loading = true;
+setTimeout(() => {
+  this.loading = false;
+  // proceed with login logic
+}, 2000);
+    this.us_.userLogin(formData).subscribe({next:(res: any) => {
+      this.us_.login(res.access_token,res.user.email,res.user.name,res.user.id);
+
+      this.closeLogin();
+      this.route.navigateByUrl('/home');},error: (err:any)=>{
+      this.check1=true;
+      }
+
+    })
 
   }
 
@@ -66,6 +88,11 @@ formData.append('role', "user"); // For a file input
   passwordTooShort:boolean=false;
   
   signUp() {
+     this.signupLoading = true;
+
+     setTimeout(() => {
+    this.signupLoading = false;
+  }, 2000);
     const formValue = this.myform.value; // use the correct form group
 
     const name = `${formValue.nfa} ${formValue.name} ${formValue.last_name}`;

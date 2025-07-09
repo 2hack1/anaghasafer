@@ -109,5 +109,9 @@ makeMyFormMail( data:FormData){
   return this.api.post("/send-mail",data);
 }
 
+setorder( data:FormData){
+  return  this.api.post('/order',data);
+
+}
 
 }
