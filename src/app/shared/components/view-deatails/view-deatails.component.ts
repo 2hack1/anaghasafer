@@ -433,11 +433,6 @@ export class ViewDeatailsComponent implements OnInit {
     this.order.append('userId', this.as_.user_id);
     
 
- 
-    // conunt travler persions
-    
-    
-    
     if (this.validateForm()) {
       this.slip = !this.slip;
       this.avoidSlip = !this.avoidSlip;
@@ -464,7 +459,6 @@ export class ViewDeatailsComponent implements OnInit {
     for (const room of this.rooms) {
       for (const traveller of room.travellers) {
         const type = traveller.type.trim().toLowerCase(); // Normalize string
-        
         switch (type) {
           case 'adult':
             totalAdults += traveller.count || 0;
@@ -497,12 +491,6 @@ export class ViewDeatailsComponent implements OnInit {
     if (!printContents) return;
     
     
-    // console.log("des id", this.as_.destination_id);
-    // console.log("sub des id", this.as_.subdes_id);
-    // console.log("month id", this.as_.month_id);
-    // console.log("date", this.as_.date_id);
-    // console.log("package", this.as_.package_id);
-    // console.log("userid", this.as_.user_id);
     const popupWin = document.createElement('iframe');
     popupWin.style.position = 'absolute';
     popupWin.style.top = '-1000px';

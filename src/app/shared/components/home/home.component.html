@@ -340,18 +340,22 @@
 	<div class="tour-container">
 		<div class="tour-subtitle"><span></span>OVERSEAS JOURNEY</div>
 		<h1 class="tour-heading">INTERNATIONAL TOURS</h1>
-		<p class="tour-description">
-			Travel India Tourism Services offer the finest tour packages,
-			custom-tailored to your unique international travel plans and preferences.
-		</p>
+	
 
-		<!-- <<<<<<< HEAD -->
-		<div class="tour-cards">
-			<div class="tour-card" *ngFor="let tour of subDesinter; let i = index">
-				<a (click)="randerinternations(tour.package_id,tour.sub_destination_id)" class="tour-link">
-					<!-- [routerLink]="['/view', tour.package_id]" -->
+			<p class="tour-description">
+				Travel India Tourism Services offer the finest tour packages,
+				custom-tailored to your unique international travel plans and preferences. <br>
+			</p>
+			
+			
+			
+			<!-- <<<<<<< HEAD -->
+			<div class="tour-cards">
+				<div class="tour-card" *ngFor="let tour of subDesinter; let i = index">
+					<a (click)="randerinternations(tour.package_id,tour.sub_destination_id)" class="tour-link">
+						<!-- [routerLink]="['/view', tour.package_id]" -->
 					<img [src]="`${env.backend_url}/storage/` + (tour.images?.[0]?.img || 'default.jpg')"
-						[alt]="tour.place_name" />
+					[alt]="tour.place_name" />
 					<div class="tour-overlay">
 						<h2>{{ tour.place_name }}</h2>
 						<p>Price: ₹{{ tour.price_trip }}</p>
@@ -361,8 +365,13 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- *****************************REVIEW ************************ -->
+	<div style="display: flex; justify-content: center; align-items: center;"  >
+		<button class="see-all-btn" ><a [routerLink]="['/des',16]"
+			 style="text-decoration: none; color: white; font-size: 14px; ">
+			 Find More tours</a></button>
+	</div>
+	
+	<!-- *****************************REVIEW************************ -->
 	<div class="check" style="position: relative">
 		<button class="slider-btn left hide" onclick="SlideLeft()">&#10094;</button>
 		<button class="slider-btn right hide" onclick="SlideRight()">&#10095;</button>
