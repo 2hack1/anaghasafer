@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { error } from 'jquery';
 
 
 interface Tour {
@@ -446,9 +447,16 @@ export class ViewDeatailsComponent implements OnInit {
     }).catch((err)=>{
       console.error(err)
     })
-      // return;
+   // ************** EMAIL FOR THE USER  WHEN DO iT ORDER ******************************  
+    const user_order_mail =new FormData;
+  user_order_mail.append('name',sessionStorage.getItem('name'))
+  user_order_mail.append('email',sessionStorage.getItem('email'));
+this.as_.orderEmail(user_order_mail).then((res:any)=>{
+  console.log("email api has been work");
+}).catch((erro:any)=>{
+  console.error(erro);
+})
     }
-  
   }
 
   countTravler() {

@@ -120,7 +120,7 @@ this.passwordTooShort = f.length !== 6;
 
       this.us_.userRegister(this.all_data).subscribe((res: any) => {
 
-        this.us_.login(res.access_token,res.user.email,res.user.name,res.id);
+        this.us_.login(res.access_token,res.user.email,res.user.name,res.user.id);
         
         this.closeLogin();
 

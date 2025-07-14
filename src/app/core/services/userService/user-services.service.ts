@@ -34,7 +34,7 @@ userRegister(data:any) {
   }
 
   login(token: string,email:string,name:string,id:any) {
-   
+    
     sessionStorage.setItem('token',token);
     sessionStorage.setItem('email',email);
     sessionStorage.setItem('name',name);

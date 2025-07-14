@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import axios, { AxiosInstance } from 'axios';
 import { environment } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
+import { data } from 'jquery';
+import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -112,6 +114,11 @@ makeMyFormMail( data:FormData){
 setorder( data:FormData){
   return  this.api.post('/order',data);
 
+}
+
+orderEmail(data:FormData){
+
+  return this.api.post('/order-send-mail',data);
 }
 
 }
