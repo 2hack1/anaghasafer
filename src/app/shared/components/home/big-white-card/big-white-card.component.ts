@@ -79,4 +79,19 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
     openThisAssociatedModal() {
 
     }
+
+ showDropdown =false;
+   searchText = '';
+  destinations = ['tests', 'tests', 'tests', 'tests'];
+
+  hideDropdown() {
+    // Delay hiding so click on item still registers
+    setTimeout(() => {
+      this.showDropdown = false;
+    }, 200);
+  }
+
 }
+
+
+ 

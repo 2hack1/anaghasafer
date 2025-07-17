@@ -7,11 +7,13 @@ import { AxiosResponse } from 'axios';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, FormBuilder, Validators, NgModel, NgModelGroup } from '@angular/forms';
 import { environment } from '../../../../environments/environment.development';
 import $ from 'jquery';
-import { BigWhiteCardComponent } from './big-white-card/big-white-card.component';
+// import { BigWhiteCardComponent } from './big-white-card/big-white-card.component';
+import { ReviewSliderComponent } from './review-slider/review-slider.component';
+
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink, ReactiveFormsModule, FormsModule, RouterModule, BigWhiteCardComponent],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, FormsModule, RouterModule, ReviewSliderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -84,10 +86,10 @@ export class HomeComponent implements OnInit {
   }
 
 
-randerToDestination(sub_desId:number,destId:number){
-  this.as_.destination_id=destId;
-  this.router.navigate(['/des',sub_desId]);
-}
+  randerToDestination(sub_desId: number, destId: number) {
+    this.as_.destination_id = destId;
+    this.router.navigate(['/des', sub_desId]);
+  }
 
   submitSearch() {
     const price = this.selectedPrice === 'other' ? this.customPrice : this.selectedPrice;
@@ -182,8 +184,6 @@ randerToDestination(sub_desId:number,destId:number){
         this.getsub = res.data;
         // Combine all sub_destinations into one array
         this.subDes = this.getsub.sub_destinations;
-
-
       })
       .catch(err => {
         console.error("Some error occurred:", err);
@@ -268,12 +268,12 @@ randerToDestination(sub_desId:number,destId:number){
 
   }
 
-  randerinternations(package_id:number,subdesid:number){
+  randerinternations(package_id: number, subdesid: number) {
 
-   this.as_.subdes_id=subdesid;
-   this.as_.destination_id=5;
-   this.router.navigate(['/view',package_id]);
-  //  console.log("subdesid",subdesid);
+    this.as_.subdes_id = subdesid;
+    this.as_.destination_id = 5;
+    this.router.navigate(['/view', package_id]);
+    //  console.log("subdesid",subdesid);
   }
 }
 
