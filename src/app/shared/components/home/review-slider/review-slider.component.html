@@ -1,0 +1,21 @@
+<h2 style="font-size: 2rem;">My AnaghaSafar Story !</h2>
+<br>
+<p style="color: #cfd9de;">Customer satisfaction is our major goal. See what our customers are saying about us.</p>
+<div class="testimonial-wrapper">
+ <div class="slider-container">
+  <div class="slider">
+   <div class="card-track" [style.transform]="'translateX(-' + index * cardWidth + 'px)'">
+    <div class="testimonial-card" *ngFor="let testimonial of testimonials">
+     <p style="color: black;">
+      {{ testimonial.message }}
+      <span style="color: red;">...Show More</span>
+     </p>
+     <img [src]="testimonial.img" alt="user" class="user-img">
+     <h4 style="color: black;">{{ testimonial.name }}</h4>
+    </div>
+   </div>
+  </div>
+ </div>
+ <button class="nav-btn left" (click)="prevSlide()">&#8592;</button>
+ <button class="nav-btn right" (click)="nextSlide()">&#8594;</button>
+</div>

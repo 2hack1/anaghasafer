@@ -79,46 +79,4 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
     openThisAssociatedModal() {
 
     }
-
-showModal = false;
-
-  guestCounts = {
-    adults: 2,
-    children: 0,
-      rooms: 1,
-  };
-
-  guestTypes = [
-    { type: 'adults', label: 'Adults' },
-    { type: 'children', label: 'Children' },
-    { type: 'rooms', label: 'Rooms' },
-  ];
-
-  get totalGuests(){
-  return {
-    Guests: this.guestCounts.adults + this.guestCounts.children,
-    rooms: this.guestCounts.rooms
-  };
-    // return this.guestCounts.adults + this.guestCounts.children , this.guestCounts.rooms;
-  }
-
-  openModal() {
-    this.showModal = true;
-  }
-
-  closeModal() {
-    this.showModal = false;
-  }
-
-  increase(type: string) {
-    this.guestCounts[type]++;
-  }
-
-  decrease(type: string) {
-    if (this.guestCounts[type] > 0) {
-      this.guestCounts[type]--;
-    }
-  }
-
-
 }

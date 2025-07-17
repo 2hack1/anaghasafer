@@ -8,7 +8,7 @@ import { ViewDeatailsComponent } from './shared/components/view-deatails/view-de
 import { ContactusComponent } from './shared/components/contactus/contactus.component';
 import { AboutusComponent } from './shared/components/aboutus/aboutus.component';
 import { FilterpackagesComponent } from './shared/components/filterpackages/filterpackages.component';
-
+import { ReviewSliderComponent } from './shared/components/home/review-slider/review-slider.component';
 
 
 export const routes: Routes = [
@@ -43,6 +43,10 @@ export const routes: Routes = [
     }, {
         path: "home",
         component: HomeComponent
+    },
+    {
+        path: "ReviewSliderComponent",
+        component: ReviewSliderComponent
     }
 ]
 

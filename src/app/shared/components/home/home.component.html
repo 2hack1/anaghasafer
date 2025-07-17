@@ -1,6 +1,4 @@
 <div style="position: relative;">
-
-
 	<!-- THIS IS HIDDEN , NO USE OF THIS -->
 	<div class="slider-wrapper" style="display: none;">
 		<div class="slider">
@@ -133,6 +131,7 @@
 									</div>
 								</div>
 
+
 								<!-- modal -->
 								<div class="dropdown-modal" id="hotel-destination-modal" style="display: none">
 									<input type="text" (ngModel)="(hotel.destination)" class="input-field"
@@ -263,16 +262,12 @@
 		<!-- <img src="assets/image.webp" alt="Buildings" class="building-graphic" /> -->
 	</div>
 	<!-- THIS IS HIDDEN , NO USE OF THIS -->
-
-	<app-big-white-card></app-big-white-card>
-
-
+	<!-- <app-big-white-card></app-big-white-card> -->
 	<div class="container">
 		<div class="main-heading">
 			<h2></h2>
 		</div>
 	</div>
-
 	<div class="container">
 		<!-- <div class="header">
         <h2>Top Trending India's Destinations</h2>
@@ -282,7 +277,6 @@
             <span>&#10140;</span>
         </a>
     </div> -->
-
 		<div class="header">
 			<div>
 				<!-- give me description about this  -->
@@ -319,12 +313,10 @@
 			<button class="scroll-btn right" (click)="scrollRight()">&#10095;</button>
 		</div>
 	</div>
-
 	<!-- *************************four cards***************************  -->
 	<section class="section01" style="background: url('assets/fourcard.webp') no-repeat center center/cover">
 		<h2>Tailored Solutions for Every Traveller</h2>
 		<!-- <div class=""> -->
-
 		<div class="cards01">
 			<div class="card01" *ngFor="let card of fourcart">
 				<div class="card01-wrapper">
@@ -340,22 +332,17 @@
 	<div class="tour-container">
 		<div class="tour-subtitle"><span></span>OVERSEAS JOURNEY</div>
 		<h1 class="tour-heading">INTERNATIONAL TOURS</h1>
-	
-
-			<p class="tour-description">
-				Travel India Tourism Services offer the finest tour packages,
-				custom-tailored to your unique international travel plans and preferences. <br>
-			</p>
-			
-			
-			
-			<!-- <<<<<<< HEAD -->
-			<div class="tour-cards">
-				<div class="tour-card" *ngFor="let tour of subDesinter; let i = index">
-					<a (click)="randerinternations(tour.package_id,tour.sub_destination_id)" class="tour-link">
-						<!-- [routerLink]="['/view', tour.package_id]" -->
+		<p class="tour-description">
+			Travel India Tourism Services offer the finest tour packages,
+			custom-tailored to your unique international travel plans and preferences. <br>
+		</p>
+		<!-- <<<<<<< HEAD -->
+		<div class="tour-cards">
+			<div class="tour-card" *ngFor="let tour of subDesinter; let i = index">
+				<a (click)="randerinternations(tour.package_id,tour.sub_destination_id)" class="tour-link">
+					<!-- [routerLink]="['/view', tour.package_id]" -->
 					<img [src]="`${env.backend_url}/storage/` + (tour.images?.[0]?.img || 'default.jpg')"
-					[alt]="tour.place_name" />
+						[alt]="tour.place_name" />
 					<div class="tour-overlay">
 						<h2>{{ tour.place_name }}</h2>
 						<p>Price: ₹{{ tour.price_trip }}</p>
@@ -365,29 +352,29 @@
 			</div>
 		</div>
 	</div>
-	<div style="display: flex; justify-content: center; align-items: center;"  >
-		<button class="see-all-btn" ><a [routerLink]="['/des',16]"
-			 style="text-decoration: none; color: white; font-size: 14px; ">
-			 Find More tours</a></button>
+	<div style="display: flex; justify-content: center; align-items: center;">
+		<button class="see-all-btn"><a [routerLink]="['/des',16]"
+				style="text-decoration: none; color: white; font-size: 14px; ">
+				Find More tours</a></button>
 	</div>
-	
 	<!-- *****************************REVIEW************************ -->
 	<div class="check" style="position: relative">
-		<button class="slider-btn left hide" onclick="SlideLeft()">&#10094;</button>
-		<button class="slider-btn right hide" onclick="SlideRight()">&#10095;</button>
+		<!-- <button class="slider-btn left hide" onclick="SlideLeft()">&#10094;</button>
+		<button class="slider-btn right hide" onclick="SlideRight()">&#10095;</button> -->
 		<section class="testimonial-section">
-			<h2>My AnaghaSafar Story !</h2>
+			<!-- <h2>My AnaghaSafar Story !</h2>
 			<p class="subtitle">
 				Customer satisfaction is our major goal. See what our customers are saying
 				about us.
-			</p>
-
+			</p> -->
 			<div class="slider-container">
-				<button class="slider-btn left hides" onclick="SlideLeft()">
+				<!-- <button class="slider-btn left hides" onclick="SlideLeft()">
 					&#10094;
-				</button>
+				</button> -->
 
-				<div class="slider-track" #sliderTrack>
+				<app-review-slider></app-review-slider>
+
+				<!-- <div class="slider-track" #sliderTrack>
 					<div class="testimonial-card">
 						<p class="quote">❝</p>
 						<p class="message">
@@ -435,13 +422,11 @@
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<button class="slider-btn right hides" onclick="SlideRight()">
+				</div> -->
+				<!-- <button class="slider-btn right hides" onclick="SlideRight()">
 					&#10095;
-				</button>
+				</button> -->
 			</div>
-
 			<button class="see-all-btn">See All</button>
 		</section>
 	</div>
@@ -457,7 +442,6 @@
 						<input type="email" placeholder="detionation address" formControlName="destination_address"
 							required />
 					</div>
-
 					<!-- Email -->
 					<div *ngIf="checkEmail" style="color: red; font-size: 14px; margin-top: 5px">
 						Password and Confirm Password do not match.
@@ -465,7 +449,6 @@
 					<div class="input-group1">
 						<input type="email" placeholder="Your Email" formControlName="email" required />
 					</div>
-
 					<div class="input-group1">
 						<div>
 							<label>Check In</label>
@@ -476,7 +459,6 @@
 							<input type="date" formControlName="check_out" />
 						</div>
 					</div>
-
 					<div class="input-group1">
 						<div class="number-field1">
 							<label><i class="fas fa-user1"></i> Adults</label>
@@ -487,13 +469,11 @@
 							<input type="number" value="0" min="0" formControlName="children" />
 						</div>
 					</div>
-
 					<button type="submit1" id="button1" (click)="makeMytrip()">
 						Submit Now
 					</button>
 				</form>
 			</div>
-
 			<div class="info-box1">
 				<h2>Contact Information</h2>
 				<p>If you have any questions, feel free to reach out to us.</p>
