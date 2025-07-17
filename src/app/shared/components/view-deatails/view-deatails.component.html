@@ -146,9 +146,7 @@
                 <img src="/assets/icons/marker.png" alt="Spiti Road Trip">
                 <strong class="" style="font-size: 1.2rem; font-weight: normal;">{{days.day}}: </strong>
                 <span style="font-size: 1.1rem;"> {{ days.title }}</span>
-                <button class="arrow-button" [ngClass]="{ 'rotate': {opens} }">
-
-                </button>
+                <button class="arrow-button" [ngClass]="{ 'rotate': {opens} }"> </button>
             </div>
             <div class="day-content">
                 <p>{{ days.detail }}</p>
@@ -166,7 +164,7 @@
                 {{ months.year }}
             </button>
         </div>
-        <div class="size" style="height: auto; padding: 10px;">
+        <!-- <div class="size" style="height: auto; padding: 10px;">
             <div class="card">
                 <div class="tour-date" *ngFor="let tours of date">
 
@@ -175,8 +173,46 @@
                         tours.availability }}</span>
                 </div>
             </div>
-        </div>
+        </div> -->
+   
+   <!-- <div class="size" style="height: auto; padding: 10px;">
+  <div class="card">
+    <div class="tour-date" *ngFor="let tours of date">
+      <span>{{ tours.start_date }} to {{ tours.end_date }}</span>
+
+      <span
+        class="label open1"
+        [class.disabled]="tours.availability === 'close'"
+        [style.cursor]="tours.availability === 'lose' ? 'not-allowed' : 'pointer'"
+        (click)="tours.availability !== 'Close' && openPopup11(tours.date_id, tours.start_date, tours.end_date)"
+      >
+        {{ tours.availability }}
+      </span>
     </div>
+  </div>
+</div> -->
+
+<div class="size" style="height: auto; padding: 10px;">
+  <div class="card">
+    <div class="tour-date" *ngFor="let tours of date">
+      <span>{{ tours.start_date }} to {{ tours.end_date }}</span>
+
+      <span
+        class="label open1"
+        [ngClass]="{
+          'open': tours.availability === 'open',
+          'hurry': tours.availability === 'hurry up',
+          'disabled': tours.availability === 'Close'
+        }"
+        [style.cursor]="tours.availability === 'close' ? 'not-allowed' : 'pointer'"
+        (click)="tours.availability !== 'close' && openPopup11(tours.date_id, tours.start_date, tours.end_date)"
+      >
+        {{ tours.availability }}
+      </span>
+    </div>
+  </div>
+</div>
+</div>
 
 </div>
 

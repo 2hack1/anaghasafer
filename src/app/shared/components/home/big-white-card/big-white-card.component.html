@@ -41,8 +41,7 @@ position: relative;">
                 <div class="menu_container">
 
                     <!-- hotel text -->
-                    <p
-                        style="color: #666;margin: 0; text-align: center; font-size: 14px; padding: 1rem 0;font-weight: bold;">
+                    <p style="color: #666;margin: 0; text-align: center; font-size: 14px; padding: 1rem 0;font-weight: bold;">
                         Book your
                         perfect stay and
                         customize your
@@ -61,8 +60,8 @@ position: relative;">
                                 <div>
                                     <h4>City or Location</h4>
                                     <p class="destination" id="destination-name" style="margin-top: 5px">
-                                        <strong style="text-transform: capitalize">{{
-                                            hotel.destination
+                                        <strong style="text-transform: capitalize">
+                                            {{hotel.destination
                                             }}</strong>
                                     </p>
                                 </div>
@@ -112,20 +111,6 @@ position: relative;">
                                     ">
                                 </div>
                             </div>
-                            <!-- <div class="dropdown-modal" id="hotel-checkin-modal" style="display: none">
-                                <input type="text" (ngModel)="(hotel.destination)" class="input-field"
-                                    placeholder="Search for destination" />
-                                <div style="padding: 5px">
-                                    <p class="header">Enter destination name</p>
-
-                                    <ng-container *ngFor="let i of [1, 1, 1, 1]">
-                                        <button type="button" class="select-destionation-button"
-                                            (click)="hotel.destination = i + ''; closeAllModal()">
-                                            tests
-                                        </button>
-                                    </ng-container>
-                                </div>
-                            </div> -->
                         </div>
 
                         <div class="divider"></div>
@@ -157,26 +142,39 @@ position: relative;">
                             </div>
                         </div>
                         <div class="divider"></div>
-                        <div class="item">
-                            <div style="
-                  display: flex;
-                  align-items: center;
-                  gap: 2rem;
-                  height: 100%;">
-                                <i class="bi bi-person"></i>
-                                <div style="
-                    display: flex;
-                    flex-direction: column;
-                    flex: 1;
-                    height: 100%;
-                  ">
-                                    <h4 class="">Room and Guest</h4>
-                                    <p class="check-in-out" style="margin-top: auto">
-                                        <strong>2 Guests, 1 Room</strong>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                   
+<div class="item" (click)="openModal()" style="cursor: pointer;">
+  <div style="display: flex; align-items: center; gap: 2rem; height: 100%;">
+    <i class="bi bi-person"></i>
+    <div style="display: flex; flex-direction: column; flex: 1; height: 100%;">
+      <h4 class="">Room and Guest</h4>
+      <p class="check-in-out" style="margin-top: auto">
+        <strong>{{ totalGuests.Guests }}  Guests, {{totalGuests.rooms}}Room</strong>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div *ngIf="showModal" class="modal-overlay">
+  <div class="modal-box">
+    <h3>Select Guests</h3>
+
+    <div class="counter-row" *ngFor="let item of guestTypes">
+      <label>{{ item.label }}</label>
+      <div class="counter">
+        <button (click)="decrease(item.type)">-</button>
+        <span>{{ guestCounts[item.type]}}</span>
+        <button (click)="increase(item.type)">+</button>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button (click)="closeModal()">Done</button>
+    </div>
+  </div>
+</div>
+
                     </div>
                     <!-- trending hotels -->
                     <div style="text-align: center; flex: 1;margin-top: 10px;">

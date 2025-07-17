@@ -1367,3 +1367,25 @@ table {
   cursor: pointer;
   z-index: 2001;
 }
+
+
+.label.open1 {
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+}
+
+.label.open {
+  background-color: #28a745; /* Green */
+}
+
+.label.hurry {
+  background-color: #dc3545; /* Red */
+}
+
+
+.label.disabled {
+  opacity: 0.5;
+  pointer-events: none; /* Prevents click */
+}
