@@ -7,13 +7,13 @@ import { AxiosResponse } from 'axios';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, FormBuilder, Validators, NgModel, NgModelGroup } from '@angular/forms';
 import { environment } from '../../../../environments/environment.development';
 import $ from 'jquery';
-// import { BigWhiteCardComponent } from './big-white-card/big-white-card.component';
 import { ReviewSliderComponent } from './review-slider/review-slider.component';
+import { BigWhiteCardComponent } from './big-white-card/big-white-card.component';
 
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink, ReactiveFormsModule, FormsModule, RouterModule, ReviewSliderComponent],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, FormsModule, RouterModule, ReviewSliderComponent,BigWhiteCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
