@@ -99,7 +99,6 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
             Guests: this.guestCounts.adults + this.guestCounts.children,
             rooms: this.guestCounts.rooms
         };
-        // return this.guestCounts.adults + this.guestCounts.children , this.guestCounts.rooms;
     }
 
     openModal() {
