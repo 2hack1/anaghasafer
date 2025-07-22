@@ -210,7 +210,7 @@
 
 .modal-overlay {
   position: fixed;
- 
+
   top: 219px;
   left: 280px;
   width: 100%;
@@ -224,7 +224,7 @@
 .modal-box {
   background: white;
   width: 536px;
-  // height: 329px;
+  height: 329px;
   border-radius: 10px;
   padding: 20px;
   display: flex;
@@ -236,12 +236,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: px 0;
+  margin: 20px;
 }
 
 .counter button {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   font-size: 20px;
   font-weight: bold;
 }
@@ -254,4 +254,6 @@
 
 .modal-actions {
   text-align: right;
+  border: none;
+  border-color: white;
 }
