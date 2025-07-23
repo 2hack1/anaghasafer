@@ -2,8 +2,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import $ from 'jquery';
-
-
 @Component({
     selector: 'app-big-white-card',
     imports: [CommonModule],
@@ -90,7 +88,9 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
 
     guestTypes = [
         { type: 'adults', label: 'Adults' },
-        { type: 'children', label: 'Children' },
+        {
+            type: 'children', label: 'Children'
+        },
         { type: 'rooms', label: 'Rooms' },
     ];
 
@@ -118,6 +118,8 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
             this.guestCounts[type]--;
         }
     }
+
+
 
 }
 
