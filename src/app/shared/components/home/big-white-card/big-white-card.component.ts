@@ -9,6 +9,8 @@ import $ from 'jquery';
     styleUrl: './big-white-card.component.scss'
 })
 export class BigWhiteCardComponent implements OnInit, AfterViewInit {
+   
+    isArrowUp=true;
     hotel = {
         destination: "Gwalior",
         checkIn: "",
@@ -20,6 +22,9 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
             guests: 1
         }
     }
+
+
+    
 
 
     ngAfterViewInit(): void {
@@ -74,9 +79,11 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
         });
     }
 
-    openThisAssociatedModal() {
+    // openThisAssociatedModal() {
 
-    }
+    // }
+ destination = ['Gwalior', 'Indore', 'Bhopal'];
+
 
     showModal = false;
 
@@ -95,6 +102,9 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
     ];
 
     get totalGuests() {
+        console.log("this.guestCounts.adults:",this.guestCounts.adults)
+        console.log("this.guestCounts.children:",this.guestCounts.children)
+        console.log("this.guestCounts.rooms:",this.guestCounts.rooms)
         return {
             Guests: this.guestCounts.adults + this.guestCounts.children,
             rooms: this.guestCounts.rooms
@@ -117,6 +127,25 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
         if (this.guestCounts[type] > 0) {
             this.guestCounts[type]--;
         }
+    }
+
+
+
+
+
+    showPriceDropdown = false;
+    priceOptions = ['0–1500', '1500–2500', '2500–5000', '5000-6000','6000+'];
+    selectedPrice = '';
+
+    togglePriceDropdown() {
+        this.showPriceDropdown = !this.showPriceDropdown;
+        this.isArrowUp=!this.isArrowUp;
+    }
+
+    selectPrice(price: string) {
+        this.selectedPrice = price;
+        this.showPriceDropdown = false;
+        console.log('Selected Price Range:', price);
     }
 
 
