@@ -9,7 +9,7 @@ import { UserServicesService } from '../../../core/services/userService/user-ser
   selector: 'app-header',
   imports: [CommonModule, LoginComponent, RouterLink],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+  styleUrl: './header.component.scss',    
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
@@ -23,7 +23,7 @@ import { UserServicesService } from '../../../core/services/userService/user-ser
   ]
 })
 export class HeaderComponent implements OnInit {
-
+   a:any;     // no used
   constructor(private us_: UserServicesService) { }
   isLogin = false
 
