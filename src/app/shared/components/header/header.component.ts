@@ -72,11 +72,6 @@ export class HeaderComponent implements OnInit {
 }
 
 
-
-
-
-
-
 // hotelsidebar
 
 // import { CommonModule } from '@angular/common';
@@ -111,6 +106,7 @@ export class HeaderComponent implements OnInit {
 
 
 // }
+
 // //////
 // <div class="container">
 //   <!-- Sidebar -->

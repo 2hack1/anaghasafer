@@ -1,0 +1,437 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  margin: 0;
+  color: #333;
+}
+
+.booking-container {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.left-content {
+  flex: 2;
+}
+
+.right-sidebar {
+  flex: 1;
+}
+
+.hotel-card,
+.info-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 16px;
+  background: #fff;
+  margin-bottom: 16px;
+}
+
+.hotel-title {
+  margin: 0;
+  font-size: 2px;
+  font-weight: bold;
+}
+
+.tags {
+  margin: 6px 0;
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+
+.tag.blue {
+  background: #e5f3ff;
+  color: #fff;
+}
+
+.tag.grey {
+  background: #eee;
+  color: #333;
+}
+
+.hotel-address {
+  font-size: 14px;
+  color: #555;
+}
+
+.checkin-out {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.check-block {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+.night-count {
+  background: #f2f2f2;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.stay-summary {
+  font-size: 12px;
+  color: #555;
+}
+
+.room-info ul {
+  padding-left: 20px;
+  margin: 4px 0;
+}
+
+.room-info p,
+.room-info ul {
+  font-size: 13px;
+}
+
+.link {
+  color: #0071c2;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Right Sidebar */
+.price-card,
+.coupon-card {
+  margin-top: 20px;
+  width: 20rem;
+  height: 24rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.price-card h4,
+.coupon-card h4 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+}
+
+.price-card .row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  padding: 6px 0;
+}
+
+.total-discount {
+  color: green;
+}
+
+.total {
+  font-weight: bold;
+}
+
+.coupon {
+  margin-top: 20px;
+  // border: 1px solid #ddd;
+  border: dotted #0071c2;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+.coupon.active {
+  border-color: #0071c2;
+  background: #f0f8ff;
+}
+
+.coupon label {
+  font-weight: bold;
+}
+
+.coupon .discount {
+  color: #0071c2;
+  margin-left: 6px;
+}
+
+.coupon .desc {
+  font-size: 12px;
+  color: #555;
+  margin: 4px 0 0;
+}
+
+.gift-note {
+  font-size: 12px;
+  background: #f5f2eb;
+  padding: 6px;
+  border-radius: 4px;
+  color: #7a5a2e;
+  margin-bottom: 8px;
+}
+
+.coupon-input {
+  display: flex;
+}
+
+.coupon-input input {
+  flex: 1;
+  padding: 6px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+}
+
+.coupon-input button {
+  background: #0071c2;
+  color: white;
+  border: none;
+  padding: 0 12px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+//
+.booking-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 16px;
+  max-width: 850px;
+  margin: 20px auto;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.hotel-name {
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0;
+}
+
+.tags {
+  margin: 6px 0;
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+
+.tag.blue {
+  background: #0071c2;
+  color: #fff;
+}
+
+.tag.grey {
+  background: #eee;
+  color: #333;
+}
+
+.hotel-address {
+  font-size: 14px;
+  color: #555;
+}
+
+.hotel-img {
+  width: 100px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Stay Info */
+.stay-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+.checkin,
+.checkout {
+  margin-left: 15px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 10px;
+  color: #555;
+  font-weight: bold;
+}
+
+.night-count {
+  background: #f2f2f2;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-left: 36px;
+}
+
+.stay-summary {
+  flex: 1;
+  text-align: right;
+  font-weight: bold;
+}
+
+/* Room Details */
+.room-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 13px;
+}
+
+.room-details ul {
+  margin: 4px 0;
+  padding-left: 18px;
+}
+
+.policy {
+  margin: 4px 0;
+  font-size: 15px;
+}
+
+.policy-link {
+  color: #0071c2;
+  text-decoration: none;
+}
+
+.policy-link:hover {
+  text-decoration: underline;
+}
+
+.see-inclusions {
+  color: #0071c2;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+
+
+/* ===========================
+   Responsive Styles
+   =========================== */
+
+/* Tablet and below */
+@media (max-width: 1024px) {
+  .booking-container {
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 10px;
+  }
+
+  .left-content,
+  .right-sidebar {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .price-card,
+  .coupon-card {
+    width: 100%;
+    height: auto;
+  }
+
+  .stay-info {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .stay-summary {
+    text-align: left;
+    flex-basis: 100%;
+    margin-top: 8px;
+  }
+}
+
+/* Mobile and below */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .hotel-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .stay-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .checkin,
+  .checkout {
+    margin-left: 0;
+    font-size: 16px;
+  }
+
+  .night-count {
+    margin-left: 0;
+  }
+
+  .room-details {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .see-inclusions {
+    align-self: flex-start;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .hotel-name {
+    font-size: 18px;
+  }
+
+  .price-card h4,
+  .coupon-card h4 {
+    font-size: 14px;
+  }
+
+  .policy {
+    font-size: 13px;
+  }
+
+  .coupon-input input {
+    font-size: 12px;
+  }
+
+  .coupon-input button {
+    padding: 0 8px;
+  }
+}

@@ -9,6 +9,8 @@ import { ContactusComponent } from './shared/components/contactus/contactus.comp
 import { AboutusComponent } from './shared/components/aboutus/aboutus.component';
 import { FilterpackagesComponent } from './shared/components/filterpackages/filterpackages.component';
 import { ReviewSliderComponent } from './shared/components/home/review-slider/review-slider.component';
+import { HotelListComponent } from './shared/components/hotel-list/hotel-list.component';
+import { ParticularHotelRoomDataComponent } from './shared/components/particular-hotel-room-data/particular-hotel-room-data.component';
 
 
 export const routes: Routes = [
@@ -47,6 +49,14 @@ export const routes: Routes = [
     {
         path: "ReviewSliderComponent",
         component: ReviewSliderComponent
+    },{
+        path:'Hotel-Rooms',
+        component:HotelListComponent
+    },
+    {
+        path:'paricular-hotel-room-data',
+         component: ParticularHotelRoomDataComponent
+
     }
 ]
 
