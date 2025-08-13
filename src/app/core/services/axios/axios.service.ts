@@ -120,5 +120,11 @@ orderEmail(data:FormData){
 
   return this.api.post('/order-send-mail',data);
 }
+getHotelRoomsWithExact(params:any){
+  return this.api.get('/hotel-available-rooms-exact',{params});
+}
+getHotelRoomsWithCombo(params:any){
+   return  this.api.get('/hotel-available-rooms-price',{params})
+}
 
 }

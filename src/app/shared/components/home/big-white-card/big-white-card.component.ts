@@ -1,18 +1,29 @@
 
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Axios } from 'axios';
 import $ from 'jquery';
+import { AxiosService } from '../../../../core/services/axios/axios.service';
 @Component({
     selector: 'app-big-white-card',
-    imports: [CommonModule],
+    imports: [CommonModule, FormsModule,CommonModule],
     templateUrl: './big-white-card.component.html',
     styleUrl: './big-white-card.component.scss'
 })
 export class BigWhiteCardComponent implements OnInit, AfterViewInit {
-   
-    isArrowUp=true;
+         hotelService = false;
+         destinationService = true;
+         a1=''
+         a2=''
+    isArrowUp = true;
+    minPrice = 0;
+    maxPrice = 1500;
+    tomorrow = new Date();
+
     hotel = {
-        destination: "Gwalior",
+        destination: "gwalior",
         checkIn: "",
         checkOut: "",
         extra: {
@@ -23,10 +34,27 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
         }
     }
 
+    constructor(private route: Router, private service: AxiosService) { }
+    ngOnInit(): void {
+        console.log("hotel", this.hotel)
+        const today = new Date();
 
-    
+        this.tomorrow.setDate(today.getDate() + 1);
 
+        this.hotel.checkIn = this.formatDate(today);
+        this.hotel.checkOut = this.formatDate(this.tomorrow);
+    }
 
+    private formatDate(date: Date): string {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+    onDateChange() {
+        console.log('CheckIn:', this.hotel.checkIn);
+        console.log('CheckOut:', this.hotel.checkOut);
+    }
     ngAfterViewInit(): void {
         $(document).on('click', function (event) {
             const $target = $(event.target);
@@ -57,7 +85,6 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
             }
         });
 
-
         $('.checkin-date').on('change', function () {
             let value = $(this).val()
             const minDate = new Date(value.toString());
@@ -71,40 +98,32 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
             console.log(value)
         })
     }
-    ngOnInit(): void { }
 
     closeAllModal() {
+
         $('.dropdown-modal').each(function () {
             $(this).hide();
         });
     }
 
-    // openThisAssociatedModal() {
 
-    // }
- destination = ['Gwalior', 'Indore', 'Bhopal'];
-
+    destination = ['gwalior', 'indore', 'bhopal'];
 
     showModal = false;
 
     guestCounts = {
         adults: 2,
-        children: 0,
+        children: 1,
         rooms: 1,
     };
 
     guestTypes = [
         { type: 'adults', label: 'Adults' },
-        {
-            type: 'children', label: 'Children'
-        },
+        { type: 'children', label: 'Children' },
         { type: 'rooms', label: 'Rooms' },
     ];
 
     get totalGuests() {
-        console.log("this.guestCounts.adults:",this.guestCounts.adults)
-        console.log("this.guestCounts.children:",this.guestCounts.children)
-        console.log("this.guestCounts.rooms:",this.guestCounts.rooms)
         return {
             Guests: this.guestCounts.adults + this.guestCounts.children,
             rooms: this.guestCounts.rooms
@@ -112,7 +131,7 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
     }
 
     openModal() {
-        this.showModal = true;
+        this.showModal = !this.showModal;
     }
 
     closeModal() {
@@ -129,25 +148,49 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
         }
     }
 
-
-
-
-
     showPriceDropdown = false;
-    priceOptions = ['0–1500', '1500–2500', '2500–5000', '5000-6000','6000+'];
-    selectedPrice = '';
+    priceOptions = ['0–1500', '1500–2500', '2500–5000', '5000-6000', '6000+'];
+    // selectedPrice = '';
 
     togglePriceDropdown() {
         this.showPriceDropdown = !this.showPriceDropdown;
-        this.isArrowUp=!this.isArrowUp;
+        this.isArrowUp = !this.isArrowUp;
     }
 
     selectPrice(price: string) {
-        this.selectedPrice = price;
+        // this.selectedPrice = price;
         this.showPriceDropdown = false;
-        console.log('Selected Price Range:', price);
+        const parts = price.split(/–|-/); // covers en dash and hyphen
+        if (parts.length === 2) {
+            this.minPrice = Number(parts[0].trim());
+            this.maxPrice = Number(parts[1].trim());
+        } else {
+            this.minPrice = Number(parts[0].trim());
+            this.maxPrice = this.minPrice;
+        }
     }
 
+    onSubmit() {
+       
+        const params = {
+            city: this.hotel.destination,
+            checkin: this.hotel.checkIn,
+            checkout: this.hotel.checkOut,
+            adults: this.guestCounts.adults,
+            children: this.guestCounts.children,
+            rooms: this.guestCounts.rooms,
+            min_price: this.minPrice,
+            max_price: this.maxPrice
+        };
+
+        if (this.maxPrice) {
+          this.route.navigate(['/Hotel-Rooms'], { queryParams: params });
+        } else {
+            alert("Please fill  the fields");
+        }
+
+
+    }
 
 
 }

@@ -1,0 +1,180 @@
+
+<div class="apartment-container">
+  <!-- Header -->
+  <div class="header-section">
+    <h2 style="margin-left: 10px;"><i class="fa fa-check-circle"></i> Ivy Retreat Apartments Baga</h2>
+    <p style="margin-left: 10px; ">Entire 1 or 2 BHK apartment units featuring a pool, kitchen & Wi-Fi</p>
+  </div>
+
+  <div class="content-grid">
+    <div class="cards-container">
+      <div *ngFor="let card of [1]" class="card">
+        <div class="right">
+          <img [src]="mainImage" class="main-image" alt="Main Hotel Image" />
+          <div class="thumbnails">
+            <img *ngFor="let img of images" [src]="img" class="thumbnail" (mouseenter)="onThumbnailHover(img)" />
+          </div>
+        </div>
+
+        <div class="travel-card">
+          <div class="card-image">
+            <img
+              src="https://r1imghtlak.mmtcdn.com/0f00d12b-9701-420b-b944-7cf35bc4d064.jpg?&output-quality=75&crop=520:350;2,0&output-format=jpg&downsize=540:*"
+              alt="Eiffel Tower" />
+          </div>
+          <div class="card-content">
+            <h3>2 Rooms Combo with Free Cancellation</h3>
+            <h6 class="location">Fits 3 Adults</h6>
+            <p class="location">Per night for 2 Rooms:</p>
+
+            <div style="display: flex;">
+              <h2>₹ 6,598</h2>
+              <sup>+792</sup>
+            </div>
+
+
+            <div class="tabs">
+              <button [class.active]="activeTab === 'description'"
+                (click)="activeTab = 'description'">Description</button>
+              <button [class.active]="activeTab === 'reviews'" (click)="activeTab = 'reviews'">Reviews</button>
+            </div>
+
+            <div class="tab-content" *ngIf="activeTab === 'description'">
+              <p>
+                way from the pristine Candolim Beach. The hotel offers well-appointed rooms, contemporary amenities, and
+                a warm, welcoming ambiance, making it ideal for both leisure and business travelers. Guests can enjoy
+                delicious dining options.<b style="color: #0D6EFD">...More</b>
+              </p>
+            </div>
+            <div class="tab-content" *ngIf="activeTab === 'reviews'">
+              <div class="rating">
+                <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+                <span class="score">(5.0)</span>
+              </div>
+              <div class="rating">
+                <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+                <span class="score">(4.0)</span>
+              </div>
+              <div class="rating">
+                <span>⭐</span><span>⭐</span><span>⭐</span>
+                <span class="score">(3.0)</span>
+              </div>
+            </div>
+
+            <div class="card-actions">
+              <button class="train">Train Ticket</button>
+              <button class="flight">Flight Ticket</button>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <!-- Apartment Info -->
+    <div class="apartment-info">
+      <h4>Entire Serviced Apartment</h4>
+      <div class="info-icons">
+        <span><i class="fa-solid fa-door-open" style="font-size: 25px;"></i><br>1 Bedroom</span>
+        <span style="margin-left: 9rem;"><i class="fa-solid fa-people-group" style="font-size: 25px; "></i> <br>Sleeps 4
+          guests</span>
+      </div>
+      <div class="info-box">
+        <img src="https://promos.makemytrip.com/AltAcco/Education_Icons/Entire.png" alt="Icon">
+        <div class="info-text">
+          <strong>What is an Entire Serviced Apartment?</strong>
+          <p>Get complete access to all bedrooms, living room, kitchen and more, with hotel-like amenities such as
+            Housekeeping, Toiletries, WiFi etc.</p>
+        </div>
+      </div>
+      <p class="description">
+        Experience the best of Goa at this gated property featuring apartments with kitchens, a shared pool & a lush
+        lawn.<b style="color: #008cff;">More</b>
+      </p>
+      <div class="property-section">
+
+        <!-- Tabs -->
+        <div class="tabs">
+          <div class="tab active">
+            <img src="https://img.icons8.com/ios-filled/50/4a90e2/building.png" class="tab-icon" />
+            <span>Property Highlights</span>
+          </div>
+          <div class="tab">
+            <img src="https://img.icons8.com/ios-filled/50/4a90e2/around-the-globe.png" class="tab-icon" />
+            <span>Activities & Nearby Attractions</span>
+          </div>
+        </div>
+
+        <!-- Amenities -->
+        <div class="amenities">
+          <h3 class="amenities-title">Amenities</h3>
+          <p class="amenities-subtitle"><img src="https://promos.makemytrip.com/altaccoimages/ugc/ugc_amenities2.webp"
+              alt="" style="width: 20px;">
+            Amenities rated <span class="highlight">3.8</span> by guests
+          </p>
+
+          <div class="amenities-list">
+            <div class="amenity-item">
+              <img src="https://img.icons8.com/ios-filled/50/999999/swimming-pool.png" />
+              <span>Swimming Pool</span>
+            </div>
+            <div class="amenity-item">
+              <img src="https://promos.makemytrip.com/images/highlighted/caretaker.png" />
+              <span>Caretaker</span>
+            </div>
+            <div class="amenity-item">
+              <img src="https://img.icons8.com/ios-filled/50/999999/broom.png" />
+              <span>Housekeeping</span>
+            </div>
+            <div class="amenity-item">
+              <img src="https://img.icons8.com/ios-filled/50/999999/wifi.png" />
+              <span>Free Wi-Fi</span>
+            </div>
+            <div class="amenity-item">
+              <span class="checkmark">✔</span>
+              <span>Elevator/Lift</span>
+            </div>
+            <div class="amenity-item">
+              <img src="https://img.icons8.com/ios-filled/50/999999/washing-machine.png" />
+              <span>Washing Machine</span>
+            </div>
+            <div class="amenity-item">
+              <img src="https://img.icons8.com/ios-filled/50/999999/kitchen-room.png" />
+              <span>Kitchenette</span>
+            </div>
+            <div class="amenity-item">
+              <img src="https://img.icons8.com/ios-filled/50/999999/sofa.png" />
+              <span>Living Room</span>
+            </div>
+            <div class="amenity-item">
+              <span class="checkmark">✔</span>
+              <span>Dining Area</span>
+            </div>
+            <div class="amenity-item">
+              <span class="checkmark">✔</span>
+              <span>Paid Public Parking</span>
+            </div>
+          </div>
+
+          <a href="#" class="more-link">+ More Amenities</a>
+        </div>
+
+        <!-- Login Box -->
+        <div class="login-box">
+          <h4>Login to unlock deals & manage your bookings!</h4>
+          <div class="login-form">
+            <label>Mobile Number</label>
+            <div class="input-row">
+              <span class="country-code">+91</span>
+              <input type="text" placeholder="Enter mobile number" />
+              <button style="margin-left: 10px; width: 9rem; height: 2rem;">Login now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+
