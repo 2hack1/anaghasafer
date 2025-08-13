@@ -30,8 +30,10 @@ export class HeaderComponent implements OnInit {
   isHidden = false;
   lastScrollTop = 0;
 
-  // login =false;
-  // logout=true;
+  name: string = 'Kapil Agrawal';
+firstLetter: string = '';
+bgColor: string = '';
+
 
   @HostListener('window:scroll', [])
   onScroll(): void {
@@ -54,13 +56,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     // const token = localStorage.getItem('token');
     // this.isLoggedIn = !!token; 
+  this.firstLetter = this.name.charAt(0).toUpperCase();
+  this.bgColor = this.getColorForLetter(this.firstLetter);
 
     this.us_.isLoggedIn$.subscribe((status: boolean) => {
       this.isLoggedIn = status;
     });
   }
-
-
 
   logout() {
     this.us_.logout();
@@ -69,11 +71,19 @@ export class HeaderComponent implements OnInit {
   openLoginModal() {
     this.isLogin = true;
   }
+
+
+getColorForLetter(letter: string): string {
+  const colors: { [key: string]: string } = {
+    A: '#FF5733', B: '#33B5FF', C: '#28A745', D: '#FFC300', E: '#9B59B6',
+    F: '#E74C3C', G: '#1ABC9C', H: '#F39C12', I: '#2ECC71', J: '#8E44AD',
+    K: '#3498DB', L: '#E67E22', M: '#16A085', N: '#C0392B', O: '#2980B9',
+    P: '#D35400', Q: '#27AE60', R: '#8E44AD', S: '#34495E', T: '#F1C40F',
+    U: '#7F8C8D', V: '#E84393', W: '#00CEC9', X: '#6C5CE7', Y: '#D63031',
+    Z: '#0984E3'
+  };
+  return colors[letter] || '#666'; // Default gray if not found
 }
 
-
-
-
-
-
+}
 

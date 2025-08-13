@@ -435,3 +435,194 @@ body {
     padding: 0 8px;
   }
 }
+
+// form section
+.guest-form {
+  max-width: 781px;
+  margin: auto;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h3 {
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+input, select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.checkbox {
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.login-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f0f7ff;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.login-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+  }
+}
+// 
+.trip-secure-container {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 16px;
+}
+
+.header-banner {
+  background: #e6f8f3;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  color: #007b66;
+  font-weight: bold;
+}
+
+.trip-secure-box {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-section h3 {
+  margin: 0;
+}
+
+.subtitle {
+  color: #0071c2;
+  margin-top: 4px;
+}
+
+.logo {
+  width: 90px;
+}
+
+.benefits-list {
+  margin: 16px 0;
+}
+
+.benefit {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.more-benefits {
+  color: #0071c2;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.price-section {
+  font-size: 16px;
+  margin: 12px 0;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.small {
+  font-size: 14px;
+  color: #555;
+}
+
+.gst {
+  font-size: 12px;
+  color: #888;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.success-message {
+  background: #e6f8e6;
+  padding: 8px;
+  border-radius: 6px;
+  color: #007b33;
+  font-weight: bold;
+}
+
+.agreement {
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.agreement a {
+  color: #0071c2;
+  text-decoration: none;
+}
+
+.pay-now {
+  background: linear-gradient(to right, #0071c2, #005ea1);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.pay-now:hover {
+  background: linear-gradient(to right, #005ea1, #003f73);
+}
+

@@ -171,3 +171,63 @@ nav {
         display: block !important;
     }
 }
+
+
+
+.avatar-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px; /* space between avatar and button */
+}
+
+.profile-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Hover glow */
+.profile-avatar::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: scale(0.8);
+}
+
+.profile-avatar:hover::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Down arrow button */
+.arrow-btn {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  color: #555;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.arrow-btn:hover {
+  color: #007bff;
+  transform: scale(1.2);
+}

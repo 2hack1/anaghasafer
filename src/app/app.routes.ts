@@ -11,6 +11,7 @@ import { FilterpackagesComponent } from './shared/components/filterpackages/filt
 import { ReviewSliderComponent } from './shared/components/home/review-slider/review-slider.component';
 import { HotelListComponent } from './shared/components/hotel-list/hotel-list.component';
 import { ParticularHotelRoomDataComponent } from './shared/components/particular-hotel-room-data/particular-hotel-room-data.component';
+import { HotelroominfoComponent } from './shared/components/hotelroominfo/hotelroominfo.component';
 
 
 export const routes: Routes = [
@@ -57,6 +58,9 @@ export const routes: Routes = [
         path:'paricular-hotel-room-data',
          component: ParticularHotelRoomDataComponent
 
+    },{
+            path:'room-info',
+            component: HotelroominfoComponent
     }
 ]
 

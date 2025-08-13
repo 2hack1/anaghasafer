@@ -257,3 +257,37 @@
   border: none;
   border-color: white;
 }
+
+
+
+.animated-text {
+    text-align: center;
+    font-size: 15px;
+    padding: 1rem 0;
+    font-weight: bold;
+    margin: 0;
+    animation: colorChange 4s infinite alternate;
+}
+
+@keyframes colorChange {
+    0% {
+        color: #666;
+        background-color: #fff;
+    }
+    25% {
+        color: #ff5733;
+        // background-color: #f0f0f0;
+    }
+    50% {
+        color: #007bff;
+        // background-color: #e0e0e0;
+    }
+    75% {
+        color: #28a745;
+        // background-color: #d0d0d0;
+    }
+    100% {
+        color: #6f42c1;
+        // background-color: #c0c0c0;
+    }
+}

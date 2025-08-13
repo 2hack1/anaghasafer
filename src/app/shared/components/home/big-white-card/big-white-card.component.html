@@ -23,32 +23,44 @@ position: relative;">
         <div class="__bg_white_menu">
             <!-- menus -->
             <div class="menu_options cus-shadow">
-                <button>
-                    <i class="bi bi-map active"></i>
-                </button>
-                <button>
-                    <i class="bi bi-building"></i>
-                </button>
-                <button>
-                    <i class="bi bi-train-front"></i>
-                </button>
-            </div>
+              <!-- First Button -->
+<button class="icon-btn"
+          (click)="setActive('destination')">
+    <i class="bi bi-map"
+       [class.active]="activeTab==='destination'"></i>
+  </button>
+
+  <!-- Hotel -->
+  <button class="icon-btn"
+          (click)="setActive('hotel')">
+    <i class="bi bi-building"
+       [class.active]="activeTab==='hotel'"></i>
+  </button>
+
+  <!-- Train (example third tab) -->
+  <button class="icon-btn"
+          (click)="setActive('train')">
+    <i class="bi bi-train-front"
+       [class.active]="activeTab==='train'"></i>
+  </button>
+
+</div>
 
             <!-- 
             center Direction box
              -->
-            <div style="height: 100%; width: 100%; position: relative;">
+            <div style="height: 100%; width: 100%; position: relative;" *ngIf="hotelService">
                 <div class="menu_container">
 
                     <!-- hotel text -->
-                    <p
-                        style="color: #666;margin: 0; text-align: center; font-size: 14px; padding: 1rem 0;font-weight: bold;">
+                    <p class="animated-text"
+                        style="color: #666;margin: 0; text-align: center; font-size: 16px; padding: 1rem 0;font-weight: bold;">
                         Book your
                         perfect stay and
                         customize your
                         hotel package just the
                         way you
-                        like it!</p>
+                        like it.......!</p>
 
                     <div class="items">
                         <div class="item destination">
@@ -70,17 +82,11 @@ position: relative;">
 
                             <!-- modal -->
                             <div class="dropdown-modal" id="hotel-destination-modal" style="display: none">
-                                <input type="text" (ngModel)="(hotel.destination)" class="input-field"
+                                <input type="text" [(ngModel)]="hotel.destination" class="input-field"
                                     placeholder="Search for destination" />
+
                                 <div style="padding: 5px">
                                     <p class="header">Enter destination name</p>
-
-                                    <!-- <ng-container *ngFor="let i of destination">
-                                        <button type="button" class="select-destionation-button"
-                                            (click)="hotel.destination = i + ''; closeAllModal()">
-                                           {{i}}
-                                        </button>
-                                    </ng-container> -->
                                     <ng-container *ngFor="let i of destination">
                                         <button type="button" class="select-destionation-button"
                                             (click)="hotel.destination = i; closeAllModal()">
@@ -107,15 +113,9 @@ position: relative;">
                                     height: 100%;
                                 ">
                                     <h4 class="">Check in</h4>
-                                    <!-- <p class="check-in-out" style="margin-top: auto">
-                                        <strong>--/--/--</strong>
-                                    </p> -->
-                                    <input class="checkin-date checkin" type="date" style="
-                                        margin-top: auto;
-                                        outline: none;
-                                        border: none;
-                                        padding: 5px;
-                                        font-weight: bold;">
+                                    <input class="checkin-date checkin" type="date" [(ngModel)]="hotel.checkIn"
+                                      
+                                        style="margin-top: auto; outline: none; border: none; padding: 5px; font-weight: bold;" />
                                 </div>
                             </div>
                         </div>
@@ -135,15 +135,10 @@ position: relative;">
                                     height: 100%;
                                 ">
                                     <h4 class="">Check Out</h4>
-                                    <!-- <p class="check-in-out" style="margin-top: auto">
-                                        <strong>--/--/--</strong>
-                                    </p> -->
-                                    <input class="checkout-date" type="date" style="
-                                        margin-top: auto;
-                                        outline: none;
-                                        border: none;
-                                        padding: 5px;
-                                        font-weight: bold;">
+
+                                    <input class="checkout-date" type="date" [(ngModel)]="hotel.checkOut"
+                                      style="
+                                      margin-top: auto; outline: none; border: none; padding: 5px; font-weight: bold;">
                                 </div>
                             </div>
                         </div>
@@ -162,7 +157,7 @@ position: relative;">
                                 </div>
                             </div>
                         </div>
-
+                        <div class="divider"></div>
                         <!-- Modal -->
                         <div *ngIf="showModal"
                             style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;  display: flex; justify-content: center; align-items: center; z-index: 1000; margin-top: 22rem; margin-left: 42rem;">
@@ -200,17 +195,12 @@ position: relative;">
                             <div (click)="togglePriceDropdown()" style="padding: 1rem;  cursor: pointer; ">
                                 <h4 style="margin: 0; font-size: 1rem; font-weight: 600; color: #007bff;">Price Per
                                     Night
-
-
                                     <span style="font-size: 0.8rem;">{{ isArrowUp ? '▲' : '▼' }}</span>
-
-
                                 </h4>
                                 <p style="margin: 0; color: #333;">
-                                    <strong>{{ selectedPrice || 'Select Range' }}</strong>
+                                    <strong>{{ minPrice +"-"+maxPrice  || 'Select Range' }}</strong>
                                 </p>
                             </div>
-
                             <div *ngIf="showPriceDropdown"
                                 style="position: absolute; top: 100%; left: 0; background: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); border-radius: 6px; z-index: 1000; min-width: 200px;">
                                 <div *ngFor="let price of priceOptions" (click)="selectPrice(price)"
@@ -268,11 +258,235 @@ position: relative;">
                     </div>
 
                     <div class="btn-container">
-                        <button class="btn-search cus-shadow">Search</button>
+                        <button class="btn-search cus-shadow"(click)="onSubmit()">Search</button>
                     </div>
                 </div>
 
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+ <div style="height: 100%; width: 100%; position: relative;" *ngIf="destinationService">
+                <div class="menu_container">
+
+                    <!-- hotel text -->
+                    <p 
+                        style="color: #666;margin: 0; text-align: center; font-size: 15px; padding: 1rem 0;font-weight: bold;">
+                        Book your
+                        perfect stay and
+                        customize your
+                        hotel package just the
+                        way you
+                        like it!</p>
+
+                    <div class="items">
+                        <div class="item destination">
+                            <div data-modalname="hotel-destination-modal" style="
+								display: flex;
+								align-items: center;
+								gap: 2rem;
+								position: relative;">
+                                <i class="bi bi-search" style="font-size: 2rem"></i>
+                                <div>
+                                    <h4>City or Location</h4>
+                                    <p class="destination" id="destination-name" style="margin-top: 5px">
+                                        <strong style="text-transform: capitalize">
+                                            {{hotel.destination
+                                            }}</strong>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- modal -->
+                            <div class="dropdown-modal" id="hotel-destination-modal" style="display: none">
+                                <input type="text" [(ngModel)]="hotel.destination" class="input-field"
+                                    placeholder="Search for destination" />
+
+                                <div style="padding: 5px">
+                                    <p class="header">Enter destination name</p>
+                                    <ng-container *ngFor="let i of destination">
+                                        <button type="button" class="select-destionation-button"
+                                            (click)="hotel.destination = i; closeAllModal()">
+                                            {{ i }}
+                                        </button>
+                                    </ng-container>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+
+                        <div class="item check-in-out">
+                            <div style="
+                                display: flex;
+                                align-items: center;
+                                gap: 2rem;
+                                height: 100%;
+                            ">
+                                <div style="
+                                    display: flex;
+                                    flex-direction: column;
+                                    flex: 1;
+                                    height: 100%;
+                                ">
+                                    <h4 class="">Check in</h4>
+                                    <input class="checkin-date checkin" type="date" [(ngModel)]="hotel.checkIn"
+                                      
+                                        style="margin-top: auto; outline: none; border: none; padding: 5px; font-weight: bold;" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="divider"></div>
+                        <div class="item check-in-out">
+                            <div style="
+                                display: flex;
+                                align-items: center;
+                                gap: 2rem;
+                                height: 100%;
+                            ">
+                                <div style="
+                                    display: flex;
+                                    flex-direction: column;
+                                    flex: 1;
+                                    height: 100%;
+                                ">
+                                    <h4 class="">Check Out</h4>
+
+                                    <input class="checkout-date" type="date" [(ngModel)]="hotel.checkOut"
+                                      style="
+                                      margin-top: auto; outline: none; border: none; padding: 5px; font-weight: bold;">
+                                </div>
+                            </div>
+                        </div>
+                    
+                     
+                        <div class="divider"></div>
+                        <!-- Modal -->
+                        <div *ngIf="showModal"
+                            style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;  display: flex; justify-content: center; align-items: center; z-index: 1000; margin-top: 22rem; margin-left: 42rem;">
+                            <div
+                                style="background-color: white; padding: 2rem; border-radius: 12px; width: 350px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);">
+                                <h3 style="margin-top: 0; font-size: 1.2rem; color: #333;">Select Guests</h3>
+
+                                <div *ngFor="let item of guestTypes"
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                                    <label style="font-weight: 500; color: #444;">{{ item.label }}</label>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <button (click)="decrease(item.type)"
+                                            style="background-color: #eee; border: none; border-radius: 5px; padding: 6px 10px; cursor: pointer;">
+                                            <i class="fa-solid fa-arrow-down" style="color: #333;"></i>
+                                        </button>
+                                        <span style="min-width: 20px; text-align: center; font-weight: 500;">{{
+                                            guestCounts[item.type]}}</span>
+                                        <button (click)="increase(item.type)"
+                                            style="background-color: #eee; border: none; border-radius: 5px; padding: 6px 10px; cursor: pointer;">
+                                            <i class="fa-solid fa-arrow-up" style="color: #333;"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div style="text-align: right; margin-top: 2rem;">
+                                    <button (click)="closeModal()"
+                                        style="width: 100px; height: 37px; background-color: #ff5f5f; color: white; border: none; border-radius: 6px; font-weight: 500; cursor: pointer;">
+                                        Apply
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-left: 1rem; position: relative;">
+                            <div (click)="togglePriceDropdown()" style="padding: 1rem;  cursor: pointer; ">
+                                <h4 style="margin: 0; font-size: 1rem; font-weight: 600; color: #007bff;">Price Per
+                                    Night
+                                    <span style="font-size: 0.8rem;">{{ isArrowUp ? '▲' : '▼' }}</span>
+                                </h4>
+                                <p style="margin: 0; color: #333;">
+                                    <strong>{{ minPrice +"-"+maxPrice  || 'Select Range' }}</strong>
+                                </p>
+                            </div>
+                            <div *ngIf="showPriceDropdown"
+                                style="position: absolute; top: 100%; left: 0; background: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); border-radius: 6px; z-index: 1000; min-width: 200px;">
+                                <div *ngFor="let price of priceOptions" (click)="selectPrice(price)"
+                                    style="padding: 10px; cursor: pointer; color: #333;"
+                                    onmouseover="this.style.backgroundColor='#f2f2f2'"
+                                    onmouseout="this.style.backgroundColor='white'">
+                                    ₹{{ price }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="item" (click)="openModal()" style="cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 2rem; height: 100%;">
+                                <i class="bi bi-person"></i>
+                                <div style="display: flex; flex-direction: column; flex: 1; height: 100%;">
+                                    <h4 class="">Room and Guest</h4>
+                                    <p class="check-in-out" style="margin-top: auto">
+                                        <strong>{{ totalGuests.Guests }} Guests, {{totalGuests.rooms}}Room</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- Modal -->
+                        <!-- <div *ngIf="showModal" class="modal-overlay">
+                            <div class="modal-box">
+                                <h3>Select Guests</h3>
+                                <div class="counter-row" *ngFor="let item of guestTypes">
+                                    <label>{{ item.label }}</label>
+                                    <div class="counter">
+                                        <button (click)="decrease(item.type)"><i
+                                                class="fa-solid fa-arrow-down"></i></button>
+                                        <span>{{ guestCounts[item.type]}}</span>
+                                        <button (click)="increase(item.type)">
+                                            <i class="fa-solid fa-arrow-up"></i></button>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <button (click)="closeModal()"
+                                        style="width: 100px; height: 37px; background-color: #ff5f5f;color: white; margin-top: 25px; margin-left: 10px;">Done</button>
+                                </div>
+                            </div>
+                        </div> -->
+
+                    </div>
+                    <!-- trending hotels -->
+                    <div style="text-align: center; flex: 1;margin-top: 10px;">
+                        <ul class="trending-places">
+                            <small>
+                                Trending Places
+                            </small>
+                            <li class="trending-place">Delhi</li>
+                            <li class="trending-place">Delhi</li>
+                            <li class="trending-place">Delhi</li>
+                        </ul>
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-search cus-shadow"(click)="onSubmit()">Search</button>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+            
         </div>
 
     </div>
