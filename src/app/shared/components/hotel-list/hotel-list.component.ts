@@ -42,12 +42,12 @@ export class HotelListComponent implements OnInit {
   };
   
   this.service.getHotelRoomsWithCombo(filter).then((res: any) => {
-              console.log("res Combo", res)
+              console.log("res Combo", res.data.non_matched_rooms)
           }).catch((err: any) => {
               console.log("err", err);
           })
             this.service.getHotelRoomsWithExact(filter).then((res: any) => {
-                console.log("res exact", res)
+                console.log("res exact", res.data.rooms)
             }).catch((err: any) => {
                 console.log("err", err);
             })
