@@ -247,52 +247,93 @@
   flex-direction: column;
   gap: 20px;
 }
-
-.card {
-  width: 70rem;
+.content-grid {
   display: flex;
-  align-items: flex-start;
+  flex-wrap: wrap; /* allows stacking on small screens */
   gap: 20px;
-  // border: 1px solid #ddd;
-  // border-radius: 6px;
-  background: #fff;
-  padding: 16px;
 }
 
-/* IMAGE SECTION */
-.right {
+.cards-container {
   flex: 1;
 }
 
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Left side: Main Image & Thumbnails */
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Fixed size main image */
 .main-image {
-  margin-left: -25px;
-  // margin-right: 0rem;
-  width: 55%;
-  height: 220%;
+  width: 792px;
+  height: 446px;
   object-fit: cover;
   border-radius: 10px;
 }
 
+/* Thumbnails */
 .thumbnails {
-  // margin-right: 33px;
   display: flex;
   gap: 8px;
   margin-top: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .thumbnail {
-  // gap: 20px;
-  // margin-left: -24px;
-  width: 8rem;
-  height: 6rem;
+  width: 120px;
+  height: 80px;
   object-fit: cover;
   border-radius: 4px;
   cursor: pointer;
   border: 1px solid #ccc;
+  transition: border-color 0.2s;
 }
 
 .thumbnail:hover {
   border-color: #0071c2;
+}
+
+/* Right side: Travel card content */
+.travel-card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  flex: 1;
+  min-width: 300px;
+}
+
+.card-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1024px) {
+  .main-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 792 / 446;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    align-items: center;
+  }
+  .main-image {
+    max-width: 100%;
+  }
 }
 
 /* ROOM INFO SECTION */

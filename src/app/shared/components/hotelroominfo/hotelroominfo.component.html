@@ -9,12 +9,20 @@
   <div class="content-grid">
     <div class="cards-container">
       <div *ngFor="let card of [1]" class="card">
-        <div class="right">
-          <img [src]="mainImage" class="main-image" alt="Main Hotel Image" />
-          <div class="thumbnails">
-            <img *ngFor="let img of images" [src]="img" class="thumbnail" (mouseenter)="onThumbnailHover(img)" />
-          </div>
-        </div>
+
+       
+  <div class="right">
+    <img [src]="mainImage" class="main-image" alt="Main Hotel Image" />
+    <div class="thumbnails">
+      <img *ngFor="let img of images" 
+           [src]="img" 
+           class="thumbnail" 
+           (mouseenter)="onThumbnailHover(img)" />
+    </div>
+  </div>
+
+
+
 
         <div class="travel-card">
           <div class="card-image">
