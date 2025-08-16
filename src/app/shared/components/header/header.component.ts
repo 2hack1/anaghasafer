@@ -66,6 +66,7 @@ bgColor: string = '';
 
   logout() {
     this.us_.logout();
+    this.isProfileMenuOpen= false;
   }
 
   openLoginModal() {
@@ -84,6 +85,25 @@ getColorForLetter(letter: string): string {
   };
   return colors[letter] || '#666'; // Default gray if not found
 }
+
+
+ 
+  
+    userName = 'Kapil Agarwal'; 
+    
+    userEmail = 'Kapila12@gmail.com';
+     isProfileMenuOpen = false; toggleProfileMenu()
+      { this.isProfileMenuOpen = !this.isProfileMenuOpen; }
+       goToProfile() { console.log('Navigating to profile...'); 
+
+       } goToSettings() { console.log('Navigating to settings...'); 
+
+       } 
+
+
+
+
+
 
 }
 

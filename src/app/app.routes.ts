@@ -59,7 +59,7 @@ export const routes: Routes = [
          component: ParticularHotelRoomDataComponent
 
     },{
-            path:'room-info',
-            component: HotelroominfoComponent
+        path:'room-info/:id',
+         component: HotelroominfoComponent
     }
 ]

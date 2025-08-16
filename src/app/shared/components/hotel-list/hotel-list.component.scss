@@ -325,3 +325,138 @@
   align-items: center;
   cursor: pointer;
 }
+
+
+// **************  search bar styles ************** //
+/* 🔍 Search Bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  // border: 2px solid #f9a825; /* orange border */
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 15px auto 20px;
+  background: #fff;
+  max-width: 95%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.search-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-right: 1px solid #f1c04e;
+  font-size: 14px;
+  color: #333;
+  gap: 8px;
+}
+
+.search-section:last-of-type {
+  border-right: none;
+}
+
+.search-text {
+  font-weight: 500;
+  color: #222;
+}
+
+
+.search-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.search-btn:hover {
+  background: #0056b3;
+}
+
+/* ✅ Responsive */
+@media (max-width: 992px) {
+  .search-bar {
+    flex-wrap: wrap;
+  }
+
+  .search-section {
+    flex: 1 1 100%;
+    border-right: none;
+    border-bottom: 1px solid #f1c04e;
+  }
+
+  .search-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .search-btn {
+    width: 100%;
+    border-radius: 0 0 6px 6px;
+  }
+}
+
+
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.search-card {
+    flex-direction: column;
+  }
+
+  .search-card {
+    display: flex;
+    flex-direction: row;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    gap: 20px;
+    flex-wrap: wrap;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+//  more amenities button
+
+.amenities-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.amenity {
+  background: #f1f1f1;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: default;
+}
+
+.amenity.more {
+  background: #d3d2cd;
+  cursor: pointer;
+  font-weight: 500;
+}
+.amenities-title {
+  font-weight: 800;   // extra bold
+  margin-bottom: 4px;
+}
+.thumbnail-wrapper {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 4px;
+}

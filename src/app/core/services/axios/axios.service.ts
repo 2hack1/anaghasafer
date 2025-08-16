@@ -127,4 +127,21 @@ getHotelRoomsWithCombo(params:any){
    return  this.api.get('/hotel-available-rooms-price',{params})
 }
 
+checavailability(id:any){
+ return this.api.post('/check-availability')
+
+//  hotel_roomId
+// check_in_date
+// check_out_date
+// rooms_booked
+//  roomType
+}
+
+getinfo(hotelId:any, roomId:any){
+
+  return this.api.get(`/hotels/${hotelId}/rooms/${roomId}`);
+  //  abhi  nahi lagaya yaad se laga lena
+}
+
+
 }

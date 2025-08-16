@@ -273,8 +273,8 @@
 
 /* Fixed size main image */
 .main-image {
-  width: 792px;
-  height: 446px;
+  width: 685px;
+  height: 382px;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -282,14 +282,14 @@
 /* Thumbnails */
 .thumbnails {
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 12px;
+  margin-top: 36px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .thumbnail {
-  width: 120px;
+  width: 108px;
   height: 80px;
   object-fit: cover;
   border-radius: 4px;
