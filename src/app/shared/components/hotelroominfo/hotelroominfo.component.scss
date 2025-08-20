@@ -588,11 +588,26 @@
   align-items: center;
 }
 
+// @media (max-width: 576px) {
+//   .input-row {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-start; /* optional, aligns to left */
+//     gap: 8px; /* space between inputs */
+//   }
+
+//   .input-row input,
+//   .input-row button {
+//     width: 100%; /* make inputs/buttons full width */
+//   }
+// }
+
+
 .country-code {
   padding: 8px;
   background: white;
   border: 1px solid #ccc;
-  border-radius: 4px 0 0 4px;
+  // border-radius: 4px 0 0 4px;
 }
 
 .input-row input {
@@ -698,7 +713,113 @@
 }
 
 .card-actions .flight {
-  background: #007bff;
+  // background: #007bff;
+  background-color: orange; 
+  font-weight: 400; font-size:20px;
   color: white;
   margin-left: 5px;
 }   
+
+// *********************page not found ***********************
+/* === Container === */
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #1e3c72, #ffffff);
+  color: #fff;
+  text-align: center;
+}
+
+/* === Content Box === */
+.content {
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* === Error Code === */
+.error-code {
+  font-size: 8rem;
+  font-weight: 800;
+  margin: 0;
+  color: #ff5100de;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+/* === Message === */
+.error-message {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+/* === Description === */
+.error-description {
+  font-size: 1rem;
+  margin: 15px 0 25px;
+  color: #e0e0e0;
+}
+
+/* === Button === */
+.home-btn {
+  background: #3e81da;
+  color: #1e3c72;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.home-btn:hover {
+  background: #2067d1;
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .error-code {
+    font-size: 5rem;
+  }
+  .error-message {
+    font-size: 1.5rem;
+  }
+  .error-description {
+    font-size: 0.9rem;
+  }
+  .home-btn {
+    width: 100%;
+  }
+}
+
+
+// .input-row {
+//   display: flex;
+//   align-items: center;
+//   gap: 8px;
+// }
+
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+// .flight:active {
+//   background-color: darkorange; /* change color while pressed */
+// }
+

@@ -1,30 +1,84 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  background:rgb(236, 231, 231);
+  background: rgb(236, 231, 231);
 }
 
 // /* Sidebar */
+// .sidebar-wrapper {
+//   flex: 0 0 220px;
+// }
+
+// .sidebar {
+//   // width: 20vw;
+//   // height: 20px;
+//   background-color: #fff;
+//   border-right: 1px solid #ddd;
+//   padding: 20px;
+//   box-sizing: border-box;
+//   position: sticky;
+//   top: 0;
+// }
+
+// .sidebar-header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   // margin-top: 20px;
+// }
+
+// .toggle-btn {
+//   background-color: white;
+//   color: black;
+//   padding: 6px 12px;
+//   font-size: 30px;
+//   border: none;
+//   border-radius: 20px;
+//   cursor: pointer;
+//   display: none; /* Shown only on small screen */
+// }
+
+// .filter-list {
+//   list-style: none;
+//   margin-top: 20px;
+//   padding-left: 0;
+// }
+
+// .filter-list li {
+//   margin-bottom: 12px;
+//   font-size: 15px;
+// }
+
+// .filter-list input {
+//   margin-right: 8px;
+// }
+
+// // 
+
+// *************************** updated on 16-08-2025 *************************** 
 .sidebar-wrapper {
   flex: 0 0 220px;
+  height: 100vh;
+  // Ensures full height sidebar 
 }
 
 .sidebar {
-  // width: 20vw;
-  // height: 20px;
   background-color: #fff;
   border-right: 1px solid #ddd;
   padding: 20px;
   box-sizing: border-box;
   position: sticky;
   top: 0;
+  height: 100vh; // Fixes height to viewport overflow-y: auto; 
+
+  // Makes vertical content scrollable 
 }
 
+/* Rest of your styles remain unchanged... */
 .sidebar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // margin-top: 20px;
 }
 
 .toggle-btn {
@@ -35,7 +89,8 @@
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  display: none; /* Shown only on small screen */
+  display: none;
+  /* Shown only on small screen */
 }
 
 .filter-list {
@@ -52,6 +107,37 @@
 .filter-list input {
   margin-right: 8px;
 }
+
+.selected {
+  color: #0084ff;
+  font-weight: bold;
+}
+
+.selected-filters {
+  margin-bottom: 12px;
+}
+
+.chip {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 10px;
+  background: #e3e3e3;
+  margin-right: 6px;
+  color: #0084ff;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.chip-remove {
+  background: none;
+  border: none;
+  color: #f00;
+  font-size: 15px;
+  cursor: pointer;
+  margin-left: 3px;
+}
+
+// ************************************ only *****************************
 
 /* Cards Container */
 .cards-container {
@@ -182,104 +268,113 @@
 
 
 .right {
-    flex: 2;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
+  flex: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .card-content {
-    flex: 2;
-    padding: 10px 0;
+  flex: 2;
+  padding: 10px 0;
 }
 
 .card-content h3 {
-    margin: 0 0 10px; /* Slightly bigger gap after heading */
-    font-size: 18px;
-    font-weight: bold;
-    color: #222;
-    line-height: 1.4; /* Adds breathing space inside heading */
+  margin: 0 0 10px;
+  /* Slightly bigger gap after heading */
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+  line-height: 1.4;
+  /* Adds breathing space inside heading */
 }
 
 .card-content p {
-    margin: 6px 0; /* Increased margin for vertical gap */
-    font-size: 14px;
-    color: #555;
-    line-height: 1.6; /* Adds vertical space inside text */
+  margin: 6px 0;
+  /* Increased margin for vertical gap */
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  /* Adds vertical space inside text */
 }
 
 
 .card-price {
-    flex: 1;
-    min-width: 150px;
-    padding: 15px;
-    background: #f5f8ff;
-    border-radius: 8px;
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+  flex: 1;
+  min-width: 150px;
+  padding: 15px;
+  background: #f5f8ff;
+  border-radius: 8px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
 }
 
 .rating {
-    font-weight: bold;
-    color: #0071c2;
-    margin-bottom: 6px;
-    font-size: 14px;
+  font-weight: bold;
+  color: #0071c2;
+  margin-bottom: 6px;
+  font-size: 14px;
 }
 
 .old-price {
-    text-decoration: line-through;
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 4px;
+  text-decoration: line-through;
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 4px;
 }
 
 .price {
-    font-size: 20px;
-    font-weight: bold;
-    color: #000;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
 }
 
 .card-price small {
-    font-size: 12px;
-    color: #777;
+  font-size: 12px;
+  color: #777;
 }
 
 /* On mobile, stack card content and price */
 @media (max-width: 768px) {
-    .right {
-        flex-direction: column;
-        gap: 10px;
-    }
-    .card-price {
-        text-align: left;
-        align-items: flex-start;
-        background: none;
-        padding: 0;
-        box-shadow: none;
-    }
+  .right {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card-price {
+    text-align: left;
+    align-items: flex-start;
+    background: none;
+    padding: 0;
+    box-shadow: none;
+  }
 }
 
 .hotel-card {
-    display: flex;
-    flex-direction: row;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    gap: 20px;
-    flex-wrap: wrap;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  gap: 20px;
+  flex-wrap: wrap;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Smooth hover effect */
 }
 
 .hotel-card:hover {
-    transform: scale(0.99); /* Slight zoom */
-    // box-shadow: 0 0px 0px rgba(0, 0, 0, 0.15); /* Elevation effect */
-    border-color: #b7bdc5; /* Subtle blue highlight */
+  transform: scale(0.99);
+  /* Slight zoom */
+  // box-shadow: 0 0px 0px rgba(0, 0, 0, 0.15); /* Elevation effect */
+  border-color: #b7bdc5;
+  /* Subtle blue highlight */
 }
+
 // .thumbnail {
 //     transition: transform 0.3s ease, opacity 0.3s ease;
 // }
@@ -338,7 +433,7 @@
   margin: 15px auto 20px;
   background: #fff;
   max-width: 95%;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .search-section {
@@ -412,19 +507,20 @@
 }
 
 .search-card {
-    flex-direction: column;
-  }
+  flex-direction: column;
+}
 
-  .search-card {
-    display: flex;
-    flex-direction: row;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    gap: 20px;
-    flex-wrap: wrap;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+.search-card {
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  gap: 20px;
+  flex-wrap: wrap;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Smooth hover effect */
 }
 
 //  more amenities button
@@ -449,14 +545,209 @@
   cursor: pointer;
   font-weight: 500;
 }
+
 .amenities-title {
-  font-weight: 800;   // extra bold
+  font-weight: 800; // extra bold
   margin-bottom: 4px;
 }
+
 .thumbnail-wrapper {
   position: relative;
   width: 60px;
   height: 60px;
   overflow: hidden;
   border-radius: 4px;
+}
+
+
+/* === Modal Backdrop (shared) === */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.25s ease;
+}
+
+/* === Base Modal Box (shared by all) === */
+.modal-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.3s ease;
+  font-family: "Inter", sans-serif;
+}
+
+.modal-box h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1f2937;
+  text-align: center;
+}
+
+/* === Guests Modal === */
+.guests-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.guest-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.guest-item label {
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.guest-item select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+}
+
+/* === Date Modal === */
+.date-modal label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #374151;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.date-modal input[type="date"] {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+}
+
+/* === City Modal === */
+.city-modal ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 20px 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.city-modal ul li {
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.city-modal ul li:hover {
+  background: #f3f4f6;
+}
+
+/* === Buttons (shared) === */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.close-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s ease;
+}
+
+.close-btn:first-child {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.close-btn:first-child:hover {
+  background: #e5e7eb;
+}
+
+.close-btn:last-child {
+  background: #2563eb;
+  color: #fff;
+}
+
+.close-btn:last-child:hover {
+  background: #1d4ed8;
+}
+
+/* === Animations === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ✅ Responsive Guests Modal */
+@media (max-width: 480px) {
+  .guests-row {
+    flex-direction: column;
+  }
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  /* default at top */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  border: none;
+  transition: none;
+  /* remove delay */
+}
+
+.sticky-header.scrolled {
+  background: transparent;
+  box-shadow: none;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  /* stays above content but below modal */
 }

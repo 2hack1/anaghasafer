@@ -1,48 +1,41 @@
 <div class="container">
-  <!-- Sidebar -->
+
+
+
+
+  <!-- updated on 16-08-2025 -->
   <div class="sidebar-wrapper">
-    <div class="sidebar">
-
-
-      <!-- Header + Toggle -->
+    <div class="sidebar"> <!-- Header + Toggle -->
+      <div class="sidebar-header"> <button class="toggle-btn" (click)="toggleFilters()">☰</button> </div>
+      <!-- Selected Filters as Chips -->
+      <div class="selected-filters" *ngIf="selectedPrices.length || selectedPlaceType"> <span
+          *ngFor="let price of selectedPrices" class="chip"> {{ price }} <button class="chip-remove"
+            (click)="removePrice(price)">×</button> </span> <span *ngIf="selectedPlaceType" class="chip"> {{
+          selectedPlaceType }} <button class="chip-remove" (click)="clearPlaceType()">×</button> </span> </div>
+      <!-- Price Filter -->
       <div class="sidebar-header">
-        <h3>Suggested For You</h3>
-        <button class="toggle-btn" (click)="toggleFilters()">☰</button>
+        <h4>Price per night</h4>
       </div>
-
-      <!-- Filters -->
       <ul class="filter-list" [class.show]="showFilters">
-        <li><label><input type="checkbox"> Last Min Deals</label></li>
-        <li><label><input type="checkbox"> Deals</label></li>
-        <li><label><input type="checkbox"> 5 Star</label></li>
-        <li><label><input type="checkbox"> North Goa</label></li>
-        <li><label><input type="checkbox"> Resorts</label></li>
-        <li><label><input type="checkbox"> Beachfront Properties</label></li>
-        <li><label><input type="checkbox"> Free Cancellation</label></li>
-        <li><label><input type="checkbox"> Villas</label></li>
-        <li><label><input type="checkbox"> Calangute</label></li>
-        <li><label><input type="checkbox"> Coimbatore</label></li>
-        <li><label><input type="checkbox"> Baga</label></li>
-        <li><label><input type="checkbox"> Anjuna</label></li>
-        <li><label><input type="checkbox"> Panjim</label></li>
-        <li><label><input type="checkbox"> South Goa</label></li>
+        <li *ngFor="let price of priceOptions"> <label [class.selected]="selectedPrices.includes(price.value)"> <input
+              type="checkbox" [checked]="price.selected" (change)="onSelectPrice(price)"> {{ price.label }} </label>
+        </li>
+      </ul> <!-- Place Type Filter -->
+      <div class="sidebar-header">
+        <h4>Find By Place Types</h4>
+      </div>
+      <ul class="filter-list" [class.show]="showFilters">
+        <li *ngFor="let place of placeTypes"> <label [class.selected]="selectedPlaceType === place"> <input type="radio"
+              name="placeType" [checked]="selectedPlaceType === place" (change)="onSelectPlaceType(place)"> {{ place }}
+          </label> </li>
       </ul>
     </div>
-  </div>
+  </div> <!-- ************************************* only ************************** -->
 
 
-
-
-  <!-- Cards Section -->
   <div class="cards-container">
-
-
-
-
-
-
     <!-- 🔍 Search Bar -->
-    <div class="search-card">
+    <!-- <div class="search-card">
 
 
       <div class="search-bar">
@@ -61,8 +54,63 @@
 
         <button class="search-btn">Search</button>
       </div>
-    </div>
+    </div> -->
 
+    <div class="search-card sticky-header">
+      <div class="search-bar"> <!-- City -->
+        <div class="search-section" (click)="openCityModal()"> <i class="bi bi-building"></i> <span class="search-text">
+            {{ hotel.destination | titlecase }}, Madhya Pradesh, India </span> </div> <!-- Date -->
+        <div class="search-section" (click)="openDateModal()"> <i class="bi bi-calendar-event"></i> <span
+            class="search-text"> {{ hotel.checkIn || 'Tue 19 Aug' }} — {{ hotel.checkOut || 'Sat 23 Aug' }} </span>
+        </div> <!-- Guests -->
+        <div class="search-section line" (click)="openGuestsModal()"> <i class="bi bi-people"></i> <span
+            class="search-text"> {{ hotel.extra.adults }} adults - {{ hotel.extra.childrens }} children <br> - {{
+            hotel.extra.rooms }} rooms </span> </div> <!-- Guests Modal -->
+        <!-- <div class="modal-backdrop" *ngIf="showGuestsModal"> <div class="modal-box"> <h3>Select Guests</h3> <div class="guests-row"> ... </div> <div class="modal-actions"> ... </div> </div> </div> -->
+        <button class="search-btn">Search</button>
+      </div>
+    </div> <!-- Guests Modal -->
+
+
+    
+    <div class="modal-backdrop" *ngIf="showGuestsModal">
+      <div class="modal-box">
+        <h3>Select Guests</h3>
+        <div class="guests-row"> <!-- Adults -->
+          <div class="guest-item"> <label>Adults</label> <select [(ngModel)]="tempAdults">
+              <option *ngFor="let num of numberOptions" [value]="num">{{ num }}</option>
+            </select> </div> <!-- Children -->
+          <div class="guest-item"> <label>Children</label> <select [(ngModel)]="tempChildrens">
+              <option *ngFor="let num of numberOptions" [value]="num">{{ num }}</option>
+            </select> </div> <!-- Rooms -->
+          <div class="guest-item"> <label>Rooms</label> <select [(ngModel)]="tempRooms">
+              <option *ngFor="let num of numberOptions" [value]="num">{{ num }}</option>
+            </select> </div>
+        </div>
+        <div class="modal-actions"> <button class="close-btn" (click)="closeGuestsModal()">Cancel</button> <button
+            class="close-btn" (click)="applyGuests()">Apply</button> </div>
+      </div>
+    </div> <!-- Date Modal --> <!-- Date Modal -->
+    <div class="modal-backdrop" *ngIf="showDateModal">
+      <div class="modal-box date-modal">
+        <h3>Select Dates</h3> <label> Check-in: <input type="date" [(ngModel)]="tempCheckIn"> </label> <label>
+          Check-out: <input type="date" [(ngModel)]="tempCheckOut" [min]="tempCheckIn"> </label>
+       
+          <div class="modal-actions">
+          <button class="close-btn" (click)="closeDateModal()">Cancel</button>
+           <button  class="close-btn" (click)="closeDateModal()"> Apply </button> </div>
+      </div>
+    </div> <!-- City Modal -->
+    <div class="modal-backdrop" *ngIf="showCityModal">
+      <div class="modal-box city-modal">
+        <h3>Select City</h3>
+        <ul>
+          <li *ngFor="let city of destination" (click)="selectCity(city)"> {{ city | titlecase }} </li>
+        </ul>
+        <div class="modal-actions"> <button class="close-btn" (click)="closeCityModal()">Close</button> <button
+            class="close-btn" (click)="applyDates(); closeDateModal()">Apply</button> </div>
+      </div>
+    </div>
 
 
     <!-- <div class="hotel-card" *ngFor="let card of [1]">
@@ -104,156 +152,154 @@
     
     </div> -->
 
-  <div class="hotel-card" *ngFor="let card of execthotelRooms"   [routerLink]="['/room-info', card.hotel_roomId]">
 
-  <!-- LEFT SECTION -->
-  <div class="left">
-    <!-- <img [src]="'http://localhost:8000/storage/'+mainImage" class="main-image" alt="Main Hotel Image" /> -->
-     <img [src]="'http://localhost:8000/storage/'+(card.mainImageUrl || card.mainImage)" 
-     class="main-image" alt="Main Hotel Image" />
 
-    <div class="thumbnails">
-      <div class="thumbnail-wrapper" *ngFor="let img of card.rooms_image.slice(0, 4)">
-        <img [src]="'http://localhost:8000/storage/'+img" class="thumbnail" (mouseenter)="onThumbnailHover(img,card)" />
+    <div class="hotel-card" *ngFor="let card of execthotelRooms"  (click)="rendervalue(card.hotel_roomId, card.roomType,card.hotel.hotel_vendor_id)">
+
+      <!-- LEFT SECTION -->
+      <div class="left">
+        <!-- <img [src]="'http://localhost:8000/storage/'+mainImage" class="main-image" alt="Main Hotel Image" /> -->
+        <img [src]="'http://localhost:8000/storage/'+(card.mainImageUrl || card.mainImage)" class="main-image"
+          alt="Main Hotel Image" />
+
+        <div class="thumbnails">
+          <div class="thumbnail-wrapper" *ngFor="let img of card.rooms_image.slice(0, 4)">
+            <img [src]="'http://localhost:8000/storage/'+img" class="thumbnail"
+              (mouseenter)="onThumbnailHover(img,card)" />
+          </div>
+
+          <!-- Show See More if images > 4 -->
+          <div class="thumbnail-wrapper see-more" *ngIf="card.rooms_image.length > 4" (click)="onSeeMoreClick()">
+            <img [src]="'http://localhost:8000/storage/'+card.rooms_image[4]" class="thumbnail" />
+            <div class="overlay">+{{ card.rooms_image.length - 4 }} more</div>
+          </div>
+        </div>
       </div>
 
-      <!-- Show See More if images > 4 -->
-      <div class="thumbnail-wrapper see-more" *ngIf="card.rooms_image.length > 4" (click)="onSeeMoreClick()">
-        <img [src]="'http://localhost:8000/storage/'+card.rooms_image[4]" class="thumbnail" />
-        <div class="overlay">+{{ card.rooms_image.length - 4 }} more</div>
-      </div>
-    </div>
-  </div>
+      <!-- RIGHT SECTION -->
+      <div class="right">
+        <div class="card-content">
+          <h2> Hotel {{ card.hotel.hotelname }} With luxurious {{ card.roomType }} Room</h2>
+          <h3> Room Type {{ card.roomType }}</h3>
+          <!-- <h3> cancellation_charges {{ card.cancellation_charges }}</h3> -->
 
-  <!-- RIGHT SECTION -->
-  <div class="right">
-    <div class="card-content">
-      <h2> Hotel {{ card.hotel.hotelname }} With luxurious  {{ card.roomType }} Room</h2>
-      <h3> Room Type {{ card.roomType }}</h3>
-      <!-- <h3> cancellation_charges {{ card.cancellation_charges }}</h3> -->
-      
-      <p><a href="#">{{ card.hotel.city }}</a> - {{ card.hotel.address }}</p>
-      <p>
-     
-  <span *ngIf="card.cancellation_charges == 0; else hasCharge">
-    No Cancellation charges in 12 hours
-  </span>
-  <ng-template #hasCharge>
-    Cancellation Charges:  ₹ {{ card.cancellation_charges }}
-  </ng-template>
-</p>
+          <p><a href="#">{{ card.hotel.city }}</a> - {{ card.hotel.address }}</p>
+          <p>
+
+            <span *ngIf="card.cancellation_charges == 0; else hasCharge">
+              No Cancellation charges in 12 hours
+            </span>
+            <ng-template #hasCharge>
+              Cancellation Charges: ₹ {{ card.cancellation_charges }}
+            </ng-template>
+          </p>
 
 
 
-      <!-- Amenities loop -->
-<span class="amenities-title"  *ngIf="card.amenities?.length">Available Features:</span>
+          <!-- Amenities loop -->
+          <span class="amenities-title" *ngIf="card.amenities?.length">Available Features:</span>
 
-<div class="amenities-row" *ngIf="card.amenities?.length">
-  <!-- Amenities with toggle -->
-  <span class="amenity" 
-        *ngFor="let amenity of (card.showAllAmenities ? card.amenities : card.amenities.slice(0,4))">
-    {{ amenity }}
-  </span>
+          <div class="amenities-row" *ngIf="card.amenities?.length">
+            <!-- Amenities with toggle -->
+            <span class="amenity"
+              *ngFor="let amenity of (card.showAllAmenities ? card.amenities : card.amenities.slice(0,4))">
+              {{ amenity }}
+            </span>
 
-  <!-- Toggle button -->
-  <span class="amenity more" *ngIf="card.amenities.length > 4" 
-        (click)="toggleAmenities(card)">
-    {{ card.showAllAmenities ? 'Show less' : '+' + (card.amenities.length - 4) + ' more' }}
-  </span>
-</div>
- 
-      <!-- Hotel description -->
-      <p>{{ card.hotel.description }}</p>
-    </div>
+            <!-- Toggle button -->
+            <span class="amenity more" *ngIf="card.amenities.length > 4" (click)="toggleAmenities(card)">
+              {{ card.showAllAmenities ? 'Show less' : '+' + (card.amenities.length - 4) + ' more' }}
+            </span>
+          </div>
 
-    <div class="card-price">
-      <div class="rating">Very Good 4.0 (2574 Ratings)</div>
-      <div class="old-price">₹ {{ card.basePrice }}</div>
-      <div class="price">₹ {{ card.finalPrice }}</div>
-      <small *ngIf="card.taxIncluded">+ Taxes Included & fees Per Night</small>
-    </div>
-  </div>
+          <!-- Hotel description -->
+          <p>{{ card.hotel.description }}</p>
+        </div>
 
-</div>
-
-<div class="hotel-card" *ngFor="let card of combohotelRooms">
-
-  <!-- LEFT SECTION -->
-  <div class="left">
-    <img [src]="'http://localhost:8000/storage/'+(card.mainImageUrlcombo || card.maincomboImage)" 
-         class="main-image" alt="Main Hotel Image" />
-
-    <div class="thumbnails">
-      <div class="thumbnail-wrapper" *ngFor="let img of card.room.rooms_image.slice(0, 4)">
-        <img [src]="'http://localhost:8000/storage/'+img" 
-             class="thumbnail" 
-             (mouseenter)="onThumbnailHovercombo(img,card)" />
+        <div class="card-price">
+          <div class="rating">Very Good 4.0 (2574 Ratings)</div>
+          <div class="old-price">₹ {{ card.basePrice }}</div>
+          <div class="price">₹ {{ card.finalPrice * room }}</div>
+          <small *ngIf="card.taxIncluded">+ Taxes Included & fees Per Night</small>
+        </div>
       </div>
 
-      <!-- Show See More if images > 4 -->
-      <div class="thumbnail-wrapper see-more" 
-           *ngIf="card.room.rooms_image.length > 4" 
-           (click)="onSeeMoreClick()">
-        <img [src]="'http://localhost:8000/storage/'+card.room.rooms_image[4]" class="thumbnail" />
-        <div class="overlay">+{{ card.room.rooms_image.length - 4 }} more</div>
-      </div>
     </div>
-  </div>
 
-  <!-- RIGHT SECTION -->
-  <div class="right">
-    <div class="card-content">
-      <h2>Hotel {{ card.hotel?.hotelname }} With luxurious {{ card.room.roomType }} Room</h2>
-      <h3>Room Type: {{ card.room.roomType }}</h3>
 
-      <p>
-        <a href="#">{{ card.hotel?.city }}</a> - {{ card.hotel?.address }}
-      </p>
 
-      <!-- Cancellation Charges -->
-      <p>
-        <span *ngIf="card.room.cancellation_charges == 0; else hasCharge">
-          No Cancellation charges in 12 hours
-        </span>
-        <ng-template #hasCharge>
-          Cancellation Charges: ₹ {{ card.room.cancellation_charges }}
-        </ng-template>
-      </p>
+    <div class="hotel-card" *ngFor="let card of combohotelRooms" (click)="rendercombo(card.hotel.hotel_vendor_id,card.room.hotel_roomId,card.calculated_needed_rooms,card.room.roomType)">
 
-      <!-- Amenities -->
-      <span class="amenities-title" *ngIf="card.room.amenities?.length">Available Features:</span>
+      <!-- LEFT SECTION -->
+      <div class="left">
+        <img [src]="'http://localhost:8000/storage/'+(card.mainImageUrlcombo || card.maincomboImage)" class="main-image"
+          alt="Main Hotel Image" />
 
-      <div class="amenities-row" *ngIf="card.room.amenities?.length">
-        <span class="amenity" 
+        <div class="thumbnails">
+          <div class="thumbnail-wrapper" *ngFor="let img of card.room.rooms_image.slice(0, 4)">
+            <img [src]="'http://localhost:8000/storage/'+img" class="thumbnail"
+              (mouseenter)="onThumbnailHovercombo(img,card)" />
+          </div>
+
+          <!-- Show See More if images > 4 -->
+          <div class="thumbnail-wrapper see-more" *ngIf="card.room.rooms_image.length > 4" (click)="onSeeMoreClick()">
+            <img [src]="'http://localhost:8000/storage/'+card.room.rooms_image[4]" class="thumbnail" />
+            <div class="overlay">+{{ card.room.rooms_image.length - 4 }} more</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SECTION -->
+      <div class="right">
+        <div class="card-content">
+          <h2>Hotel {{ card.hotel?.hotelname }},Luxurious Combo Plan With <span
+              style=" color: rgb(69, 69, 247);">{{card.calculated_needed_rooms}} Rooms</span></h2>
+
+          <h3>Room Type: {{ card.room.roomType }}</h3>
+
+          <p>
+            <a href="#">{{ card.hotel?.city }}</a> - {{ card.hotel?.address }}
+          </p>
+
+          <!-- Cancellation Charges -->
+          <p>
+            <span *ngIf="card.room.cancellation_charges == 0; else hasCharge">
+              No Cancellation charges in 12 hours
+            </span>
+            <ng-template #hasCharge>
+              Cancellation Charges: ₹ {{ card.room.cancellation_charges }}
+            </ng-template>
+          </p>
+
+          <!-- Amenities -->
+          <span class="amenities-title" *ngIf="card.room.amenities?.length">Available Features:</span>
+
+          <div class="amenities-row" *ngIf="card.room.amenities?.length">
+            <span class="amenity"
               *ngFor="let amenity of (card.showAllAmenities ? card.room.amenities : card.room.amenities.slice(0,4))">
-          {{ amenity }}
-        </span>
+              {{ amenity }}
+            </span>
 
-        <!-- Toggle button -->
-        <span class="amenity more" 
-              *ngIf="card.room.amenities.length > 4" 
-              (click)="toggleAmenities(card)">
-          {{ card.showAllAmenities ? 'Show less' : '+' + (card.room.amenities.length - 4) + ' more' }}
-        </span>
+            <!-- Toggle button -->
+            <span class="amenity more" *ngIf="card.room.amenities.length > 4" (click)="toggleAmenities(card)">
+              {{ card.showAllAmenities ? 'Show less' : '+' + (card.room.amenities.length - 4) + ' more' }}
+            </span>
+          </div>
+
+          <!-- Hotel description -->
+          <p>{{ card.hotel?.description }}</p>
+        </div>
+
+        <!-- PRICE SECTION -->
+        <div class="card-price">
+          <div class="rating">Very Good 4.0 (2574 Ratings)</div>
+          <div class="old-price">₹ {{ card.room.basePrice*card.calculated_needed_rooms }}</div>
+          <div class="price">₹ {{ card.room.finalPrice * card.calculated_needed_rooms  }}</div>
+          <small *ngIf="card.room.taxIncluded">+ Taxes Included & fees Per Night</small>
+        </div>
       </div>
 
-      <!-- Hotel description -->
-      <p>{{ card.hotel?.description }}</p>
     </div>
-
-    <!-- PRICE SECTION -->
-    <div class="card-price">
-      <div class="rating">Very Good 4.0 (2574 Ratings)</div>
-      <div class="old-price">₹ {{ card.room.basePrice }}</div>
-      <div class="price">₹ {{ card.room.finalPrice }}</div>
-      <small *ngIf="card.room.taxIncluded">+ Taxes Included & fees Per Night</small>
-    </div>
-  </div>
-
-</div>
-
-
-
 
 
 
