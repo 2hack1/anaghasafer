@@ -4,7 +4,8 @@
       <div class="header">
         <div>
           <h2 class="hotel-name">Hotel {{infodata.hotel.hotelname}}</h2>
-          <div class="tags"> <span class="tag blue">{{infodata.hotel.hoteltype}}</span> <span class="tag grey">Couple Friendly</span>
+          <div class="tags"> <span class="tag blue">{{infodata.hotel.hoteltype}}</span> <span class="tag grey">Couple
+              Friendly</span>
           </div>
           <p class="hotel-address">{{infodata.hotel.address}}, Calangute - 403516, Goa, India</p>
         </div> <img
@@ -12,10 +13,12 @@
           alt="Hotel" class="hotel-img">
       </div>
       <div class="stay-info">
-        <div class="checkin"> <span class="label">CHECK IN</span> <span class="date">{{ checkInDay }} <b>{{ checkInDateFormatted }}</b></span> <span   class="time">{{ checkInTimeFormatted }}</span> </div>
+        <div class="checkin"> <span class="label">CHECK IN</span> <span class="date">{{ checkInDay }} <b>{{
+              checkInDateFormatted }}</b></span> <span class="time">{{ checkInTimeFormatted }}</span> </div>
         <div class="night-count"> <span class="nights">1 NIGHT</span> </div>
-        <div class="checkout"> <span class="label">CHECK OUT</span> <span class="date">{{ checkOutDay }} <b>{{ checkOutDateFormatted }}</b></span>
-          <span class="time">{{  checkOutTimeFormatted }}</span>
+        <div class="checkout"> <span class="label">CHECK OUT</span> <span class="date">{{ checkOutDay }} <b>{{
+              checkOutDateFormatted }}</b></span>
+          <span class="time">{{ checkOutTimeFormatted }}</span>
         </div>
         <div class="stay-summary"> 1 Night | {{persion}} Adults | Entire Apartment </div>
       </div>
@@ -28,7 +31,7 @@
             <li style="margin-top: 10px;">No meals included</li>
           </ul>
           <h3 style="font-size: 18px;">{{checkCharges}}</h3>
-          <p class="policy">Refund is applicable for this booking</p> 
+          <p class="policy">Refund is applicable for this booking</p>
           <a href="" class="policy-link">Cancellation policy details</a>
         </div> <a href="#" class="see-inclusions">See Inclusions</a>
       </div>
@@ -42,62 +45,195 @@
         <li style="margin-left: 20px;">Unmarried couples are not allowed in hourly stay rooms</li>
       </ul> <a href="#" class="link" style="margin-top: 10px;">View More</a>
     </div>
-    <div class="guest-form">
+    <!-- <div class="guest-form">
       <h3>Guest Details</h3>
-      <form> <!-- Title -->
+      <form> 
         <div class="form-group"> <label for="title">Title</label> <select id="title" [(ngModel)]="guest.title"
             name="title">
             <option value="Mr">Mr</option>
             <option value="Mrs">Mrs</option>
             <option value="Ms">Ms</option>
             <option value="Dr">Dr</option>
-          </select> </div> <!-- Full Name -->
+          </select> </div> 
         <div class="form-row">
-          <div class="form-group"> <label for="firstName">First Name</label> <input id="firstName" type="text"
+          <div class="form-group"> <label for="firstName"> Name</label> <input id="firstName" type="text"
               [(ngModel)]="guest.firstName" name="firstName" /> </div>
           <div class="form-group"> <label for="lastName">Last Name</label> <input id="lastName" type="text"
               [(ngModel)]="guest.lastName" name="lastName" /> </div>
-        </div> <!-- Email -->
-        <div class="form-group"> <label for="email">Email Address <small>(Booking voucher will be sent to this email
-              ID)</small></label> <input id="email" type="email" [(ngModel)]="guest.email" name="email" /> </div>
-        <!-- Mobile Number -->
+        </div> 
+
         <div class="form-row">
-          <div class="form-group country-code"> <label for="countryCode">Code</label> <select id="countryCode"
-              [(ngModel)]="guest.countryCode" name="countryCode">
-              <option value="+91">+91</option>
-              <option value="+1">+1</option>
-              <option value="+44">+44</option>
-            </select> </div>
-          <div class="form-group"> <label for="mobile">Contact Number</label> <input id="mobile" type="tel"
-              [(ngModel)]="guest.mobile" name="mobile" /> </div>
-          <div class="form-group"> <label for="password">Password</label> <input id="password" type="text"
+
+          <div class="form-group"> <label for="email">Email Address</label> <input id="mobile" type="email"
+              [(ngModel)]="guest.email" name="email" /> </div>
+          <div class="form-group"> <label for="password">Password</label> <input id="password" type="password"
               name="password" /> </div>
-        </div> <!-- GST -->
-    <button type="button" class="regis-btn"
-          (click)="registerNow()" [disabled]="isLoading"> <ng-container *ngIf="!isLoading"><b>Submit
-              Now!</b></ng-container> <ng-container *ngIf="isLoading"> <span class="loader"></span> Loading...
-          </ng-container> </button> <!-- Success Popup -->
+        </div>
+
+        <div class="form-row">
+         
+         
+         <div class="form-group"> <label for="mobile">Contact Number 1</label> <input id="mobile" type="tel"
+               /> </div>
+
+            <div class="form-group"> <label for="mobile">Contact Number 2</label> <input id="mobile" type="tel"
+              [(ngModel)]="guest.mobile" name="mobile" /> </div>
+
+          <div class="form-group"> <label for="password">Confirm Password</label> <input id="password" type="password"
+              name="confirmPassword" /> </div>
+        </div>
+        <button type="button" class="regis-btn" (click)="registerNow()" [disabled]="isLoading"> <ng-container
+            *ngIf="!isLoading"><b>Submit Now!</b>
+          </ng-container> 
+          <ng-container *ngIf="isLoading"> <span class="loader"></span> Loading...  </ng-container> </button> 
+
         <div *ngIf="isSuccess" class="success-popup"> ✅ Successfully Registered! </div>
         <div class="login-section" style="margin-top: 10px;">
+
           <p>Login to prefill traveller details and get access to secret deals</p> <button type="button"
             class="login-btn">LOGIN</button>
         </div>
       </form>
+    </div> -->
+
+    <div class="guest-form">
+      <h3>Guest Details</h3>
+      <form>
+        <!-- Title -->
+        <div class="form-group">
+          <label for="title">Title</label>
+          <select id="title" [(ngModel)]="guest.title" name="title">
+            <option value="Mr">Mr</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Ms">Ms</option>
+            <option value="Dr">Dr</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">Name</label>
+            <input id="firstName" type="text" [(ngModel)]="guest.firstName" name="firstName" />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" type="text" [(ngModel)]="guest.lastName" name="lastName" />
+          </div>
+        </div>
+
+        <!-- Email + Password -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input id="email" type="email" [(ngModel)]="guest.email" name="email" />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" [(ngModel)]="guest.password" name="password" />
+          </div>
+        </div>
+
+        <!-- Mobile + Confirm Password -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="mobile1">Contact Number 1</label>
+            <input id="mobile1" type="tel" />
+          </div>
+
+          <div class="form-group">
+            <label for="mobile2">Contact Number 2</label>
+            <input id="mobile2" type="tel" [(ngModel)]="guest.mobile" name="mobile" />
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input id="confirmPassword" type="password" [(ngModel)]="guest.confirmPassword" name="confirmPassword" />
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="button" class="regis-btn" (click)="registerNow()" [disabled]="isLoading">
+          <ng-container *ngIf="!isLoading"><b>Submit Now!</b></ng-container>
+          <ng-container *ngIf="isLoading"><span class="loader"></span> Loading...</ng-container>
+        </button>
+
+        <!-- Success Popup -->
+        <div *ngIf="isSuccess" class="success-popup">
+          ✅ Successfully Registered!
+        </div>
+
+        <!-- Login -->
+        <div class="login-section" style="margin-top: 10px;">
+         <p>Secure your booking with safe and easy payment methods</p>
+
+          <button type="button" class="login-btn" (click)="paymentMethodss()">PROCEED TO PAY</button>
+        </div>
+      </form>
+      <!--  ********************  phone pay ******************************* -->
+
+      <div class="modal-backdrop" *ngIf="isModalOpen" (click)="closeModal()"></div>
+
+
+      <div class="modal" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h3>Select Payment Method</h3>
+    <div style="display: flex; align-items: center; ">
+      <p style=" color: rgb(5, 5, 5); font-size: 20px; font-family: monospace;">  Total Amount :</p>
+      <p style="  font-size: 24px; font-family: monospace;"> ₹ 333</p>
     </div>
-  </div> <!-- RIGHT SECTION -->
+    <div class="payment-options"  >
+      
+      <div class="payment-card" *ngFor="let method of paymentMethods" style="margin-bottom: 20px;"  >
+         
+        <div class="logo-circle" >
+          <img [src]="method.logo" [alt]="method.name" />
+        </div>
+        <p>{{ method.name }}</p>
+        
+      </div>
+    </div>
+     <!-- <div class="borders" style="border-bottom: #000000 5px;"></div> -->
+  </div>
+     
+<!-- <p> cvghjgfhtghfhdhecked</p>
+    <p> cvghjgfhtghfhdhecked</p>
+    <p> cvghjgfhtghfhdhecked</p>
+    <p> cvghjgfhtghfhdhecked</p> -->
+
+  
+
+
+
+</div>
+    
+
+
+    </div>
+
+  </div>
   <div class="right-sidebar">
     <div class="price-card">
       <h4>Price Breakup</h4>
       <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
-          style="color: #000000; font-size: 16px;"><b>Entire Apartment (550 sq.ft) × ₹ 19,00<br>1 Night </b></span>
-        <!-- <span>₹ 1,900</span> --> </div>
-      <div class="row total-discount" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
-          style="font-size: 16px;">Total Discount <i class="info-icon"></i></span> <span>- ₹ {{infodata.discount}}</span> </div>
+          style="color: #000000; font-size: 16px;"><b>Entire Rooms In ₹ {{infodata.finalPrice * persion}}<br>1 Night
+          </b></span>
+      </div>
       <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
-          style="font-size: 16px;">Price after Discount</span> <span>₹ {{infodata.finalPrice}}</span> </div>
+          style="font-size: 16px;">Base Price x {{filter.rooms_required}}Rooms</span> <span>₹ {{infodata.basePrice *
+          persion}}</span> </div>
+
+      <div class="row total-discount" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
+          style="font-size: 16px;">Total Discount <i class="info-icon"></i></span> <span>- ₹ {{(infodata.basePrice *
+          persion)/infodata.discount}}</span> </div>
+
+      <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
+          style="font-size: 16px;">Price after Discount</span> <span>₹ {{infodata.finalPrice * persion }}</span> </div>
+
       <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
           style="font-size: 16px;">Taxes & Service Fees</span> <span>₹ 0</span> </div>
-      <div class="row total"> <span style="font-size: 16px;">Total Amount to be paid</span> <span>₹ 1,624</span> </div>
+      <div class="row total"> <span style="font-size: 16px;">Total Amount to be paid</span> <span>₹
+          {{infodata.finalPrice * persion}}</span> </div>
     </div>
     <div class="coupon-card">
       <h4>Coupon Codes</h4>
