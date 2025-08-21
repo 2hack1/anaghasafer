@@ -942,7 +942,12 @@ select {
   align-items: center;
  
 }
-
+@media (max-width: 600px) {
+  .payment-options {
+    grid-template-columns: repeat(3, 1fr); /* 👈 Always 3 in one line */
+    gap: 10px; /* reduce spacing on mobile */
+  }
+}
 .logo-circle {
   width: 80px;
   height: 80px;

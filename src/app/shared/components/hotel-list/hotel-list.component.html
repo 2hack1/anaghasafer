@@ -17,20 +17,23 @@
         <h4>Price per night</h4>
       </div>
       <ul class="filter-list" [class.show]="showFilters">
+        <h4>Price per night</h4>
         <li *ngFor="let price of priceOptions"> <label [class.selected]="selectedPrices.includes(price.value)"> <input
               type="checkbox" [checked]="price.selected" (change)="onSelectPrice(price)"> {{ price.label }} </label>
         </li>
       </ul> <!-- Place Type Filter -->
       <div class="sidebar-header">
-        <h4>Find By Place Types</h4>
+       
       </div>
       <ul class="filter-list" [class.show]="showFilters">
+         <h4>Find By Place Types</h4>
         <li *ngFor="let place of placeTypes"> <label [class.selected]="selectedPlaceType === place"> <input type="radio"
               name="placeType" [checked]="selectedPlaceType === place" (change)="onSelectPlaceType(place)"> {{ place }}
           </label> </li>
       </ul>
     </div>
-  </div> <!-- ************************************* only ************************** -->
+  </div>
+   <!-- ************************************* only ************************** -->
 
 
   <div class="cards-container">
