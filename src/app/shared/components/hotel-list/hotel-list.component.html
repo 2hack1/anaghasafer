@@ -62,15 +62,14 @@
     <div class="search-card sticky-header">
       <div class="search-bar"> <!-- City -->
         <div class="search-section" (click)="openCityModal()"> <i class="bi bi-building"></i> <span class="search-text">
-            {{ hotel.destination | titlecase }}, Madhya Pradesh, India </span> </div> <!-- Date -->
+            {{ hotel.destination || (combohotelRooms[0].city+',Madhya Pradesh, India') }},  </span> </div> <!-- Date -->
         <div class="search-section" (click)="openDateModal()"> <i class="bi bi-calendar-event"></i> <span
-            class="search-text"> {{ hotel.checkIn || 'Tue 19 Aug' }} — {{ hotel.checkOut || 'Sat 23 Aug' }} </span>
+            class="search-text">   {{ formattedCheckIn || combohotelRooms[0].checkin }} — {{ formattedCheckOut || combohotelRooms[0].checkin }} </span>
         </div> <!-- Guests -->
         <div class="search-section line" (click)="openGuestsModal()"> <i class="bi bi-people"></i> <span
-            class="search-text"> {{ hotel.extra.adults }} adults - {{ hotel.extra.childrens }} children <br> - {{
-            hotel.extra.rooms }} rooms </span> </div> <!-- Guests Modal -->
-        <!-- <div class="modal-backdrop" *ngIf="showGuestsModal"> <div class="modal-box"> <h3>Select Guests</h3> <div class="guests-row"> ... </div> <div class="modal-actions"> ... </div> </div> </div> -->
-        <button class="search-btn">Search</button>
+            class="search-text"> {{ hotel.extra.adults || combohotelRooms[0].room.maxAdults}} adults - {{ hotel.extra.childrens||combohotelRooms[0].room.maxChildren  }} children <br> - 
+            {{hotel.extra.rooms ||combohotelRooms[0].calculated_needed_rooms }} rooms </span> </div> <!-- Guests Modal -->
+        <button class="search-btn" (click)="search()">Search</button>
       </div>
     </div> <!-- Guests Modal -->
 
@@ -100,8 +99,10 @@
           Check-out: <input type="date" [(ngModel)]="tempCheckOut" [min]="tempCheckIn"> </label>
        
           <div class="modal-actions">
-          <button class="close-btn" (click)="closeDateModal()">Cancel</button>
-           <button  class="close-btn" (click)="closeDateModal()"> Apply </button> </div>
+                <button class="close-btn" (click)="closeDateModal()">Cancel</button>
+                   <button class="close-btn" (click)="applyDates(); closeDateModal()">Apply</button>
+
+          </div>
       </div>
     </div> <!-- City Modal -->
     <div class="modal-backdrop" *ngIf="showCityModal">
@@ -116,50 +117,14 @@
     </div>
 
 
-    <!-- <div class="hotel-card" *ngFor="let card of [1]">
 
-      <div class="left">
-        <img [src]="mainImage" class="main-image" alt="Main Hotel Image" />
-        <div class="thumbnails">
-       
-          <div class="thumbnail-wrapper" *ngFor="let img of images.slice(0, 4)">
-            <img [src]="img" class="thumbnail" (mouseenter)="onThumbnailHover(img)" />
-          </div>
 
-        
-          <div class="thumbnail-wrapper see-more" *ngIf="images.length > 4" (click)="onSeeMoreClick()">
-            <img [src]="images[4]" class="thumbnail" />
-            <div class="overlay">+{{ images.length - 4 }} more</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="right">
-        <div class="card-content">
-          <h2> hotel name</h2>
-          <h3>room type</h3>
-          <p><a href="#">Baga</a>address</p>
-          <p>Couple Friendly amenties</p>
-          <p>Breakfast Included</p>
-          <p>Convenient location close to Baga Beach and Titos Lane, clean swimming pool, budget-friendly stay</p>
-        </div>
-        <div class="card-price">
-          <div class="rating">Very Good 4.0 (2574 Ratings)</div>
-          <div class="old-price">₹ 3,600</div>
-          <div class="price">₹ 1,584</div>
-          <small>+ ₹ 720 taxes & fees Per Night</small>
-        </div>
-       
-      </div>
-       
     
-    </div> -->
 
-
-
-    <div class="hotel-card" *ngFor="let card of execthotelRooms"  (click)="rendervalue(card.hotel_roomId, card.roomType,card.hotel.hotel_vendor_id)">
-
-      <!-- LEFT SECTION -->
+    <div class="hotel-card" *ngFor="let card of execthotelRooms  let i = index" (click)="rendervalue(card.hotel_roomId, card.roomType,card.hotel.hotel_vendor_id,card.checkin,card.checkout
+    ,card.requiredRooms,card.adults,card.children)">
+ 
+                                                                                                                               
       <div class="left">
         <!-- <img [src]="'http://localhost:8000/storage/'+mainImage" class="main-image" alt="Main Hotel Image" /> -->
         <img [src]="'http://localhost:8000/storage/'+(card.mainImageUrl || card.mainImage)" class="main-image"
@@ -231,7 +196,9 @@
 
 
 
-    <div class="hotel-card" *ngFor="let card of combohotelRooms" (click)="rendercombo(card.hotel.hotel_vendor_id,card.room.hotel_roomId,card.calculated_needed_rooms,card.room.roomType)">
+    <div class="hotel-card" *ngFor="let card of combohotelRooms" (click)="rendercombo(card.hotel.hotel_vendor_id,card.room.hotel_roomId,card.calculated_needed_rooms
+    ,card.room.roomType,card.checkin,card.checkout,card.adult,card.children
+)">
 
       <!-- LEFT SECTION -->
       <div class="left">

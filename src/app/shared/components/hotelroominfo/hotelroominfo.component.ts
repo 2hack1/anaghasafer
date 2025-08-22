@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { error } from 'jquery';
+import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-hotelroominfo',
@@ -38,9 +39,11 @@ export class HotelroominfoComponent implements OnInit {
   activeTab: 'description' | 'reviews' = 'description';
 
   constructor(private route: ActivatedRoute, private service: AxiosService, private router: Router) {
-    this.pertions = Number(localStorage.getItem('adults')) | 0;
-    this.child = Number(localStorage.getItem('children')) | 0;
+
+
     this.route.queryParamMap.subscribe(query => {
+      this.pertions=query.get('adults');
+      this.child=query.get('childrens');
       if (query.get('combo')) {
         const hotelid = query.get('hotel_vendor_id');
         const room_id = query.get('hotel_roomId')

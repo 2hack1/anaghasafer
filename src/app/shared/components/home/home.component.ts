@@ -56,6 +56,8 @@ export class HomeComponent implements OnInit {
 
   }
   ngOnInit(): void {
+
+    localStorage.clear();
     setInterval(() => this.nextSlide(), 5000);
     this.getImages();
     this.getcards();
