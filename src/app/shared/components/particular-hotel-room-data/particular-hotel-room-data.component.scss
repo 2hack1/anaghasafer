@@ -980,3 +980,71 @@ select {
 
   border: #a6aaad 1px;
 }
+.payment-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.payment-card:hover {
+  border-color: #007bff;
+  background: #f0f8ff;
+}
+
+.logo-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+.logo-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.payment-box {
+  // border: 2px dashed #1900ff;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+}
+
+.payment-box input {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.qr-box {
+
+  button {
+    background: linear-gradient(to right, #007bff, #0056b3);
+    color: #fff;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    transition: background 0.2s, transform 0.2s;
+
+    &:hover {
+      background: linear-gradient(to right, #0056b3, #003f73);
+      transform: translateY(-2px) scale(1.03);
+    }
+  }
+}
+
+

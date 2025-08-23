@@ -12,6 +12,7 @@ import { ReviewSliderComponent } from './shared/components/home/review-slider/re
 import { HotelListComponent } from './shared/components/hotel-list/hotel-list.component';
 import { ParticularHotelRoomDataComponent } from './shared/components/particular-hotel-room-data/particular-hotel-room-data.component';
 import { HotelroominfoComponent } from './shared/components/hotelroominfo/hotelroominfo.component';
+import { UserprofileComponent } from './shared/components/userprofile/userprofile.component';
 
 
 export const routes: Routes = [
@@ -61,5 +62,8 @@ export const routes: Routes = [
     },{
         path:'room-info',
          component: HotelroominfoComponent
+    },{
+        path:'profile',
+        component:UserprofileComponent
     }
 ]

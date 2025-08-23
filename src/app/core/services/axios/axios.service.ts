@@ -136,5 +136,8 @@ getinfo(hotelId:any, roomId:any){
   //  abhi  nahi lagaya yaad se laga lena
 }
 
+booking(data:FormData){
+  return this.api.post('/bookings',data);
+}
 
 }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { UserServicesService } from '../../../core/services/userService/user-services.service';
 import { error } from 'jquery';
@@ -27,6 +27,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     fullName: ''   // 👈 added fullName
   };
 
+  avrooms:any;
   isLoading = false;
   isSuccess = false;
   chek = "dekhte hai";
@@ -46,10 +47,12 @@ export class ParticularHotelRoomDataComponent implements OnInit {
   checkCharges: any;
   errorMessage = '';
   isModalOpen = false;
-
-  constructor(private route: ActivatedRoute, private service: AxiosService, private userservice: UserServicesService) {
+   transaction_id: string = '';
+  constructor(private route: ActivatedRoute, private service: AxiosService, 
+    private userservice: UserServicesService,private router:Router) {
     this.route.queryParams.subscribe(query => {
-
+            this.persion=query['adutls'];
+            this.avrooms=query['avrooms'];
       this.filter = {
         check_in_date: query['check_in_date'],
         check_out_date: query['check_out_date'],
@@ -57,13 +60,15 @@ export class ParticularHotelRoomDataComponent implements OnInit {
         hotel_roomId: query['hotel_roomId'],
         hotel_vendor_id: query['hotel_vendor_id'],
         rooms_required: query['rooms'],
+        children:query['children'],
       };
     });
+
 
     if (this.filter) {
       this.service.getinfo(this.filter.hotel_vendor_id,
         this.filter.hotel_roomId).then((res: any) => {
-          console.log(res.data.data);
+          console.log("infodata",res.data.data);
           this.infodata = res.data.data;
           this.checkin = this.infodata.checkInTime;
           this.checkout = this.infodata.checkOutTime
@@ -79,9 +84,13 @@ export class ParticularHotelRoomDataComponent implements OnInit {
           console.error(err);
         })
     }
+
   }
+
+
   ngOnInit(): void {
-    this.persion = Number(localStorage.getItem('adults'));
+    // this.persion = Number(localStorage.getItem('adults'));
+    console.log('avrooms:',this.avrooms)
   }
 
   private isValidEmail(email: string): boolean {
@@ -112,87 +121,6 @@ openModal() {
   closeModal() {
     this.isModalOpen = false;
   }
-
-
-
-//   registerNow() {
-//     this.isLoading = true;
-//     this.isSuccess = false;
-//     this.errorMessage = '';
-
-
-//     // Simple validations
-//     if (!this.guest.firstName || !this.guest.lastName || !this.guest.email || !this.guest.mobile) {
-//       this.errorMessage = 'Please fill all required fields!';
-//       this.updateFullName();
-//       alert("fill all require details");
-//       this.isLoading = false;
-//       return;
-//     }
-
-
-//     if (!this.isValidEmail(this.guest.email)) {
-//       this.errorMessage = 'Invalid email format!';
-//       this.isLoading = false;
-//       alert("please enter vailid email");
-//       return;
-//     }
-
-//     if (!this.isValidMobile(this.guest.mobile)) {
-//       this.errorMessage = 'Contact number must be 10 digits!';
-//       alert(" mobile no.will be 10 digit");
-//       this.isLoading = false;
-//         return;
-//       }
-// // Password length check
-      
-//  if (this.guest.password  || this.guest.password.length <= 6) {
-//        this.errorMessage = 'Password must be at least 6 characters!';
-//          alert("Password must be at least 6 characters!");
-//        this.isLoading = false;
-//         return;
-//        }
-//     if (this.guest.password !== this.guest.confirmPassword) {
-//       this.errorMessage = 'Passwords do not match!';
-//       alert("password and  confirmPassword not match");
-//       this.isLoading = false;
-//       return;
-//     }
-
-//     const a = {
-//       name: this.guest.fullName,
-//       email: this.guest.email,
-//       password: this.guest.password,
-//       password_confirmation: this.guest.confirmPassword,
-//       role: 'user',
-//       mobile: this.guest.mobile  
-//     };
-
-
-//     this.userservice.userRegister(a).subscribe({
-//       next: (res: any) => {
-//         console.log('Register Success:', res);
-//         this.isLoading = false;
-//         this.isSuccess = true;
-//         this.isModalOpen=true;
-//         setTimeout(() => {
-//           console.log('Guest Registered:', this.guest);
-//           this.isLoading = false;
-//           this.isSuccess = true;
-//           this.isModalOpen=false;
-//         }, 2000);
-
-
-//       },
-//       error: (err: any) => {
-//         console.error('Register Error:', err);
-//         this.errorMessage = err.error?.message || 'Registration failed. Please try again.';
-//         this.isLoading = false;
-//       }
-//     });
-
-
-//   }
 
 registerNow() {
   this.isLoading = true;
@@ -239,7 +167,7 @@ registerNow() {
         this.isLoading = false;
         this.isSuccess = true;
       
-      
+      sessionStorage.setItem('i',res.user.id)
        sessionStorage.setItem('token', res.access_token);
        sessionStorage.setItem('name', res.user.name);
        sessionStorage.setItem('email', res.user.email);
@@ -266,12 +194,11 @@ registerNow() {
   }
 
   paymentMethodss(){
-    if(sessionStorage.getItem('name') && sessionStorage.getItem('token') && sessionStorage.getItem('email')){
-       this.isModalOpen = true;
-    }else{
-     alert("Kindly complete your registration before proceeding.");
-
-    }
+    this.isModalOpen = true;
+    // if(sessionStorage.getItem('name') && sessionStorage.getItem('token') && sessionStorage.getItem('email')){
+    // }else{
+    //  alert("Kindly complete your REGISTRATION or LOGIN before proceeding.");
+    // }
   }
 
   formatDates(checkin: any, checkout: any) {
@@ -314,6 +241,61 @@ registerNow() {
     return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
   }
 
+selectedMethod: any = null;
 
+selectMethod(method: any) {
+  this.selectedMethod = method;
+  console.log("selected method",method);
+  console.log("transition id",this.transaction_id);
+
+}
+// *************************************************************************************************
+
+    submitPayment(){
+
+     const booking={
+        user_id:  sessionStorage.getItem('i'),
+        hotel_vendor_id: this.infodata.hotel_vendor_id,
+        hotel_roomId:this.infodata.hotel_roomId,
+        check_in_date:this.filter.check_in_date,
+        check_out_date:this.filter.check_out_date,
+        adults:this.persion,
+        children:this.filter.children,
+        rooms_booked:this.filter.rooms_required,
+        roomType: this.infodata.roomType,
+        price_per_night: this.infodata.finalPrice,
+        // payment_status:"pending",
+
+        payment_method:this.selectedMethod,
+        transaction_id:this.transaction_id,
+        // status:"",
+        // special_requests:"",
+        total_amount:(this.infodata.finalPrice * this.filter.rooms_required),
+        rooms_available: this.avrooms,
+
+      }
+
+      const data = new FormData();
+      Object.entries(booking).forEach(([key, value]) => {
+        data.append(key, value as any);
+      });
+      console.log('FormData entries:');
+      
+      // console.log("booking:",booking);
+      if(booking.transaction_id){
+           
+      this.router.navigate(['/profile']);
+      this.service.booking(data).then((res:any)=>{
+   
+        console.log(res);
+
+      }).catch((err:any)=>{
+        console.log(err,"errror");
+      })
+      }else{
+        this.errorMessage = 'Please enter the transaction ID to proceed with the payment.';
+        alert('Please enter the transaction ID to proceed.');
+      }
+  }
 
 }

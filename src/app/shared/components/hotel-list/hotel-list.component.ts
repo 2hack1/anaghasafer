@@ -31,13 +31,11 @@ export class HotelListComponent implements OnInit {
   formattedCheckIn: any;
   formattedCheckOut: any;
   maincomboImage = 'https://r1imghtlak.mmtcdn.com/010191f275a611ed91930a58a9feac02.jfif?output-quality=75&output-format=jpg&downsize=360:*';
-
   comboimages = [
     'https://r1imghtlak.mmtcdn.com/b80a4f9e32df11eb984b0242ac110002.jfif?output-quality=75&output-format=jpg&downsize=360:*',
     'https://r1imghtlak.mmtcdn.com/010191f275a611ed91930a58a9feac02.jfif?output-quality=75&output-format=jpg&downsize=360:*',
 
   ];
-
   mainImage = 'https://r1imghtlak.mmtcdn.com/010191f275a611ed91930a58a9feac02.jfif?output-quality=75&output-format=jpg&downsize=360:*';
   images = [
     'https://r1imghtlak.mmtcdn.com/b80a4f9e32df11eb984b0242ac110002.jfif?output-quality=75&output-format=jpg&downsize=360:*',
@@ -69,7 +67,10 @@ export class HotelListComponent implements OnInit {
       };
 
 
-      if (!localStorage.getItem('city') && !localStorage.getItem('adults') && !localStorage.getItem('children') && !localStorage.getItem('checkin') && !localStorage.getItem('checkout') && !localStorage.getItem('rooms')) {
+      if (!localStorage.getItem('city') && !localStorage.getItem('adults')
+         && !localStorage.getItem('children') && !localStorage.getItem('checkin')
+         && !localStorage.getItem('checkout') && !localStorage.getItem('rooms')) 
+         {
 
         this.service.getHotelRoomsWithCombo(filter).then((res: any) => {
           console.log("res Combo", res.data.non_matched_rooms)
@@ -98,6 +99,17 @@ export class HotelListComponent implements OnInit {
         })
 
       } else {
+
+
+        this.searchOnIt = {
+          city: localStorage.getItem('city'),
+          adults: localStorage.getItem('adults'),
+          children: localStorage.getItem('children'),
+          checkin: localStorage.getItem('checkin'),
+          checkout: localStorage.getItem('checkout'),
+          rooms: localStorage.getItem('rooms'),
+        }
+
         this.service.getHotelRoomsWithCombo(this.searchOnIt).then((res: any) => {
           console.log("res Combo", res.data.non_matched_rooms)
           this.combohotelRooms = [];
@@ -129,9 +141,11 @@ export class HotelListComponent implements OnInit {
 
   }
 
-  rendercombo(hotelid: any, roomid: any, calculate_rooms: any, roomtype: any, checkin: any, checkout: any,readults:any,rechildrens:any) {
+  rendercombo(hotelid: any, roomid: any, calculate_rooms: any, roomtype: any, checkin: any,
+    checkout: any, readults: any, rechildrens: any) {
 
-    console.log("combo data:", hotelid, roomid, calculate_rooms, roomtype, checkin, checkout,readults,rechildrens);
+    console.log("combo data:", hotelid, roomid, calculate_rooms, roomtype,
+      checkin, checkout, readults, rechildrens);
 
     this.router.navigate(['/room-info',], {
       queryParams: {
@@ -142,15 +156,15 @@ export class HotelListComponent implements OnInit {
         check_in_date: checkin,
         check_out_date: checkout,
         rooms_required: calculate_rooms,
-        adults:readults,
-        childrens:rechildrens
+        adults: readults,
+        childrens: rechildrens
       }
 
     });
-// console.log()
+    // console.log()
   }
-  rendervalue(roomid: any, roomType: any, hotelid: any, checkin: any, checkout: any, requireroom: any,readults:any,rechildrens:any) {
-    console.log("exact data:", hotelid, roomid, requireroom, roomType, checkin, checkout,readults,rechildrens);
+  rendervalue(roomid: any, roomType: any, hotelid: any, checkin: any, checkout: any, requireroom: any, readults: any, rechildrens: any) {
+    console.log("exact data:", hotelid, roomid, requireroom, roomType, checkin, checkout, readults, rechildrens);
 
 
     this.router.navigate(['/room-info',], {
@@ -161,8 +175,8 @@ export class HotelListComponent implements OnInit {
         check_in_date: checkin,
         check_out_date: checkout,
         rooms_required: requireroom,
-        adults:readults,
-        childrens:requireroom
+        adults: readults,
+        childrens: requireroom
       }
 
     });
@@ -507,7 +521,7 @@ export class HotelListComponent implements OnInit {
 
     console.log("Searching hotels with filters:", this.hotel);
     // *************************************************  dekho baad main *************************************
-  
+
   }
 
 

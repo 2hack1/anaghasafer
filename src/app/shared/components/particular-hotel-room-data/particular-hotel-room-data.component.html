@@ -171,46 +171,50 @@
       </form>
       <!--  ********************  phone pay ******************************* -->
 
-      <div class="modal-backdrop" *ngIf="isModalOpen" (click)="closeModal()"></div>
 
 
-      <div class="modal" *ngIf="isModalOpen">
+<div class="modal-backdrop" *ngIf="isModalOpen" (click)="closeModal()"></div>
+<div class="modal" *ngIf="isModalOpen">
   <div class="modal-content">
     <span class="close" (click)="closeModal()">&times;</span>
     <h3>Select Payment Method</h3>
-    <div style="display: flex; align-items: center; ">
-      <p style=" color: rgb(5, 5, 5); font-size: 20px; font-family: monospace;">  Total Amount :</p>
-      <p style="  font-size: 24px; font-family: monospace;"> ₹ 333</p>
+
+    <!-- Total Amount -->
+    <div style="display: flex; align-items: center;">
+      <p style="color: #050505; font-size: 20px; font-family: monospace;">Total Amount :</p>
+      <p style="font-size: 24px; font-family: monospace; margin-left: 8px;">₹ 333</p>
     </div>
-    <div class="payment-options"  >
-      
-      <div class="payment-card" *ngFor="let method of paymentMethods" style="margin-bottom: 20px;"  >
-         
-        <div class="logo-circle" >
+
+    <!-- Payment Options -->
+    <div class="payment-options">
+      <div
+        class="payment-card"
+        *ngFor="let method of paymentMethods"
+        (click)="selectMethod(method.name)"
+      >
+        <div class="logo-circle">
           <img [src]="method.logo" [alt]="method.name" />
         </div>
         <p>{{ method.name }}</p>
-        
       </div>
     </div>
-     <!-- <div class="borders" style="border-bottom: #000000 5px;"></div> -->
+
+    <!-- Payment ID + QR section -->
+    <div *ngIf="selectedMethod" style="margin-top: 20px;">
+      <div class="payment-box">
+        <label>Enter Payment ID</label>
+        <input type="text" [(ngModel)]="transaction_id" placeholder="Enter payment ID" />
+      </div>
+
+      <div class="qr-box">
+        <button  (click)="submitPayment()"> Submit Payment ID</button>
+      </div>
+    </div>
   </div>
-     
-<!-- <p> cvghjgfhtghfhdhecked</p>
-    <p> cvghjgfhtghfhdhecked</p>
-    <p> cvghjgfhtghfhdhecked</p>
-    <p> cvghjgfhtghfhdhecked</p> -->
-
-  
-
-
-
 </div>
-    
 
 
     </div>
-
   </div>
   <div class="right-sidebar">
     <div class="price-card">
@@ -236,7 +240,7 @@
           {{infodata.finalPrice * persion}}</span> </div>
     </div>
     <div class="coupon-card">
-      <h4>Coupon Codes</h4>
+      <h4>Amenties</h4>
       <div class="coupon active"> <input type="radio" checked> <label>MMTHOMESTAYS... <span class="discount">₹
             368</span></label>
         <p class="desc">Congratulations! Discount of INR 368 Applied</p>

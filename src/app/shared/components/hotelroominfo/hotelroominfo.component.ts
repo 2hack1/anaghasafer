@@ -26,7 +26,7 @@ export class HotelroominfoComponent implements OnInit {
   pertions: any;
   child: any;
   available: boolean = false;
-
+totelroom:any;
   mainImage = 'https://r2imghtlak.mmtcdn.com/r2-mmt-htl-image/htl-imgs/202410211734063978-3075721f-29bd-42d6-ae75-ac8bfb9fea77.jpg';
 
   images = ['https://r1imghtlak.mmtcdn.com/0f00d12b-9701-420b-b944-7cf35bc4d064.jpg?&output-quality=75&crop=520:350;2,0&output-format=jpg&downsize=540:*',
@@ -53,7 +53,9 @@ export class HotelroominfoComponent implements OnInit {
           rooms_required: query.get('rooms_required'),
           roomType: query.get('roomType'),
           hotel_roomId: query.get('hotel_roomId'),
-          hotel_vendor_id: query.get('hotel_vendor_id')
+          hotel_vendor_id: query.get('hotel_vendor_id'),
+           childrens:query.get('childrens'),
+          adults:query.get('adults'),
         };
 
         this.service.checavailability(this.filter).then((res: any) => {
@@ -112,13 +114,16 @@ export class HotelroominfoComponent implements OnInit {
 
         const hotelid = query.get('hotel_vendor_id');
         const room_id = query.get('hotel_roomId')
+
         this.filter = {
           check_in_date: query.get('check_in_date'),
           check_out_date: query.get('check_out_date'),
           rooms_required: query.get('rooms_required'),
           roomType: query.get('roomType'),
           hotel_roomId: query.get('hotel_roomId'),
-          hotel_vendor_id: query.get('hotel_vendor_id')
+          hotel_vendor_id: query.get('hotel_vendor_id'),
+          childrens:query.get('childrens'),
+          adults:query.get('adults'),
 
         };
 
@@ -132,10 +137,12 @@ export class HotelroominfoComponent implements OnInit {
             this.available = false;
 
           }
-          console.log("availablity check:", exactavailable)
+          console.log("availablity check:", exactavailable);
           this.requirerooms = availability.require_room
-          console.log("availability", availability.require_room)
-          console.log("availability", availability)
+          console.log("availability", availability);
+          console.log("totelroom", this.totelroom);
+          this.totelroom=availability.totalRooms;
+
         }).catch((error: any) => {
           console.log(error);
         });
@@ -154,12 +161,6 @@ export class HotelroominfoComponent implements OnInit {
           } else {
             this.combo_check = "with features";
           }
-
-          // if (this.exactvalue.cancellation_charges == '0') {
-          //   this.combo_check = "with Free Cancellation"
-          // } else {
-          //   this.combo_check = "with features"
-          // }
           if (this.exactvalue.rooms_image) {
             this.mainImage = this.exactvalue.rooms_image[0]; // first image as main
             this.images = this.exactvalue.rooms_image;       // thumbnails list
@@ -175,34 +176,19 @@ export class HotelroominfoComponent implements OnInit {
 
 
   }
-
-  // this.router.navigate(['/room-info',],{
-  //       queryParams:{
-  //          combo: 'combo',
-  //       hotel_vendor_id: hotelid,
-  //       hotel_roomId: roomid,
-  //       roomType: roomtype,
-  //       check_in_date:this.originalParams.checkin,
-  //       check_out_date:this.originalParams.checkout,
-  //       rooms_required: calculate_rooms
-  //     }
-
-  //     });
-
-
-
-  comboRender() {
-
-    // console.log(this.filter);
-
-    this.router.navigate(['/paricular-hotel-room-data',], {
+  comboRender() { 
+    
+    this.router.navigate(['/paricular-hotel-room-data',], { 
       queryParams: {
         hotel_vendor_id: this.filter.hotel_vendor_id,
         hotel_roomId: this.filter.hotel_roomId,
         roomType: this.filter.roomType,
         check_in_date: this.filter.check_in_date,
         check_out_date: this.filter.check_out_date,
-        rooms: this.filter.rooms_required
+        rooms: this.filter.rooms_required,
+        adutls:this.filter.adults,
+        children:this.filter.childrens,
+        avrooms:this.totelroom
       }
     })
     console.log('its working');
