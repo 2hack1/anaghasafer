@@ -61,7 +61,7 @@ totelroom:any;
         this.service.checavailability(this.filter).then((res: any) => {
           const availlibllity = res.data;
           const comboavailable = availlibllity.available;
-
+         
           if (comboavailable) {
             this.available = true;
 
@@ -130,6 +130,8 @@ totelroom:any;
         this.service.checavailability(this.filter).then((res: any) => {
           const availability = res.data;
           const exactavailable = availability.available;
+              this.totelroom=availability.totalRooms;
+                 console.log("totelroom", this.totelroom);
           if (exactavailable) {
             this.available = true;
 
@@ -140,11 +142,12 @@ totelroom:any;
           console.log("availablity check:", exactavailable);
           this.requirerooms = availability.require_room
           console.log("availability", availability);
-          console.log("totelroom", this.totelroom);
-          this.totelroom=availability.totalRooms;
+       
+      
 
         }).catch((error: any) => {
           console.log(error);
+          
         });
 
         this.service.getinfo(hotelid, room_id).then((res: any) => {
@@ -177,7 +180,7 @@ totelroom:any;
 
   }
   comboRender() { 
-    
+    console.log("smnfdkdsnkjfn",this.totelroom )    
     this.router.navigate(['/paricular-hotel-room-data',], { 
       queryParams: {
         hotel_vendor_id: this.filter.hotel_vendor_id,

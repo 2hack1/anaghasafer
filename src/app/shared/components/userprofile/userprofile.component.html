@@ -1,1 +1,169 @@
-<p>userprofile works!</p>
+<div class="dashboard-container"> <!-- Header -->
+    <header class="profile-header">
+        <div class="profile-info"> <img src="https://avatars.githubusercontent.com/u/167794620?v=4" alt="Profile"
+                class="profile-pic">
+            <div class="info-text">
+                <h2>Kapil</h2>
+                <p class="sub">Student, Vision Institute of Technology</p>
+                <p class="year">Year: 2009 to 2015</p> <a href="#" class="reset-link"><i class="fa fa-undo"></i> Reset
+                    Password</a>
+            </div>
+        </div>
+        <div class="contact-info">
+            <p><i class="fa fa-envelope"></i> rajyadav2121.com</p>
+            <p><i class="fa fa-id-card"></i> 09P02308</p>
+            <p><i class="fa fa-phone"></i> 8604203001</p>
+            
+        </div>
+    </header> <!-- Mid section -->
+    <section class="details-grid" style="margin-top: 1rem;"> <!-- Personal Details -->
+   
+        
+        <div class="card-check" >
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" 
+       [class.active]="selectedTab === 0" 
+       href="javascript:void(0)" 
+       (click)="selectTab(0)">
+      Active
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" 
+       [class.active]="selectedTab === 1" 
+       href="javascript:void(0)" 
+       (click)="selectTab(1)">
+      Link 1
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" 
+       [class.active]="selectedTab === 2" 
+       href="javascript:void(0)" 
+       (click)="selectTab(2)">
+      Link 2
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" 
+       href="javascript:void(0)">
+      Disabled
+    </a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div *ngIf="selectedTab === 0">
+   <div class="card"> 
+            <div class="card-header">
+                <h3>Personal Details</h3> <span class="edit-icon">✎</span>
+            </div>
+            <div class="details-row">
+                <div class="detail">
+                    <p class="label">Gender</p>
+                    <p class="value">Male</p>
+                </div>
+                <div class="detail">
+                    <p class="label">Date of Birth</p>
+                    <p class="value">24 July 1994</p>
+                </div>
+            </div>
+            <div class="details-row">
+                <div class="detail">
+                    <p class="label">Blood Group</p>
+                    <p class="value">A+</p>
+                </div>
+                <div class="detail">
+                    <p class="label">Registered Email</p>
+                    <p class="value">vikas1212.com</p>
+                </div>
+            </div>
+            <div class="details-row">
+                <div class="detail full-width">
+                    <p class="label">Permanent Address</p>
+                    <p class="value">6c-1 Satbari Road New Azad Nagar, Kanpur Uttar Pradesh - 208011</p>
+                </div>
+            </div>
+            <div class="details-row">
+                <div class="detail full-width">
+                    <p class="label">Residential Address</p>
+                    <p class="value">687, Himalaya Road, Sec 38, Gurgaon, Haryana - 122001</p>
+                </div>
+            </div>
+        </div>
+  </div>
+
+  <div *ngIf="selectedTab === 1">
+      <div class="card"> 
+            <div class="card-header">
+                <h3>Personal Details</h3> <span class="edit-icon">✎</span>
+            </div>
+            <div class="details-row">
+                <div class="detail">
+                    <p class="label">Gender</p>
+                    <p class="value">Male</p>
+                </div>
+                <div class="detail">
+                    <p class="label">Date of Birth</p>
+                    <p class="value">24 July 1994</p>
+                </div>
+            </div>
+            <div class="details-row">
+                <div class="detail">
+                    <p class="label">Blood Group</p>
+                    <p class="value">A+</p>
+                </div>
+                <div class="detail">
+                    <p class="label">Registered Email</p>
+                    <p class="value">vikas1212.com</p>
+                </div>
+            </div>
+            <div class="details-row">
+                <div class="detail full-width">
+                    <p class="label">Permanent Address</p>
+                    <p class="value">6c-1 Satbari Road New Azad Nagar, Kanpur Uttar Pradesh - 208011</p>
+                </div>
+            </div>
+          
+        </div>
+  </div>
+
+  <div *ngIf="selectedTab === 2">
+     <div class="card"> 
+            <div class="card-header">
+                <h3>Personal Details</h3> <span class="edit-icon">✎</span>
+            </div>
+            <div class="details-row">
+                <div class="detail">
+                    <p class="label">Gender</p>
+                    <p class="value">Male</p>
+                </div>
+                <div class="detail">
+                    <p class="label">Date of Birth</p>
+                    <p class="value">24 July 1994</p>
+                </div>
+            </div>
+            <div class="details-row">
+                <div class="detail">
+                    <p class="label">Blood Group</p>
+                    <p class="value">A+</p>
+                </div>
+                <div class="detail">
+                    <p class="label">Registered Email</p>
+                    <p class="value">vikas1212.com</p>
+                </div>
+            </div>
+           
+          
+        </div>
+  </div>
+</div>
+
+
+
+     
+    </div>
+    </section>
+</div>
