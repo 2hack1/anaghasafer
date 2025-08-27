@@ -3,167 +3,219 @@
         <div class="profile-info"> <img src="https://avatars.githubusercontent.com/u/167794620?v=4" alt="Profile"
                 class="profile-pic">
             <div class="info-text">
-                <h2>Kapil</h2>
+                <h2>{{userdata.name}}</h2>
                 <p class="sub">Student, Vision Institute of Technology</p>
                 <p class="year">Year: 2009 to 2015</p> <a href="#" class="reset-link"><i class="fa fa-undo"></i> Reset
                     Password</a>
             </div>
         </div>
         <div class="contact-info">
-            <p><i class="fa fa-envelope"></i> rajyadav2121.com</p>
-            <p><i class="fa fa-id-card"></i> 09P02308</p>
-            <p><i class="fa fa-phone"></i> 8604203001</p>
-            
+            <p><i class="fa fa-envelope"></i> {{userdata.email}}</p>
+            <!-- <p><i class="fa fa-id-card"></i> 09P02308</p> -->
+            <p><i class="fa fa-phone"></i> {{userdata.user_mob_no1}}</p>
+            <p><i class="fa fa-phone"></i> {{userdata.user_mob_no2}}</p>
+
         </div>
     </header> <!-- Mid section -->
-    <section class="details-grid" style="margin-top: 1rem;"> <!-- Personal Details -->
-   
-        
-        <div class="card-check" >
+    <section class="details-grid" style="margin-top: 1rem;">
+         <!-- Personal Details -->
 
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link" 
-       [class.active]="selectedTab === 0" 
-       href="javascript:void(0)" 
-       (click)="selectTab(0)">
-      Active
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" 
-       [class.active]="selectedTab === 1" 
-       href="javascript:void(0)" 
-       (click)="selectTab(1)">
-      Link 1
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" 
-       [class.active]="selectedTab === 2" 
-       href="javascript:void(0)" 
-       (click)="selectTab(2)">
-      Link 2
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" 
-       href="javascript:void(0)">
-      Disabled
-    </a>
-  </li>
-</ul>
 
-<div class="tab-content">
-  <div *ngIf="selectedTab === 0">
-   <div class="card"> 
-            <div class="card-header">
-                <h3>Personal Details</h3> <span class="edit-icon">✎</span>
+        <div class="card-check">
+
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" [class.active]="selectedTab === 0" href="javascript:void(0)"
+                        (click)="selectTab(0)">
+                        Booking
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.active]="selectedTab === 1" href="javascript:void(0)"
+                        (click)="selectTab(1)">
+                        Link 1
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.active]="selectedTab === 2" href="javascript:void(0)"
+                        (click)="selectTab(2)">
+                        Link 2
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="javascript:void(0)">
+                        Disabled
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div *ngIf="selectedTab === 0">
+                    <div class="card" *ngIf="!nothavebooking">
+                        <div class="card-header">
+                            <h3>Personal Details</h3> <span class="edit-icon"></span>
+                        </div>
+
+                        <div class="details-row" style="margin-top: 1rem;">
+                            <div class="detail inline">
+                                <p class="label">Check-in:</p>
+                                <p class="value">{{ booking[0].check_in_date }}</p>
+                            </div>
+                            <div class="detail inline">
+                                <p class="label">Check-out:</p>
+                                <p class="value">{{ booking[0].check_out_date }}</p>
+                            </div>
+                        </div>
+
+                        <div class="details-row">
+                            <div class="detail inline">
+                                <p class="label">Adults:</p>
+                                <p class="value">{{ booking[0].adults }}</p>
+                            </div>
+                            <div class="detail inline">
+                                <p class="label">Children:</p>
+                                <p class="value">{{ booking[0].children }}</p>
+                            </div>
+                        </div>
+
+                        <div class="details-row">
+                            <div class="detail inline">
+                                <p class="label">Book Rooms:</p>
+                                <p class="value">{{ booking[0].rooms_booked }}</p>
+                            </div>
+                            <div class="detail inline">
+                                <p class="label">Room No:</p>
+                                <p class="value">{{ booking[0].room_no || '-' }}</p>
+                            </div>
+                        </div>
+
+                        <div class="details-row">
+                            <div class="detail inline">
+                                <p class="label">Room Type:</p>
+                                <p class="value">{{ booking[0].roomType }}</p>
+                            </div>
+                            <div class="detail inline">
+                                <p class="label">Price/Night:</p>
+                                <p class="value">₹{{ booking[0].price_per_night }}</p>
+                            </div>
+                        </div>
+
+                        <div class="details-row">
+                            <div class="detail inline">
+                                <p class="label">Total Amount:</p>
+                                <p class="value">₹{{ booking[0].total_amount }}</p>
+                            </div>
+                            <div class="detail inline">
+                                <p class="label">Payment Status:</p>
+                                <p class="value">{{ booking[0].payment_status }}</p>
+                            </div>
+                        </div>
+
+                        <div class="details-row">
+                            <div class="detail inline">
+                                <p class="label">Payment Method:</p>
+                                <p class="value">{{ booking[0].payment_method }}</p>
+                            </div>
+                            <div class="detail inline">
+                                <p class="label">Hotel Name:</p>
+                                <p class="value">{{ booking[0].hotel_vendor.hotelname }}</p>
+                            </div>
+                        </div>
+
+                        <div class="details-row">
+                            <div class="detail full-width">
+                                <p class="label">City:</p>
+                                <p class="value">{{ booking[0].hotel_vendor.city }}, {{ booking[0].hotel_vendor.state }}
+                                    - {{ booking[0].hotel_vendor.pincode }}</p>
+                            </div>
+                        </div>
+
+                        <div class="details-row">
+                            <div class="detail full-width">
+                                <p class="label">Address:</p>
+                                <p class="value">{{ booking[0].hotel_vendor.address }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="nothavebooking" style="justify-content: center; align-items: center; 
+                       align-items: center; display: flex; height: 200px; color: rgb(171, 172, 173); ">
+                        <p style="font-family: system-ui;">No Booking Found, please HOTEL & TOORS Booked Know </p>
+                    </div>
+
+                </div>
+
+                <div *ngIf="selectedTab === 1">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Personal Details</h3> <span class="edit-icon">✎</span>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail">
+                                <p class="label">Gender</p>
+                                <p class="value">Male</p>
+                            </div>
+                            <div class="detail">
+                                <p class="label">Date of Birth</p>
+                                <p class="value">24 July 1994</p>
+                            </div>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail">
+                                <p class="label">Blood Group</p>
+                                <p class="value">A+</p>
+                            </div>
+                            <div class="detail">
+                                <p class="label">Registered Email</p>
+                                <p class="value">vikas1212.com</p>
+                            </div>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail full-width">
+                                <p class="label">Permanent Address</p>
+                                <p class="value">6c-1 Satbari Road New Azad Nagar, Kanpur Uttar Pradesh - 208011</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div *ngIf="selectedTab === 2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Personal Details</h3> <span class="edit-icon">✎</span>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail">
+                                <p class="label">Gender</p>
+                                <p class="value">Male</p>
+                            </div>
+                            <div class="detail">
+                                <p class="label">Date of Birth</p>
+                                <p class="value">24 July 1994</p>
+                            </div>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail">
+                                <p class="label">Blood Group</p>
+                                <p class="value">A+</p>
+                            </div>
+                            <div class="detail">
+                                <p class="label">Registered Email</p>
+                                <p class="value">vikas1212.com</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <button class="cancel-btn" *ngIf="!nothavebooking">Cancel Booking</button>
+
             </div>
-            <div class="details-row">
-                <div class="detail">
-                    <p class="label">Gender</p>
-                    <p class="value">Male</p>
-                </div>
-                <div class="detail">
-                    <p class="label">Date of Birth</p>
-                    <p class="value">24 July 1994</p>
-                </div>
-            </div>
-            <div class="details-row">
-                <div class="detail">
-                    <p class="label">Blood Group</p>
-                    <p class="value">A+</p>
-                </div>
-                <div class="detail">
-                    <p class="label">Registered Email</p>
-                    <p class="value">vikas1212.com</p>
-                </div>
-            </div>
-            <div class="details-row">
-                <div class="detail full-width">
-                    <p class="label">Permanent Address</p>
-                    <p class="value">6c-1 Satbari Road New Azad Nagar, Kanpur Uttar Pradesh - 208011</p>
-                </div>
-            </div>
-            <div class="details-row">
-                <div class="detail full-width">
-                    <p class="label">Residential Address</p>
-                    <p class="value">687, Himalaya Road, Sec 38, Gurgaon, Haryana - 122001</p>
-                </div>
-            </div>
+
+
+
+
         </div>
-  </div>
-
-  <div *ngIf="selectedTab === 1">
-      <div class="card"> 
-            <div class="card-header">
-                <h3>Personal Details</h3> <span class="edit-icon">✎</span>
-            </div>
-            <div class="details-row">
-                <div class="detail">
-                    <p class="label">Gender</p>
-                    <p class="value">Male</p>
-                </div>
-                <div class="detail">
-                    <p class="label">Date of Birth</p>
-                    <p class="value">24 July 1994</p>
-                </div>
-            </div>
-            <div class="details-row">
-                <div class="detail">
-                    <p class="label">Blood Group</p>
-                    <p class="value">A+</p>
-                </div>
-                <div class="detail">
-                    <p class="label">Registered Email</p>
-                    <p class="value">vikas1212.com</p>
-                </div>
-            </div>
-            <div class="details-row">
-                <div class="detail full-width">
-                    <p class="label">Permanent Address</p>
-                    <p class="value">6c-1 Satbari Road New Azad Nagar, Kanpur Uttar Pradesh - 208011</p>
-                </div>
-            </div>
-          
-        </div>
-  </div>
-
-  <div *ngIf="selectedTab === 2">
-     <div class="card"> 
-            <div class="card-header">
-                <h3>Personal Details</h3> <span class="edit-icon">✎</span>
-            </div>
-            <div class="details-row">
-                <div class="detail">
-                    <p class="label">Gender</p>
-                    <p class="value">Male</p>
-                </div>
-                <div class="detail">
-                    <p class="label">Date of Birth</p>
-                    <p class="value">24 July 1994</p>
-                </div>
-            </div>
-            <div class="details-row">
-                <div class="detail">
-                    <p class="label">Blood Group</p>
-                    <p class="value">A+</p>
-                </div>
-                <div class="detail">
-                    <p class="label">Registered Email</p>
-                    <p class="value">vikas1212.com</p>
-                </div>
-            </div>
-           
-          
-        </div>
-  </div>
-</div>
-
-
-
-     
-    </div>
     </section>
 </div>

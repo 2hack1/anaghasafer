@@ -140,4 +140,13 @@ booking(data:FormData){
   return this.api.post('/bookings',data);
 }
 
+
+getBookingWithuser(id:any){
+return this.api.get(`bookings/user/${id}`);
+}
+
+getuserdata(id:any){
+  return this.api.get(`users/${id}`);
+
+}
 }

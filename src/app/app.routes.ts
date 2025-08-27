@@ -63,7 +63,7 @@ export const routes: Routes = [
         path:'room-info',
          component: HotelroominfoComponent
     },{
-        path:'profile',
+        path:'profile/:id',
         component:UserprofileComponent
     }
 ]

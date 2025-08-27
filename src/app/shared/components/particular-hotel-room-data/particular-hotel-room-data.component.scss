@@ -948,6 +948,31 @@ select {
     gap: 10px; /* reduce spacing on mobile */
   }
 }
+
+
+
+.payment-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.payment-card:hover {
+  border-color: #999;
+}
+
+.payment-card.selected {
+  border-color: #007bff; /* blue border for selected */
+  background: #f0f8ff;   /* light highlight */
+  transform: scale(1.05);
+}
+
+
 .logo-circle {
   width: 80px;
   height: 80px;
@@ -1048,3 +1073,42 @@ select {
 }
 
 
+
+
+    .amenities-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #ececec;
+      padding: 24px 20px;
+      margin-bottom: 24px;
+    }
+    .amenities-card h4 {
+      margin-bottom: 18px;
+      font-size: 20px;
+      color: #1a237e;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .amenities-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 0;
+    }
+    .amenities-list li {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      color: #333;
+      padding: 4px 0;
+    }
+    .amenity-icon {
+      font-size: 22px;
+      margin-right: 10px;
+      color: #1976d2;
+    }
+    .amenity-name {
+      font-size: 15px;
+    }

@@ -12,6 +12,7 @@ import { error } from 'jquery';
   imports: [CommonModule, FormsModule],
   templateUrl: './particular-hotel-room-data.component.html',
   styleUrl: './particular-hotel-room-data.component.scss'
+  //  styleUrls: ['./particular-hotel-room-data.component.scss'] 
 })
 export class ParticularHotelRoomDataComponent implements OnInit {
   guest = {
@@ -20,16 +21,18 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     lastName: '',
     email: '',
     countryCode: '+91',
-    mobile: '',
+    mobile1: '',
+    mobile2: '',
     password: '',
     confirmPassword: '',
     hasGST: false,
     fullName: ''   // 👈 added fullName
   };
-
+  userid:any;
   avrooms: any;
-  isLoading = false;
-  isSuccess = false;
+  isLoading :boolean = false;
+
+  isSuccess :boolean= false;
   chek = "dekhte hai";
   infodata: any;
   filter: any;
@@ -130,7 +133,10 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     this.updateFullName();
 
     // Validation checks
-    if (!this.guest.firstName || !this.guest.lastName || !this.guest.email || !this.guest.mobile) {
+    if (!this.guest.firstName || !this.guest.lastName || !this.guest.email || !this.guest.mobile1 || !this.guest.mobile2) {
+     
+      
+      console.log("sjfdojsdof",this.guest)
       this.errorMessage = 'Please fill all required fields!';
       alert("Fill all required details");
       this.isLoading = false;
@@ -138,7 +144,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
       this.errorMessage = 'Invalid email format!';
       alert("Please enter a valid email");
       this.isLoading = false;
-    } else if (!this.isValidMobile(this.guest.mobile)) {
+    } else if (!this.isValidMobile(this.guest.mobile1)) {
       this.errorMessage = 'Contact number must be 10 digits!';
       alert("Mobile number must be 10 digits");
       this.isLoading = false;
@@ -158,7 +164,9 @@ export class ParticularHotelRoomDataComponent implements OnInit {
         password: this.guest.password,
         password_confirmation: this.guest.confirmPassword,
         role: 'user',
-        mobile: this.guest.mobile
+        mob1: this.guest.mobile1,
+        mob2: this.guest.mobile2,
+        
       };
 
       this.userservice.userRegister(a).subscribe({
@@ -166,7 +174,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
           console.log('Register Success:', res);
           this.isLoading = false;
           this.isSuccess = true;
-
+          this.userid=res.user.id;
           sessionStorage.setItem('i', res.user.id)
           sessionStorage.setItem('token', res.access_token);
           sessionStorage.setItem('name', res.user.name);
@@ -194,11 +202,13 @@ export class ParticularHotelRoomDataComponent implements OnInit {
   }
 
   paymentMethodss() {
-    this.isModalOpen = true;
-    if(sessionStorage.getItem('name') && sessionStorage.getItem('token') && sessionStorage.getItem('email')){
-    }else{
-     alert("Kindly complete your REGISTRATION or LOGIN before proceeding.");
-    }
+    // if(sessionStorage.getItem('name') && sessionStorage.getItem('token') && sessionStorage.getItem('email')){
+      this.isModalOpen = true;
+    
+    // }else{
+    //  alert("Kindly complete your REGISTRATION or LOGIN before proceeding.");
+    //   // return
+    // }
   }
 
   formatDates(checkin: any, checkout: any) {
@@ -253,6 +263,10 @@ export class ParticularHotelRoomDataComponent implements OnInit {
 
   submitPayment() {
 
+
+
+    
+
     const booking = {
       user_id: sessionStorage.getItem('i'),
       hotel_vendor_id: this.infodata.hotel_vendor_id,
@@ -273,8 +287,13 @@ export class ParticularHotelRoomDataComponent implements OnInit {
       total_amount: (this.infodata.finalPrice * this.filter.rooms_required),
       rooms_available: this.avrooms,
 
+       room_no:this.filter.rooms_required && this.filter.rooms_required.length > 0 
+              ? this.filter.rooms_required 
+              : []   // ✅ safe default
     }
  
+
+     console.log('lsdhfshdfsd',booking)
 
     const data = new FormData();
     Object.entries(booking).forEach(([key, value]) => {
@@ -288,19 +307,19 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     const txnRegex = /^(pay_[a-zA-Z0-9]{8,20}|order_[a-zA-Z0-9]{8,20}|txn_[a-zA-Z0-9]{8,20}|[0-9A-Z]{10,20})$/;
 
 
-   
-
-
-
     // console.log("booking:",booking);
     if (txnId && txnRegex.test(txnId)) {
     // if (booking.transaction_id) {
 
       this.service.booking(data).then((res: any) => {
-        
-        console.log("bookingg",booking);
-        
-        this.router.navigate(['/profile']);
+          
+        console.log("bookingg",this.userid);
+        // this.router.navigate(['/profile',this.userid]);
+        this.router.navigate(['/profile', 1]);
+     
+//         const encryptedId = btoa(this.userid.toString()); // convert to Base64
+// this.router.navigate(['/profile', encryptedId]);
+        // sessionStorage.clear();
       }).catch((err: any) => {
         console.log(err, "errror");
       })

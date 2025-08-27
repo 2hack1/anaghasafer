@@ -435,19 +435,19 @@ export class HotelListComponent implements OnInit {
     // check destination
     if (!this.hotel.destination) {
 
-      alert("Please select a locations");
+      alert("Please select again a locations");
       return;
     }
 
     // check dates
     if (!this.hotel.checkIn || !this.hotel.checkOut) {
-      alert("Please select check-in and check-out dates")
+      alert("Please select check-in and check-out dates again")
       return;
     }
 
     // check adults
     if (!this.hotel.extra.adults) {
-      alert("Please select number of adults")
+      alert("Please select number of adults again")
       return;
     }
     if (!this.hotel.extra.childrens) {
@@ -455,7 +455,7 @@ export class HotelListComponent implements OnInit {
     }
     // check rooms
     if (!this.hotel.extra.rooms) {
-      alert("Please select number of rooms")
+      alert("Please select number of rooms again")
       return;
     }
 

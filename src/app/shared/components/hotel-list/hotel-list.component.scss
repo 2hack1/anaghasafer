@@ -175,7 +175,7 @@
 .thumbnails {
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
 }
 
 .thumbnail {
@@ -728,9 +728,9 @@
 }
 
 .sticky-header {
-  position: sticky;
+  // position: sticky;
   top: 0;
-  z-index: 1000;
+  // z-index: 1000;
   background: #fff;
   /* default at top */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -748,6 +748,11 @@
 .sticky-header {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 500;
   /* stays above content but below modal */
+}
+@media (max-width: 768px) {
+  .sticky-header {
+    position: static; /* behaves like normal block element */
+  }
 }
