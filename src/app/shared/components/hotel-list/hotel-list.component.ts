@@ -427,7 +427,6 @@ export class HotelListComponent implements OnInit {
     console.log('adults', this.tempAdults);
     console.log('childrens', this.tempChildrens);
     console.log('rooms', this.tempRooms);
-
   }
 
 

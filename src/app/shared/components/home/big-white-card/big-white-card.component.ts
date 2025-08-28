@@ -21,7 +21,7 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
     minPrice = 0;
     maxPrice = 1500;
     tomorrow = new Date();
-
+  
     hotel = {
         destination: "gwalior",
         checkIn: "",
@@ -137,6 +137,11 @@ setActive(tab: 'destination'|'hotel'|'train') {
         rooms: 1,
     };
 
+    TuorguestTypes = [
+        { type: 'adults', label: 'Adults' },
+        { type: 'children', label: 'Children' },
+       
+    ];
     guestTypes = [
         { type: 'adults', label: 'Adults' },
         { type: 'children', label: 'Children' },
@@ -169,7 +174,14 @@ setActive(tab: 'destination'|'hotel'|'train') {
     }
 
     showPriceDropdown = false;
+    showPriceDropdown1 = false;
     priceOptions = ['0–1500', '1500–2500', '2500–5000', '5000-6000', '6000+'];
+    selectedmonth="March";
+   months = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+   ];
+
     // selectedPrice = '';
 
     togglePriceDropdown() {
@@ -189,6 +201,20 @@ setActive(tab: 'destination'|'hotel'|'train') {
             this.maxPrice = this.minPrice;
         }
     }
+
+    selectPrice1(month: string) {
+        // this.selectedPrice = price;
+        this.selectedmonth=month;
+        this.showPriceDropdown1=false;
+
+    }
+
+
+  togglePriceDropdown1() {
+        this.showPriceDropdown1 = !this.showPriceDropdown1;
+       
+    }
+
 
     onSubmit() {
        
