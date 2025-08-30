@@ -118,22 +118,26 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
 
 
 
-    randerWithFilterOnTop(){
-        // if( !this.selectedmonth ){
-        //   alert('')
-        // }elseif( !this.tour.destination){
-        //          alert('')
-        // }elseif( this.tour.destination){
+randerWithFilterOnTop(){
+// console.log("selectedmonth",this.selectedmonth)
+// console.log("destination",this.tour.destination)
+// console.log("adultss",this.TuorguestCounts.adultss)
+// console.log("childrens",this.TuorguestCounts.childrens)
+// console.log("days",this.TuorguestCounts.days)
+// console.log("price",this.minPricefortour);
+// console.log("maxprice",this.maxPricefortour);
 
-        //     alert('')
-        // }
-console.log("selectedmonth",this.selectedmonth)
-console.log("destination",this.tour.destination)
-
-console.log("adultss",this.TuorguestCounts.adultss)
-console.log("childrens",this.TuorguestCounts.childrens)
-console.log("days",this.TuorguestCounts.days)
-
+ this.route.navigate(['/dss'], {
+    queryParams: {
+      selectedMonth: this.selectedmonth,
+      destination: this.tour.destination,
+      adults: this.TuorguestCounts.adultss,
+      children: this.TuorguestCounts.childrens,
+      days: this.TuorguestCounts.days,
+      minPrice: this.minPricefortour,
+      maxPrice: this.maxPricefortour
+    }
+  });
 
         
     }

@@ -55,9 +55,23 @@ user_id:any;
   getSubDesAll(id:any){
     return this.api.get(`/destination/${id}`);
   }
-  getfilterpackages(data:any){
-     return this.api.post(`/filter/homepage`,data);
+  // getfilterpackages(data:any){
+    // }
+
+
+    // ****************************************************************************************
+    getPackagePlaceName(){
+     return this.api.post('/pac/places');
+
   }
+
+  // *********************************************************
+
+
+ getfilterpackages(params:any){
+     return this.api.get(`/top/filter`,{params});
+  }
+
   getPackages(id:any){
         return this.api.get(`/packages/${id}`);
   }

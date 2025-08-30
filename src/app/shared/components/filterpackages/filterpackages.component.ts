@@ -24,24 +24,25 @@ export class FilterpackagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.catchRouteId = this.routes.snapshot.paramMap.get('id');
-  //  this.getpackafewithfilter(this.catchRouteId);
+
   this.getPackagesWithFilters();
     this.getpackages(this.catchRouteId);
-      // get data by homw page 
+    
  this.routes.queryParams.subscribe(params => {
-    const fileter={
-       destination : params['place_name'],
-       price : params['price'],
-       duration : params['duration']
-    };
+   const filter = {
+    selectedMonth: params['selectedMonth'],   // ✅ backend expects this
+    destination: params['destination'],       // ✅ backend expects this
+    minPrice: params['minPrice'],             // ✅ backend expects this
+    maxPrice: params['maxPrice']              // ✅ backend expects this
+  };
       // console.log('Destination:', destination);
-      // console.log('Price:', price);
-      // console.log('Duration:', duration);
-
-      // Now you can call your API using these parameters
-      this.getallfilpackages(fileter);
+     
+      this.getallfilpackages(filter);
     });
 }
+
+
+
 check:any;
 getallfilpackages(data : any){
   // console.log("data:",data)
@@ -121,15 +122,17 @@ this.as_.getfilterpackages(data).then((res:any)=>{
     const combinedFilters = [...mainLabels, ...priceLabels];
       console.log("in the filter :",combinedFilters);
      console.log("id ;",this.catchRouteId)
-    this.as_.getPackagesWithFilter(this.catchRouteId,combinedFilters)
-      .then((res: any) => {
-        console.log('Filtered Packages:', res.data);
-        this.package =res.data;
-        // Optionally store in a variable for use in HTML
-      })
-      .catch(err => {
-        console.error('API error:', err);
-      });
+
+     
+    // this.as_.getPackagesWithFilter(this.catchRouteId,combinedFilters)
+    //   .then((res: any) => {
+    //     console.log('Filtered Packages:', res.data);
+    //     this.package =res.data;
+    //     // Optionally store in a variable for use in HTML
+    //   })
+    //   .catch(err => {
+    //     console.error('API error:', err);
+    //   });
   }
 
   
