@@ -314,8 +314,8 @@ export class ParticularHotelRoomDataComponent implements OnInit {
       this.service.booking(data).then((res: any) => {
           
         console.log("bookingg",this.userid);
-        // this.router.navigate(['/profile',this.userid]);
-        this.router.navigate(['/profile', 1]);
+        this.router.navigate(['/profile',this.userid]);
+        // this.router.navigate(['/profile', 1]);
      
 //         const encryptedId = btoa(this.userid.toString()); // convert to Base64
 // this.router.navigate(['/profile', encryptedId]);

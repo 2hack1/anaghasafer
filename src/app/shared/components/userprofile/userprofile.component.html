@@ -5,7 +5,8 @@
             <div class="info-text">
                 <h2>{{userdata.name}}</h2>
                 <p class="sub">Student, Vision Institute of Technology</p>
-                <p class="year">Year: 2009 to 2015</p> <a href="#" class="reset-link"><i class="fa fa-undo"></i> Reset
+                <p class="year">Year: 2009 to 2015</p> <a class="reset-link"><i class="fa fa-undo"></i>
+                     Reset
                     Password</a>
             </div>
         </div>
@@ -27,26 +28,22 @@
                 <li class="nav-item">
                     <a class="nav-link" [class.active]="selectedTab === 0" href="javascript:void(0)"
                         (click)="selectTab(0)">
-                        Booking
+                      Hotel  Booking
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" [class.active]="selectedTab === 1" href="javascript:void(0)"
                         (click)="selectTab(1)">
-                        Link 1
+                       Tour & travell
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" [class.active]="selectedTab === 2" href="javascript:void(0)"
                         (click)="selectTab(2)">
                         Link 2
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="javascript:void(0)">
-                        Disabled
-                    </a>
-                </li>
+                </li> -->
+               
             </ul>
 
             <div class="tab-content">

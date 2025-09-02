@@ -44,10 +44,10 @@ export class UserprofileComponent implements OnInit {
   
   ngOnInit(): void {
     
-   const id = this.router.snapshot.paramMap.get('id');  // read param
+  //  const id = this.router.snapshot.paramMap.get('id');  // read param
    
-// const encryptedId = this.route.snapshot.paramMap.get('id');
-// this.userid = atob(encryptedId!);
+const encryptedId = this.router.snapshot.paramMap.get('id');
+  const id = atob(encryptedId!);
 
   console.log("Route ID:", id);
  
@@ -105,7 +105,6 @@ this.getBookingdata(id);
 
   }).catch((err:any)=>{
     console.log(err,'user not found');
-
   })
 }
 

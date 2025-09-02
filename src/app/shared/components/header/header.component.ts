@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { LoginComponent } from "../login/login.component";
 import { trigger, animate, style, state, transition } from "@angular/animations"
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UserServicesService } from '../../../core/services/userService/user-services.service';
 
 @Component({
@@ -24,7 +24,7 @@ import { UserServicesService } from '../../../core/services/userService/user-ser
 })
 export class HeaderComponent implements OnInit {
    a:any;     // no used
-  constructor(private us_: UserServicesService) { }
+  constructor(private us_: UserServicesService,private route:Router) { }
   isLogin = false
 
   isHidden = false;
@@ -89,14 +89,29 @@ getColorForLetter(letter: string): string {
 
  
   
-    userName = 'Kapil Agarwal'; 
+    userName = sessionStorage.getItem('name'); 
     
-    userEmail = 'Kapila12@gmail.com';
-     isProfileMenuOpen = false; toggleProfileMenu()
-      { this.isProfileMenuOpen = !this.isProfileMenuOpen; }
-       goToProfile() { console.log('Navigating to profile...'); 
+    userEmail =sessionStorage.getItem('email');
 
-       } goToSettings() { console.log('Navigating to settings...'); 
+
+    // if(sessionStorage.getItem('email') &&sessionStorage.getItem('p') )
+     isProfileMenuOpen = false; 
+    toggleProfileMenu() {
+       this.isProfileMenuOpen = !this.isProfileMenuOpen; 
+      }
+       goToProfile() {
+         console.log('Navigating to profile...'); 
+        
+            const userId = sessionStorage.getItem('userid');
+
+// Encrypt the ID
+const encryptedId = btoa(userId!); // Base64 encode
+
+// Navigate with the encrypted ID as a route param
+this.route.navigate(['/profile', encryptedId]);
+       } 
+       goToSettings() { 
+        console.log('Navigating to settings...'); 
 
        } 
 

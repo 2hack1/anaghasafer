@@ -60,15 +60,8 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
         }
     };
 
-    tour = {
-        destination: "gwalior",
-        months: '',
-        adults: 1,
-        children: 1,
-        guests: 1
-    };
+    
 
-    destination = ['gwalior', 'indore', 'bhopal', 'ujjain', 'khajuraho', 'orchha'];
     priceOptions = ['0–1500', '1500–2500', '2500–5000', '5000-6000', '6000+'];
     //   priceOptions1 = ['0–5000', '5000–10000', '15000–25000', '25000-30000', '30000+'];
     months = [
@@ -94,10 +87,21 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
         days: 1,
     };
     TuorguestTypes = [
-        { type: 'adultss', label: 'Adultss' },
+        { type: 'adultss', label: 'Adults' },
         { type: 'childrens', label: 'Childrens' },
-        { type: 'days', label: 'Dayss' },
+        { type: 'days', label: 'Days' },
     ];
+
+    tour = {
+        destination: "gwalior",
+        months: '',
+        adults: 1,
+        children: 1,
+        guests: 1
+    };
+
+    destinations = ['gwalior', 'indore', 'bhopal', 'ujjain', 'khajuraho', 'orchha'];
+    destination = ['gwalior'];
 
     // ------------------------------------------------
     // 🔹 CONSTRUCTOR
@@ -114,6 +118,12 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
 
         this.hotel.checkIn = this.formatDate(today);
         this.hotel.checkOut = this.formatDate(this.tomorrow);
+        this.service.getPackagePlaceName().then((res:any)=>{
+      
+            console.log("check place",res.data.data);
+            this.destination.push(...res.data.data.map((item:any)=>item.place_name));
+        }).catch((res:any)=>{
+        })
     }
 
 
@@ -193,8 +203,8 @@ randerWithFilterOnTop(){
     }
 
     get filteredDestinations1() {
-        if (!this.searchText1) return this.destination;
-        return this.destination.filter(item =>
+        if (!this.searchText1) return this.destinations;
+        return this.destinations.filter(item =>
             item.toLowerCase().includes(this.searchText1.toLowerCase())
         );
     }
@@ -235,6 +245,7 @@ randerWithFilterOnTop(){
 
     closeAllModalForhotel(destination_name: any) {
         this.hotel.destination = destination_name;
+        console.log(this.hotel.destination)
         this.checkonmyside = false;
         this.searchText1 = '';
     }
@@ -294,20 +305,39 @@ randerWithFilterOnTop(){
     //   }
 
 
-    selectPrice(price: string) {
-        this.showPriceDropdown = false;
+    // selectPrice(price: string) {
+    //     this.showPriceDropdown = false;
 
-        if (price === '6000+') {
-            // Special case for 30000+
-            this.minPrice = 6000;
-            this.maxPrice = null;
-        } else {
-            // Normal price range case
-            const parts = price.split(/–|-/);
-            this.minPrice = Number(parts[0].trim());
-            this.maxPrice = Number(parts[1].trim());
-        }
-    }
+    //     if (price === '6000+') {
+    //         // Special case for 30000+
+    //         this.minPrice = 6000;
+    //         this.maxPrice = null;
+    //     } else {
+    //         // Normal price range case
+    //         const parts = price.split(/–|-/);
+    //         this.minPrice = Number(parts[0].trim());
+    //         this.maxPrice = Number(parts[1].trim());
+    //     }
+    // }
+
+    selectedPriceText: string = '';
+
+selectPrice(price: string) {
+  this.showPriceDropdown = false;
+
+  if (price === '6000+') {
+    this.minPrice = 6000;
+    this.maxPrice = 100000;
+    this.selectedPriceText = `₹${this.minPrice} - ₹${this.maxPrice}`;
+  } else {
+    const parts = price.split(/–|-/);
+    this.minPrice = Number(parts[0].replace(/[^0-9]/g, '').trim());
+    this.maxPrice = Number(parts[1].replace(/[^0-9]/g, '').trim());
+    this.selectedPriceText = price; // show original string
+  }
+
+  console.log('Min:', this.minPrice, 'Max:', this.maxPrice);
+}
 
 
     priceOptions1 = ['0–5000', '5000–10000', '15000–25000', '25000–30000', '30000+'];

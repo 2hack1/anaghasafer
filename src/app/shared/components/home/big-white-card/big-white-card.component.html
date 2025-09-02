@@ -50,12 +50,8 @@ position: relative;">
                     <!-- hotel text -->
                     <p class="animated-text"
                         style="color: #666;margin: 0; text-align: center; font-size: 16px; padding: 1rem 0;font-weight: bold;">
-                        Book your
-                        perfect stay and
-                        customize your
-                        hotel package just the
-                        way you
-                        like it.......!</p>
+                        Discover your dream destination and create a travel package tailored just for you ....!
+                    </p>
 
                     <div class="items">
 
@@ -81,7 +77,7 @@ position: relative;">
                                 <input type="text" [(ngModel)]="searchText1" class="input-field"
                                     placeholder="Search for destination" />
 
-                                <!-- Scrollable Destination List -->
+
                                 <div class="destination-list">
                                     <ng-container *ngFor="let i of filteredDestinations1">
                                         <button type="button" class="select-destionation-button"
@@ -92,20 +88,11 @@ position: relative;">
 
                                     <!-- No Results Message -->
                                     <p *ngIf="filteredDestinations1.length === 0" class="no-results">
-                                        No destinations found
+                                        No hotels available in Location
                                     </p>
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
-
-
-
 
                         <div class="divider"></div>
 
@@ -205,23 +192,15 @@ position: relative;">
                                     Night
                                     <span style="font-size: 0.8rem;">{{ isArrowUp ? '▲' : '▼' }}</span>
                                 </h4>
-                                <!-- <p style="margin: 0; color: #333;">
-                                    <strong> ₹{{ minPrice +"-"+maxPrice || 'Select Range' }}</strong>
-                                </p> -->
-
                                 <strong>
-                                    ₹
                                     {{
                                     minPrice === null
                                     ? 'Select Range'
-                                    : maxPrice === null
-                                    ? minPrice + '+'
-                                    : minPrice + ' - ' + maxPrice
+                                    : (minPrice === 6000 && maxPrice === 100000)
+                                    ? '₹'+minPrice + '+'
+                                    : '₹'+minPrice + ' - ' + maxPrice
                                     }}
                                 </strong>
-
-
-
                             </div>
                             <div *ngIf="showPriceDropdown"
                                 style="position: absolute; top: 100%; left: 0; background: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); border-radius: 6px; z-index: 1000; min-width: 200px;">
@@ -290,7 +269,7 @@ position: relative;">
                 <div class="menu_container">
 
                     <!-- hotel text -->
-                    <p class="animated-text"
+                    <p
                         style="color: #666;margin: 0; text-align: center; font-size: 16px; padding: 1rem 0;font-weight: bold;">
                         Book your
                         perfect stay and
@@ -322,7 +301,6 @@ position: relative;">
                                 <input type="text" [(ngModel)]="searchText" class="input-field"
                                     placeholder="Search for destination" />
 
-                                <!-- Scrollable Destination List -->
                                 <div class="destination-list">
                                     <ng-container *ngFor="let i of filteredDestinations">
                                         <button type="button" class="select-destionation-button"
