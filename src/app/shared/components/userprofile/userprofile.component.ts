@@ -30,6 +30,7 @@ import { AxiosService } from '../../../core/services/axios/axios.service';
 export class UserprofileComponent implements OnInit {
 
   nothavebooking:boolean=false
+  nothaveoder:boolean=false
   selectedTab = 0;
    booking :any={}
    userdata:any;
@@ -53,6 +54,7 @@ const encryptedId = this.router.snapshot.paramMap.get('id');
  
   // this.getBookingdata(id);
   this.getuserdata(id);
+
   }
 
 
@@ -102,6 +104,7 @@ getuserdata(id:any){
    this.userdata=res.data;
 
 this.getBookingdata(id);
+this.getorderdata(id);
 
   }).catch((err:any)=>{
     console.log(err,'user not found');
@@ -129,5 +132,33 @@ if (!res.data || res.data.length === 0) {
 }
 
 
+cancelBooking(){
+
+  if(window.confirm('Are you sure you want to cancel this booking?')){
+   alert('Booking cancelled.');
+  }else{
+     alert('Action cancelled.');
+  }
+  
+}
+
+getorderdata(id:any){
+this.service.getOrderDataOnUserProfile(id).then((res:any)=>{
+  console.log('data.....: ',res.data)
+if (!res.data || res.data.length === 0) {
+  this.nothaveoder = true;
+  
+
+} else {
+  this.nothaveoder = false;
+  // this.booking = res.data[0];
+  
+
+}
+}).catch((error:any)=>{
+  
+  
+})
+}
 
 }

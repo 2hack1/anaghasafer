@@ -139,11 +139,11 @@
                        align-items: center; display: flex; height: 200px; color: rgb(171, 172, 173); ">
                         <p style="font-family: system-ui;">No Booking Found, please HOTEL & TOORS Booked Know </p>
                     </div>
-
+                           <button class="cancel-btn" *ngIf="!nothavebooking"  (click)="cancelBooking()" >Cancel Booking</button>
                 </div>
 
                 <div *ngIf="selectedTab === 1">
-                    <div class="card">
+                    <div class="card" *ngIf="!nothaveoder"  >
                         <div class="card-header">
                             <h3>Personal Details</h3> <span class="edit-icon">✎</span>
                         </div>
@@ -175,6 +175,11 @@
                         </div>
 
                     </div>
+                      <div *ngIf="nothaveoder" style="justify-content: center; align-items: center; 
+                       align-items: center; display: flex; height: 200px; color: rgb(171, 172, 173); ">
+                        <p style="font-family: system-ui;">No Booking Found, please HOTEL & TOORS Booked Know </p>
+                    </div>
+                     <button class="cancel-btn" *ngIf="!nothavebooking"  (click)="cancelBooking()" >Cancel Booking</button>
                 </div>
 
                 <div *ngIf="selectedTab === 2">
@@ -206,7 +211,7 @@
 
                     </div>
                 </div>
-                <button class="cancel-btn" *ngIf="!nothavebooking">Cancel Booking</button>
+                <!-- <button class="cancel-btn" *ngIf="!nothavebooking"  (click)="cancelBooking()" >Cancel Booking</button> -->
 
             </div>
 

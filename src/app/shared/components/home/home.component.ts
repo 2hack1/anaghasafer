@@ -198,7 +198,7 @@ export class HomeComponent implements OnInit {
   subDesinter: any[] = [];
 
   getSubInternationalLimit(destination_id: any) {
-    this.as_.InternationalPackages(16)
+    this.as_.InternationalPackages(22)
       .then((res: AxiosResponse) => {
         this.getsubinter = res.data;
         this.subDesinter = res.data;

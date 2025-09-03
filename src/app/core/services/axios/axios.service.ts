@@ -63,9 +63,13 @@ export class AxiosService {
 
   getPackagePlaceName() {
     return this.api.get('/pac/places');
+    
+  }
+  
+  getOrderDataOnUserProfile(id:any){
+    return this.api.get(`/orderbyid/${id}`);
 
   }
-
   // *********************************************************
 
 

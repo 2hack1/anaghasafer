@@ -28,14 +28,13 @@
     </div>
   </aside>
 
-
   <main class="main-content">
     <div *ngFor="let pack of check" class="package-card">
-      <div class="image-section">
-        <ng-container *ngFor="let image of check.images">
-          <img [src]="backendUrl + image.img" alt="{{ pack.place_name }}">
-        </ng-container>
-      </div>
+  <div class="image-section">
+    <ng-container *ngFor="let image of pack.images">
+      <img [src]="backendUrl + image.img" alt="{{ pack.place_name }}">
+    </ng-container>
+  </div>
 
       <div class="details-section">
         <h2>{{ pack.place_name }}</h2>

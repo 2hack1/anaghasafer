@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class FilterpackagesComponent implements OnInit {
 
- backendUrl = environment.backend_url + '/storage/';
+ backendUrl = environment.backend_url + '/storage/'; 
 
   constructor(private routes: ActivatedRoute, private as_: AxiosService) { }
   catchRouteId: any | null = null;
@@ -50,6 +50,7 @@ this.as_.getfilterpackages(data).then((res:any)=>{
     this.check=res.data.data;
 
       console.log("check:",this.check);
+      console.log("check:check:",this.check[0].images[0].img);
 }).catch((erro)=>{
 
   console.log(erro);

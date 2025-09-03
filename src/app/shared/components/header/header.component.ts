@@ -31,8 +31,8 @@ export class HeaderComponent implements OnInit {
   lastScrollTop = 0;
 
   name: string = 'Kapil Agrawal';
-firstLetter: string = '';
-bgColor: string = '';
+  firstLetter: string = '';
+   bgColor: string = '';
 
 
   @HostListener('window:scroll', [])
@@ -104,6 +104,7 @@ getColorForLetter(letter: string): string {
         
             const userId = sessionStorage.getItem('userid');
 
+ this.isProfileMenuOpen=false;
 // Encrypt the ID
 const encryptedId = btoa(userId!); // Base64 encode
 
