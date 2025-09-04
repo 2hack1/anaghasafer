@@ -1,18 +1,15 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { AxiosService } from '../../../core/services/axios/axios.service';
 import { CommonModule } from '@angular/common';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-aboutus',
-  imports: [CommonModule, FormsModule],
-  templateUrl: './aboutus.component.html',
-  styleUrl: './aboutus.component.scss'
+  selector: 'app-mobile-view-big-white-card',
+  imports: [CommonModule,FormsModule],
+  templateUrl: './mobile-view-big-white-card.component.html',
+  styleUrl: './mobile-view-big-white-card.component.scss'
 })
-export class AboutusComponent implements OnInit {
-
-
-  // Guest & room counters 
+export class MobileViewBigWhiteCardComponent implements OnInit {
+// Guest & room counters 
   adults = 2;
   children = 0;
   rooms = 1; maxadults = 5; maxchildren = 5; maxRooms = 5;
@@ -21,13 +18,19 @@ export class AboutusComponent implements OnInit {
   cityOptions: string[] = ['Delhi', 'Mumbai', 'Bangalore', 'Goa'];
   country = 'India'; checkIn: ''
   checkOut: ''
-  totalGuests = 2; totalRooms = 1;
+  totalGuests = 2; 
+  totalRooms = 1;
   // Modals 
   showGuestsModal = false;
+ 
   showPriceModal = false;
   // tempCheckIn: string = ''; 
   // // tempCheckOut: string = '';
   isMobile = false;
+
+
+  // for tour
+  
   ngOnInit(): void {
     this.checkScreenSize();
   }
@@ -35,7 +38,7 @@ export class AboutusComponent implements OnInit {
   @HostListener('window:resize') onResize() {
     this.checkScreenSize();
   }
-  checkScreenSize() { this.isMobile = window.innerWidth <= 768; }
+  checkScreenSize() { this.isMobile = window.innerWidth <= 1150; }
   // ✅ Guest increment/decrement
   incAdults() { if (this.adults < this.maxadults) this.adults++; this.updateGuests(); }
   decAdults() { if (this.adults > 1) this.adults--; this.updateGuests(); }
@@ -51,9 +54,13 @@ export class AboutusComponent implements OnInit {
   incMaxPrice() { if (this.maxPrice + 500 <= 50000) this.maxPrice += 500; }
   decMaxPrice() { if (this.maxPrice - 500 >= this.minPrice) this.maxPrice -= 500; }
   applyPrice() { this.showPriceModal = false; }
+
   toggleGuestsModal() { this.showGuestsModal = !this.showGuestsModal; }
+
   togglePriceModal() { this.showPriceModal = !this.showPriceModal; }
   search() { console.log('Searching hotels...'); }
+
+
   hotelService = false;
   destinationService = true;
   a1 = '';
@@ -62,6 +69,8 @@ export class AboutusComponent implements OnInit {
   minPrice = 0;
   maxPrice = 1500;
   tomorrow = new Date();
+
+
   hotel = {
     destination: "gwalior", checkIn: "",
     checkOut: "", extra: { rooms: 1, adults: 1, childrens: 1, guests: 1 }
@@ -156,6 +165,8 @@ export class AboutusComponent implements OnInit {
     const day = ('0' + date.getDate()).slice(-2);
     return `${year} -${month} -${day}`;
   }
+  
+  
   // for hotel slide 
   hotelCity: string = '';
   hotelCityOptions: string[] = ['Goa', 'Delhi', 'Mumbai', 'Jaipur'];
@@ -181,8 +192,7 @@ export class AboutusComponent implements OnInit {
     this.showHotelGuestsModal = !this.showHotelGuestsModal;
   }
   applyHotelGuests() { this.toggleHotelGuestsModal(); }
-  // today = new Date().toISOString().split('T')[0]; 
-  // // today's date in yyyy-mm-dd 
+ 
   openDateModal1() {
     // // Temporary variables to avoid direct binding until applied 
     this.tempCheckIn = this.hotel.checkIn;
@@ -192,6 +202,11 @@ export class AboutusComponent implements OnInit {
   closeDateModal1() {
     this.showDateModal = false;
   }
+
+
+
+  
+
   // slides //month for the trip 
   showMonthModal = false; selectedMonth: string = 'March';
   // Default 
@@ -202,4 +217,76 @@ export class AboutusComponent implements OnInit {
   applyMonth() { this.showMonthModal = false; console.log('Selected Month:', this.selectedMonth); }
 
 
+// ********************************************************************************************************************
+
+  // --------- TOUR MODAL VARIABLES ----------
+adultsTour = 2;
+childrenTour = 0;
+roomsTour = 1;
+
+maxAdultsTour = 5;
+maxChildrenTour = 5;
+maxRoomsTour = 5;
+
+totalGuestsTour = 2;
+totalRoomsTour = 1;
+
+showGuestsModalTour = false;
+
+// --------- TOUR MODAL METHODS ----------
+incAdultsTour() {
+  if (this.adultsTour < this.maxAdultsTour) this.adultsTour++;
+  this.updateGuestsTour();
+}
+
+decAdultsTour() {
+  if (this.adultsTour > 1) this.adultsTour--;
+  this.updateGuestsTour();
+}
+
+incChildrenTour() {
+  if (this.childrenTour < this.maxChildrenTour) this.childrenTour++;
+  this.updateGuestsTour();
+}
+
+decChildrenTour() {
+  if (this.childrenTour > 0) this.childrenTour--;
+  this.updateGuestsTour();
+}
+
+incRoomsTour() {
+  if (this.roomsTour < this.maxRoomsTour) this.roomsTour++;
+  this.updateGuestsTour();
+}
+
+decRoomsTour() {
+  if (this.roomsTour > 1) this.roomsTour--;
+  this.updateGuestsTour();
+}
+
+updateGuestsTour() {
+  this.totalGuestsTour = this.adultsTour + this.childrenTour;
+  this.totalRoomsTour = this.roomsTour;
+}
+
+applyGuestsTour() {
+  this.showGuestsModalTour = false;
+}
+
+toggleGuestsModalTour() {
+  this.showGuestsModalTour = !this.showGuestsModalTour;
+}
+
+
+search0(){
+alert(' destination uder working ')
+}
+
+search1(){
+  alert(' hotle uder working')
+}
+
+search2(){
+  alert(' train uder working')
+}
 }

@@ -267,8 +267,19 @@
 	</div>
 	<!-- THIS IS HIDDEN , NO USE OF THIS -->
 
-	<app-big-white-card></app-big-white-card>
+	
+	
+	
+	<app-big-white-card  *ngIf="!isMobile"></app-big-white-card>
 	<!-- <app-big-white-card></app-big-white-card> -->
+	
+	
+	<app-mobile-view-big-white-card *ngIf="isMobile"></app-mobile-view-big-white-card>
+	
+	
+	
+	
+	
 	<div class="container">
 		<div class="main-heading">
 			<h2></h2>

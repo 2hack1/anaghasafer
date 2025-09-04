@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
@@ -9,11 +9,12 @@ import { environment } from '../../../../environments/environment.development';
 import $ from 'jquery';
 import { ReviewSliderComponent } from './review-slider/review-slider.component';
 import { BigWhiteCardComponent } from './big-white-card/big-white-card.component';
+import { MobileViewBigWhiteCardComponent } from './mobile-view-big-white-card/mobile-view-big-white-card.component';
 
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink, ReactiveFormsModule, FormsModule, RouterModule, ReviewSliderComponent,BigWhiteCardComponent],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, FormsModule, RouterModule, ReviewSliderComponent,BigWhiteCardComponent,MobileViewBigWhiteCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -55,6 +56,7 @@ export class HomeComponent implements OnInit {
     })
 
   }
+   isMobile = false;
   ngOnInit(): void {
 
     localStorage.clear();
@@ -74,8 +76,17 @@ export class HomeComponent implements OnInit {
       // this.getSubLimit(this.international);
 
     })()
-
+this.checkScreenSize();
   }
+
+
+ 
+  // ✅ Detect mobile 
+  @HostListener('window:resize') onResize() {
+    this.checkScreenSize();
+  }
+  checkScreenSize() { this.isMobile = window.innerWidth <= 768; }
+
 
   destination: string = '';
   customPrice: number | null = null;

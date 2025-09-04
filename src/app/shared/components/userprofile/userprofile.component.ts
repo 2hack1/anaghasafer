@@ -130,8 +130,6 @@ if (!res.data || res.data.length === 0) {
     
   })
 }
-
-
 cancelBooking(){
 
   if(window.confirm('Are you sure you want to cancel this booking?')){
@@ -147,8 +145,6 @@ this.service.getOrderDataOnUserProfile(id).then((res:any)=>{
   console.log('data.....: ',res.data)
 if (!res.data || res.data.length === 0) {
   this.nothaveoder = true;
-  
-
 } else {
   this.nothaveoder = false;
   // this.booking = res.data[0];
