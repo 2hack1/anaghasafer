@@ -972,3 +972,41 @@ label {
 
 
 
+.custom-dropdown {
+  position: absolute;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+   z-index: 1000;
+  overflow: hidden;
+  
+}
+
+.city-search-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  outline: none;
+  font-size: 16px;
+}
+
+.city-list {
+  max-height: 150px;   /* 👈 makes it scrollable */
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.city-list li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.city-list li:hover,
+.city-list li.active {
+  background: #f5f5f5;
+  font-weight: bold;
+}

@@ -30,34 +30,49 @@
                      justify-content: center; width: 100%; box-sizing: border-box; margin-top: 20px;">
 
                                 <!-- City Dropdown -->
-                                <div class="hotel-search-field city-dropdown"
-                                    style="width: 90%; max-width: 400px; margin-bottom: 1rem;">
+                               <div class="hotel-search-field city-dropdown"
+                                    style="width: 90%; max-width: 400px; margin-bottom: 1rem;"
+                                    (click)="openDropdown($event)">
+
                                     <i class="bi bi-geo-alt"></i>
-                                    <div style="flex: 1;">
+                       
+                                    <div style="flex: 1; position: relative;">
                                         <label class="field-label">Enter City or Location</label>
-                                        <select class="city-select" style="font-size: 22px; width: 100%;"
-                                            [(ngModel)]="city">
-                                            <option *ngFor="let c of cityOptions" [value]="c">{{ c }}</option>
-                                        </select>
-                                        <span class="hotel-subtext">{{ country }}</span>
+                                                          <h4>{{cityTour}}</h4>
+                                        <!-- DROPDOWN -->
+                                        <div class="custom-dropdown" *ngIf="check" (click)="$event.stopPropagation()">
+                                            <input type="text" [(ngModel)]="citySearch" placeholder="Search city..."
+                                                class="city-search-input" />
+
+                                            <ul class="city-list">
+                                                <li *ngFor="let c of filteredCityOptionsTour()"
+                                                    (click)="selectCityTour(c)" [class.active]="c === cityTour">
+                                                    {{ c }}
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <span class="hotel-subtext">{{ cityTour }}</span>
                                     </div>
                                 </div>
 
 
-
                                 <!-- Guests & Rooms -->
-                                <div class="hotel-search-field" (click)="toggleGuestsModal()"
+                                <div class="hotel-search-field" (click)="toggleGuestsModalTour()"
                                     style="width: 90%; max-width: 400px; margin-bottom: 1rem;">
                                     <i class="bi bi-people"></i>
                                     <div style="flex: 1;">
                                         <label class="field-label">Select No. of Guests</label>
                                         <div class="guest-value" style="display: flex; gap: 8px;">
-                                            <span>Adults: {{ totalGuests }}</span>
-                                            <span>Children: {{ totalRooms }}</span>
+                                            <span>Adults: {{ totalGuestsTour }}</span>
+                                            <span>Children: {{ totalRoomsTour }}</span>
                                         </div>
                                     </div>
                                     <i class="bi bi-plus-circle add-icon"></i>
                                 </div>
+
+
+
 
                                 <!-- Guest Modal -->
 
@@ -76,13 +91,13 @@
 
 
                                 <!-- Price Range -->
-                                <div class="hotel-search-field" (click)="togglePriceModal()"
+                                <div class="hotel-search-field" (click)="togglePriceModalTour()"
                                     style="width: 90%; max-width: 400px; margin-bottom: 1rem;">
                                     <i class="bi bi-currency-dollar"></i>
                                     <div style="flex: 1;">
                                         <label class="field-label">Price Range</label>
                                         <div class="guest-value">
-                                            ₹{{ minPrice }} - ₹{{ maxPrice }}
+                                            ₹{{ minPriceTour }} - ₹{{ maxPriceTour }}
                                         </div>
                                     </div>
                                     <i class="bi bi-plus-circle add-icon"></i>
@@ -99,7 +114,7 @@
                      justify-content: center; width: 100%; box-sizing: border-box; ">
 
                                 <!-- City Dropdown -->
-                                <div class="hotel-search-field city-dropdown"
+                                <!-- <div class="hotel-search-field city-dropdown"
                                     style="width: 90%; max-width: 400px; margin-bottom: 1rem;">
                                     <i class="bi bi-geo-alt"></i>
                                     <div style="flex: 1;">
@@ -110,6 +125,33 @@
                                         </select>
                                         <span class="hotel-subtext">{{ country }}</span>
                                     </div>
+                                </div> -->
+
+
+                                      <div class="hotel-search-field city-dropdown"
+                                    style="width: 90%; max-width: 400px; margin-bottom: 1rem;"
+                                    (click)="openDropdownHotel($event)">
+
+                                    <i class="bi bi-geo-alt"></i>
+                       
+                                    <div style="flex: 1; position: relative;">
+                                        <label class="field-label">Enter City or Location</label>
+                                                          <h4>{{city}}</h4>
+                                        <!-- DROPDOWN -->
+                                        <div class="custom-dropdown" *ngIf="checkHotel" (click)="$event.stopPropagation()">
+                                            <input type="text" [(ngModel)]="citySearchHotel" placeholder="Search city..."
+                                                class="city-search-input" />
+
+                                            <ul class="city-list">
+                                                <li *ngFor="let c of filteredCityOptionsHotel()"
+                                                    (click)="selectCityHotel(c)" [class.active]="c === city">
+                                                    {{ c }}
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <span class="hotel-subtext">{{ cityTour }}</span>
+                                    </div>
                                 </div>
 
                                 <!-- Check-in & Check-out -->
@@ -118,7 +160,7 @@
                                     style="width: 90%; max-width: 400px; margin-bottom: 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
                                     <i class="bi bi-calendar-event"></i>
                                     <span class="search-text city-select">
-                                        {{ hotel.checkIn || '2025-11-01' }} — {{ hotel.checkOut || '2025-10-10' }}
+                                        {{ hotel.checkIn || '2025-11-01' }} - {{ hotel.checkOut || '2025-10-10' }}
                                     </span>
                                 </div>
 
@@ -349,18 +391,18 @@
                             </div>
                         </div>
 
-
+                        <!-- tour ghest -->
                         <div class="modal-overlay" *ngIf="showGuestsModalTour">
                             <div class="modal-box">
                                 <button style="margin-left: 17rem;
-                         color: black;
-                         width: 30px; height: 20px; 
-                           font-size: 20px;
-                            background-color: white;
-                            border: none;" (click)="toggleGuestsModalTour()">
+                                                            color: black;
+                                                       width: 30px; height: 20px; 
+                                                        font-size: 20px;
+                                              background-color: white;
+                                  border: none;" (click)="toggleGuestsModalTour()">
                                     x
                                 </button>
-                                <h3>Select Guests & Roomddddddddddddds</h3>
+                                <h3>Select Guests & Room</h3>
 
                                 <div class="vertical-sections">
 
@@ -373,7 +415,7 @@
                                     </div>
 
                                     <div class="guest-section">
-                                        <h4>Children</h4>
+                                        <h4>Childrennn</h4>
                                         <i class="bi bi-arrow-up-circle-fill arrow-btn" (click)="incChildrenTour()"
                                             [class.disabled]="childrenTour >= maxChildrenTour"></i>
                                         <span class="count">{{ childrenTour }}</span>
@@ -381,14 +423,14 @@
                                             (click)="decChildrenTour()"></i>
                                     </div>
 
-                                    <div class="guest-section">
-                                        <h4>Rooms</h4>
+                                    <!-- <div class="guest-section">
+                                        <h4>Roomsss</h4>
                                         <i class="bi bi-arrow-up-circle-fill arrow-btn" (click)="incRoomsTour()"
                                             [class.disabled]="roomsTour >= maxRoomsTour"></i>
                                         <span class="count">{{ roomsTour }}</span>
                                         <i class="bi bi-arrow-down-circle-fill arrow-btn" (click)="decRoomsTour()"
                                             [class.disabled]="roomsTour === 1"></i>
-                                    </div>
+                                    </div> -->
                                 </div>
 
 
@@ -398,7 +440,43 @@
                             </div>
                         </div>
 
+                        <!-- Tour price -->
 
+                        <div class="modal-overlay" *ngIf="showPriceModalTour">
+                            <div class="modal-box">
+                                <button style="margin-left: 17rem;
+                       color: black;
+                        width: 30px; height: 20px; 
+                         font-size: 20px;
+                         background-color: white;
+                          border: none;" (click)="togglePriceModalTour()">
+                                    x
+                                </button>
+                                <h3>Select Price Range</h3>
+                                <div class="vertical-sections">
+                                    <div class="guest-section">
+                                        <h4>Min Price</h4>
+                                        <i class="bi bi-arrow-up-circle-fill arrow-btn" (click)="incMinPriceTour()"
+                                            [class.disabled]="minPriceTour >= maxPriceTour"></i>
+                                        <span class="count">₹{{ minPriceTour }}</span>
+                                        <i class="bi bi-arrow-down-circle-fill arrow-btn" (click)="decMinPriceTour()"
+                                            [class.disabled]="minPriceTour <= 0"></i>
+                                    </div>
+                                    <div class="guest-section">
+                                        <h4>Max Price</h4>
+                                        <i class="bi bi-arrow-up-circle-fill arrow-btn" (click)="incMaxPriceTour()"
+                                            [class.disabled]="maxPriceTour >= 50000"></i>
+                                        <span class="count">₹{{ maxPriceTour }}</span>
+                                        <i class="bi bi-arrow-down-circle-fill arrow-btn" (click)="decMaxPriceTour()"
+                                            [class.disabled]="maxPriceTour <= minPriceTour"></i>
+                                    </div>
+                                </div>
+                                <div class="modal-actions" style="text-align: right; margin-top: 1rem;">
+                                    <button class="apply-btn" style="padding: 6px 12px; background: #ff7a1b; color: white; 
+                                   border: none; border-radius: 5px;" (click)="applyPriceTour()">Apply</button>
+                                </div>
+                            </div>
+                        </div>
 
 
                     </div>
