@@ -8,10 +8,22 @@
     <div class="sidebar"> <!-- Header + Toggle -->
       <div class="sidebar-header"> <button class="toggle-btn" (click)="toggleFilters()">☰</button> </div>
       <!-- Selected Filters as Chips -->
-      <div class="selected-filters" *ngIf="selectedPrices.length || selectedPlaceType"> <span
-          *ngFor="let price of selectedPrices" class="chip"> {{ price }} <button class="chip-remove"
-            (click)="removePrice(price)">×</button> </span> <span *ngIf="selectedPlaceType" class="chip"> {{
-          selectedPlaceType }} <button class="chip-remove" (click)="clearPlaceType()">×</button> </span> </div>
+      <div class="selected-filters" *ngIf="selectedPrices.length || selectedPlaceType">
+
+  <!-- ✅ show chips by option, not by string -->
+  <ng-container *ngFor="let option of priceOptions">
+    <span *ngIf="option.selected" class="chip">
+      {{ option.label }}
+      <button class="chip-remove" (click)="removePrice(option.value)">×</button>
+    </span>
+  </ng-container>
+
+  <span *ngIf="selectedPlaceType" class="chip">
+    {{ selectedPlaceType }}
+    <button class="chip-remove" (click)="clearPlaceType()">×</button>
+  </span>
+</div>
+
       <!-- Price Filter -->
       <div class="sidebar-header">
        
@@ -71,7 +83,12 @@
         <div class="search-section line" (click)="openGuestsModal()"> <i class="bi bi-people"></i> <span
             class="search-text"> {{ hotel.extra.adults || combohotelRooms[0].room.maxAdults}} adults - {{ hotel.extra.childrens||combohotelRooms[0].room.maxChildren  }} children <br> - 
             {{hotel.extra.rooms ||combohotelRooms[0].calculated_needed_rooms }} rooms </span> </div> <!-- Guests Modal -->
-        <button class="search-btn" (click)="search()">Search</button>
+      <button class="search-btn" (click)="search()" [disabled]="isSearching">
+  <span *ngIf="!isSearching">Search</span>
+  <span *ngIf="isSearching">
+    <i class="bi bi-arrow-clockwise spin"></i> Searching...
+  </span>
+</button>
       </div>
     </div> <!-- Guests Modal -->
 
@@ -82,19 +99,22 @@
         <h3>Select Guests</h3>
         <div class="guests-row"> <!-- Adults -->
           <div class="guest-item"> <label>Adults</label> <select [(ngModel)]="tempAdults">
-              <option *ngFor="let num of numberOptions" [value]="num">{{ num }}</option>
+              <option class="check" *ngFor="let num of numberOptions" [value]="num">{{ num }}</option>
             </select> </div> <!-- Children -->
           <div class="guest-item"> <label>Children</label> <select [(ngModel)]="tempChildrens">
-              <option *ngFor="let num of numberOptions" [value]="num">{{ num }}</option>
+              <option class="check" *ngFor="let num of numberOptions" [value]="num">{{ num }}</option>
             </select> </div> <!-- Rooms -->
-          <div class="guest-item"> <label>Rooms</label> <select [(ngModel)]="tempRooms">
-              <option *ngFor="let num of numberOptions" [value]="num">{{ num }}</option>
+          <div class="guest-item"> <label>Rooms</label>
+             <select [(ngModel)]="tempRooms">
+              <option class="check" *ngFor="let num of numberOptions" [value]="num">{{ num }}</option>
             </select> </div>
         </div>
         <div class="modal-actions"> <button class="close-btn" (click)="closeGuestsModal()">Cancel</button> <button
             class="close-btn" (click)="applyGuests()">Apply</button> </div>
       </div>
     </div> <!-- Date Modal --> <!-- Date Modal -->
+   
+   
     <div class="modal-backdrop" *ngIf="showDateModal">
       <div class="modal-box date-modal">
         <h3>Select Dates</h3> <label> Check-in: <input type="date" [(ngModel)]="tempCheckIn"> </label> <label>

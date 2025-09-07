@@ -234,6 +234,7 @@ export class HotelListComponent implements OnInit {
   { value: '15000-20000', label: '₹15,000 – ₹20,000', selected: false },
   { value: '20000-25000', label: '₹20,000 – ₹25,000', selected: false },
   { value: '25000+', label: '₹25,000+', selected: false },];
+  
   placeTypes = ['Hotel', 'Apartment', 'Resort', 'Homestay', 'Villa'];
   selectedPrices: string[] = [];
   selectedPlaceType: string = '';
@@ -428,103 +429,178 @@ export class HotelListComponent implements OnInit {
     console.log('childrens', this.tempChildrens);
     console.log('rooms', this.tempRooms);
   }
+isSearching: boolean = false;
 
 
-  search() {
-    // check destination
-    if (!this.hotel.destination) {
+  // search() {
+  //   // check destination
+  //   if (!this.hotel.destination) {
 
-      alert("Please select again a locations");
-      return;
-    }
+  //     alert("Please select again a locations");
+  //     return;
+  //   }
 
-    // check dates
-    if (!this.hotel.checkIn || !this.hotel.checkOut) {
-      alert("Please select check-in and check-out dates again")
-      return;
-    }
+  //   // check dates
+  //   if (!this.hotel.checkIn || !this.hotel.checkOut) {
+  //     alert("Please select check-in and check-out dates again")
+  //     return;
+  //   }
 
-    // check adults
-    if (!this.hotel.extra.adults) {
-      alert("Please select number of adults again")
-      return;
-    }
-    if (!this.hotel.extra.childrens) {
-      this.hotel.extra.childrens = '0';
-    }
-    // check rooms
-    if (!this.hotel.extra.rooms) {
-      alert("Please select number of rooms again")
-      return;
-    }
+  //   // check adults
+  //   if (!this.hotel.extra.adults) {
+  //     alert("Please select number of adults again")
+  //     return;
+  //   }
+  //   if (!this.hotel.extra.childrens) {
+  //     this.hotel.extra.childrens = '0';
+  //   }
+  //   // check rooms
+  //   if (!this.hotel.extra.rooms) {
+  //     alert("Please select number of rooms again")
+  //     return;
+  //   }
 
-    this.searchOnIt = {
-      city: this.hotel.destination,
-      adults: this.hotel.extra.adults,
-      children: this.hotel.extra.childrens || '0',
-      checkin: this.hotel.checkIn,
-      checkout: this.hotel.checkOut,
-      rooms: this.hotel.extra.rooms,
-    }
+  //   this.searchOnIt = {
+  //     city: this.hotel.destination,
+  //     adults: this.hotel.extra.adults,
+  //     children: this.hotel.extra.childrens || '0',
+  //     checkin: this.hotel.checkIn,
+  //     checkout: this.hotel.checkOut,
+  //     rooms: this.hotel.extra.rooms,
+  //   }
 
-    console.log("check again");
+  //   console.log("check again");
 
-    if (this.searchOnIt && Object.keys(this.searchOnIt).length > 0) {
-      localStorage.setItem('city', this.hotel.destination)
-      localStorage.setItem('adults', this.hotel.extra.adults)
-      localStorage.setItem('children', this.hotel.extra.childrens || '0')
-      localStorage.setItem('checkin', this.hotel.checkIn)
-      localStorage.setItem('checkout', this.hotel.checkOut)
-      localStorage.setItem('rooms', this.hotel.extra.rooms)
-    }
+  //   if (this.searchOnIt && Object.keys(this.searchOnIt).length > 0) {
+  //     localStorage.setItem('city', this.hotel.destination)
+  //     localStorage.setItem('adults', this.hotel.extra.adults)
+  //     localStorage.setItem('children', this.hotel.extra.childrens || '0')
+  //     localStorage.setItem('checkin', this.hotel.checkIn)
+  //     localStorage.setItem('checkout', this.hotel.checkOut)
+  //     localStorage.setItem('rooms', this.hotel.extra.rooms)
+  //   }
 
 
 
-    if (localStorage.getItem('city') && localStorage.getItem('adults') && localStorage.getItem('children') && localStorage.getItem('checkin') && localStorage.getItem('checkout') && localStorage.getItem('rooms')) {
+  //   if (localStorage.getItem('city') && localStorage.getItem('adults') && localStorage.getItem('children') && localStorage.getItem('checkin') && localStorage.getItem('checkout') && localStorage.getItem('rooms')) {
 
-      this.searchOnIt = {
-        city: localStorage.getItem('city'),
-        adults: localStorage.getItem('adults'),
-        children: localStorage.getItem('children'),
-        checkin: localStorage.getItem('checkin'),
-        checkout: localStorage.getItem('checkout'),
-        rooms: localStorage.getItem('rooms'),
-      }
+  //     this.searchOnIt = {
+  //       city: localStorage.getItem('city'),
+  //       adults: localStorage.getItem('adults'),
+  //       children: localStorage.getItem('children'),
+  //       checkin: localStorage.getItem('checkin'),
+  //       checkout: localStorage.getItem('checkout'),
+  //       rooms: localStorage.getItem('rooms'),
+  //     }
 
-      this.service.getHotelRoomsWithCombo(this.searchOnIt).then((res: any) => {
-        console.log("res Combo", res.data.non_matched_rooms)
-        // this.combohotelRooms = [];
-        this.combohotelRooms = res.data.non_matched_rooms
-          // remove records with calculated_needed_rooms == 1
-          .filter((room: any) => room.calculated_needed_rooms !== 1)
-          // map for main image
-          .map((room: any) => ({
-            ...room,
-            mainImageUrlcombo: room.room?.rooms_image?.[0] || ''
-          }));
-      }).catch((err: any) => {
-        console.log("err", err);
-      })
-      this.service.getHotelRoomsWithExact(this.searchOnIt).then((res: any) => {
-        console.log("res exact", res.data.rooms)
-        // this.execthotelRooms = [];
-        this.execthotelRooms = res.data.rooms;
-        this.execthotelRooms = res.data.rooms.map((room: any) => ({
-          ...room,
-          mainImage: room.rooms_image?.[0] || '' // take first image as main
-        }));
-      }).catch((err: any) => {
-        console.log("err", err);
-      })
-    }
+  //     this.service.getHotelRoomsWithCombo(this.searchOnIt).then((res: any) => {
+  //       console.log("res Combo", res.data.non_matched_rooms)
+  //       // this.combohotelRooms = [];
+  //       this.combohotelRooms = res.data.non_matched_rooms
+  //         // remove records with calculated_needed_rooms == 1
+  //         .filter((room: any) => room.calculated_needed_rooms !== 1)
+  //         // map for main image
+  //         .map((room: any) => ({
+  //           ...room,
+  //           mainImageUrlcombo: room.room?.rooms_image?.[0] || ''
+  //         }));
+  //     }).catch((err: any) => {
+  //       console.log("err", err);
+  //     })
+  //     this.service.getHotelRoomsWithExact(this.searchOnIt).then((res: any) => {
+  //       console.log("res exact", res.data.rooms)
+  //       // this.execthotelRooms = [];
+  //       this.execthotelRooms = res.data.rooms;
+  //       this.execthotelRooms = res.data.rooms.map((room: any) => ({
+  //         ...room,
+  //         mainImage: room.rooms_image?.[0] || '' // take first image as main
+  //       }));
+  //     }).catch((err: any) => {
+  //       console.log("err", err);
+  //     })
+  //   }
 
-    console.log("Searching hotels with filters:", this.hotel);
-    // *************************************************  dekho baad main *************************************
+  //   console.log("Searching hotels with filters:", this.hotel);
+  //   // *************************************************  dekho baad main *************************************
 
-  }
+  // }
 
 
   // ✅ Inside your component
+
+search() {
+  // Prevent multiple clicks while loading
+  if (this.isSearching) return;
+
+  // check destination
+  if (!this.hotel.destination) {
+    alert("Please select a location");
+    return;
+  }
+
+  // check dates
+  if (!this.hotel.checkIn || !this.hotel.checkOut) {
+    alert("Please select check-in and check-out dates");
+    return;
+  }
+
+  // check adults
+  if (!this.hotel.extra.adults) {
+    alert("Please select number of adults");
+    return;
+  }
+
+  // set default children
+  if (!this.hotel.extra.childrens) this.hotel.extra.childrens = '0';
+
+  // check rooms
+  if (!this.hotel.extra.rooms) {
+    alert("Please select number of rooms");
+    return;
+  }
+
+  this.isSearching = true; // start loading
+
+  this.searchOnIt = {
+    city: this.hotel.destination,
+    adults: this.hotel.extra.adults,
+    children: this.hotel.extra.childrens || '0',
+    checkin: this.hotel.checkIn,
+    checkout: this.hotel.checkOut,
+    rooms: this.hotel.extra.rooms,
+  };
+
+  // Save to localStorage
+  Object.entries(this.searchOnIt).forEach(([key, value]) => {
+    localStorage.setItem(key, value as string);
+  });
+
+  // Fetch API data
+  Promise.all([
+    this.service.getHotelRoomsWithCombo(this.searchOnIt),
+    this.service.getHotelRoomsWithExact(this.searchOnIt)
+  ]).then(([comboRes, exactRes]: any) => {
+    // Combo rooms
+    this.combohotelRooms = comboRes.data.non_matched_rooms
+      .filter((room: any) => room.calculated_needed_rooms !== 1)
+      .map((room: any) => ({
+        ...room,
+        mainImageUrlcombo: room.room?.rooms_image?.[0] || ''
+      }));
+
+    // Exact rooms
+    this.execthotelRooms = exactRes.data.rooms.map((room: any) => ({
+      ...room,
+      mainImage: room.rooms_image?.[0] || ''
+    }));
+  }).catch((err: any) => {
+    console.error(err);
+    alert("Something went wrong while fetching hotels.");
+  }).finally(() => {
+    this.isSearching = false; // stop loading
+  });
+}
+
   showPriceModal = false; selectedPrice: string = '';
   openPriceModal() { this.showPriceModal = true; }
   closePriceModal() { this.showPriceModal = false; }

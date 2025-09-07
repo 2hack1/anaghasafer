@@ -119,7 +119,6 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
         this.hotel.checkIn = this.formatDate(today);
         this.hotel.checkOut = this.formatDate(this.tomorrow);
         this.service.getPackagePlaceName().then((res:any)=>{
-      
             console.log("check place",res.data.data);
             this.destination.push(...res.data.data.map((item:any)=>item.place_name));
         }).catch((res:any)=>{

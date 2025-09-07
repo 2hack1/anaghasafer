@@ -34,18 +34,43 @@
           <h3 style="font-size: 18px;">{{checkCharges}}</h3>
           <p class="policy">Refund is applicable for this booking</p>
           <a href="" class="policy-link">Cancellation policy details</a>
-        </div> <a href="#" class="see-inclusions">See Inclusions</a>
+          <!-- amenaties   guest.amenties-->
+              
+           <div *ngIf="showInclusions">
+             <p class="policy" >features included</p>
+             <li *ngFor="let amenity of infodata.amenities" >{{ amenity }}</li>
+            </div>
+            </div> 
+          <a href="javascript:void(0)" class="see-inclusions" (click)="toggleInclusions()">
+    {{ showInclusions ? 'Hide Inclusions' : 'See Inclusions' }}
+  </a>
+
+
+  
+    <!-- <a href="#" class="see-inclusions">  See Inclusions</a> -->
+
       </div>
     </div>
+ 
     <div class="info-card">
-      <h2>Important information</h2>
-      <ul style="margin-top: 10px;">
-        <li style="margin-left: 20px;">Primary Guest should be atleast 18 years of age.</li>
-        <li style="margin-left: 20px;">Passport, Aadhaar, Driving License and Govt. ID are accepted as ID proof(s)</li>
-        <li style="margin-left: 20px;">Unmarried couples allowed</li>
-        <li style="margin-left: 20px;">Unmarried couples are not allowed in hourly stay rooms</li>
-      </ul> <a href="#" class="link" style="margin-top: 10px;">View More</a>
-    </div>
+  <h2>Important information</h2>
+  <ul style="margin-top: 10px;">
+    <li style="margin-left: 20px;">Primary Guest should be atleast 18 years of age.</li>
+    <li style="margin-left: 20px;">Passport, Aadhaar, Driving License and Govt. ID are accepted as ID proof(s)</li>
+    <li style="margin-left: 20px;">Unmarried couples allowed</li>
+    <li style="margin-left: 20px;">Unmarried couples are not allowed in hourly stay rooms</li>
+
+    <!-- Extra items shown only if expanded -->
+    <li *ngIf="showMore" style="margin-left: 20px;">Check-in time is {{ checkInTimeFormatted }}, Check-out time is {{ checkOutTimeFormatted }}</li>
+    <li *ngIf="showMore" style="margin-left: 20px;">Pets are not allowed inside the property</li>
+  </ul>
+
+  <!-- Toggle link -->
+  <a href="javascript:void(0)" class="link" (click)="toggleMore()" style="margin-top: 10px; display:block;">
+    {{ showMore ? 'View Less' : 'View More' }}
+  </a>
+</div>
+
 
     <div class="guest-form">
       <h3>Guest Details</h3>
@@ -193,7 +218,7 @@
 
     
     <div class="coupon-card">
-      <h4>Amenties</h4>
+      <h4>Coupon</h4>
       <div class="coupon active"> <input type="radio" checked> <label>MMTHOMESTAYS... <span class="discount">₹
             368</span></label>
         <p class="desc">Congratulations! Discount of INR 368 Applied</p>

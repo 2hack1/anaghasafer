@@ -23,9 +23,9 @@ export class FilterpackagesComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.catchRouteId = this.routes.snapshot.paramMap.get('id');
 
-  this.getPackagesWithFilters();
+
+  // this.getPackagesWithFilters();
     this.getpackages(this.catchRouteId);
     
  this.routes.queryParams.subscribe(params => {
@@ -48,7 +48,8 @@ getallfilpackages(data : any){
   // console.log("data:",data)
 this.as_.getfilterpackages(data).then((res:any)=>{
     this.check=res.data.data;
-
+            this.catchRouteId =res.data.data[0].sub_destination_id    ;
+            console.log('cnsd',this.catchRouteId)
       console.log("check:",this.check);
       console.log("check:check:",this.check[0].images[0].img);
 }).catch((erro)=>{
@@ -56,14 +57,16 @@ this.as_.getfilterpackages(data).then((res:any)=>{
   console.log(erro);
 })
 }
-
+filterdata:any;
   getpackages(id:any) {
     this.as_.getPackages(id).then((res) => {
       console.log("ALL Packages :",res.data);
-    
+       this.filterdata=res.data;
+   this.showfilter=true;
          }).
       catch((err) => {
         console.error(err);
+           this.showfilter=true;
       });
   // vpo-35
   }
@@ -109,32 +112,88 @@ this.as_.getfilterpackages(data).then((res:any)=>{
     lowPricing: "Low Pricing"
   };
 
+showfilter:boolean=false;
+
+  objectKeys = Object.keys;  
+loadingText: string = '';
+loadingInterval: any;
+
+getPackagesWithFilters(selectedKey?: string) {
+  // If a key is provided, uncheck all other filters
+  if (selectedKey) {
+    Object.keys(this.filters).forEach(key => {
+      this.filters[key] = (key === selectedKey);
+    });
+  }
+
+  // Collect selected filters
+  const selectedMain = Object.keys(this.filters).filter(key => this.filters[key]);
+  const selectedPrice = Object.keys(this.priceFilters).filter(key => this.priceFilters[key]);
+
+  const mainLabels = selectedMain.map(key => this.filterLabels[key]);
+  const priceLabels = selectedPrice.map(key => this.priceLabels[key]);
+
+  const combinedFilters = [...mainLabels, ...priceLabels];
+
+  console.log("in the filter:", combinedFilters);
+  console.log("id:", this.catchRouteId);
+
+  // Start loading indicator
+  this.loadingText = 'Searching';
+  let dotCount = 0;
+  this.loadingInterval = setInterval(() => {
+    dotCount = (dotCount + 1) % 4; // cycles 0 → 1 → 2 → 3
+    this.loadingText = 'Searching' + '.'.repeat(dotCount);
+  }, 500);
+
+  this.as_.getPackagesWithFilterdss(this.catchRouteId, combinedFilters)
+    .then((res: any) => {
+      clearInterval(this.loadingInterval); // stop animation
+
+      if (res.data && res.data.length > 0) {
+        this.loadingText = 'Search Completed';
+      } else {
+        this.loadingText = 'No matching tour found';
+      }
+
+      console.log('Filtered Packages:', res.data);
+      this.package = res.data;
+    })
+    .catch(err => {
+      clearInterval(this.loadingInterval);
+      this.loadingText = 'no matching tour found';
+      console.error('API error:', err);
+    });
+}
 
 
-  objectKeys = Object.keys;
 
-  getPackagesWithFilters() {
-    const selectedMain = Object.keys(this.filters).filter(key => this.filters[key]);
-    const selectedPrice = Object.keys(this.priceFilters).filter(key => this.priceFilters[key]);
 
-    const mainLabels = selectedMain.map(key => this.filterLabels[key]);
-    const priceLabels = selectedPrice.map(key => this.priceLabels[key]);
 
-    const combinedFilters = [...mainLabels, ...priceLabels];
-      console.log("in the filter :",combinedFilters);
-     console.log("id ;",this.catchRouteId)
+
+  // getPackagesWithFilters() {
+  //   const selectedMain = Object.keys(this.filters).filter(key => this.filters[key]);
+  //   const selectedPrice = Object.keys(this.priceFilters).filter(key => this.priceFilters[key]);
+
+  //   const mainLabels = selectedMain.map(key => this.filterLabels[key]);
+  //   const priceLabels = selectedPrice.map(key => this.priceLabels[key]);
+
+  //   const combinedFilters = [...mainLabels, ...priceLabels];
+  //     console.log("in the filter :",combinedFilters);
+
+  //    console.log("id ;",this.catchRouteId)
 
      
-    // this.as_.getPackagesWithFilter(this.catchRouteId,combinedFilters)
-    //   .then((res: any) => {
-    //     console.log('Filtered Packages:', res.data);
-    //     this.package =res.data;
-    //     // Optionally store in a variable for use in HTML
-    //   })
-    //   .catch(err => {
-    //     console.error('API error:', err);
-    //   });
-  }
+  //   this.as_.getPackagesWithFilter(this.catchRouteId,combinedFilters)
+  //     .then((res: any) => {
+  //       console.log('Filtered Packages:', res.data);
+  //       this.package =res.data;
+  //       // Optionally store in a variable for use in HTML
+  //     })
+  //     .catch(err => {
+  //       console.error('API error:', err);
+  //     });
+  // }
 
   
 }

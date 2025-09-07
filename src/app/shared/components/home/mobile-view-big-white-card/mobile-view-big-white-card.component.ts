@@ -16,11 +16,11 @@ export class MobileViewBigWhiteCardComponent implements OnInit {
   children = 0;
   rooms = 1; maxadults = 5; maxchildren = 5; maxRooms = 5;
   // Other fields
-  city = 'Goa';
-  cityOptions: string[] = ['Delhi', 'Mumbai', 'Bangalore', 'Goa'];
+  city = 'Gwalior';
+  cityOptions: string[] = ['Gwalior', 'Indore', 'Bhopal', 'Goa'];
   country = 'India';
-   checkIn: '';
-  checkOut: '';
+   checkIn:'';
+   checkOut:'';
   totalGuests = 2; 
   totalRooms = 1;
   // Modals 
@@ -38,7 +38,10 @@ export class MobileViewBigWhiteCardComponent implements OnInit {
     document.addEventListener("click", () => {
     this.check = false;
     this.checkHotel=false;
+        this.setDates();
+
   });
+
     this.checkScreenSize();
       this.service.getPackagePlaceName()
     .then((res: any) => {
@@ -51,6 +54,7 @@ export class MobileViewBigWhiteCardComponent implements OnInit {
       console.error("Error fetching city names", err);
     });
   }
+  
   // ✅ Detect mobile 
   @HostListener('window:resize') onResize() {
     this.checkScreenSize();
@@ -97,7 +101,15 @@ decMaxPrice() {
   toggleGuestsModal() { this.showGuestsModal = !this.showGuestsModal;
    
    }
+setDates() {
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
 
+    // Format YYYY-MM-DD
+    this.hotel.checkIn = today.toISOString().split('T')[0];
+    this.hotel.checkOut = tomorrow.toISOString().split('T')[0];
+  }
   togglePriceModal() { this.showPriceModal = !this.showPriceModal; }
   search() { console.log('Searching hotels...'); }
 
@@ -380,7 +392,7 @@ applyPriceTour() {
 
 // ***********************************************
 // ===== Tour City Dropdown Variables =====
-cityTour: string = 'Delhi';
+cityTour: string = 'Gwalior';
 cityOptionsTour: string[] = ['Delhi'];
 countryTour: string = 'India';
 
@@ -429,17 +441,46 @@ search0(){
 }
 
 search1(){
- 
- console.log("city",this.city)
-  console.log("minPrice",this.minPrice);
-  console.log("maxPrice",this.maxPrice);
-  console.log('adults',this.adultsTour);
-  console.log('children',this.children);
-  console.log('rooms',this.rooms);
-  console.log('checkIn',this.hotel.checkIn);
-  console.log('checkOut',this.hotel.checkOut);
 
+
+
+  
+const checkInDate = new Date(this.hotel.checkIn);
+const checkOutDate = new Date(this.hotel.checkOut);
+
+// Format to YYYY-MM-DD (clean date string)
+const formattedCheckIn = checkInDate.toISOString().split('T')[0];  
+const formattedCheckOut = checkOutDate.toISOString().split('T')[0];  
+    console.log('checkIn',this.hotel.checkIn);
+  console.log('checkOut',this.hotel.checkOut);
+  
+  const params = {
+            city: this.city,
+            checkin: formattedCheckIn,
+            checkout: formattedCheckOut,
+            adults: this.adults,
+            children:this.children,
+            rooms: this.rooms,
+            min_price: this.minPrice,
+            max_price: this.maxPrice
+        };
+
+        if (this.maxPrice) {
+            this.route.navigate(['/Hotel-Rooms'], { queryParams: params });
+             alert("Please fill the fields");
+        } else {
+            alert("Please fill the fields");
+        }
+
+
+
+
+
+  
 }
+
+
+
 
 search2(){
   alert(' train uder working')

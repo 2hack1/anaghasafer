@@ -92,6 +92,13 @@ export class AxiosService {
       filters: filters
     });
   }
+
+  getPackagesWithFilterdss(subDesId: number, filters: string[]) {
+    return this.api.post(`/p/filter/${subDesId}`, {
+      filters: filters
+    });
+  }
+
   getMonthandDate(id: any) {
     return this.api.get(`/months/${id}`);
   }

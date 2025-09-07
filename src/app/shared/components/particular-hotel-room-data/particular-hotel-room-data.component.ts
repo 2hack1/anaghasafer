@@ -204,13 +204,22 @@ export class ParticularHotelRoomDataComponent implements OnInit {
   paymentMethodss() {
     // if(sessionStorage.getItem('name') && sessionStorage.getItem('token') && sessionStorage.getItem('email')){
       this.isModalOpen = true;
-    
     // }else{
     //  alert("Kindly complete your REGISTRATION or LOGIN before proceeding.");
     //   // return
     // }
   }
 
+ showInclusions = false;
+   toggleInclusions() {
+    this.showInclusions = !this.showInclusions;
+  }
+
+  showMore = false;
+
+  toggleMore() {
+    this.showMore = !this.showMore;
+  }
   formatDates(checkin: any, checkout: any) {
 
     // Detect format
