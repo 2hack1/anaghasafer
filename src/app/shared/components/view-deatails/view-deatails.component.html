@@ -1,12 +1,12 @@
 <section class="trip-section" *ngIf="avoidSlip">
     <div class="slider">
         <div class="slides" [style.transform]="getTransform()" *ngIf="!isnotgallary">
-            <img *ngFor="let image of packag" [src]="'http://localhost:8000/storage/'+image.img" alt="Trip Slide">
+            <img *ngFor="let image of packag" [src]="`${env.backend_url}/storage/${image.img}`" alt="Trip Slide">
         </div>
 
 
         <div class="slides" [style.transform]="getTransform()" *ngIf="isnotgallary">
-            <img *ngFor="let image of galleryImages" [src]="'http://localhost:8000/storage/'+image.url"
+            <img *ngFor="let image of galleryImages" [src]="`${env.backend_url}/storage/${image.url}`"
                 alt="Trip Slide">
         </div>
 
@@ -307,8 +307,8 @@
     </button>
 
     <div class="image-grid">
-      <div class="image-card" *ngFor="let img of galleryImages" (click)="viewImage('http://localhost:8000/storage/' + img.url)">
-        <img [src]="'http://localhost:8000/storage/' + img.url" />
+      <div class="image-card" *ngFor="let img of galleryImages" (click)="viewImage(`${env.backend_url}/storage/${img.url}`)">
+            <img [src]="`${env.backend_url}/storage/${img.url}`" />
         <div class="image-meta">
           <div class="price">{{ img.price }} $</div>
           <div class="author">{{ img.author }}</div>

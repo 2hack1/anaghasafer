@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-statestours',
@@ -20,7 +21,7 @@ export class StatestoursComponent implements OnInit {
   getroute: any | null = null;
   getallsubdes: any[] = [];
   sliderGroups: any[][] = [];
-
+env=environment
   ngOnInit(): void {
     this.getroute = this.routes.snapshot.paramMap.get('id');
     this.as_.destination_id=this.getroute;

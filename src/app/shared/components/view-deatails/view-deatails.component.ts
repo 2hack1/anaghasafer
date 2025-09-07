@@ -4,6 +4,7 @@ import { ActivatedRoute, Route } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { error } from 'jquery';
+import { environment } from '../../../../environments/environment.development';
 
 
 interface Tour {
@@ -46,7 +47,7 @@ export class ViewDeatailsComponent implements OnInit {
     //   insect: ['']
     // })
   }
-
+ env=environment
   galleryImages: any;
   isnotgallary: any;
   packageId: any | null = null;

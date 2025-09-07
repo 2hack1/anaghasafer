@@ -6,15 +6,15 @@
   <div class="content-grid">
     <div class="cards-container">
       <div *ngFor="let card of [1]" class="card">
-        <div class="right"> <img [src]="'http://localhost:8000/storage/'+mainImage" class="main-image"
+        <div class="right"> <img [src]="`${env.backend_url}/storage/${mainImage}`" class="main-image"
             alt="Main Hotel Image" />
           <div class="thumbnails"> <img *ngFor="let img of combovalue.rooms_image"
-              [src]="'http://localhost:8000/storage/'+img" class="thumbnail" (mouseenter)="onThumbnailHover(img)" />
+              [src]="`${env.backend_url}/storage/${img}`" class="thumbnail" (mouseenter)="onThumbnailHover(img)" />
           </div>
         </div>
         <div class="travel-card">
           <div class="card-image">
-            <img [src]="'http://localhost:8000/storage/'+combovalue.rooms_image[0]" alt="Eiffel Tower" />
+            <img [src]="`${env.backend_url}/storage/${combovalue.rooms_image[0]}`" alt="Eiffel Tower" />
           </div>
           <div class="card-content">
             <h3>{{requirerooms}} Rooms Combo {{combo_check}}</h3>
@@ -125,15 +125,15 @@
   <div class="content-grid">
     <div class="cards-container">
       <div *ngFor="let card of [1]" class="card">
-        <div class="right"> <img [src]="'http://localhost:8000/storage/'+mainImage" class="main-image"
+        <div class="right"> <img [src]="`${env.backend_url}/storage/${mainImage}`" class="main-image"
             alt="Main Hotel Image" />
           <div class="thumbnails"> <img *ngFor="let img of exactvalue.rooms_image"
-              [src]="'http://localhost:8000/storage/'+img" class="thumbnail" (mouseenter)="onThumbnailHover(img)" />
+              [src]="`${env.backend_url}/storage/${img}`" class="thumbnail" (mouseenter)="onThumbnailHover(img)" />
           </div>
         </div>
         <div class="travel-card">
           <div class="card-image">
-            <img [src]="'http://localhost:8000/storage/'+exactvalue.rooms_image[0]" alt="Eiffel Tower" />
+            <img [src]="`${env.backend_url}/storage/${exactvalue.rooms_image[0]}`" alt="Eiffel Tower" />
           </div>
           <div class="card-content">
             <h3>{{requirerooms}} Rooms {{combo_check}}</h3>

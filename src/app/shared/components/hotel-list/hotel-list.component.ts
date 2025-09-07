@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-hotel-list',
@@ -27,7 +28,7 @@ export class HotelListComponent implements OnInit {
     rooms?: string;
   } = {};
 
-
+ env = environment
   formattedCheckIn: any;
   formattedCheckOut: any;
   maincomboImage = 'https://r1imghtlak.mmtcdn.com/010191f275a611ed91930a58a9feac02.jfif?output-quality=75&output-format=jpg&downsize=360:*';

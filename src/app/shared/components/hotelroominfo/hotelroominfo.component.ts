@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { error } from 'jquery';
 import { query } from '@angular/animations';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-hotelroominfo',
@@ -33,6 +34,7 @@ totelroom:any;
     'https://r1imghtlak.mmtcdn.com/2d382902-8cb2-49f3-9d60-ecb7572deb44.jpg',
     'https://r1imghtlak.mmtcdn.com/887a2539-a471-45d1-ad8d-5643260068f7.jpg',
   ];
+   env = environment
   toggleFilters() { this.showFilters = !this.showFilters; }
 
   onThumbnailHover(img: string) { this.mainImage = img; }

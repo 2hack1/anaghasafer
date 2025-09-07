@@ -148,19 +148,20 @@
  
                                                                                                                                
       <div class="left">
-        <!-- <img [src]="'http://localhost:8000/storage/'+mainImage" class="main-image" alt="Main Hotel Image" /> -->
-        <img [src]="'http://localhost:8000/storage/'+(card.mainImageUrl || card.mainImage)" class="main-image"
+       
+       <img [src]="`${env.backend_url}/storage/${card.mainImageUrl || card.mainImage}`" class="main-image"
           alt="Main Hotel Image" />
+        
 
         <div class="thumbnails">
           <div class="thumbnail-wrapper" *ngFor="let img of card.rooms_image.slice(0, 4)">
-            <img [src]="'http://localhost:8000/storage/'+img" class="thumbnail"
+            <img [src]="`${env.backend_url}/storage/${img}`" class="thumbnail"
               (mouseenter)="onThumbnailHover(img,card)" />
           </div>
 
           <!-- Show See More if images > 4 -->
           <div class="thumbnail-wrapper see-more" *ngIf="card.rooms_image.length > 4" (click)="onSeeMoreClick()">
-            <img [src]="'http://localhost:8000/storage/'+card.rooms_image[4]" class="thumbnail" />
+            <img [src]="`${env.backend_url}/storage/${card.rooms_image[4]}`" class="thumbnail" />
             <div class="overlay">+{{ card.rooms_image.length - 4 }} more</div>
           </div>
         </div>
@@ -224,18 +225,18 @@
 
       <!-- LEFT SECTION -->
       <div class="left">
-        <img [src]="'http://localhost:8000/storage/'+(card.mainImageUrlcombo || card.maincomboImage)" class="main-image"
+        <img [src]="`${env.backend_url}/storage/${card.mainImageUrlcombo || card.maincomboImage}`" class="main-image"
           alt="Main Hotel Image" />
 
         <div class="thumbnails">
           <div class="thumbnail-wrapper" *ngFor="let img of card.room.rooms_image.slice(0, 4)">
-            <img [src]="'http://localhost:8000/storage/'+img" class="thumbnail"
+            <img [src]="`${env.backend_url}/storage/'+${img}`" class="thumbnail"
               (mouseenter)="onThumbnailHovercombo(img,card)" />
           </div>
 
           <!-- Show See More if images > 4 -->
           <div class="thumbnail-wrapper see-more" *ngIf="card.room.rooms_image.length > 4" (click)="onSeeMoreClick()">
-            <img [src]="'http://localhost:8000/storage/'+card.room.rooms_image[4]" class="thumbnail" />
+            <img [src]="`${env.backend_url}/storage/${card.room.rooms_image[4]}`" class="thumbnail" />
             <div class="overlay">+{{ card.room.rooms_image.length - 4 }} more</div>
           </div>
         </div>
