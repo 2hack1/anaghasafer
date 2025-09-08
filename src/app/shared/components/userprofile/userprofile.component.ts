@@ -111,11 +111,11 @@ this.getorderdata(id);
   })
 }
 
-
+bookingData:any=[];
 getBookingdata(id:any){
   this.service.getBookingWithuser(id).then((res:any)=>{
  console.log("booking data",res.data )
-  
+  this.bookingData=res.data;
 if (!res.data || res.data.length === 0) {
   this.nothavebooking = true;
 } else {
@@ -139,10 +139,16 @@ cancelBooking(){
   }
   
 }
-
+packageData: any = {};   // keep it as an object
+itinaries:any;
 getorderdata(id:any){
 this.service.getOrderDataOnUserProfile(id).then((res:any)=>{
-  console.log('data.....: ',res.data)
+  console.log('data.....: ',res.data[0].iteneris)
+  // this.itinaries=res.data[0].iteneris;
+  this.itinaries = res.data[0]?.iteneris || [];
+  console.log("jdfsjdfl",this.itinaries)
+  this.packageData=res.data;
+  console.log('packageData ',this.packageData)
 if (!res.data || res.data.length === 0) {
   this.nothaveoder = true;
 } else {

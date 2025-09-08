@@ -13,6 +13,7 @@ import { HotelListComponent } from './shared/components/hotel-list/hotel-list.co
 import { ParticularHotelRoomDataComponent } from './shared/components/particular-hotel-room-data/particular-hotel-room-data.component';
 import { HotelroominfoComponent } from './shared/components/hotelroominfo/hotelroominfo.component';
 import { UserprofileComponent } from './shared/components/userprofile/userprofile.component';
+import { ForgetpasspopupComponent } from './shared/components/forgetpasspopup/forgetpasspopup.component';
 
 
 export const routes: Routes = [
@@ -65,5 +66,8 @@ export const routes: Routes = [
     },{
         path:'profile/:id',
         component:UserprofileComponent
+    },{
+        path:"forgetPassword",
+        component:ForgetpasspopupComponent
     }
 ]

@@ -21,7 +21,9 @@
     {{ showPasswords ?   '👁️':'🙈' }}
   </span>
 </div> -->
-    <p class="forgot">Forgot your password?</p>
+    <!-- <p  [routerLink]="['/forgetPassword']">Forgot your password?</p> -->
+    <a class="forgot" [routerLink]="['/forgetPassword']" style="text-decoration: none;"><p class="forgot" >Forgot your password?</p></a>
+
     <!-- <button type="submit" class="login-btn" (click)="login()">Log in</button> -->
      <button type="submit" class="login-btn" (click)="login()" [disabled]="loading">
   <span *ngIf="loading" class="spinner"></span>

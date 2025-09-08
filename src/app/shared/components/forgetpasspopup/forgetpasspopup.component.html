@@ -1,0 +1,36 @@
+<!-- <h1>ksdhfksdkjf</h1>
+<h1>ksdhfksdkjf</h1>
+<h1>ksdhfksdkjf</h1>
+<h1>ksdhfksdkjf</h1>
+<h1>ksdhfksdkjf</h1> -->
+
+<div class="forgot-container">
+  <div 
+    class="form-wrapper" 
+    [style.transform]="'translateX(-' + (step * 33) + '%)'"
+  >
+    <!-- STEP 1 -->
+    <form class="form-step" (ngSubmit)="sendOtp()">
+      <h2>Forgot Password</h2>
+      <input type="email" placeholder="Enter your email" [(ngModel)]="email" name="email" required />
+      <button type="submit">Send OTP</button>
+    </form>
+
+    <!-- STEP 2 -->
+    <form class="form-step" (ngSubmit)="verifyOtp()">
+      <h2>Verify OTP</h2>
+      <input type="text" placeholder="Enter OTP" [(ngModel)]="otp" name="otp" required />
+      <button type="submit">Verify</button>
+    </form>
+
+    <!-- STEP 3 -->
+    <form class="form-step" (ngSubmit)="updatePassword()">
+      <h2>Reset Password</h2>
+      <input type="password" placeholder="New Password" [(ngModel)]="newPassword" name="newPassword" required />
+      <input type="password" placeholder="Confirm Password" [(ngModel)]="confirmPassword" name="confirmPassword" required />
+      <button type="submit">Update Password</button>
+    </form>
+  </div>
+</div>
+
+

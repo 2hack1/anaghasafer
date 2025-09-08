@@ -290,3 +290,22 @@
     }
   }
   
+  .text p {
+  line-height: 1.8;   /* increases space between lines */
+  margin-top: 10px;   /* adds space above */
+  margin-bottom: 10px; /* adds space below */
+}
+
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* stack image above text */
+    text-align: center;
+  }
+
+  .container .image, 
+  .container .text {
+    width: 100%;
+  }
+}
