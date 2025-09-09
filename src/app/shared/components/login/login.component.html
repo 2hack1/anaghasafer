@@ -13,32 +13,34 @@
     <p style="color: red;  margin-bottom: 1 rem; " *ngIf="check"> Please fill in all required fields. </p>
     <p style="color: red;  margin-bottom: 1 rem; " *ngIf="check1"> Please check again youre data</p>
     <form [formGroup]="formModel">
-    <input type="email" placeholder="Email" class="input" formControlName="email" />
-    <input type="password" placeholder="Password" class="input" formControlName="password" />
-     <!-- <div class="password-wrapper">
+      <input type="email" placeholder="Email" class="input" formControlName="email" />
+      <input type="password" placeholder="Password" class="input" formControlName="password" />
+      <!-- <div class="password-wrapper">
   <input [type]="showPasswords ? 'text' : 'password'" placeholder="Password" class="input"  />
   <span class="eye-icon" (click)="showPasswords = !showPasswords">
     {{ showPasswords ?   '👁️':'🙈' }}
   </span>
 </div> -->
-    <!-- <p  [routerLink]="['/forgetPassword']">Forgot your password?</p> -->
-    <a class="forgot" [routerLink]="['/forgetPassword']" style="text-decoration: none;"><p class="forgot" >Forgot your password?</p></a>
+      <!-- <p  [routerLink]="['/forgetPassword']">Forgot your password?</p> -->
+      <a class="forgot" [routerLink]="['/forgetPassword']" style="text-decoration: none;" (click)="randorForgot()">
+        <p class="forgot">Forgot your password?</p>
+      </a>
 
-    <!-- <button type="submit" class="login-btn" (click)="login()">Log in</button> -->
-     <button type="submit" class="login-btn" (click)="login()" [disabled]="loading">
-  <span *ngIf="loading" class="spinner"></span>
-  {{ loading ? 'Processing...' : 'Log in' }}
-</button>
-    <p class="terms">
-      By continuing, you agree to AnaghaSafer
-      <span class="underline"><a href="#">Terms of Service</a></span> and
-      <span class="underline">Privacy Policy</span>.
-    </p>
-    <p class="signup">
-      Not on Pinterest yet?
-      <span class="link" (click)="isSignup = true">Sign up</span>
-    </p> 
-  </form>
+      <!-- <button type="submit" class="login-btn" (click)="login()">Log in</button> -->
+      <button type="submit" class="login-btn" (click)="login()" [disabled]="loading">
+        <span *ngIf="loading" class="spinner"></span>
+        {{ loading ? 'Processing...' : 'Log in' }}
+      </button>
+      <p class="terms">
+        By continuing, you agree to AnaghaSafer
+        <span class="underline"><a href="#">Terms of Service</a></span> and
+        <span class="underline">Privacy Policy</span>.
+      </p>
+      <p class="signup">
+        Not on Pinterest yet?
+        <span class="link" (click)="isSignup = true">Sign up</span>
+      </p>
+    </form>
   </ng-container>
 
 
@@ -47,50 +49,50 @@
   <ng-container *ngIf="isSignup">
     <h2 class="title">SIGN UP</h2>
     <form [formGroup]="myform">
-      <div *ngIf="passwordMismatch" style="color: red; font-size: 14px; margin-top: 5px;"> Password and Confirm Password do not match.</div>
+      <div *ngIf="passwordMismatch" style="color: red; font-size: 14px; margin-top: 5px;"> Password and Confirm Password
+        do not match.</div>
       <div *ngIf="passwordTooShort" style="color: red;">Password Must be exactly 6 characters</div>
       <div class="select__name">
-      <select class="input" formControlName="nfa">
-        <option>Mr</option>
-        <option>Mis</option>
-      </select>
-      <input type="text" placeholder="First Name" class="input" formControlName="name" />
-      <input type="text" placeholder="Last Name" class="input" formControlName="last_name" />
-    </div>
-    <input  type="email"   placeholder="Email ID will we your username"  class="input" formControlName="email"/>
-    <!-- <input type="password" placeholder="Password" class="input" formControlName="pass" />
-    <input type="password" placeholder="Confirm_Password" class="input" formControlName="confirm" /> -->
-    <div class="password-wrapper">
-  <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" class="input" formControlName="pass" />
-  <span class="eye-icon" (click)="showPassword = !showPassword">
-    {{ showPassword ?   '👁️':'🙈' }}
-  </span>
-</div>
+        <select class="input" formControlName="nfa">
+          <option>Mr</option>
+          <option>Mis</option>
+        </select>
+        <input type="text" placeholder="First Name" class="input" formControlName="name" />
+        <input type="text" placeholder="Last Name" class="input" formControlName="last_name" />
+      </div>
+      <input type="email" placeholder="Email ID will we your username" class="input" formControlName="email" />
+      <div class="password-wrapper">
+        <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" class="input"
+          formControlName="pass" />
+        <span class="eye-icon" (click)="showPassword = !showPassword">
+          {{ showPassword ? '👁️':'🙈' }}
+        </span>
+      </div>
 
-<!-- Confirm Password Field -->
-<div class="password-wrapper">
-  <input [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm_Password" class="input" formControlName="confirm" />
-  <span class="eye-icon" (click)="showConfirmPassword = !showConfirmPassword">
-    {{ showConfirmPassword ?  '👁️':'🙈'  }}
-  </span>
-</div>
-        <!-- <button class="login-btn" (click)="signUp()">Sign up</button> -->
-   <button class="login-btn" (click)="signUp()" [disabled]="signupLoading">
-  <span *ngIf="signupLoading" class="spinner"></span>
-  {{ signupLoading ? 'Processing...' : 'Sign up' }}
-</button>
-        <p class="terms">
-      By continuing, you agree to AnaghaSafer
-      <span class="underline"><a href="#">Terms of Service</a></span> and
-      <span class="underline">Privacy Policy</span>.
-    </p>
-    <p class="signup">
-      Not on Pinterest yet?
-      <span class="link" (click)="isSignup = false">Login </span>
-    </p>
+      <!-- Confirm Password Field -->
+      <div class="password-wrapper">
+        <input [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm_Password" class="input"
+          formControlName="confirm" />
+        <span class="eye-icon" (click)="showConfirmPassword = !showConfirmPassword">
+          {{ showConfirmPassword ? '👁️':'🙈' }}
+        </span>
+      </div>
+      <button class="login-btn" (click)="signUp()" [disabled]="signupLoading">
+        <span *ngIf="signupLoading" class="spinner"></span>
+        {{ signupLoading ? 'Processing...' : 'Sign up' }}
+      </button>
+      <p class="terms">
+        By continuing, you agree to AnaghaSafer
+        <span class="underline"><a href="#">Terms of Service</a></span> and
+        <span class="underline">Privacy Policy</span>.
+      </p>
+      <p class="signup">
+        Not on Pinterest yet?
+        <span class="link" (click)="isSignup = false">Login </span>
+      </p>
 
-      </form>
-      
+    </form>
+
   </ng-container>
 
 </div>

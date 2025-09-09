@@ -173,6 +173,21 @@ export class AxiosService {
 
   getuserdata(id: any) {
     return this.api.get(`users/${id}`);
+    
+  }
+  
+  forgotpassSendOtp(data:FormData){
+    return this.api.post(`forget-pass`,data);
 
   }
+ forgotpassOtpVerify(data:FormData){
+    return this.api.post(`verify-pass`,data);
+    
+  }
+  
+  forgotUpdatePassword(data:FormData){
+    
+    return this.api.post(`pass-update`,data);
+  }
+
 }

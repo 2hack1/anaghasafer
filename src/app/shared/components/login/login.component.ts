@@ -148,5 +148,10 @@ this.passwordTooShort = f.length !== 6;
 
   }
 
+  
+          randorForgot(){
+            console.log("check",this.isSignup);
+            this.isLoginChange.emit(false)
+          }
 
 }

@@ -1,36 +1,118 @@
-<!-- <h1>ksdhfksdkjf</h1>
-<h1>ksdhfksdkjf</h1>
-<h1>ksdhfksdkjf</h1>
-<h1>ksdhfksdkjf</h1>
-<h1>ksdhfksdkjf</h1> -->
+<div class="slider-wrapper">
 
-<div class="forgot-container">
-  <div 
-    class="form-wrapper" 
-    [style.transform]="'translateX(-' + (step * 33) + '%)'"
-  >
-    <!-- STEP 1 -->
-    <form class="form-step" (ngSubmit)="sendOtp()">
-      <h2>Forgot Password</h2>
-      <input type="email" placeholder="Enter your email" [(ngModel)]="email" name="email" required />
-      <button type="submit">Send OTP</button>
-    </form>
+  <div class="slider" [style.transform]="getSliderTransform()">
 
-    <!-- STEP 2 -->
-    <form class="form-step" (ngSubmit)="verifyOtp()">
-      <h2>Verify OTP</h2>
-      <input type="text" placeholder="Enter OTP" [(ngModel)]="otp" name="otp" required />
-      <button type="submit">Verify</button>
-    </form>
 
-    <!-- STEP 3 -->
-    <form class="form-step" (ngSubmit)="updatePassword()">
-      <h2>Reset Password</h2>
-      <input type="password" placeholder="New Password" [(ngModel)]="newPassword" name="newPassword" required />
-      <input type="password" placeholder="Confirm Password" [(ngModel)]="confirmPassword" name="confirmPassword" required />
-      <button type="submit">Update Password</button>
-    </form>
+    <!-- Slide 1 -->
+    <div class="slide">
+      <div class="form-box">
+        <div class="close-icon">
+          <i class="bi bi-x"></i>
+        </div>
+
+
+        <div class="forgot-header">
+          <h2>Forgot Password?</h2>
+          <p>Enter the email address associated with your account</p>
+        </div>
+        <p class="error-text" *ngIf="invailidemail"><i class="bi bi-exclamation-circle"></i> Please enter a valid email
+          address.</p>
+        <p class="error-text" *ngIf="emailfill"><i class="bi bi-exclamation-circle"></i> Email is required.</p>
+        <div class="input-group">
+          <label for="email"><b>Email Address:</b></label>
+          <input type="email" id="email" placeholder="Enter your email" required [(ngModel)]="email">
+
+        </div>
+
+        <div class="form-actions">
+          <button (click)="nextSlide()" [disabled]="isLoadingNext">
+            <span *ngIf="!isLoadingNext">Submit</span>
+            <span *ngIf="isLoadingNext" class="button-loader"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Slide 2 -->
+    <div class="slide">
+      <div class="form-box">
+        <div style="display: flex; align-items: end;">
+          <i class="bi bi-arrow-left" (click)="prevSlide()" style="cursor: pointer;"></i>
+        </div>
+        <p class="error-text" *ngIf="invailidOtp"><i class="bi bi-exclamation-circle"></i> Please enter a valid OTP.</p>
+        <p class="error-text" *ngIf="otpfill"><i class="bi bi-exclamation-circle"></i> OTP is required.</p>
+        <h2>Verify OTP</h2>
+        <p>Enter the 6-digit code sent to <span style="color: rgb(136, 45, 163);">{{email}}</span></p>
+        <div class="otp-inputs">
+          <input type="text" maxlength="1" class="otp-field" (focus)="makeActive($event)" [(ngModel)]="otp[0]"
+            (keyup)="moveToNext($event, 1)">
+          <input type="text" maxlength="1" class="otp-field" (focus)="makeActive($event)" [(ngModel)]="otp[1]"
+            (keyup)="moveToNext($event, 2)">
+          <input type="text" maxlength="1" class="otp-field" (focus)="makeActive($event)" [(ngModel)]="otp[2]"
+            (keyup)="moveToNext($event, 3)">
+          <input type="text" maxlength="1" class="otp-field" (focus)="makeActive($event)" [(ngModel)]="otp[3]"
+            (keyup)="moveToNext($event, 4)">
+          <input type="text" maxlength="1" class="otp-field" (focus)="makeActive($event)" [(ngModel)]="otp[4]"
+            (keyup)="moveToNext($event, 5)">
+          <input type="text" maxlength="1" class="otp-field" (focus)="makeActive($event)" [(ngModel)]="otp[5]"
+            (keyup)="moveToNext($event, 6)">
+        </div>
+
+        <div class="form-actions">
+          <button (click)="veryfing()" [disabled]="isVerifying">
+            <span *ngIf="!isVerifying">Verify</span>
+
+            <span *ngIf="isVerifying" class="button-loader"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Slide 3 -->
+
+    <div class="slide">
+      <div class="form-box">
+         <div class="d-flex align-items-center gap-2" *ngIf="success">
+          <i class="bi bi-check-circle-fill"></i>
+          <span style="background-color: rgb(95, 248, 64); ">Your password has been updated successfully.</span>
+        </div>
+        <h2>Reset Password</h2>
+
+        <!-- New Password -->
+        <div class="input-grou">
+          <input [type]="showNewPassword ? 'text' : 'password'" class="form-control" placeholder="New Password" required
+            [(ngModel)]="newPassword">
+
+          <i class="bi" [ngClass]="showNewPassword ?  'bi-eye' :'bi-eye-slash'"
+            (click)="showNewPassword = !showNewPassword"></i>
+
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="input-grou">
+          <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control" placeholder="Confirm Password"
+            required [(ngModel)]="confirmPassword">
+
+          <i class="bi" [ngClass]="showConfirmPassword ?   'bi-eye' :'bi-eye-slash'"
+            (click)="showConfirmPassword = !showConfirmPassword"></i>
+
+        </div>
+        <p class="error-text" *ngIf="matchpass"><i class="bi bi-exclamation-circle"></i> Please enter a valid OTP.</p>
+        <p class="error-text" *ngIf="fillpass"><i class="bi bi-exclamation-circle"></i> password is required.</p>
+        <p class="error-text" *ngIf="countpass"><i class="bi bi-exclamation-circle"></i> Your password should contain a
+          minimum of 6 characters. </p>
+        <p class="error-text" *ngIf="errorOcure"><i class="bi bi-exclamation-circle"></i> Something want's worng. </p>
+        <!-- Submit -->
+          <div class="form-actions">
+          <button class="btn btn-primary submintbuto" (click)="submitResetPassword()" [disabled]="isLoading">
+            <span *ngIf="!isLoading">Submit</span>
+            Submit
+            <span *ngIf="isLoading" class="button-loader"></span>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-
