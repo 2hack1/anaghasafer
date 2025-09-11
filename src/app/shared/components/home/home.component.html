@@ -299,10 +299,10 @@
 				<!-- give me description about this  -->
 				<h2>Top Trending India's Destinations</h2>
 			</div>
-			<a [routerLink]="['/states', stores]">
-				View all tours
-				<i class="bi bi-arrow-right-short" style="font-size: 1.5rem"></i>
-			</a>
+			<a [routerLink]="['/states', getUrlSlug(stores)]">
+  View all tours
+  <i class="bi bi-arrow-right-short" style="font-size: 1.5rem"></i>
+</a>
 		</div>
 		<div class="scroll-wrapper">
 			<button class="scroll-btn left" (click)="scrollLeft()">&#10094;</button>
@@ -364,7 +364,7 @@
 		</div>
 	</div>
 	<div style="display: flex; justify-content: center; align-items: center;">
-		<button class="see-all-btn"><a [routerLink]="['/des',16]"
+		<button class="see-all-btn" (click)="goToTour(16)"><a 
 				style="text-decoration: none; color: white; font-size: 14px; ">
 				Find More tours</a></button>
 	</div>

@@ -7,8 +7,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 
-
-
 export class UserServicesService {
 
   private baseUrl = environment.base_url; // ✅ Access environment value
@@ -17,8 +15,7 @@ export class UserServicesService {
         console.log('API Base URL:', this.baseUrl); // Example usage
      }
 
-
-userRegister(data:any) {
+  userRegister(data:any) {
   let path = `${this.baseUrl}/register-user`;
     return this.http.post(path,data);
   }

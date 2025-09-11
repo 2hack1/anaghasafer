@@ -2,7 +2,7 @@ import { CommonModule, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { error } from 'jquery';
 import { environment } from '../../../../environments/environment.development';
 
@@ -613,5 +613,22 @@ this.as_.orderEmail(user_order_mail).then((res:any)=>{
   viewImage(imageUrl: string) {
     this.selectedImage = imageUrl;
   };
+
+
+
+   submitInquiry(form: NgForm) {
+    if (form.valid) {
+      console.log('Form Values:', form.value);
+
+      // You can access each field like:
+    
+           form.reset();
+           alert("Inquiry submitted successfully!");
+      // TODO: Send this data to backend API
+    } else {
+      console.log('Form is invalid!');
+    }
+  }
+
   
 }

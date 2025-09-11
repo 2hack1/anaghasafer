@@ -288,6 +288,14 @@ this.checkScreenSize();
     this.router.navigate(['/view', package_id]);
     //  console.log("subdesid",subdesid);
   }
+  goToTour(id: number) {
+  this.router.navigate(['/des', id]);
+}
+// component.ts
+getUrlSlug(name: string) {
+  return name.toLowerCase().replace(/\s+/g, '-'); // "My Store" -> "my-store"
+}
+
 }
 
 
