@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AxiosService } from '../../../core/services/axios/axios.service';
-import { from } from 'rxjs';
-import { Router } from '@angular/router';
+
+import { Router, RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-forgetpasspopup',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './forgetpasspopup.component.html',
   styleUrl: './forgetpasspopup.component.scss'
 })
@@ -177,13 +178,11 @@ export class ForgetpasspopupComponent {
           this.fillpass = false;
           this.countpass = false;
           this.isLoading = false;
-
         } else {
           this.isLoading = false;
            
            setTimeout(() => {
             this.success=true
-         
           }, 4000);
            this.router.navigateByUrl('/home');
          

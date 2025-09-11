@@ -27,9 +27,9 @@ interface Month {
 export class ViewDeatailsComponent implements OnInit {
   activeTab: string = 'tourDates';
   images: string[] = [
-    '/assets/slider12.png',
-    '/assets/slider13.png',
-    '/assets/slider14.png'
+    'assets/slider12.png',
+    'assets/slider13.png',
+    'assets/slider14.png'
   ];
   currentIndex = 0;
   autoSlideInterval: any;
