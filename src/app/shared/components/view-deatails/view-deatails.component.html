@@ -1,0 +1,447 @@
+<section class="trip-section" *ngIf="avoidSlip">
+    <div class="slider">
+        <div class="slides" [style.transform]="getTransform()" *ngIf="!isnotgallary">
+            <img *ngFor="let image of packag" [src]="`${env.backend_url}/storage/${image.img}`" alt="Trip Slide">
+        </div>
+
+
+        <div class="slides" [style.transform]="getTransform()" *ngIf="isnotgallary">
+            <img *ngFor="let image of galleryImages" [src]="`${env.backend_url}/storage/${image.url}`"
+                alt="Trip Slide">
+        </div>
+
+        <button class="prev" (click)="prevSlide()">&#10094;</button>
+        <button class="next" (click)="nextSlide()">&#10095;</button>
+
+        <div class="wave">
+            <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path fill="#f8f9fa"
+                    d="M0,64 C60,100 90,250 180,180 C270,110 360,-30 450,100 C540,230 630,50 720,120 C810,190 900,60 990,130 C1080,200 1170,100 1260,140 C1350,180 1410,100 1440,90 L1440,320 L0,320 Z">
+                </path>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<section class="trip-bottom" *ngIf="avoidSlip">
+    <div class="trip-bottom-content">
+        <div class="left-content">
+            <span class="tag">Group Tour</span>
+            <h1>{{packageDetails.place_name}} Road Trip{{packageDetails.duration_days}} Days</h1>
+            <div class="rating-info">
+                <span>⭐⭐⭐⭐⭐ 4.7 (723)</span>
+            </div>
+
+            <div class="info-cards">
+                <div class="card">
+                    <img src="icons/cl.png" alt="Duration">
+                    <p><strong>Duration</strong><br>{{packageDetails.duration_days-1}}N/{{packageDetails.duration_days}}D
+                    </p>
+                </div>
+                <div class="card">
+                    <img src="icons/marker.png" alt="Spiti Road Trip">
+                    <p><strong>Location</strong><br>{{packageDetails.place_name}}</p>
+                </div>
+                <div class="card" *ngIf="isnotgallary"  (click)="openGallery()">
+                    <p><strong>Gallery </strong><br>{{packageDetails.place_name}}</p>
+                    <img src="icons/gallery.png" alt="Gallery Icon"
+                        style="height: 2rem; width: 2rem; transition: transform 0.3s;"
+                        onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+                </div>
+            </div>
+
+
+            <h2>Tour Overview</h2>
+            <p class="overview-text"><strong>{{packageDetails.about_trip}}
+                    <!-- The Winter Spiti Expedition is one of the best adventure trips anyone can do during the winters
+                    in the Himalayas to experience snow. Winter Spiti Expedition is all about a cold desert mountain
+                    valley high in the Himalayan Mountains in the Indian state of Himachal Pradesh’s north-eastern
+                    corner. The word “Spiti” means “Middle Ground,” referring to the region that lies between Tibet
+                    and India.  -->
+                </strong> </p>
+
+        </div>
+
+        <div class="right-card">
+            <div class="price">
+                <p class="old-price">Starting Per Adult <span>₹{{packageDetails.price_trip +2000}}</span></p>
+                <p class="new-price">₹{{packageDetails.price_trip}}/- RS</p>
+            </div>
+
+            <h3>Highlights</h3>
+            <ul class="highlights-list">
+                <li>✔️ Almost Everything Included</li>
+                <li>✔️ Hand-picked accommodation</li>
+                <li>✔️ Guided Tour</li>
+                <li>✔️ Inner Line Permits Included</li>
+                <li>✔️ Visit Chicham Bridge</li>
+                <li>✔️ Visit Chandratal Lake</li>
+                <li>✔️ Visit Key Monastery</li>
+                <li>✔️ Visit World's Highest Post Office</li>
+                <li>✔️ Visit World's Highest Village</li>
+                <li>✔️ 24x7 Support</li>
+                <li>✔️ Memories for Lifetime</li>
+            </ul>
+
+            <!-- <a href="#" class="inquiry-btn">Quick Inquiry ➔</a> -->
+            <a class="inquiry-btn" (click)=" openPopup()">Quick Inquiry ➔</a>
+
+            <!-- Add the Popup Form HTML at the end of body -->
+            <div class="overlay" *ngIf="showPopup" id="popupForm">
+                <div class="modal">
+                    <button class="close-btn" (click)="closePopup()">&times;</button>
+                    <div class="header">
+                        <img src="icons/logo.png" alt="Logo" class="logo" style="height: 50px;" />
+                        <h2>Plan Your Dream Trip</h2>
+                        <p>Tell us about your journey and talk With Expart ✈️</p>
+                    </div>
+                    <!-- <form class="form">
+                        <div class="form-group">
+                            <input type="text" id="fullName" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" placeholder="Phone Number" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="date" id="travelDate" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" id="persons" placeholder="No. of Persons" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" rows="4" placeholder="Message..." required></textarea>
+                        </div>
+                        <button type="submit" class="continue-btn" (click)="submitInquary()">Submit Inquiry</button>
+                    </form> -->
+               <form class="form" #inquiryForm="ngForm" (ngSubmit)="submitInquiry(inquiryForm)">
+  <div class="form-group">
+    <input type="text" id="fullName" name="fullName" placeholder="Full Name" required ngModel>
+  </div>
+
+  <div class="form-group">
+    <input type="tel" id="phone" name="phone" placeholder="Phone Number" required ngModel>
+  </div>
+
+  <div class="form-group">
+    <input type="email" id="email" name="email" placeholder="Email Address" required ngModel>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <input type="date" id="travelDate" name="travelDate" required ngModel>
+    </div>
+    <div class="form-group">
+      <input type="number" id="persons" name="persons" placeholder="No. of Persons" required ngModel>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <textarea id="message" name="message" rows="4" placeholder="Message..." required ngModel></textarea>
+  </div>
+
+  <button type="submit" class="continue-btn">Submit Inquiry</button>
+</form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!--**************************** Tour Dates Tab Content ************************* -->
+<div class="itinerary1" *ngIf="avoidSlip">
+    <!-- Tabs -->
+    <div class="tabs">
+
+        <button class="tab-button" [class.active]="activeTab === 'tourDates'" (click)="activeTab = 'tourDates'">
+            Tour Dates
+        </button>
+        <button class="tab-button" [class.active]="activeTab === 'itinerary'" (click)="activeTab = 'itinerary'">
+            Itinerary
+        </button>
+    </div>
+
+    <!-- Itinerary Tab Content -->
+    <section class="itinerary" *ngIf="activeTab === 'itinerary'">
+        <h2 style="margin-bottom:30px; font-size: 30px; font-family:system-ui; letter-spacing: 3px;">Itinerary</h2>
+        <div class="day" *ngFor="let days of itenaries; let i = index" [class.open]={opens}>
+            <div class="day-header">
+                <img src="icons/marker.png" alt="Spiti Road Trip">
+                <strong class="" style="font-size: 1.2rem; font-weight: normal;">{{days.day}}: </strong>
+                <span style="font-size: 1.1rem;"> {{ days.title }}</span>
+                <button class="arrow-button" [ngClass]="{ 'rotate': {opens} }"> </button>
+            </div>
+            <div class="day-content">
+                <p>{{ days.detail }}</p>
+            </div>
+        </div>
+
+
+    </section>
+
+    <div class="container" *ngIf="activeTab === 'tourDates'">
+        <h2>Tour Dates</h2>
+        <div class="months">
+            <button *ngFor="let months of monthDate" class="month-btn" [class.active]="selectedMonth === months.month"
+                (click)="selectMonth(months.tour_month_id)">{{months.month}}'
+                {{ months.year }}
+            </button>
+        </div>
+        <!-- <div class="size" style="height: auto; padding: 10px;">
+            <div class="card">
+                <div class="tour-date" *ngFor="let tours of date">
+
+                    <span>{{ tours.start_date }} to {{tours.end_date}}</span>
+                    <span class="label open1" (click)=" openPopup11(tours.date_id,tours.start_date,tours.end_date)">{{
+                        tours.availability }}</span>
+                </div>
+            </div>
+        </div> -->
+   
+   <!-- <div class="size" style="height: auto; padding: 10px;">
+  <div class="card">
+    <div class="tour-date" *ngFor="let tours of date">
+      <span>{{ tours.start_date }} to {{ tours.end_date }}</span>
+
+      <span
+        class="label open1"
+        [class.disabled]="tours.availability === 'close'"
+        [style.cursor]="tours.availability === 'lose' ? 'not-allowed' : 'pointer'"
+        (click)="tours.availability !== 'Close' && openPopup11(tours.date_id, tours.start_date, tours.end_date)"
+      >
+        {{ tours.availability }}
+      </span>
+    </div>
+  </div>
+</div> -->
+
+<div class="size" style="height: auto; padding: 10px;">
+  <div class="card">
+    <div class="tour-date" *ngFor="let tours of date">
+      <span>{{ tours.start_date }} to {{ tours.end_date }}</span>
+
+      <span
+        class="label open1"
+        [ngClass]="{
+          'open': tours.availability === 'open',
+          'hurry': tours.availability === 'hurry up',
+          'disabled': tours.availability === 'Close'
+        }"
+        [style.cursor]="tours.availability === 'close' ? 'not-allowed' : 'pointer'"
+        (click)="tours.availability !== 'close' && openPopup11(tours.date_id, tours.start_date, tours.end_date)"
+      >
+        {{ tours.availability }}
+      </span>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+<div class="modal-itinerary" *ngIf="showPopup11">
+    <div class="container1 modal-itinerary-child">
+        <div>
+            <button class="close" (click)="closePopup11()">&times;</button>
+
+            <p
+                style="display: flex; align-items: center; justify-content: center; color: black; font-size: 1.5rem; font-weight: bolder;">
+                price <span style="color: orange;">₹{{ totalAmount }}</span>/- RS
+            </p>
+
+        </div>
+
+        <!-- Add Room Button -->
+        <div class="room-section">
+        </div>
+
+        <div>
+            <div class="travellers travellers-card" *ngFor="let room of rooms; let roomIndex = index">
+                <div class="travellers-inner-container">
+                    <div class="room-header">
+
+                    </div>
+
+                    <div class="traveller1-container">
+                        <div class="traveller1" *ngFor="let traveller of room.travellers; let travellerIndex = index">
+                            <label class="traveller1-lbl">{{ traveller.type }}<br><span class="traveller1-age">
+                                ({{traveller.ageGroup  }})</span></label>
+                            <div class="counter1">
+                                <button class="counter1-btn" (click)="decreaseCount(roomIndex, traveller)"> - </button>
+                                <span class="count">{{ traveller.count }}</span>
+                                <button class=" counter1-btn" (click)="increaseCount(roomIndex, traveller)"> +
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-section">  
+            <label>Select With Going Trip</label>
+            <div class="icons">
+                <button *ngFor="let mode of availableModes" (click)="selectTransport(mode.key)"
+                    [ngClass]="{ 'active': selectedTransport === mode.key }" style="font-size: 2rem;">
+                    <i [class]="mode.icon"></i>
+                </button>
+            </div>
+        </div>
+
+
+        <div class="form-section">
+            <label><i class="fa fa-calendar"></i> Date of Travel</label>
+            <input type="text" class="input" [(ngModel)]="startdate" readonly>
+
+            <label><i class="fa fa-phone"></i> Your Contact Details</label>
+            <div class="contact-details">
+                <input type="text" placeholder="Phone Number" [(ngModel)]="phoneNumber">
+                <input type="email" placeholder="Email Address" [(ngModel)]="getEmailsesstion">
+            </div>
+
+            <div class="checkbox-section">
+                <input type="checkbox" id="accept" [(ngModel)]="termsAccepted">
+                <label for="accept">I accept the <a href="#">Privacy Policy</a> & <a href="#">Terms &
+                        Conditions</a></label>
+            </div>
+
+            <div style="display: flex; gap: 5px;">
+                <!-- <button class="submit-btn" (click)="calculateTotalAmount()">Calculate Package Price</button> -->
+                <button type="submit" class="submit-btn" style="background-color: blueviolet;"
+                    (click)="submitForm()">Make Slip With = ₹{{ totalAmount }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="gallery-modal" *ngIf="showGallery">
+  <div class="gallery-content">
+    <div class="gallery-header">
+      <h2>Anagha <span>Safar</span></h2>
+    </div>
+
+    <button class="close-btn" (click)="closeGallery()" style="color: white;">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <div class="image-grid">
+      <div class="image-card" *ngFor="let img of galleryImages" (click)="viewImage(`${env.backend_url}/storage/${img.url}`)">
+            <img [src]="`${env.backend_url}/storage/${img.url}`" />
+        <div class="image-meta">
+          <div class="price">{{ img.price }} $</div>
+          <div class="author">{{ img.author }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-footer">
+      <span>1</span> / <span>3</span>
+    </div>
+  </div>
+
+  <div class="fullscreen-image" *ngIf="selectedImage" (click)="selectedImage = null">
+    <img [src]="selectedImage" />
+    <button class="fullscreen-close" (click)="selectedImage = null; $event.stopPropagation()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+</div>
+
+
+
+<!-- Slip content to be printed -->
+<button class="print-btn" (click)="printSlip()" *ngIf="slip">🖨️ Print Tour Slip</button>
+<div id="printArea" *ngIf="slip">
+    <div class="page">
+
+        <div class="header-row">
+
+            <h2>ExploreWorld Tours</h2>
+            <h3>Tour Slip – {{convertmonth}}</h3>
+            <!-- <h3>Tour Slip – June 2025</h3> -->
+        </div>
+
+        <div class="section info">
+            <p><strong>Name:</strong> {{nameOfUser}}</p>
+            <p><strong>Email:</strong> {{getEmailsesstion}}</p>
+            <p><strong>Mobile:</strong> +91-{{phoneNumber}}</p>
+        </div>
+
+        <div class="section">
+            <h3>Tour Details</h3>
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Information</th>
+                </tr>
+                <tr>
+                    <td>Duration</td>
+                    <td>{{packageDetails.duration_days}}Days / {{packageDetails.duration_days-1}}Nights</td>
+                </tr>
+                <tr>
+                    <td>Origin</td>
+                    <td>{{packageDetails.origin}}</td>
+                </tr>
+                <tr>
+                    <td>Departure</td>
+                    <td>{{packageDetails.departure_point}}</td>
+                </tr>
+                <tr>
+                    <td>Destination</td>
+                    <td>{{packageDetails.place_name}}</td>
+                </tr>
+                <tr>
+                    <td>Start Date</td>
+                    <td>{{showstartdate}}</td>
+                </tr>
+                <tr>
+                    <td>End Date</td>
+                    <td>{{endtdate}}</td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td>₹{{packageDetails.price_trip}}</td>
+                </tr>
+            </table>
+        </div>
+
+
+
+        <div class="section">
+            <h3>Date-wise Itinerary</h3>
+            <table>
+                <tr>
+                    <th>Day</th>
+                    <th>Date</th>
+                    <th>Activities</th>
+                </tr>
+                <tr *ngFor="let days of itenaries; let i = index">
+                    <td>{{days.day}}</td>
+                    <td>{{ days.title }}</td>
+                    <td>{{ days.detail }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="section">
+            <h3>about of trip </h3>
+            <p>
+                {{packageDetails.about_trip}}
+            </p>
+        </div>
+        <div class="section center">
+            <button class="total-price-btn">Confirm Your Trip With Pay ₹18,000</button>
+        </div>
+
+    </div>
+</div>

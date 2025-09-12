@@ -1,0 +1,248 @@
+<div class="apartment-container" *ngIf="combo">
+  <div class="header-section">
+    <h2 style="margin-left: 10px;"><i class="fa fa-check-circle"></i> Ivy Retreat Apartments Baga</h2>
+    <p style="margin-left: 10px; ">Entire 1 or 2 BHK apartment units featuring a pool, kitchen & Wi-Fi</p>
+  </div>
+  <div class="content-grid">
+    <div class="cards-container">
+      <div *ngFor="let card of [1]" class="card">
+        <div class="right"> <img [src]="`${env.backend_url}/storage/${mainImage}`" class="main-image"
+            alt="Main Hotel Image" />
+          <div class="thumbnails"> <img *ngFor="let img of combovalue.rooms_image"
+              [src]="`${env.backend_url}/storage/${img}`" class="thumbnail" (mouseenter)="onThumbnailHover(img)" />
+          </div>
+        </div>
+        <div class="travel-card">
+          <div class="card-image">
+            <img [src]="`${env.backend_url}/storage/${combovalue.rooms_image[0]}`" alt="Eiffel Tower" />
+          </div>
+          <div class="card-content">
+            <h3>{{requirerooms}} Rooms Combo {{combo_check}}</h3>
+            <span style="background-color: rgb(175, 255, 100);" *ngIf="available"> Available</span>
+            <span style="background-color: rgb(238, 59, 59);" *ngIf="!available"> Not Available</span>
+            <h6 class="location">Fits {{pertions}} Adults</h6>
+            <p class="location">Per night for {{requirerooms}} Rooms:</p>
+            <div style="display: flex;">
+              <h2>₹ {{combovalue.finalPrice * requirerooms}}</h2> <sup>+792</sup>
+            </div>
+            <div class="tabs"> <button [class.active]="activeTab === 'description'"
+                (click)="activeTab = 'description'">Description</button> <button
+                [class.active]="activeTab === 'reviews'" (click)="activeTab = 'reviews'">Reviews</button> </div>
+            <div class="tab-content" *ngIf="activeTab === 'description'">
+              <p> {{combovalue.description}}<b style="color: #0D6EFD">...More</b> </p>
+            </div>
+            <div class="tab-content" *ngIf="activeTab === 'reviews'">
+
+              <div style="height: 50px; border:#008cff 1px; justify-content: center; display: flex;">
+                <p>Not Availble</p>
+              </div>
+            </div>
+        
+                        <div class="card-actions"> 
+                          <button class="flight"  *ngIf="available" style="background-color: orange; font-weight: 400; font-size:20px;" 
+                          (click)="comboRender()" >Book know </button> </div>
+            <div class="card-actions">
+               <button class="flight" *ngIf="!available" style="background-color: rgb(173, 172, 169); font-weight: 400; font-size:20px;"  >Booking full </button> </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- Apartment Info -->
+
+    <div class="apartment-info">
+      <h4>Entire Serviced Apartment</h4>
+      <div class="info-icons"> <span><i class="fa-solid fa-door-open" style="font-size: 25px;"></i><br>{{requirerooms}}
+          Bedroom</span>
+        <span style="margin-left: 9rem;"><i class="fa-solid fa-people-group" style="font-size: 25px; "></i> <br>Sleeps
+          {{child + pertions}} guests</span>
+      </div>
+      <div class="info-box"> <img src="https://promos.makemytrip.com/AltAcco/Education_Icons/Entire.png" alt="Icon">
+        <div class="info-text"> <strong>What is an Entire Serviced Apartment?</strong>
+          <p>Get complete access to all bedrooms and more, with hotel-like amenities such as
+            Housekeeping, Toiletries, WiFi etc.</p>
+        </div>
+      </div>
+      <p class="description"> Experience the best of Goa at this gated property featuring apartments with kitchens, a
+        shared pool & a lush lawn.<b style="color: #008cff;">More</b> </p>
+      <div class="property-section"> <!-- Tabs -->
+        <div class="tabs">
+          <div class="tab active"> <img src="https://img.icons8.com/ios-filled/50/4a90e2/building.png"
+              class="tab-icon" /> <span>Property Highlights</span> </div>
+          <div class="tab"> <img src="https://img.icons8.com/ios-filled/50/4a90e2/around-the-globe.png"
+              class="tab-icon" /> <span>Activities & Nearby Attractions</span> </div>
+        </div> <!-- Amenities -->
+
+        <div class="amenities">
+          <h3 class="amenities-title">Amenities</h3>
+          <p class="amenities-subtitle">
+            <img src="https://promos.makemytrip.com/altaccoimages/ugc/ugc_amenities2.webp" alt="" style="width: 20px;">
+            Amenities rated <span class="highlight">3.8</span> by guests
+          </p>
+
+          <div class="amenities-list">
+            <div class="amenity-item" *ngFor="let item of amenities">
+              <img *ngIf="amenityIcons[item]" [src]="amenityIcons[item]" width="24" height="24" />
+              <span>{{ item }}</span>
+            </div>
+          </div>
+
+          <a href="#" class="more-link">+ More Amenities</a>
+        </div>
+
+        <div class="login-box">
+          <h4>Login to unlock deals & manage your bookings!</h4>
+          <div class="login-form">
+            <div class="input-row">
+              <span class="country-code">Email</span> <input equired="true" type="text" placeholder="Enter Email"
+                [(ngModel)]="email" />
+              <span> & </span>
+              <span class="country-code">Password</span> <input required="true" type="text" placeholder="Enter Password"
+                [(ngModel)]="password" />
+              <button style="margin-left: 10px; width: 9rem; height: 2rem; background-color: orange; " (click)="login()"
+                *ngIf="!loading else spinner">Login now</button>
+
+              <ng-template #spinner>
+                <span class="spinner"></span> Loading... </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- **************************************************** -->
+
+
+
+
+
+
+<div class="apartment-container" *ngIf="exact">
+  <div class="header-section">
+    <h2 style="margin-left: 10px;"><i class="fa fa-check-circle"></i> Ivy Retreat Apartments Baga</h2>
+    <p style="margin-left: 10px; ">Entire 1 or 2 BHK apartment units featuring a pool, kitchen & Wi-Fi</p>
+  </div>
+  <div class="content-grid">
+    <div class="cards-container">
+      <div *ngFor="let card of [1]" class="card">
+        <div class="right"> <img [src]="`${env.backend_url}/storage/${mainImage}`" class="main-image"
+            alt="Main Hotel Image" />
+          <div class="thumbnails"> <img *ngFor="let img of exactvalue.rooms_image"
+              [src]="`${env.backend_url}/storage/${img}`" class="thumbnail" (mouseenter)="onThumbnailHover(img)" />
+          </div>
+        </div>
+        <div class="travel-card">
+          <div class="card-image">
+            <img [src]="`${env.backend_url}/storage/${exactvalue.rooms_image[0]}`" alt="Eiffel Tower" />
+          </div>
+          <div class="card-content">
+            <h3>{{requirerooms}} Rooms {{combo_check}}</h3>
+            <h6 class="location">Fits {{pertions}} Adults</h6>
+
+            <span style="background-color: rgb(175, 255, 100);" *ngIf="available"> Available</span>
+            <span style="background-color: rgb(238, 59, 59);" *ngIf="!available"> Not Available</span>
+            <!-- <span>not Available</span> -->
+            <p class="location">Per night for {{requirerooms}} Rooms:</p>
+            <div style="display: flex;">
+              <h2>₹ {{exactvalue.finalPrice * requirerooms}}</h2> <sup>+792</sup>
+            </div>
+            <div class="tabs"> <button [class.active]="activeTab === 'description'"
+                (click)="activeTab = 'description'">Description</button> <button
+                [class.active]="activeTab === 'reviews'" (click)="activeTab = 'reviews'">Reviews</button> </div>
+            <div class="tab-content" *ngIf="activeTab === 'description'">
+              <p> {{exactvalue.description}}<b style="color: #0D6EFD">...More</b> </p>
+            </div>
+            <div class="tab-content" *ngIf="activeTab === 'reviews'">
+
+              <div style="height: 50px; border:#008cff 1px; justify-content: center; display: flex;">
+                <p>Not Availble</p>
+              </div>
+            </div>
+            <div class="card-actions"> <button class="flight"  *ngIf="available"  style="background-color: orange; font-weight: 400; font-size:20px; "  (click)="comboRender()" >Book know </button> </div>
+            <div class="card-actions"> <button class="flight" *ngIf="!available" style="background-color: rgb(173, 172, 169); font-weight: 400; font-size:20px;"  >Booking full </button> </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <div class="apartment-info">
+      <h4>Entire Serviced Apartment</h4>
+      <div class="info-icons"> <span><i class="fa-solid fa-door-open" style="font-size: 25px;"></i><br>{{requirerooms}}
+          Bedroom</span>
+        <span style="margin-left: 9rem;"><i class="fa-solid fa-people-group" style="font-size: 25px; "></i> <br>Sleeps
+          {{child + pertions}} guests</span>
+      </div>
+      <div class="info-box"> <img src="https://promos.makemytrip.com/AltAcco/Education_Icons/Entire.png" alt="Icon">
+        <div class="info-text"> <strong>What is an Entire Serviced Apartment?</strong>
+          <p>Get complete access to all bedrooms and more, with hotel-like amenities such as
+            Housekeeping, Toiletries, WiFi etc.</p>
+        </div>
+      </div>
+      <p class="description"> Experience the best of Goa at this gated property featuring apartments with kitchens, a
+        shared pool & a lush lawn.<b style="color: #008cff;">More</b> </p>
+      <div class="property-section"> <!-- Tabs -->
+        <div class="tabs">
+          <div class="tab active"> <img src="https://img.icons8.com/ios-filled/50/4a90e2/building.png"
+              class="tab-icon" /> <span>Property Highlights</span> </div>
+          <div class="tab"> <img src="https://img.icons8.com/ios-filled/50/4a90e2/around-the-globe.png"
+              class="tab-icon" /> <span>Activities & Nearby Attractions</span> </div>
+        </div> <!-- Amenities -->
+
+        <div class="amenities">
+          <h3 class="amenities-title">Amenities</h3>
+          <p class="amenities-subtitle">
+            <img src="https://promos.makemytrip.com/altaccoimages/ugc/ugc_amenities2.webp" alt="" style="width: 20px;">
+            Amenities rated <span class="highlight">3.8</span> by guests
+          </p>
+
+          <div class="amenities-list">
+            <div class="amenity-item" *ngFor="let item of amenities">
+              <img *ngIf="amenityIcons[item]" [src]="amenityIcons[item]" width="24" height="24" />
+              <span>{{ item }}</span>
+            </div>
+          </div>
+
+          <a href="#" class="more-link">+ More Amenities</a>
+        </div>
+
+        <div class="login-box">
+          <h4>Login to unlock deals & manage your bookings!</h4>
+          <div class="login-form">
+            <div class="input-row">
+              <span class="country-code">Email</span> <input equired="true" type="text" placeholder="Enter Email"
+                [(ngModel)]="email" />
+              <span> & </span>
+              <span class="country-code">Password</span> <input required="true" type="text" placeholder="Enter Password"
+                [(ngModel)]="password" />
+              <button style="margin-left: 10px; width: 9rem; height: 2rem; background-color: orange; " (click)="login()"
+                *ngIf="!loading else spinner">Login now</button>
+
+              <ng-template #spinner>
+                <span class="spinner"></span> Loading... </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="not-found-container" *ngIf="notfound">
+  <div class="content">
+    <h1 class="error-code">500</h1>
+    <h2 class="error-message">Oops! Somthing want worn</h2>
+    <p class="error-description">
+      you are looking for might have been get problem temporarily unavailable.
+    </p>
+    <button routerLink="/" class="home-btn">Go Back Home</button>
+  </div>
+</div>

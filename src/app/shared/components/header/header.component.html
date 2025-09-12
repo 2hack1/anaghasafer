@@ -1,0 +1,152 @@
+<nav id="top" [class.hidden]="isHidden">
+  <div class="nav-upper-part">
+    <div class="right-part">
+      <div class="tolls">
+        <p><span class="bi bi-telephone"></span>Toll no.XXXXXXXX</p>
+        |
+        <p><span class="bi bi-telephone"></span>Toll no.XXXXXXXX</p>
+
+      </div>
+
+      <div class="nav-bottom-part hide" style="border: none;">
+        <div class="logo-sidebar">
+          <div class="logo">
+            <img src="icons/logo.png" alt="" />
+          </div>
+        </div>
+      </div>
+
+
+      <!--  *********  user show model ****************  -->
+      <div class="btns ">
+        <div class="globe__right tolls">
+          <span class="bi bi-globe"></span>
+          Gwalior, Madhya Pradesh, India
+        </div>
+
+        <div class="avatar-container" (click)="toggleProfileMenu()" *ngIf="isLoggedIn">
+          <div class="profile-avatar" [ngStyle]="{'background-color': bgColor}"  >
+            {{ firstLetter }} </div> 
+            <button class="arrow-btn">
+            <i class="bi bi-caret-down-fill"></i> </button>
+        </div> <!-- Dropdown menu -->
+        <div class="profile-menu" *ngIf="isProfileMenuOpen">
+          <!-- <img
+            src="https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg"
+            alt="" style="width: 70px; margin-left: 7rem; border-radius: 50%; margin-top: 1rem;"> -->
+         
+<div 
+  [ngStyle]="{'background-color': bgColor}"
+  style="
+    width: 63px; 
+    height: 63px; 
+    margin-left: 7rem; 
+    border-radius: 50%; 
+    margin-top: 1rem;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    font-weight: bold;
+    font-size: 24px;
+    color: white;
+    position: relative;
+  ">
+  {{ firstLetter }}
+
+  <!-- Edit icon overlay -->
+  <span 
+    style="
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 2px solid white;
+      font-size: 12px;
+      color: rgb(15, 15, 15);
+    "
+    
+  >
+    ✎
+  </span>
+</div>
+
+
+         
+            <div class="profile-header">
+            <div class="profile-avatar"></div>
+            <div class="profile-details">
+
+
+              <h4>{{ userName }}</h4>
+
+              <p> {{ userEmail }}</p>
+
+
+            </div>
+          </div>
+          <hr>
+          <ul>
+            <li (click)="goToProfile()"><strong>My Profile</strong> </li>
+            <li (click)="goToProfile()"> <strong> Admin</strong></li>
+            <li (click)="goToProfile()"> <strong>My Account</strong> </li>
+            <li (click)="goToProfile()"> <strong> Help Center</strong></li>
+            <li (click)="goToSettings()"> <strong>Settings</strong></li>
+          </ul>
+          <button class="glow-on-hover" type="button"
+            style=" color: white; font-weight: 20px; background-color: rgb(255, 96, 96);" (click)="logout()">Log Out</button>
+        </div>
+
+
+
+        <button *ngIf="!isLoggedIn" class="btn-login" (click)="openLoginModal()">
+          <span class="bi bi-people"></span> Login
+        </button>
+
+
+        <!-- <button *ngIf="isLoggedIn" class="btn-login" (click)="logout()">
+          <span class="bi bi-box-arrow-right"></span> Logout
+        </button> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-bottom-part">
+    <div class="logo-sidebar tolls">
+      <div class="logo">
+        <img src="icons/logo.png" alt="" />
+     
+      </div>
+    </div>
+
+    <div class="right-part menu">
+      <div *ngFor="let item of [1]" style="display: flex;">
+        <a [routerLink]="['/']" style="text-decoration: none; color: black;">
+          <p class="menu-items">Home</p>
+        </a>
+        <a [routerLink]="['/contact']" style="text-decoration: none; color: black;">
+          <p class="menu-items">Contact</p>
+        </a>
+        <a [routerLink]="['/about']" style="text-decoration: none; color: black;">
+          <p class="menu-items">About</p>
+        </a>
+        <a [routerLink]="['/states']" style="text-decoration: none; color: black;">
+          <p class="menu-items">Tour & Trips</p>
+        </a>
+       
+      </div>
+    </div>
+  </div>
+</nav>
+
+<ng-container *ngIf="isLogin">
+  <div @fadeInOut>
+    <app-login [(isLogin)]="isLogin"></app-login>
+  </div>
+</ng-container>

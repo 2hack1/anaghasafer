@@ -1,0 +1,182 @@
+<div class="container">
+
+<section class="trip-section">
+    <div class="slider">
+        <div class="slides">
+           <img src="assets/slider12.png" alt="Trip Slide">
+
+        </div>
+
+        <!-- <button class="prev" (click)="prevSlide()">&#10094;</button>
+        <button class="next" (click)="nextSlide()">&#10095;</button> -->
+
+        <div class="wave">
+            <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path fill="#f8f9fa"
+                    d="M0,64 C60,100 90,250 180,180 C270,110 360,-30 450,100 C540,230 630,50 720,120 C810,190 900,60 990,130 C1080,200 1170,100 1260,140 C1350,180 1410,100 1440,90 L1440,320 L0,320 Z">
+                </path>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<section class="contact-section">
+
+    <!-- <div class="container">
+        <h2>Get In Touch <span>With Us</span></h2>
+        <p class="subtext">Et et dolore aliquyam sed eos ut eos accusam erat, ipsum consetetur</p>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="icon location"></div>
+                <h3>Main Branch</h3>
+                <p> bank colony F1 block,<br>
+                   Madhuban Enclaps,Bank colony Alkapuri,<br>
+                   
+            </div>
+
+            <div class="contact-card">
+                <div class="icon phone"></div>
+                <h3>Phone</h3>
+                <p>+919755549733 /<br> 9131475945</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="icon email"></div>
+                <h3>Email</h3>
+                <p> info&#64;anaghasafar.com</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="icon clock"></div>
+                <h3>Working Hours</h3>
+                <p>24 x 7 x 365</p>
+            </div>
+        </div>
+    </div> -->
+
+<div class="container">
+
+   <!-- <img src="https://your-domain.com/assets/images/wave.png" alt="Background" class="bg-img"> -->
+  <h2>Get In Touch <span>With Us</span></h2>
+  <p class="subtext">Et et dolore aliquyam sed eos ut eos accusam erat, ipsum consetetur</p>
+
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="icon location">
+        <img src="icons/location.png" alt="Location">
+      </div>
+      <h3>Main Branch</h3>
+      <p>
+        bank colony F1 block,<br>
+        Madhuban Enclaps, Bank colony Alkapuri,<br>
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <div class="icon phone">
+        <img src="icons/phone-call.png" alt="Phone">
+      </div>
+      <h3>Phone</h3>
+      <p>+919755549733 /<br> 9131475945</p>
+    </div>
+
+    <div class="contact-card">
+      <div class="icon email">
+        <img src="icons/mail.png" alt="Email">
+      </div>
+      <h3>Email</h3>
+      <p>info&#64;anaghasafar.com</p>
+    </div>
+
+    <div class="contact-card">
+      <div class="icon clock">
+        <img src="icons/cl.png" alt="Clock">
+      </div>
+      <h3>Working Hours</h3>
+      <p>24 x 7 x 365</p>
+    </div>
+  </div>
+</div>
+
+  </section>
+
+<section class="advanced-contact">
+    <div class="form-box">
+    <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+  <div class="form-group">
+    <input type="text" name="name" [(ngModel)]="contact.name" required />
+    <label>Name</label>
+  </div>
+
+  <div class="form-group">
+    <input type="email" name="email" [(ngModel)]="contact.email" required />
+    <label>Email</label>
+  </div>
+
+  <div class="form-group">
+    <input type="text" name="phone" [(ngModel)]="contact.phone" required />
+    <label>Phone Number</label>
+  </div>
+
+  <div class="form-group">
+    <textarea name="message" [(ngModel)]="contact.message" rows="4" required></textarea>
+    <label>Message</label>
+  </div>
+
+  <button type="submit">Send Message</button>
+</form>
+
+    </div>
+  
+    <div class="info-box">
+      <h3>We’re always here for you</h3>
+      <p>Day or night, rain or shine, anytime 24 / 7 / 365 — our team is here for you!</p>
+  
+   <ul class="info-list">
+  <li>
+    <div class="icon location">
+      <img src="icons/location.png" alt="Location">
+    </div>
+    <div>
+      <strong>Main Branch</strong><br />
+      bank colony F1 block, Madhuban Enclaps, Bank colony Alkapuri,<br />
+      Alkapuri City Center Gwalior (Madhya Pradesh)
+    </div>
+  </li>
+
+  <li>
+    <div class="icon phone">
+      <img src="icons/telephone.png" alt="Phone">
+    </div>
+    <div>
+      <strong>Phone</strong><br />
+      +91 9755545733 / 9131475945
+    </div>
+  </li>
+
+  <li>
+    <div class="icon email">
+      <img src="icons/mail.png" alt="Email">
+    </div>
+    <div>
+      <strong>Email</strong><br />
+      info&#64;anaghasafar.com
+    </div>
+  </li>
+
+  <li>
+    <div class="icon clock">
+      <img src="icons/cl.png" alt="Clock">
+    </div>
+    <div>
+      <strong>Working Hours</strong><br />
+      24 x 7 x 365
+    </div>
+  </li>
+</ul>
+
+    </div>
+  </section>
+  
+</div>

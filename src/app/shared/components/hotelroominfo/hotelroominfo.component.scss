@@ -1,0 +1,825 @@
+.apartment-container {
+  margin-top: 30rem;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 1200px;
+  margin: auto;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header-section h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.header-section p {
+  color: #555;
+  margin: 5px 0 20px;
+}
+
+/* Grid Layout */
+.content-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Left Panel */
+.left-panel {
+  flex: 2;
+  min-width: 60%;
+}
+
+.photo-grid {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.photo-card {
+  position: relative;
+  flex: 1;
+}
+
+.photo-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.photo-label {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.apartment-info {
+  border-top: 1px solid #ddd;
+  width: 99%;
+  margin-top: 20px;
+}
+
+.apartment-info h4 {
+  margin-top: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.info-icons {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.info-box {
+  display: flex;
+  align-items: flex-start;
+  background: #f0f6ff;
+  border-radius: 8px;
+  padding: 12px;
+  gap: 12px;
+}
+
+.info-box img {
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+}
+
+.info-text strong {
+  color: #4a4a4a;
+  font-size: 14px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.info-text p {
+  color: #4a4a4a;
+  font-size: 15px;
+  margin: 0;
+}
+
+.description {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.highlight-buttons {
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+}
+
+.highlight-btn {
+  background: rgb(237, 246, 255);
+  border: none;
+  color: #007bff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Right Panel */
+.right-panel {
+  flex: 1;
+  min-width: 320px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.room-info-card {
+  border: 1px solid gray;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
+  font-family: Arial, sans-serif;
+  max-width: 450px;
+  height: 320px;
+}
+
+.room-info-card h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.room-info-card .fits {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 14px;
+}
+
+.room-info-card .room-features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+.room-info-card .room-features li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.room-info-card .room-features li::before {
+  // content: "X";
+  position: absolute;
+  left: 0;
+  // color: red;
+  font-size: 13px;
+}
+
+.price-section {
+  margin-bottom: 14px;
+}
+
+.price-old {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 14px;
+}
+
+.price-new {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+}
+
+.price-new .tax-info {
+  font-size: 13px;
+  color: #666;
+}
+
+.button-63 {
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  border: none;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.button-63:hover {
+  background: linear-gradient(90deg, #ff6a4d, #fea45a);
+}
+
+// .more-options {
+//   display: flex;
+//   margin-right: rem;
+//   font-size: 13px;
+//   color: #0071c2;
+//   text-decoration: none;
+// }
+
+.more-options:hover {
+  text-decoration: underline;
+}
+
+/* Card Container */
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.content-grid {
+  display: flex;
+  flex-wrap: wrap; /* allows stacking on small screens */
+  gap: 20px;
+}
+
+.cards-container {
+  flex: 1;
+}
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Left side: Main Image & Thumbnails */
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Fixed size main image */
+.main-image {
+  width: 685px;
+  height: 382px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Thumbnails */
+.thumbnails {
+  display: flex;
+  gap: 12px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.thumbnail {
+  width: 108px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  transition: border-color 0.2s;
+}
+
+.thumbnail:hover {
+  border-color: #0071c2;
+}
+
+/* Right side: Travel card content */
+.travel-card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  flex: 1;
+  min-width: 300px;
+}
+
+.card-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1024px) {
+  .main-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 792 / 446;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    align-items: center;
+  }
+  .main-image {
+    max-width: 100%;
+  }
+}
+
+/* ROOM INFO SECTION */
+.left {
+  width: 20rem;
+  flex: 1;
+  padding: 20px;
+  height: 18rem;
+  border: 1px solid lightgray;
+  border-radius: 14px;
+}
+
+.fits {
+  font-size: 13px;
+  color: #555;
+}
+
+// button
+
+.button-63 {
+  align-items: center;
+  background-image: linear-gradient(92deg, #53b2fe, #0652f3);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: flex;
+  font-family: Phantomsans, sans-serif;
+  font-size: 20px;
+  justify-content: center;
+  line-height: 1em;
+  max-width: 100%;
+  min-width: 140px;
+  padding: 10px 18px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.button-63:active,
+.button-63:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  .button-63 {
+    margin-left: 8rem;
+    font-size: 16px;
+    min-width: 170px;
+  }
+}
+
+.rating-location-box {
+  margin-left: -15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 5rem;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+
+  width: 35rem;
+}
+
+.rating-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rating-score {
+  background: #1e4d92;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 10px;
+  border-radius: 6px;
+}
+
+.rating-text {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.rating-label {
+  font-weight: bold;
+  color: #1e4d92;
+  font-size: 15px;
+}
+
+.rating-count {
+  font-size: 13px;
+  color: #666;
+  margin-left: 4px;
+}
+
+.rating-link {
+  font-size: 13px;
+  color: #0071c2;
+  text-decoration: none;
+}
+
+.rating-link:hover {
+  text-decoration: underline;
+}
+
+.location-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.location-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.location-text {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.location-title {
+  font-weight: bold;
+  display: block;
+}
+
+.location-desc {
+  font-size: 13px;
+  color: #666;
+}
+
+.location-link {
+  font-size: 13px;
+  color: #0071c2;
+  text-decoration: none;
+}
+
+.location-link:hover {
+  text-decoration: underline;
+}
+
+// ameneties
+.property-section {
+  font-family: Arial, sans-serif;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  border: 1px solid #cce4ff;
+  background: #f0f8ff;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: #e6f2ff;
+}
+
+.tab-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+}
+
+/* Amenities */
+.amenities-title {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.amenities-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.highlight {
+  color: #0071c2;
+  font-weight: bold;
+}
+
+.amenities-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  margin-bottom: 10px;
+}
+
+.amenity-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+}
+
+.amenity-item img {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
+
+.checkmark {
+  color: green;
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.more-link {
+  color: #0071c2;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Login Box */
+.login-box {
+  border: 1px solid #cce4ff;
+  background: #f0f8ff;
+  border-radius: 6px;
+  padding: 14px;
+  margin-top: 18px;
+}
+
+.login-box h4 {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.login-form label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.input-row {
+  // height: 20rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+// @media (max-width: 576px) {
+//   .input-row {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-start; /* optional, aligns to left */
+//     gap: 8px; /* space between inputs */
+//   }
+
+//   .input-row input,
+//   .input-row button {
+//     width: 100%; /* make inputs/buttons full width */
+//   }
+// }
+
+
+.country-code {
+  padding: 8px;
+  background: white;
+  border: 1px solid #ccc;
+  // border-radius: 4px 0 0 4px;
+}
+
+.input-row input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-left: none;
+}
+
+.input-row button {
+  background: #0071c2;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.input-row button:hover {
+  background: #005fa3;
+}
+// sidebar
+.travel-card {
+  height: 100%;
+  width: 350px;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.card-image img {
+  width: 100%;
+  height: 200%;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.location {
+  color: gray;
+  font-size: 14px;
+  margin: 2px 0;
+}
+
+.rating {
+  margin: 5px 0;
+  color: gold;
+}
+
+.rating .score {
+  color: #555;
+  margin-left: 5px;
+}
+
+.tabs {
+  display: flex;
+  margin-top: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 8px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.tabs button.active {
+  border-bottom: 2px solid #007bff;
+  color: #007bff;
+}
+
+.tab-content {
+  font-size: 14px;
+  color: #444;
+  margin-top: 8px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.card-actions button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.card-actions .train {
+  background: #e0e0e0;
+}
+
+.card-actions .flight {
+  // background: #007bff;
+  background-color: orange; 
+  font-weight: 400; font-size:20px;
+  color: white;
+  margin-left: 5px;
+}   
+
+// *********************page not found ***********************
+/* === Container === */
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #1e3c72, #ffffff);
+  color: #fff;
+  text-align: center;
+}
+
+/* === Content Box === */
+.content {
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* === Error Code === */
+.error-code {
+  font-size: 8rem;
+  font-weight: 800;
+  margin: 0;
+  color: #ff5100de;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+/* === Message === */
+.error-message {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+/* === Description === */
+.error-description {
+  font-size: 1rem;
+  margin: 15px 0 25px;
+  color: #e0e0e0;
+}
+
+/* === Button === */
+.home-btn {
+  background: #3e81da;
+  color: #1e3c72;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.home-btn:hover {
+  background: #2067d1;
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .error-code {
+    font-size: 5rem;
+  }
+  .error-message {
+    font-size: 1.5rem;
+  }
+  .error-description {
+    font-size: 0.9rem;
+  }
+  .home-btn {
+    width: 100%;
+  }
+}
+
+
+// .input-row {
+//   display: flex;
+//   align-items: center;
+//   gap: 8px;
+// }
+
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+// .flight:active {
+//   background-color: darkorange; /* change color while pressed */
+// }
+

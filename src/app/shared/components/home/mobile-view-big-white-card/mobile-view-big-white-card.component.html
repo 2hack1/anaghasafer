@@ -1,0 +1,488 @@
+<div class="hotel-search-container">
+
+    <div class="mobile-layout" style="width: 100%; max-width: 100%; margin: 0 auto; overflow-x: hidden;">
+        <div style="height: 100%; width: 100%; position: relative;">
+            <div class="menu_container" style="overflow-x: hidden;">
+                <div class="hotel-search-container" *ngIf="isMobile">
+
+                    <!-- Top Navigation -->
+                    <p class="hotel-search-title"
+                        style="text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 1rem;">
+                        <span (click)="goToSlide(0)" [class.active]="currentSlide === 0"
+                            style="margin-right: 12px; cursor: pointer;">Tour & Trip</span>
+                        <span (click)="goToSlide(1)" [class.active]="currentSlide === 1"
+                            style="margin-right: 12px; cursor: pointer;">Hotel</span>
+                        <span (click)="goToSlide(2)" [class.active]="currentSlide === 2"
+                            style="cursor: pointer;">Train</span>
+                    </p>
+
+                    <!-- Slider Wrapper -->
+                    <div class="slider-wrapper" style="overflow: hidden; width: 110%; max-width: 100%;">
+                        <!-- <div class="slider" [style.transform]="'translateX(-'+ currentSlide * 100 + '%)'" style="display: flex; transition: transform 0.5s ease-in-out; width: 300%;"> -->
+
+                        <div class="slider" [style.transform]="'translateX(-'+ currentSlide *33 + '%)'"
+                            style="display: flex; transition: transform 0.5s ease-in-out; width: 300%;">
+
+
+
+                            <!-- Tour and travel sider -->
+                            <div class="slide" style="display: flex; flex-direction: column; align-items: center;
+                     justify-content: center; width: 100%; box-sizing: border-box; margin-top: 20px;">
+
+                                <!-- City Dropdown -->
+                               <div class="hotel-search-field city-dropdown"
+                                    style="width: 90%; max-width: 400px; margin-bottom: 1rem;"
+                                    (click)="openDropdown($event)">
+
+                                    <i class="bi bi-geo-alt"></i>
+                       
+                                    <div style="flex: 1; position: relative;">
+                                        <label class="field-label">Enter City or Location</label>
+                                                          <h4>{{cityTour}}</h4>
+                                        <!-- DROPDOWN -->
+                                        <div class="custom-dropdown" *ngIf="check" (click)="$event.stopPropagation()">
+                                            <input type="text" [(ngModel)]="citySearch" placeholder="Search city..."
+                                                class="city-search-input" />
+
+                                            <ul class="city-list">
+                                                <li *ngFor="let c of filteredCityOptionsTour()"
+                                                    (click)="selectCityTour(c)" [class.active]="c === cityTour">
+                                                    {{ c }}
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <span class="hotel-subtext">{{ cityTour }}</span>
+                                    </div>
+                                </div>
+
+
+                                <!-- Guests & Rooms -->
+                                <div class="hotel-search-field" (click)="toggleGuestsModalTour()"
+                                    style="width: 90%; max-width: 400px; margin-bottom: 1rem;">
+                                    <i class="bi bi-people"></i>
+                                    <div style="flex: 1;">
+                                        <label class="field-label">Select No. of Guests</label>
+                                        <div class="guest-value" style="display: flex; gap: 8px;">
+                                            <span>Adults: {{ totalGuestsTour }}</span>
+                                            <span>Children: {{ totalRoomsTour }}</span>
+                                        </div>
+                                    </div>
+                                    <i class="bi bi-plus-circle add-icon"></i>
+                                </div>
+
+
+
+
+                                <!-- Guest Modal -->
+
+                                <div class="hotel-search-field" (click)="toggleMonthModal()"
+                                    style="width: 90%; max-width: 400px; margin-bottom: 1rem;">
+                                    <i class="bi bi-calendar"></i>
+                                    <div style="flex: 1;">
+                                        <label class="field-label">Select Month for Trip</label>
+                                        <div class="guest-value">
+                                            Selected Month: {{ selectedMonth }}
+                                        </div>
+                                    </div>
+                                    <i class="bi bi-caret-down-fill add-icon"></i>
+                                </div>
+
+
+
+                                <!-- Price Range -->
+                                <div class="hotel-search-field" (click)="togglePriceModalTour()"
+                                    style="width: 90%; max-width: 400px; margin-bottom: 1rem;">
+                                    <i class="bi bi-currency-dollar"></i>
+                                    <div style="flex: 1;">
+                                        <label class="field-label">Price Range</label>
+                                        <div class="guest-value">
+                                            ₹{{ minPriceTour }} - ₹{{ maxPriceTour }}
+                                        </div>
+                                    </div>
+                                    <i class="bi bi-plus-circle add-icon"></i>
+                                </div>
+
+                                <!-- Price Modal -->
+
+                                <!-- Search Button -->
+
+                            </div>
+
+                            <!-- Tour & Trip Slide -->
+                            <div class="slide" style="display: flex; flex-direction: column; align-items: center;
+                     justify-content: center; width: 100%; box-sizing: border-box; ">
+
+                                <!-- City Dropdown -->
+                                <!-- <div class="hotel-search-field city-dropdown"
+                                    style="width: 90%; max-width: 400px; margin-bottom: 1rem;">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <div style="flex: 1;">
+                                        <label class="field-label">Enter City or Location</label>
+                                        <select class="city-select" style="font-size: 22px; width: 100%;"
+                                            [(ngModel)]="city">
+                                            <option *ngFor="let c of cityOptions" [value]="c">{{ c }}</option>
+                                        </select>
+                                        <span class="hotel-subtext">{{ country }}</span>
+                                    </div>
+                                </div> -->
+
+
+                                      <div class="hotel-search-field city-dropdown"
+                                    style="width: 90%; max-width: 400px; margin-bottom: 1rem;"
+                                    (click)="openDropdownHotel($event)">
+
+                                    <i class="bi bi-geo-alt"></i>
+                       
+                                    <div style="flex: 1; position: relative;">
+                                        <label class="field-label">Enter City or Location</label>
+                                                          <h4>{{city}}</h4>
+                                        <!-- DROPDOWN -->
+                                        <div class="custom-dropdown" *ngIf="checkHotel" (click)="$event.stopPropagation()">
+                                            <input type="text" [(ngModel)]="citySearchHotel" placeholder="Search city..."
+                                                class="city-search-input" />
+
+                                            <ul class="city-list">
+                                                <li *ngFor="let c of filteredCityOptionsHotel()"
+                                                    (click)="selectCityHotel(c)" [class.active]="c === city">
+                                                    {{ c }}
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <span class="hotel-subtext">{{ cityTour }}</span>
+                                    </div>
+                                </div>
+
+                                <!-- Check-in & Check-out -->
+
+                                <div class="search-section hotel-search-field" (click)="openDateModal()"
+                                    style="width: 90%; max-width: 400px; margin-bottom: 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="bi bi-calendar-event"></i>
+                                    <span class="search-text city-select">
+                                        {{ hotel.checkIn || '2025-11-01' }} - {{ hotel.checkOut || '2025-10-10' }}
+                                    </span>
+                                </div>
+
+                                <!-- Check-in Modal -->
+
+
+
+
+                                <div class="hotel-search-field" (click)="toggleGuestsModal()"
+                                    style="width: 90%; max-width: 400px; margin-bottom: 1rem;">
+                                    <i class="bi bi-people"></i>
+                                    <div style="flex: 1;">
+                                        <label class="field-label">Guests & Rooms</label>
+                                        <div class="guest-value">
+                                            {{ totalGuests }} Guests, {{ totalRooms }} Room(s)
+                                        </div>
+                                    </div>
+                                    <i class="bi bi-plus-circle add-icon"></i>
+                                </div>
+
+
+                                <div class="hotel-search-field" (click)="togglePriceModal()"
+                                    style="width: 90%; max-width: 400px; margin-bottom: 1rem;">
+                                    <i class="bi bi-currency-dollar"></i>
+                                    <div style="flex: 1;">
+                                        <label class="field-label">Price Range</label>
+                                        <div class="guest-value">
+                                            ₹{{ minPrice }} - ₹{{ maxPrice }}
+                                        </div>
+                                    </div>
+                                    <i class="bi bi-plus-circle add-icon"></i>
+                                </div>
+
+                                <!-- Price Modal -->
+
+                                <!-- Guest Modal -->
+
+
+
+                            </div>
+
+
+                            <!-- Train slider -->
+                            <div class="slide" style="display: flex; flex-direction: column; align-items: center;
+                     justify-content: center; width: 100%; box-sizing: border-box; ">
+
+                                Train booking under the process<progress></progress>
+
+                                <!-- Price Modal -->
+
+                                <!-- Guest Modal -->
+                            </div>
+
+
+
+
+
+                            <!-- Hotel Slide -->
+
+
+
+                            <!-- Train Slide -->
+
+
+                        </div>
+
+                        <button class="hotel-btn-search" (click)="search0()" *ngIf="currentSlide === 0"
+                            style="width: 100%;">
+                            SEARCH0
+                        </button>
+                        <button class="hotel-btn-search" (click)="search1()" *ngIf="currentSlide === 1"
+                            style="width: 100%;">
+                            SEARCH1
+                        </button>
+                        <button class="hotel-btn-search" (click)="search2()" *ngIf="currentSlide === 2"
+                            style="width: 100%;">
+                            SEARCH2
+                        </button>
+
+
+                        <!-- Check-in Modal -->
+
+                        <div *ngIf="showDateModal" class="modal-overlay">
+                            <div class="custom-date-modal" class="modal-box">
+                                <button class="custom-date-close-btn" (click)="PriceModal()" style="
+                            position: absolute;
+                            color: black;
+                                    background: white;
+                              border: none;
+                                font-size: 23px;
+                               display: flex;
+                               cursor: pointer;">×</button>
+
+
+                                <h3 class="custom-date-title">Select Dates</h3>
+
+                                <div class="custom-date-inputs">
+                                    <div class="custom-date-field">
+                                        <label>Check-In</label>
+                                        <input type="date" [(ngModel)]="tempCheckIn">
+                                    </div>
+                                    <div class="custom-date-field">
+                                        <label>Check-Out</label>
+                                        <input type="date" [(ngModel)]="tempCheckOut">
+                                    </div>
+                                </div>
+
+                                <div class="custom-date-actions">
+                                    <button (click)="closeDateModal()" class="custom-date-cancel">Cancel</button>
+                                    <button (click)="applyDates()" class="custom-date-apply">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Price Modal -->
+                        <div class="modal-overlay" *ngIf="showPriceModal">
+                            <div class="modal-box">
+                                <button style="margin-left: 17rem;
+                       color: black;
+                        width: 30px; height: 20px; 
+                         font-size: 20px;
+                         background-color: white;
+                          border: none;" (click)="togglePriceModal()">
+                                    x
+                                </button>
+                                <h3>Select Price Range</h3>
+                                <div class="vertical-sections">
+                                    <div class="guest-section">
+                                        <h4>Min Price</h4>
+                                        <i class="bi bi-arrow-up-circle-fill arrow-btn" (click)="incMinPrice()"
+                                            [class.disabled]="minPrice >= maxPrice"></i>
+                                        <span class="count">₹{{ minPrice }}</span>
+                                        <i class="bi bi-arrow-down-circle-fill arrow-btn" (click)="decMinPrice()"
+                                            [class.disabled]="minPrice <= 0"></i>
+                                    </div>
+                                    <div class="guest-section">
+                                        <h4>Max Price</h4>
+                                        <i class="bi bi-arrow-up-circle-fill arrow-btn" (click)="incMaxPrice()"
+                                            [class.disabled]="maxPrice >= 50000"></i>
+                                        <span class="count">₹{{ maxPrice }}</span>
+                                        <i class="bi bi-arrow-down-circle-fill arrow-btn" (click)="decMaxPrice()"
+                                            [class.disabled]="maxPrice <= minPrice"></i>
+                                    </div>
+                                </div>
+                                <div class="modal-actions" style="text-align: right; margin-top: 1rem;">
+                                    <button class="apply-btn" style="padding: 6px 12px; background: #ff7a1b; color: white; 
+                                   border: none; border-radius: 5px;" (click)="applyPrice()">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Guest Modal -->
+                        <div class="modal-overlay" *ngIf="showGuestsModal">
+                            <div class="modal-box">
+                                <button style="margin-left: 17rem;
+                         color: black;
+                         width: 30px; height: 20px; 
+                           font-size: 20px;
+                            background-color: white;
+                            border: none;" (click)="toggleGuestsModal()">
+                                    x
+                                </button>
+                                <h3>Select Guests & Rooms</h3>
+
+                                <div class="vertical-sections">
+
+                                    <div class="guest-section">
+                                        <h4>Adults</h4>
+                                        <i class="bi bi-arrow-up-circle-fill arrow-btn" (click)="incAdults()"
+                                            [class.disabled]="adults >= maxadults"></i>
+                                        <span class="count">{{ adults }}</span>
+                                        <i class="bi bi-arrow-down-circle-fill arrow-btn" (click)="decAdults()"></i>
+                                    </div>
+
+                                    <div class="guest-section">
+                                        <h4>Children</h4>
+                                        <i class="bi bi-arrow-up-circle-fill arrow-btn" (click)="incChildren()"
+                                            [class.disabled]="children >= maxchildren"></i>
+                                        <span class="count">{{ children }}</span>
+                                        <i class="bi bi-arrow-down-circle-fill arrow-btn" (click)="decChildren()"></i>
+                                    </div>
+
+                                    <div class="guest-section">
+                                        <h4>Rooms</h4>
+                                        <i class="bi bi-arrow-up-circle-fill arrow-btn" (click)="incRooms()"
+                                            [class.disabled]="rooms >= maxRooms"></i>
+                                        <span class="count">{{ rooms }}</span>
+                                        <i class="bi bi-arrow-down-circle-fill arrow-btn" (click)="decRooms()"
+                                            [class.disabled]="rooms === 1"></i>
+                                    </div>
+                                </div>
+
+
+                                <div class="modal-actions">
+                                    <button class="apply-btn" (click)="applyGuests()">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- tour Month Modal -->
+                        <div class="modal-overlay" *ngIf="showMonthModal">
+
+                            <div class="modal-box">
+
+                                <button
+                                    style="position: absolute; top: 10px; right: 10px; color: black; font-size: 20px; background: none; border: none;"
+                                    (click)="toggleMonthModal()">x</button>
+
+                                <h3>Select Month</h3>
+
+
+                                <div style="margin-top: 1rem;">
+                                    <select [(ngModel)]="selectedMonth"
+                                        style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 16px;">
+                                        <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="modal-actions" style="margin-top: 20px;">
+                                    <button class="apply-btn"
+                                        style="width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px;"
+                                        (click)="applyMonth()">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- tour ghest -->
+                        <div class="modal-overlay" *ngIf="showGuestsModalTour">
+                            <div class="modal-box">
+                                <button style="margin-left: 17rem;
+                                                            color: black;
+                                                       width: 30px; height: 20px; 
+                                                        font-size: 20px;
+                                              background-color: white;
+                                  border: none;" (click)="toggleGuestsModalTour()">
+                                    x
+                                </button>
+                                <h3>Select Guests & Room</h3>
+
+                                <div class="vertical-sections">
+
+                                    <div class="guest-section">
+                                        <h4>Adults</h4>
+                                        <i class="bi bi-arrow-up-circle-fill arrow-btn" (click)="incAdultsTour()"
+                                            [class.disabled]="adultsTour >= maxAdultsTour"></i>
+                                        <span class="count">{{ adultsTour }}</span>
+                                        <i class="bi bi-arrow-down-circle-fill arrow-btn" (click)="decAdultsTour()"></i>
+                                    </div>
+
+                                    <div class="guest-section">
+                                        <h4>Childrennn</h4>
+                                        <i class="bi bi-arrow-up-circle-fill arrow-btn" (click)="incChildrenTour()"
+                                            [class.disabled]="childrenTour >= maxChildrenTour"></i>
+                                        <span class="count">{{ childrenTour }}</span>
+                                        <i class="bi bi-arrow-down-circle-fill arrow-btn"
+                                            (click)="decChildrenTour()"></i>
+                                    </div>
+
+                                    <!-- <div class="guest-section">
+                                        <h4>Roomsss</h4>
+                                        <i class="bi bi-arrow-up-circle-fill arrow-btn" (click)="incRoomsTour()"
+                                            [class.disabled]="roomsTour >= maxRoomsTour"></i>
+                                        <span class="count">{{ roomsTour }}</span>
+                                        <i class="bi bi-arrow-down-circle-fill arrow-btn" (click)="decRoomsTour()"
+                                            [class.disabled]="roomsTour === 1"></i>
+                                    </div> -->
+                                </div>
+
+
+                                <div class="modal-actions">
+                                    <button class="apply-btn" (click)="applyGuestsTour()">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tour price -->
+
+                        <div class="modal-overlay" *ngIf="showPriceModalTour">
+                            <div class="modal-box">
+                                <button style="margin-left: 17rem;
+                       color: black;
+                        width: 30px; height: 20px; 
+                         font-size: 20px;
+                         background-color: white;
+                          border: none;" (click)="togglePriceModalTour()">
+                                    x
+                                </button>
+                                <h3>Select Price Range</h3>
+                                <div class="vertical-sections">
+                                    <div class="guest-section">
+                                        <h4>Min Price</h4>
+                                        <i class="bi bi-arrow-up-circle-fill arrow-btn" (click)="incMinPriceTour()"
+                                            [class.disabled]="minPriceTour >= maxPriceTour"></i>
+                                        <span class="count">₹{{ minPriceTour }}</span>
+                                        <i class="bi bi-arrow-down-circle-fill arrow-btn" (click)="decMinPriceTour()"
+                                            [class.disabled]="minPriceTour <= 0"></i>
+                                    </div>
+                                    <div class="guest-section">
+                                        <h4>Max Price</h4>
+                                        <i class="bi bi-arrow-up-circle-fill arrow-btn" (click)="incMaxPriceTour()"
+                                            [class.disabled]="maxPriceTour >= 50000"></i>
+                                        <span class="count">₹{{ maxPriceTour }}</span>
+                                        <i class="bi bi-arrow-down-circle-fill arrow-btn" (click)="decMaxPriceTour()"
+                                            [class.disabled]="maxPriceTour <= minPriceTour"></i>
+                                    </div>
+                                </div>
+                                <div class="modal-actions" style="text-align: right; margin-top: 1rem;">
+                                    <button class="apply-btn" style="padding: 6px 12px; background: #ff7a1b; color: white; 
+                                   border: none; border-radius: 5px;" (click)="applyPriceTour()">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

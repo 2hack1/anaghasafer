@@ -1,0 +1,259 @@
+@use 'mixins' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f9fa;
+    padding: 20px;
+}
+
+.mobile-header {
+    display: none;
+    text-align: right;
+    margin-bottom: 10px;
+
+    @include respond-to-max(md) {
+        margin-top: 10px;
+    }
+}
+
+#filter-toggle {
+    padding: 10px 20px;
+    background-color: #ffb400;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+    flex: 0 0 250px;
+    padding: 20px;
+    border-radius: 8px;
+    height: fit-content;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.filter-section {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 23px;
+    margin-bottom: 30px;
+}
+
+.filter-section h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.filter-section label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+/* Main Content */
+.main-content {
+    padding: 10px;
+    flex: 1;
+}
+
+.package-card {
+    margin-top: 20px;
+    display: flex;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-section {
+    flex: 1 1 250px;
+    max-width: 250px;
+}
+
+.details-section {
+    flex: 2 1 400px;
+    padding: 10px;
+
+    h2 {
+        font-size: 20px;
+    }
+}
+
+.price-section {
+    flex: 1 1 200px;
+    padding: 20px;
+    background: #f5f5f5;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @include respond-to-max(md){
+        display: flex;
+    }
+
+    #check {
+        font-size: 24px;
+        font-family: sans-serif;
+    }
+}
+
+.price-section h3 {
+    margin: 10px 0;
+    color: #333;
+    // @include respond-to-max(md){
+    //     display: flex;
+    // }
+ 
+}
+
+.view-details {
+    color: blue;
+    text-decoration: underline;
+    margin-bottom: 10px;
+    display: inline-block;
+    @include respond-to-max(md){
+        margin-left: 14px;
+    }
+}
+
+.book-now {
+    background: #e54239;
+    border: none;
+    padding: 10px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    @include respond-to-max(md){
+        height: 40px;
+       display: flex;        
+        align-items: center;
+        
+    }
+}
+
+.book-now:hover {
+    background: #c21a1a;
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .mobile-header {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: none;
+        /* hidden initially */
+        margin-bottom: 20px;
+    }
+
+    .sidebar.active {
+        display: block;
+    }
+
+    .package-card {
+        flex-direction: column;
+    }
+
+    .image-section,
+    .details-section,
+    .price-section {
+        max-width: 100%;
+        flex: 1 1 90%
+    }
+
+    .price-section {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+
+    .book-now {
+        margin-left: 10px;
+    }
+}
+
+.grid-details-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    max-height: 300px;
+    /* set height you want */
+    overflow-y: auto;
+    /* vertical scroll */
+    padding-right: 10px;
+    /* space for scrollbar */
+}
+
+.grid-details-section::-webkit-scrollbar {
+    width: 6px;
+}
+
+.grid-details-section::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.text {
+    p {
+        span {
+
+            color: #b62c27;
+            /* red color on hover */
+            transition: color 0.3s ease;
+
+        }
+    }
+}
+
+.icons {
+
+    li {
+        margin-top: 1rem;
+        display: flex;
+        gap: 1rem;
+
+        i {
+            font-size: 22px;
+            color: #0d125e;
+        }
+    }
+}
+
+
+.icons li i:hover {
+    cursor: pointer;
+    color: #c51414;
+    transform: scale(1.2);
+    transition: all 0.3s ease;
+}

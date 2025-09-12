@@ -1,0 +1,30 @@
+<div class="header">
+    <h2>Top Trading State's Holiday Packages :-</h2>
+</div>
+
+
+  <div class="checkpadding">
+  <div class="slider-container" *ngFor="let group of sliderGroups">
+    <a class="card" *ngFor="let destination of group" [routerLink]="['/des',destination.sub_destination_id]" style="color: white; text-decoration: none;">
+      <img [src]="`${env.backend_url}/storage/${destination.image_url}`" [alt]="destination.name" />
+      <div class="card-content">
+        <h3>{{ destination.name }}</h3>
+        <p>{{ destination.packages }} Packages</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+
+
+<div class="content1">
+    <p>For travelers, India is a treasure trove of exploration and experiences. From the bustling cities to serene rural
+        landscapes, India offers a diverse range of attractions, such as historical monuments, palaces, temples,
+        wildlife sanctuaries, and beautiful beaches.
+        The country's tourism industry attracts millions of visitors every year who come to witness its diverse culture,
+        stunning landscapes, and warm hospitality. Visiting India is a journey that promises unforgettable memories,
+        providing a blend of ancient traditions and modern advancements. Whether exploring the bustling
+        streets of Delhi, marveling at the beauty of the Taj Mahal, or meditating in the peaceful foothills of the
+        Himalayas, India offers a truly magical
+        experience that leaves a lasting impression on every traveler.</p>
+</div>
