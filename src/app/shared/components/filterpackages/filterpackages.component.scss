@@ -79,6 +79,9 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     flex-wrap: wrap;
+     @include respond-to-max(md) {
+        display: block; // remove flex on mobile
+    }
 }
 
 .image-section img {

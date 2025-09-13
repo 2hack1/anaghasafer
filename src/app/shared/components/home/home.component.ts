@@ -196,6 +196,7 @@ this.checkScreenSize();
       .then((res: AxiosResponse) => {
         this.getsub = res.data;
         // Combine all sub_destinations into one array
+
         this.subDes = this.getsub.sub_destinations;
       })
       .catch(err => {
@@ -209,7 +210,7 @@ this.checkScreenSize();
   subDesinter: any[] = [];
 
   getSubInternationalLimit(destination_id: any) {
-    this.as_.InternationalPackages(22)
+    this.as_.InternationalPackages(32)
       .then((res: AxiosResponse) => {
         this.getsubinter = res.data;
         this.subDesinter = res.data;
