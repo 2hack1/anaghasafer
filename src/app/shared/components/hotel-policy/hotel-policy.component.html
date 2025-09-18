@@ -1,0 +1,13 @@
+<p>hotel-policy works!</p>
+<div class="payment-container">
+  <button (click)="genrated()">Generate QR Code</button>
+
+  <div *ngIf="showQR; else expired">
+    <h3>Scan to Pay</h3>
+    <img [src]="qrImageUrl" alt="UPI QR Code" width="250" />
+  </div>
+
+  <ng-template #expired>
+    <p>QR removed after scan / expired</p>
+  </ng-template>
+</div>

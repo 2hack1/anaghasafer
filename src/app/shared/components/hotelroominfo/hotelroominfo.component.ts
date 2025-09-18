@@ -90,13 +90,31 @@ totelroom:any;
           this.exact = false;
           console.log("infor id base:", this.combovalue)
 
-          const charges = parseFloat(this.exactvalue?.cancellation_charges || "0");
-
-          if (charges === 0) {
+          
+        
+          
+          if(!this.exactvalue){
+                 const charges = parseFloat(this.combovalue?.cancellation_charges || "0");
+           if (charges === 0) {
             this.combo_check = "with Free Cancellation";
+            console.log("charges",charges)
           } else {
-            this.combo_check = "with features";
+            this.combo_check = "with More features";
+                 console.log("charges",charges)
+          }     // run this
+       
+          } else{
+ const charges = parseFloat(this.exactvalue?.cancellation_charges || "0");
+           if (charges === 0) {
+            this.combo_check = "with Free Cancellation";
+            console.log("charges",charges)
+          } else {
+            this.combo_check = "with More features";
+                 console.log("charges",charges)
           }
+          }
+
+          
 
 
           if (this.combovalue.rooms_image) {

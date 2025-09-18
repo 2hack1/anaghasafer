@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { UserServicesService } from '../../../core/services/userService/user-services.service';
 import { error } from 'jquery';
+import { environment } from '../../../../environments/environment.development';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     hasGST: false,
     fullName: ''   // 👈 added fullName
   };
+  env=environment
   userid:any;
   avrooms: any;
   isLoading :boolean = false;

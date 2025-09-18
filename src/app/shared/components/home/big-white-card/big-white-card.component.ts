@@ -431,6 +431,13 @@ selectPrice(price: string) {
             min_price: this.minPrice,
             max_price: this.maxPrice
         };
+        sessionStorage.setItem('city',this.hotel.destination)
+        sessionStorage.setItem('checin',this.hotel.checkIn)
+        sessionStorage.setItem('checkout',this.hotel.checkOut)
+        sessionStorage.setItem('adults',String(this.guestCounts.adults))
+        sessionStorage.setItem('children',String(this.guestCounts.children))
+        sessionStorage.setItem('rooms',String(this.guestCounts.rooms))
+        
 
         if (this.maxPrice) {
             this.route.navigate(['/Hotel-Rooms'], { queryParams: params });

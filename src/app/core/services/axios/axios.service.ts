@@ -190,4 +190,14 @@ export class AxiosService {
     return this.api.post(`pass-update`,data);
   }
 
+// createQR(): Observable<any> {
+//     return this.api.get<any>('');
+//   }
+
+  createQR(){
+    return this.api.get('create-qr');
+  }
+  checkQR(id:any){
+     return this.api.get(`check/${id}`);
+  }
 }

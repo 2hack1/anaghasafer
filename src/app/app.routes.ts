@@ -14,6 +14,7 @@ import { ParticularHotelRoomDataComponent } from './shared/components/particular
 import { HotelroominfoComponent } from './shared/components/hotelroominfo/hotelroominfo.component';
 import { UserprofileComponent } from './shared/components/userprofile/userprofile.component';
 import { ForgetpasspopupComponent } from './shared/components/forgetpasspopup/forgetpasspopup.component';
+import { HotelPolicyComponent } from './shared/components/hotel-policy/hotel-policy.component';
 
 
 export const routes: Routes = [
@@ -69,5 +70,8 @@ export const routes: Routes = [
     },{
         path:"forgetPassword",
         component:ForgetpasspopupComponent
-    },
+    },{
+        path:"qrcode/q",
+        component:HotelPolicyComponent
+    }
 ]

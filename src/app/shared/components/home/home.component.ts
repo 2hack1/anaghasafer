@@ -74,7 +74,6 @@ export class HomeComponent implements OnInit {
       this.getSubInternationalLimit(this.international);
       console.log("data", this.international)
       // this.getSubLimit(this.international);
-
     })()
 this.checkScreenSize();
   }

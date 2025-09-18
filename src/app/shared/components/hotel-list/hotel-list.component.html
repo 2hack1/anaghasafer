@@ -10,23 +10,23 @@
       <!-- Selected Filters as Chips -->
       <div class="selected-filters" *ngIf="selectedPrices.length || selectedPlaceType">
 
-  <!-- ✅ show chips by option, not by string -->
-  <ng-container *ngFor="let option of priceOptions">
-    <span *ngIf="option.selected" class="chip">
-      {{ option.label }}
-      <button class="chip-remove" (click)="removePrice(option.value)">×</button>
-    </span>
-  </ng-container>
+        <!-- ✅ show chips by option, not by string -->
+        <ng-container *ngFor="let option of priceOptions">
+          <span *ngIf="option.selected" class="chip">
+            {{ option.label }}
+            <button class="chip-remove" (click)="removePrice(option.value)">×</button>
+          </span>
+        </ng-container>
 
-  <span *ngIf="selectedPlaceType" class="chip">
-    {{ selectedPlaceType }}
-    <button class="chip-remove" (click)="clearPlaceType()">×</button>
-  </span>
-</div>
+        <span *ngIf="selectedPlaceType" class="chip">
+          {{ selectedPlaceType }}
+          <button class="chip-remove" (click)="clearPlaceType()">×</button>
+        </span>
+      </div>
 
       <!-- Price Filter -->
       <div class="sidebar-header">
-       
+
       </div>
       <ul class="filter-list" [class.show]="showFilters">
         <h4>Price per night</h4>
@@ -36,64 +36,88 @@
         </li>
       </ul> <!-- Place Type Filter -->
       <div class="sidebar-header">
-       
+
       </div>
       <ul class="filter-list" [class.show]="showFilters">
-         <h4>Find By Place Types</h4>
-         <br>
+        <h4>Find By Place Types</h4>
+        <br>
         <li *ngFor="let place of placeTypes"> <label [class.selected]="selectedPlaceType === place"> <input type="radio"
               name="placeType" [checked]="selectedPlaceType === place" (change)="onSelectPlaceType(place)"> {{ place }}
           </label> </li>
       </ul>
     </div>
   </div>
-   <!-- ************************************* only ************************** -->
+
+  <!-- ************************************* only ************************** -->
 
 
-  <div class="cards-container">
-    <!-- 🔍 Search Bar -->
-    <!-- <div class="search-card">
-
-
-      <div class="search-bar">
-        <div class="search-section">
-          <i class="bi bi-building"></i>
-          <span class="search-text">Gwalior, Madhya Pradesh, India</span>
-        </div>
-        <div class="search-section">
-          <i class="bi bi-calendar-event"></i>
-          <span class="search-text">Tue 19 Aug — Sat 23 Aug</span>
-        </div>
-        <div class="search-section line " style="  border-bottom: 1px solid #f1c04e">
-          <i class="bi bi-people"></i>
-          <span class="search-text">30 adults · 10 children · 30 rooms</span>
-        </div>
-
-        <button class="search-btn">Search</button>
-      </div>
-    </div> -->
+  <div class="cards-container" *ngIf="(combohotelRooms?.length > 0) || (execthotelRooms?.length > 0)">
 
     <div class="search-card sticky-header">
-      <div class="search-bar"> <!-- City -->
-        <div class="search-section" (click)="openCityModal()"> <i class="bi bi-building"></i> <span class="search-text">
-            {{ hotel.destination || (combohotelRooms[0].city+',Madhya Pradesh, India') }},  </span> </div> <!-- Date -->
-        <div class="search-section" (click)="openDateModal()"> <i class="bi bi-calendar-event"></i> <span
-            class="search-text">   {{ formattedCheckIn || combohotelRooms[0].checkin }} — {{ formattedCheckOut || combohotelRooms[0].checkin }} </span>
-        </div> <!-- Guests -->
-        <div class="search-section line" (click)="openGuestsModal()"> <i class="bi bi-people"></i> <span
-            class="search-text"> {{ hotel.extra.adults || combohotelRooms[0].room.maxAdults}} adults - {{ hotel.extra.childrens||combohotelRooms[0].room.maxChildren  }} children <br> - 
-            {{hotel.extra.rooms ||combohotelRooms[0].calculated_needed_rooms }} rooms </span> </div> <!-- Guests Modal -->
-      <button class="search-btn" (click)="search()" [disabled]="isSearching">
-  <span *ngIf="!isSearching">Search</span>
-  <span *ngIf="isSearching">
-    <i class="bi bi-arrow-clockwise spin"></i> Searching...
-  </span>
-</button>
+      <div class="search-bar">
+        <!-- City -->
+<!-- 
+        <div class="search-section" (click)="openCityModal()">
+           <i class="bi bi-building"></i> <span class="search-text">
+            {{ hotel.destination || (combohotelRooms[0]?.city+',Madhya Pradesh, India') }}, </span> 
+          </div>   -->
+
+
+        <div class="search-section" (click)="openCityModal()">
+           <i class="bi bi-building">
+
+           </i> <span class="search-text">
+            {{ hotel.destination || tempCity }}, </span> 
+          </div>  
+          <!-- Date -->
+
+        <!-- <div class="search-section" (click)="openDateModal()"> 
+          <i class="bi bi-calendar-event"></i> 
+          <span class="search-text"> {{ formattedCheckIn || combohotelRooms[0]?.checkin }} — {{ formattedCheckOut ||
+            combohotelRooms[0]?.checkin }} </span>
+        </div>  -->
+  <div class="search-section" (click)="openDateModal()"> 
+          <i class="bi bi-calendar-event"></i> 
+          <span class="search-text"> {{ formattedCheckIn || tempChecin }} — {{ formattedCheckOut ||
+            tempCheckout }} </span>
+        </div> 
+
+
+        <!-- Guests -->
+
+
+        <!-- <div class="search-section line" (click)="openGuestsModal()"> 
+          <i class="bi bi-people"></i> 
+          <span
+            class="search-text"> 
+            {{ hotel.extra.adults || combohotelRooms[0]?.room?.maxAdults}} adults 
+            - {{hotel.extra.childrens||combohotelRooms[0]?.room?.maxChildren }} 
+            children <br> - {{hotel.extra.rooms ||combohotelRooms[0]?.calculated_needed_rooms }} rooms </span> 
+
+          </div> -->
+
+          <div class="search-section line" (click)="openGuestsModal()"> 
+  <i class="bi bi-people"></i> 
+  <span class="search-text"> 
+    {{ hotel?.extra?.adults || tempAdult}} adults - 
+    {{ hotel?.extra?.childrens || tempChildren}} children 
+    <span class="mobile-break"></span> 
+    - {{ hotel?.extra?.rooms || tempsRooms}} rooms 
+  </span> 
+</div>
+        
+        
+        
+            <!-- Guests Modal -->
+        <button class="search-btn" (click)="search()" [disabled]="isSearching">
+          <span *ngIf="!isSearching">Search</span>
+          <span *ngIf="isSearching">
+            <i class="bi bi-arrow-clockwise spin"></i> Searching...
+          </span>
+        </button>
       </div>
     </div> <!-- Guests Modal -->
 
-
-    
     <div class="modal-backdrop" *ngIf="showGuestsModal">
       <div class="modal-box">
         <h3>Select Guests</h3>
@@ -105,64 +129,77 @@
               <option class="check" *ngFor="let num of numberOptions" [value]="num">{{ num }}</option>
             </select> </div> <!-- Rooms -->
           <div class="guest-item"> <label>Rooms</label>
-             <select [(ngModel)]="tempRooms">
+            <select [(ngModel)]="tempRooms">
               <option class="check" *ngFor="let num of numberOptions" [value]="num">{{ num }}</option>
-            </select> </div>
+            </select>
+          </div>
         </div>
         <div class="modal-actions"> <button class="close-btn" (click)="closeGuestsModal()">Cancel</button> <button
             class="close-btn" (click)="applyGuests()">Apply</button> </div>
       </div>
     </div> <!-- Date Modal --> <!-- Date Modal -->
-   
-   
+
+
     <div class="modal-backdrop" *ngIf="showDateModal">
       <div class="modal-box date-modal">
         <h3>Select Dates</h3> <label> Check-in: <input type="date" [(ngModel)]="tempCheckIn"> </label> <label>
           Check-out: <input type="date" [(ngModel)]="tempCheckOut" [min]="tempCheckIn"> </label>
-       
-          <div class="modal-actions">
-                <button class="close-btn" (click)="closeDateModal()">Cancel</button>
-                   <button class="close-btn" (click)="applyDates(); closeDateModal()">Apply</button>
 
-          </div>
+        <div class="modal-actions">
+          <button class="close-btn" (click)="closeDateModal()">Cancel</button>
+          <button class="close-btn" (click)="applyDates(); closeDateModal()">Apply</button>
+
+        </div>
       </div>
-    </div> <!-- City Modal -->
+    </div>
+    <!-- City Modal -->
+
+
     <div class="modal-backdrop" *ngIf="showCityModal">
       <div class="modal-box city-modal">
         <h3>Select City</h3>
+
+        <!-- Search box -->
+        <div class="search-box">
+          <input type="text" placeholder="Search city..." [(ngModel)]="citySearch" />
+          <i class="fa fa-search"></i>
+        </div>
+
+        <!-- City list -->
         <ul>
-          <li *ngFor="let city of destination" (click)="selectCity(city)"> {{ city | titlecase }} </li>
+          <li *ngFor="let city of filteredCities" (click)="selectCity(city)">
+            {{ city | titlecase }}
+          </li>
+          <li *ngIf="filteredCities.length === 0" class="no-results">
+            No results found
+          </li>
         </ul>
-        <div class="modal-actions"> <button class="close-btn" (click)="closeCityModal()">Close</button> <button
-            class="close-btn" (click)="applyDates(); closeDateModal()">Apply</button> </div>
+
+        <div class="modal-actions">
+          <button class="close-btn" (click)="closeCityModal()">Close</button>
+          <button class="close-btn" (click)="applyDates(); closeDateModal()">Apply</button>
+        </div>
       </div>
     </div>
 
-
-
-
-    
-
-    <div class="hotel-card" *ngFor="let card of execthotelRooms  let i = index" (click)="rendervalue(card.hotel_roomId, card.roomType,card.hotel.hotel_vendor_id,card.checkin,card.checkout
-    ,card.requiredRooms,card.adults,card.children)">
- 
-                                                                                                                               
+    <div class="hotel-card" *ngFor="let card of execthotelRooms  let i = index" (click)="rendervalue(card?.hotel_roomId, card?.roomType,card?.hotel?.hotel_vendor_id,card?.checkin,card?.checkout
+    ,card?.requiredRooms,card?.adults,card?.children)">
       <div class="left">
-       
-       <img [src]="`${env.backend_url}/storage/${card.mainImageUrl || card.mainImage}`" class="main-image"
+
+        <img [src]="`${env.backend_url}/storage/${card?.mainImageUrl || card?.mainImage}`" class="main-image"
           alt="Main Hotel Image" />
-        
+
 
         <div class="thumbnails">
-          <div class="thumbnail-wrapper" *ngFor="let img of card.rooms_image.slice(0, 4)">
+          <div class="thumbnail-wrapper" *ngFor="let img of card?.rooms_image.slice(0, 4)">
             <img [src]="`${env.backend_url}/storage/${img}`" class="thumbnail"
               (mouseenter)="onThumbnailHover(img,card)" />
           </div>
 
           <!-- Show See More if images > 4 -->
-          <div class="thumbnail-wrapper see-more" *ngIf="card.rooms_image.length > 4" (click)="onSeeMoreClick()">
-            <img [src]="`${env.backend_url}/storage/${card.rooms_image[4]}`" class="thumbnail" />
-            <div class="overlay">+{{ card.rooms_image.length - 4 }} more</div>
+          <div class="thumbnail-wrapper see-more" *ngIf="card?.rooms_image.length > 4" (click)="onSeeMoreClick()">
+            <img [src]="`${env.backend_url}/storage/${card?.rooms_image[4]}`" class="thumbnail" />
+            <div class="overlay">+{{ card?.rooms_image.length - 4 }} more</div>
           </div>
         </div>
       </div>
@@ -170,48 +207,48 @@
       <!-- RIGHT SECTION -->
       <div class="right">
         <div class="card-content">
-          <h2> Hotel {{ card.hotel.hotelname }} With luxurious {{ card.roomType }} Room</h2>
-          <h3> Room Type {{ card.roomType }}</h3>
+          <h2> Hotel {{ card?.hotel.hotelname }} With luxurious {{ card?.roomType }} Room</h2>
+          <h3> Room Type {{ card?.roomType }}</h3>
           <!-- <h3> cancellation_charges {{ card.cancellation_charges }}</h3> -->
 
-          <p><a href="#">{{ card.hotel.city }}</a> - {{ card.hotel.address }}</p>
+          <p><a href="#">{{ card?.hotel?.city }}</a> - {{ card?.hotel?.address }}</p>
           <p>
 
-            <span *ngIf="card.cancellation_charges == 0; else hasCharge">
+            <span *ngIf="card?.cancellation_charges == 0; else hasCharge">
               No Cancellation charges in 12 hours
             </span>
             <ng-template #hasCharge>
-              Cancellation Charges: ₹ {{ card.cancellation_charges }}
+              Cancellation Charges: ₹ {{ card?.cancellation_charges }}
             </ng-template>
           </p>
 
 
 
           <!-- Amenities loop -->
-          <span class="amenities-title" *ngIf="card.amenities?.length">Available Features:</span>
+          <span class="amenities-title" *ngIf="card?.amenities?.length">Available Features:</span>
 
-          <div class="amenities-row" *ngIf="card.amenities?.length">
+          <div class="amenities-row" *ngIf="card?.amenities?.length">
             <!-- Amenities with toggle -->
             <span class="amenity"
-              *ngFor="let amenity of (card.showAllAmenities ? card.amenities : card.amenities.slice(0,4))">
+              *ngFor="let amenity of (card?.showAllAmenities ? card?.amenities : card?.amenities.slice(0,4))">
               {{ amenity }}
             </span>
 
             <!-- Toggle button -->
-            <span class="amenity more" *ngIf="card.amenities.length > 4" (click)="toggleAmenities(card)">
-              {{ card.showAllAmenities ? 'Show less' : '+' + (card.amenities.length - 4) + ' more' }}
+            <span class="amenity more" *ngIf="card?.amenities.length > 4" (click)="toggleAmenities(card)">
+              {{ card?.showAllAmenities ? 'Show less' : '+' + (card?.amenities.length - 4) + ' more' }}
             </span>
           </div>
 
           <!-- Hotel description -->
-          <p>{{ card.hotel.description }}</p>
+          <p>{{ card?.hotel.description }}</p>
         </div>
 
         <div class="card-price">
           <div class="rating">Very Good 4.0 (2574 Ratings)</div>
-          <div class="old-price">₹ {{ card.basePrice }}</div>
-          <div class="price">₹ {{ card.finalPrice * room }}</div>
-          <small *ngIf="card.taxIncluded">+ Taxes Included & fees Per Night</small>
+          <div class="old-price">₹ {{ card?.basePrice }}</div>
+          <div class="price">₹ {{ card?.finalPrice * card?.requiredRooms}}</div>
+          <small *ngIf="card?.taxIncluded">+ Taxes Included & fees Per Night</small>
         </div>
       </div>
 
@@ -219,25 +256,25 @@
 
 
 
-    <div class="hotel-card" *ngFor="let card of combohotelRooms" (click)="rendercombo(card.hotel.hotel_vendor_id,card.room.hotel_roomId,card.calculated_needed_rooms
-    ,card.room.roomType,card.checkin,card.checkout,card.adult,card.children
+    <div class="hotel-card" *ngFor="let card of combohotelRooms" (click)="rendercombo(card?.hotel?.hotel_vendor_id,card?.room?.hotel_roomId,card?.calculated_needed_rooms
+    ,card?.room?.roomType,card?.checkin,card?.checkout,card?.adult,card?.children
 )">
 
       <!-- LEFT SECTION -->
       <div class="left">
-        <img [src]="`${env.backend_url}/storage/${card.mainImageUrlcombo || card.maincomboImage}`" class="main-image"
+        <img [src]="`${env.backend_url}/storage/${card?.mainImageUrlcombo || card?.maincomboImage}`" class="main-image"
           alt="Main Hotel Image" />
 
         <div class="thumbnails">
-          <div class="thumbnail-wrapper" *ngFor="let img of card.room.rooms_image.slice(0, 4)">
-            <img [src]="`${env.backend_url}/storage/'+${img}`" class="thumbnail"
+          <div class="thumbnail-wrapper" *ngFor="let img of card?.room?.rooms_image.slice(0, 4)">
+            <img [src]="`${env.backend_url}/storage/${img}`" class="thumbnail"
               (mouseenter)="onThumbnailHovercombo(img,card)" />
           </div>
 
           <!-- Show See More if images > 4 -->
-          <div class="thumbnail-wrapper see-more" *ngIf="card.room.rooms_image.length > 4" (click)="onSeeMoreClick()">
-            <img [src]="`${env.backend_url}/storage/${card.room.rooms_image[4]}`" class="thumbnail" />
-            <div class="overlay">+{{ card.room.rooms_image.length - 4 }} more</div>
+          <div class="thumbnail-wrapper see-more" *ngIf="card?.room?.rooms_image?.length > 4" (click)="onSeeMoreClick()">
+            <img [src]="`${env.backend_url}/storage/${card?.room?.rooms_image[4]}`" class="thumbnail" />
+            <div class="overlay">+{{ card?.room?.rooms_image.length - 4 }} more</div>
           </div>
         </div>
       </div>
@@ -245,50 +282,50 @@
       <!-- RIGHT SECTION -->
       <div class="right">
         <div class="card-content">
-          <h2>Hotel {{ card.hotel?.hotelname }},Luxurious Combo Plan With <span
-              style=" color: rgb(69, 69, 247);">{{card.calculated_needed_rooms}} Rooms</span></h2>
+          <h2>Hotel {{ card?.hotel?.hotelname }},Luxurious Combo Plan With <span
+              style=" color: rgb(69, 69, 247);">{{card?.calculated_needed_rooms}} Rooms</span></h2>
 
-          <h3>Room Type: {{ card.room.roomType }}</h3>
+          <h3>Room Type: {{ card?.room?.roomType }}</h3>
 
           <p>
-            <a href="#">{{ card.hotel?.city }}</a> - {{ card.hotel?.address }}
+            <a href="#">{{ card?.hotel?.city }}</a> - {{ card?.hotel?.address }}
           </p>
 
           <!-- Cancellation Charges -->
           <p>
-            <span *ngIf="card.room.cancellation_charges == 0; else hasCharge">
+            <span *ngIf="card?.room?.cancellation_charges == 0; else hasCharge">
               No Cancellation charges in 12 hours
             </span>
             <ng-template #hasCharge>
-              Cancellation Charges: ₹ {{ card.room.cancellation_charges }}
+              Cancellation Charges: ₹ {{ card?.room?.cancellation_charges }}
             </ng-template>
           </p>
 
           <!-- Amenities -->
-          <span class="amenities-title" *ngIf="card.room.amenities?.length">Available Features:</span>
+          <span class="amenities-title" *ngIf="card?.room?.amenities?.length">Available Features:</span>
 
-          <div class="amenities-row" *ngIf="card.room.amenities?.length">
+          <div class="amenities-row" *ngIf="card?.room?.amenities?.length">
             <span class="amenity"
-              *ngFor="let amenity of (card.showAllAmenities ? card.room.amenities : card.room.amenities.slice(0,4))">
+              *ngFor="let amenity of (card?.showAllAmenities ? card?.room?.amenities : card?.room?.amenities.slice(0,4))">
               {{ amenity }}
             </span>
 
             <!-- Toggle button -->
-            <span class="amenity more" *ngIf="card.room.amenities.length > 4" (click)="toggleAmenities(card)">
-              {{ card.showAllAmenities ? 'Show less' : '+' + (card.room.amenities.length - 4) + ' more' }}
+            <span class="amenity more" *ngIf="card?.room?.amenities?.length > 4" (click)="toggleAmenities(card)">
+              {{ card?.showAllAmenities ? 'Show less' : '+' + (card?.room?.amenities?.length - 4) + ' more' }}
             </span>
           </div>
 
           <!-- Hotel description -->
-          <p>{{ card.hotel?.description }}</p>
+          <p>{{ card?.hotel?.description }}</p>
         </div>
 
         <!-- PRICE SECTION -->
         <div class="card-price">
           <div class="rating">Very Good 4.0 (2574 Ratings)</div>
-          <div class="old-price">₹ {{ card.room.basePrice*card.calculated_needed_rooms }}</div>
-          <div class="price">₹ {{ card.room.finalPrice * card.calculated_needed_rooms  }}</div>
-          <small *ngIf="card.room.taxIncluded">+ Taxes Included & fees Per Night</small>
+          <div class="old-price">₹ {{ card?.room?.basePrice*card?.calculated_needed_rooms }}</div>
+          <div class="price">₹ {{ card?.room?.finalPrice * card?.calculated_needed_rooms }}</div>
+          <small *ngIf="card?.room?.taxIncluded">+ Taxes Included & fees Per Night</small>
         </div>
       </div>
 
@@ -296,5 +333,18 @@
 
 
 
+
   </div>
-</div>
+
+  <div class="cards-container" *ngIf="!(combohotelRooms?.length > 0) && !(execthotelRooms?.length > 0) ">
+    <div class="no-hotels-card" 
+      style="background-color: #eef4fa; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 250px; max-height: 400px;">
+      <i class="bi bi-exclamation-circle" style="font-size: 2.5rem; color: #c4310d; margin-bottom: 12px;"></i>
+      <h3 style="margin: 0 0 8px 0; color: #333;">No hotels found</h3>
+      <p style="color: #555; margin: 0 0 10px 0;">We couldn't find any hotels matching your criteria.</p>
+      <button class="btn btn-primary" style="padding: 6px 18px;"> <a href="" style="text-decoration: none;">Go to
+          Home</a>
+
+      </button>
+    </div>
+  </div>
