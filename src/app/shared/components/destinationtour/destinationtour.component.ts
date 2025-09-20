@@ -35,7 +35,7 @@ export class DestinationtourComponent implements OnInit {
 
   getpackages(id:any) {
     this.as_.getPackages(id).then((res) => {
-      console.log("ALL Packages :",res.data);
+      // console.log("ALL Packages :",res.data);
 
       // this.package = res.data;
     }).
@@ -98,11 +98,11 @@ export class DestinationtourComponent implements OnInit {
     const priceLabels = selectedPrice.map(key => this.priceLabels[key]);
 
     const combinedFilters = [...mainLabels, ...priceLabels];
-      console.log("in the filter :",combinedFilters);
-     console.log("id ;",this.catchRouteId)
+      // console.log("in the filter :",combinedFilters);
+    //  console.log("id ;",this.catchRouteId)
     this.as_.getPackagesWithFilter(this.catchRouteId,combinedFilters)
       .then((res: any) => {
-        console.log('Filtered Packages:', res.data);
+        // console.log('Filtered Packages:', res.data);
         this.package =res.data;
         // Optionally store in a variable for use in HTML
       })

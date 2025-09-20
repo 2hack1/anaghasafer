@@ -45,7 +45,7 @@ export class MobileViewBigWhiteCardComponent implements OnInit {
     this.checkScreenSize();
       this.service.getPackagePlaceName()
     .then((res: any) => {
-      console.log("check city", res.data.data);
+      // console.log("check city", res.data.data);
 
       // Add cities dynamically to dropdown
       this.cityOptionsTour.push(...res.data.data.map((item: any) => item.city_name ?? item.place_name));
@@ -111,7 +111,9 @@ setDates() {
     this.hotel.checkOut = tomorrow.toISOString().split('T')[0];
   }
   togglePriceModal() { this.showPriceModal = !this.showPriceModal; }
-  search() { console.log('Searching hotels...'); }
+  search() { 
+    // console.log('Searching hotels...'); 
+  }
 
 
   hotelService = false;
@@ -251,7 +253,9 @@ setDates() {
     this.hotelBooking.checkOut = this.tempHotelCheckOut;
     this.closeHotelDateModal();
   }
-  hotelSearch() { console.log("Hotel search triggered!"); }
+  hotelSearch() { 
+    // console.log("Hotel search triggered!");
+   }
   // For Hotel Price Modal 
   showHotelPriceModal: boolean = false;
   toggleHotelPriceModal() { this.showHotelPriceModal = !this.showHotelPriceModal; }
@@ -283,7 +287,9 @@ setDates() {
     'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   toggleMonthModal() { this.showMonthModal = !this.showMonthModal; }
   selectMonth(month: string) { this.selectedMonth = month; }
-  applyMonth() { this.showMonthModal = false; console.log('Selected Month:', this.selectedMonth); }
+  applyMonth() { this.showMonthModal = false; 
+    // console.log('Selected Month:', this.selectedMonth); 
+  }
 
 
 // ************************************  Tour working********************************************************************************
@@ -415,14 +421,14 @@ onCityChangeTour() {
 
 // ************************************
 search0(){
-  console.log("city",this.cityTour)
-  console.log("cityOptionsTour",this.cityOptionsTour)
+  // console.log("city",this.cityTour)
+  // console.log("cityOptionsTour",this.cityOptionsTour)
 
-  console.log("minPriceTour",this.minPriceTour);
-  console.log("maxPriceTour",this.maxPriceTour);
-  console.log('adults',this.adultsTour);
-  console.log('childrenTour',this.childrenTour);
-  console.log('roomsTour',this.roomsTour);
+  // console.log("minPriceTour",this.minPriceTour);
+  // console.log("maxPriceTour",this.maxPriceTour);
+  // console.log('adults',this.adultsTour);
+  // console.log('childrenTour',this.childrenTour);
+  // console.log('roomsTour',this.roomsTour);
 
 
 
@@ -451,8 +457,8 @@ const checkOutDate = new Date(this.hotel.checkOut);
 // Format to YYYY-MM-DD (clean date string)
 const formattedCheckIn = checkInDate.toISOString().split('T')[0];  
 const formattedCheckOut = checkOutDate.toISOString().split('T')[0];  
-    console.log('checkIn',this.hotel.checkIn);
-  console.log('checkOut',this.hotel.checkOut);
+    // console.log('checkIn',this.hotel.checkIn);
+  // console.log('checkOut',this.hotel.checkOut);
   
   const params = {
             city: this.city,

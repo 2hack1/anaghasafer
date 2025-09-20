@@ -27,7 +27,7 @@ export class ContactusComponent {
 
   onSubmit(form: any) {
     if (form.valid) {
-      console.log('Form Data:', this.contact);
+      // console.log('Form Data:', this.contact);
       alert('Thank you for contacting us, ' + this.contact.name + '! We will get back to you shortly.');
       this.contact = {
       name: '',
@@ -37,7 +37,7 @@ export class ContactusComponent {
     };
       // 👉 Here you can send `this.contact` to your backend API
     } else {
-      console.log('Form is invalid');
+      // console.log('Form is invalid');
     }
   }
 }

@@ -73,13 +73,13 @@ totelroom:any;
           }
 
 
-          console.log("availablity check:", comboavailable)
+          // console.log("availablity check:", comboavailable)
 
           this.requirerooms = availlibllity.require_room
-          console.log("availability", availlibllity.require_room)
-          console.log("availability", availlibllity)
-        }).catch((error: any) => {
-          console.log(error);
+          // console.log("availability", availlibllity.require_room)
+          // console.log("availability", availlibllity)
+        }).catch((err: any) => {
+          console.error(err);
         });
 
         this.service.getinfo(hotelid, room_id).then((res: any) => {
@@ -88,7 +88,7 @@ totelroom:any;
           this.amenities = this.combovalue.amenities;
           this.combo = true;
           this.exact = false;
-          console.log("infor id base:", this.combovalue)
+          // console.log("infor id base:", this.combovalue)
 
           
         
@@ -97,20 +97,20 @@ totelroom:any;
                  const charges = parseFloat(this.combovalue?.cancellation_charges || "0");
            if (charges === 0) {
             this.combo_check = "with Free Cancellation";
-            console.log("charges",charges)
+            // console.log("charges",charges)
           } else {
             this.combo_check = "with More features";
-                 console.log("charges",charges)
+                //  console.log("charges",charges)
           }     // run this
        
           } else{
  const charges = parseFloat(this.exactvalue?.cancellation_charges || "0");
            if (charges === 0) {
             this.combo_check = "with Free Cancellation";
-            console.log("charges",charges)
+            // console.log("charges",charges)
           } else {
             this.combo_check = "with More features";
-                 console.log("charges",charges)
+                //  console.log("charges",charges)
           }
           }
 
@@ -118,17 +118,17 @@ totelroom:any;
 
 
           if (this.combovalue.rooms_image) {
-            console.log("infor id base:")
+            // console.log("infor id base:")
             this.mainImage = this.combovalue.rooms_image[0]; // first image as main
             this.images = this.combovalue.rooms_image;       // thumbnails list
           }
 
-        }).catch((error: any) => {
-          console.log(error)
+        }).catch((err: any) => {
+          console.error(err)
           this.notfound = true;
         })
 
-  console.log("lsdjfj",this.filter)
+  // console.log("lsdjfj",this.filter)
       } else {
         // run thsi
 
@@ -151,7 +151,7 @@ totelroom:any;
           const availability = res.data;
           const exactavailable = availability.available;
               this.totelroom=availability.totalRooms;
-                 console.log("totelroom", this.totelroom);
+                //  console.log("totelroom", this.totelroom);
           if (exactavailable) {
             this.available = true;
 
@@ -159,14 +159,14 @@ totelroom:any;
             this.available = false;
 
           }
-          console.log("availablity check:", exactavailable);
+          // console.log("availablity check:", exactavailable);
           this.requirerooms = availability.require_room
-          console.log("availability", availability);
+          // console.log("availability", availability);
        
       
 
-        }).catch((error: any) => {
-          console.log(error);
+        }).catch((err: any) => {
+          console.error(err);
           
         });
 
@@ -176,7 +176,7 @@ totelroom:any;
           this.amenities = this.exactvalue.amenities;
           this.combo = false;
           this.exact = true;
-          console.log("infor id base:", this.exactvalue)
+          // console.log("infor id base:", this.exactvalue)
           const charges = parseFloat(this.exactvalue?.cancellation_charges || "0");
 
           if (charges === 0) {
@@ -189,8 +189,8 @@ totelroom:any;
             this.images = this.exactvalue.rooms_image;       // thumbnails list
           }
 
-        }).catch((error: any) => {
-          console.log(error)
+        }).catch((err: any) => {
+          console.error(err)
           this.notfound = true
         })
       }
@@ -200,7 +200,7 @@ totelroom:any;
 
   }
   comboRender() { 
-    console.log("smnfdkdsnkjfn",this.totelroom )    
+    // console.log("smnfdkdsnkjfn",this.totelroom )    
     this.router.navigate(['/paricular-hotel-room-data',], { 
       queryParams: {
         hotel_vendor_id: this.filter.hotel_vendor_id,
@@ -214,7 +214,7 @@ totelroom:any;
         avrooms:this.totelroom
       }
     })
-    console.log('its working');
+    // console.log('its working');
   }
 
   ngOnInit(): void {
@@ -265,8 +265,8 @@ totelroom:any;
       this.loading = true;
       // apicall
       setTimeout(() => {
-        console.log('Email:', this.email);
-        console.log('Password:', this.password);
+        // console.log('Email:', this.email);
+        // console.log('Password:', this.password);
 
         this.loading = false;
 

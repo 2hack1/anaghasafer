@@ -117,7 +117,7 @@ this.passwordTooShort = f.length !== 6;
     if ( !this.passwordMismatch && !this.passwordTooShort) {
       // this.passwordMismatch = false;
 
-      console.log("This is the data:", this.all_data);
+      // console.log("This is the data:", this.all_data);
 
       this.us_.userRegister(this.all_data).subscribe((res: any) => {
 
@@ -129,8 +129,9 @@ this.passwordTooShort = f.length !== 6;
 
       });
     } else {
-     console.log("6 charactor",this.passwordTooShort);
-     console.log("confire",this.passwordMismatch)
+    //  console.log("6 charactor",this.passwordTooShort);
+    //  console.log("confire",this.passwordMismatch)
+     console.log("confire")
     }
   }
 
@@ -150,7 +151,7 @@ this.passwordTooShort = f.length !== 6;
 
   
           randorForgot(){
-            console.log("check",this.isSignup);
+            // console.log("check",this.isSignup);
             this.isLoginChange.emit(false)
           }
 

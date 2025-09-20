@@ -66,13 +66,13 @@ export class HomeComponent implements OnInit {
 
     (async () => {
       this.stores = await this.getdestination(0);
-      console.log("store", this.stores)
+      // console.log("store", this.stores)
 
       this.getSubLimit(this.stores);
 
       this.international = await this.getdestination(2);
       this.getSubInternationalLimit(this.international);
-      console.log("data", this.international)
+      // console.log("data", this.international)
       // this.getSubLimit(this.international);
     })()
 this.checkScreenSize();
@@ -119,7 +119,7 @@ this.checkScreenSize();
   getImages() {
     this.as_.getimg()
       .then(res => {
-        console.log('API Response:', res.data);
+        // console.log('API Response:', res.data);
         this.images = res.data.map((item: any) => item.url);
       })
       .catch(err => {
@@ -215,8 +215,8 @@ this.checkScreenSize();
         this.subDesinter = res.data;
         // this.subDesinter = this.getsubinter.sub_destinations;
         // console.log("ihnternationsl", this.subDesinter);
-        console.log("packages response ", res);
-        console.log("package data ", this.getsubinter);
+        // console.log("packages response ", res);
+        // console.log("package data ", this.getsubinter);
       })
       .catch(err => {
         console.error("Some error occurred:", err);
@@ -237,7 +237,7 @@ this.checkScreenSize();
     const formValue = this.formModel.value;
     const email = formValue.email;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    console.log("formmodel:", this.formModel.value);
+    // console.log("formmodel:", this.formModel.value);
     if (!emailRegex.test(email)) {
       this.checkEmail = true;
       return;
@@ -250,13 +250,14 @@ this.checkScreenSize();
 
     this.as_.makeYourtrip(formData)
       .then((res: any) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.getMailOnMakeMyTrip(formData);
         this.formModel.reset();
 
       })
       .catch((err) => {
-        console.log("come error:", err);
+
+        console.error(err)
       });
   }
 
@@ -264,9 +265,10 @@ this.checkScreenSize();
   getMailOnMakeMyTrip(data: FormData) {
     this.as_.makeMyFormMail(data).then(() => {
 
-      console.log("succussfully send mail");
+      // console.log("succussfully send mail");
     }).catch((err) => {
-      console.log("not email send ", err);
+
+      console.error(err);
     })
   }
 

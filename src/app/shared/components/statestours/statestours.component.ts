@@ -25,18 +25,18 @@ env=environment
   ngOnInit(): void {
     this.getroute = this.routes.snapshot.paramMap.get('id');
     this.as_.destination_id=this.getroute;
-    console.log('Route ID:', this.getroute);
+    // console.log('Route ID:', this.getroute);
     this.getsubDestinations(this.getroute);
   }
   getsubDestinations(id: any) {
     this.as_.getSubDesAll(id).then((res) => {
-      console.log("API Response:", res.data);
+      // console.log("API Response:", res.data);
       this.getallsubdes = res.data.sub_destinations;
      
-      console.log("All Sub Destinations:", this.getallsubdes);
+      // console.log("All Sub Destinations:", this.getallsubdes);
 
       this.sliderGroups = this.chunkArray(this.getallsubdes, 5);
-      console.log("slidergroups:",this.sliderGroups);
+      // console.log("slidergroups:",this.sliderGroups);
     }).catch((err) => {
       console.error("Error fetching data:", err);
     });

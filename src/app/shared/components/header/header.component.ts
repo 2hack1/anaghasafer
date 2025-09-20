@@ -100,7 +100,7 @@ getColorForLetter(letter: string): string {
        this.isProfileMenuOpen = !this.isProfileMenuOpen; 
       }
        goToProfile() {
-         console.log('Navigating to profile...'); 
+        //  console.log('Navigating to profile...'); 
         
             const userId = sessionStorage.getItem('userid');
 
@@ -112,7 +112,7 @@ const encryptedId = btoa(userId!); // Base64 encode
 this.route.navigate(['/profile', encryptedId]);
        } 
        goToSettings() { 
-        console.log('Navigating to settings...'); 
+        // console.log('Navigating to settings...'); 
 
        } 
 

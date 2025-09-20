@@ -3,7 +3,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Axios } from 'axios';
-import $ from 'jquery';
+import $, { error } from 'jquery';
 import { AxiosService } from '../../../../core/services/axios/axios.service';
 
 @Component({
@@ -100,7 +100,7 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
         guests: 1
     };
 
-    destinations = ['gwalior', 'indore', 'bhopal', 'ujjain', 'khajuraho', 'orchha'];
+    destinations = [];
     destination = ['gwalior'];
 
     // ------------------------------------------------
@@ -112,14 +112,15 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
     // 🔹 LIFECYCLE HOOKS
     // ------------------------------------------------
     ngOnInit(): void {
-        console.log("hotel", this.hotel);
+        this.gethotelcity()
+        // console.log("hotel", this.hotel);
         const today = new Date();
         this.tomorrow.setDate(today.getDate() + 1);
 
         this.hotel.checkIn = this.formatDate(today);
         this.hotel.checkOut = this.formatDate(this.tomorrow);
         this.service.getPackagePlaceName().then((res:any)=>{
-            console.log("check place",res.data.data);
+            // console.log("check place",res.data.data);
             this.destination.push(...res.data.data.map((item:any)=>item.place_name));
         }).catch((res:any)=>{
         })
@@ -128,14 +129,6 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
 
 
 randerWithFilterOnTop(){
-// console.log("selectedmonth",this.selectedmonth)
-// console.log("destination",this.tour.destination)
-// console.log("adultss",this.TuorguestCounts.adultss)
-// console.log("childrens",this.TuorguestCounts.childrens)
-// console.log("days",this.TuorguestCounts.days)
-// console.log("price",this.minPricefortour);
-// console.log("maxprice",this.maxPricefortour);
-
  this.route.navigate(['/dss'], {
     queryParams: {
       selectedMonth: this.selectedmonth,
@@ -187,7 +180,7 @@ randerWithFilterOnTop(){
 
         $('.checkout-date').on('change', function () {
             let value = $(this).val();
-            console.log(value);
+            // console.log(value);
         });
     }
 
@@ -244,7 +237,7 @@ randerWithFilterOnTop(){
 
     closeAllModalForhotel(destination_name: any) {
         this.hotel.destination = destination_name;
-        console.log(this.hotel.destination)
+        // console.log(this.hotel.destination)
         this.checkonmyside = false;
         this.searchText1 = '';
     }
@@ -281,43 +274,12 @@ randerWithFilterOnTop(){
         this.isArrowUp = !this.isArrowUp;
     }
 
-    //   togglePriceDropdownfortour() {
-    //     this.showPriceDropdownfortour = !this.showPriceDropdownfortour;
-    //     this.isArrowUpfortour = !this.isArrowUpfortour;
-    //   }
 
 
     togglePriceDropdown1() {
         this.showPriceDropdown1 = !this.showPriceDropdown1;
     }
 
-    //   selectPrice(price: string) {
-    //     this.showPriceDropdown = false;
-    //     const parts = price.split(/–|-/);
-    //     if (parts.length === 2) {
-    //       this.minPrice = Number(parts[0].trim());
-    //       this.maxPrice = Number(parts[1].trim());
-    //     } else {
-    //       this.minPrice = Number(parts[0].trim());
-    //       this.maxPrice = this.minPrice;
-    //     }
-    //   }
-
-
-    // selectPrice(price: string) {
-    //     this.showPriceDropdown = false;
-
-    //     if (price === '6000+') {
-    //         // Special case for 30000+
-    //         this.minPrice = 6000;
-    //         this.maxPrice = null;
-    //     } else {
-    //         // Normal price range case
-    //         const parts = price.split(/–|-/);
-    //         this.minPrice = Number(parts[0].trim());
-    //         this.maxPrice = Number(parts[1].trim());
-    //     }
-    // }
 
     selectedPriceText: string = '';
 
@@ -335,7 +297,7 @@ selectPrice(price: string) {
     this.selectedPriceText = price; // show original string
   }
 
-  console.log('Min:', this.minPrice, 'Max:', this.maxPrice);
+//   console.log('Min:', this.minPrice, 'Max:', this.maxPrice);
 }
 
 
@@ -445,6 +407,37 @@ selectPrice(price: string) {
             alert("Please fill the fields");
         }
     }
+
+    cityList: string[] = [];        // 👉 only city names
+cityStateCombo: string[] = [];  // 👉 city + state strings
+
+gethotelcity() {
+  this.service.getHotelcityData()
+    .then((res: any) => {
+    //   console.log("Full data:", res.data);
+
+      // ✅ Unique city–state pairs first
+      const seen = new Set();
+      const uniquePairs = res.data.filter((item: any) => {
+        const key = `${item.city}|${item.state}`;
+        return !seen.has(key) && seen.add(key);
+      });
+
+      // ✅ Fill the two new variables
+      this.destinations = uniquePairs.map((item: any) => item.city);
+    //   this.cityList = uniquePairs.map((item: any) => item.city);
+      this.cityStateCombo = uniquePairs.map(
+        (item: any) => `${item.city}, ${item.state}`
+      );
+
+    //   console.log("City only:", this.cityList);
+    //   console.log("City + State:", this.cityStateCombo);
+    })
+    .catch((error: any) => {
+      console.error("get hotel city error:", error);
+    });
+}
+
 
     // ------------------------------------------------
     // 🔹 DATE CHANGE HANDLER

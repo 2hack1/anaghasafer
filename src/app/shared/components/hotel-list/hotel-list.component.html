@@ -71,30 +71,12 @@
           </div>  
           <!-- Date -->
 
-        <!-- <div class="search-section" (click)="openDateModal()"> 
-          <i class="bi bi-calendar-event"></i> 
-          <span class="search-text"> {{ formattedCheckIn || combohotelRooms[0]?.checkin }} — {{ formattedCheckOut ||
-            combohotelRooms[0]?.checkin }} </span>
-        </div>  -->
+     
   <div class="search-section" (click)="openDateModal()"> 
           <i class="bi bi-calendar-event"></i> 
           <span class="search-text"> {{ formattedCheckIn || tempChecin }} — {{ formattedCheckOut ||
             tempCheckout }} </span>
         </div> 
-
-
-        <!-- Guests -->
-
-
-        <!-- <div class="search-section line" (click)="openGuestsModal()"> 
-          <i class="bi bi-people"></i> 
-          <span
-            class="search-text"> 
-            {{ hotel.extra.adults || combohotelRooms[0]?.room?.maxAdults}} adults 
-            - {{hotel.extra.childrens||combohotelRooms[0]?.room?.maxChildren }} 
-            children <br> - {{hotel.extra.rooms ||combohotelRooms[0]?.calculated_needed_rooms }} rooms </span> 
-
-          </div> -->
 
           <div class="search-section line" (click)="openGuestsModal()"> 
   <i class="bi bi-people"></i> 
@@ -103,11 +85,8 @@
     {{ hotel?.extra?.childrens || tempChildren}} children 
     <span class="mobile-break"></span> 
     - {{ hotel?.extra?.rooms || tempsRooms}} rooms 
-  </span> 
-</div>
-        
-        
-        
+   </span> 
+ </div>
             <!-- Guests Modal -->
         <button class="search-btn" (click)="search()" [disabled]="isSearching">
           <span *ngIf="!isSearching">Search</span>
@@ -116,8 +95,9 @@
           </span>
         </button>
       </div>
-    </div> <!-- Guests Modal -->
+    </div>
 
+     <!-- Guests Modal -->
     <div class="modal-backdrop" *ngIf="showGuestsModal">
       <div class="modal-box">
         <h3>Select Guests</h3>
@@ -137,9 +117,10 @@
         <div class="modal-actions"> <button class="close-btn" (click)="closeGuestsModal()">Cancel</button> <button
             class="close-btn" (click)="applyGuests()">Apply</button> </div>
       </div>
-    </div> <!-- Date Modal --> <!-- Date Modal -->
+    </div>
 
-
+     
+       <!-- Date Modal -->
     <div class="modal-backdrop" *ngIf="showDateModal">
       <div class="modal-box date-modal">
         <h3>Select Dates</h3> <label> Check-in: <input type="date" [(ngModel)]="tempCheckIn"> </label> <label>

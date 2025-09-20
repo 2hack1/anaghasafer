@@ -49,12 +49,12 @@ getallfilpackages(data : any){
 this.as_.getfilterpackages(data).then((res:any)=>{
     this.check=res.data.data;
             this.catchRouteId =res.data.data[0].sub_destination_id    ;
-            console.log('cnsd',this.catchRouteId)
-      console.log("check:",this.check);
-      console.log("check:check:",this.check[0].images[0].img);
+            // console.log('cnsd',this.catchRouteId)
+      // console.log("check:",this.check);
+      // console.log("check:check:",this.check[0].images[0].img);
 }).catch((erro)=>{
-
-  console.log(erro);
+     console.error(erro);
+  // console.log(erro);
 })
 }
 filterdata:any;
@@ -135,8 +135,8 @@ getPackagesWithFilters(selectedKey?: string) {
 
   const combinedFilters = [...mainLabels, ...priceLabels];
 
-  console.log("in the filter:", combinedFilters);
-  console.log("id:", this.catchRouteId);
+  // console.log("in the filter:", combinedFilters);
+  // console.log("id:", this.catchRouteId);
 
   // Start loading indicator
   this.loadingText = 'Searching';
@@ -156,7 +156,7 @@ getPackagesWithFilters(selectedKey?: string) {
         this.loadingText = 'No matching tour found';
       }
 
-      console.log('Filtered Packages:', res.data);
+      // console.log('Filtered Packages:', res.data);
       this.package = res.data;
     })
     .catch(err => {
@@ -166,34 +166,4 @@ getPackagesWithFilters(selectedKey?: string) {
     });
 }
 
-
-
-
-
-
-  // getPackagesWithFilters() {
-  //   const selectedMain = Object.keys(this.filters).filter(key => this.filters[key]);
-  //   const selectedPrice = Object.keys(this.priceFilters).filter(key => this.priceFilters[key]);
-
-  //   const mainLabels = selectedMain.map(key => this.filterLabels[key]);
-  //   const priceLabels = selectedPrice.map(key => this.priceLabels[key]);
-
-  //   const combinedFilters = [...mainLabels, ...priceLabels];
-  //     console.log("in the filter :",combinedFilters);
-
-  //    console.log("id ;",this.catchRouteId)
-
-     
-  //   this.as_.getPackagesWithFilter(this.catchRouteId,combinedFilters)
-  //     .then((res: any) => {
-  //       console.log('Filtered Packages:', res.data);
-  //       this.package =res.data;
-  //       // Optionally store in a variable for use in HTML
-  //     })
-  //     .catch(err => {
-  //       console.error('API error:', err);
-  //     });
-  // }
-
-  
 }

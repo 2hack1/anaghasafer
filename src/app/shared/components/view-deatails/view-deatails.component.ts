@@ -75,13 +75,13 @@ export class ViewDeatailsComponent implements OnInit {
 
     this.packageId = this.Route.snapshot.paramMap.get('id');
     this.as_.package_id = this.packageId;
-    console.log("package id:", this.packageId);
+    // console.log("package id:", this.packageId);
     this.getpackagesdetails(this.packageId);
     this.getmonthAndDate(this.packageId);
     this.getiteraries(this.packageId);
     this.gettransport(this.packageId);
     this.getGallary(this.packageId);
-    console.log("++++++++++", this.selectMonth);
+    // console.log("++++++++++", this.selectMonth);
     this.autoSlideInterval = setInterval(() => {
       this.nextSlide();
     }, 4000);
@@ -90,13 +90,13 @@ export class ViewDeatailsComponent implements OnInit {
   getpackagesdetails(id: any) {
     this.as_.getPackagesDetails(id).then((res) => {
       this.packageDetails = res.data[0];
-      console.log("pakage data", this.packageDetails);
+      // console.log("pakage data", this.packageDetails);
       this.packageprice = this.packageDetails.price_trip;
       
       this.adultPrice = this.packageprice;
       this.childPrice = (this.packageprice / 2);
       
-      console.log("pakage price", this.packageprice)
+      // console.log("pakage price", this.packageprice)
       this.packag = res.data[0].images;
       
     }).catch((err) => {
@@ -106,7 +106,7 @@ export class ViewDeatailsComponent implements OnInit {
   
   getmonthAndDate(packagesId: any) {
     this.as_.getMonthandDate(packagesId).then((res) => {
-      console.log("chaek:", res.data);
+      // console.log("chaek:", res.data);
       this.monthDate = res.data;
     }).catch((err) => {
       console.error("error", err);
@@ -116,7 +116,7 @@ export class ViewDeatailsComponent implements OnInit {
   selectMonth(key: any): void {
     this.selectedMonth = key;
     this.as_.month_id = key;
-    console.log("sakfpoasfoasdo", this.selectedMonth);
+    // console.log("sakfpoasfoasdo", this.selectedMonth);
     this.getdate(this.selectedMonth);
 
   }
@@ -126,9 +126,9 @@ export class ViewDeatailsComponent implements OnInit {
   getdate(id: any) {
     
     this.as_.getdate(id).then((res) => {
-      console.log("dates", res.data);
+      // console.log("dates", res.data);
       this.date = res.data;
-      console.log(this.date);
+      // console.log(this.date);
     }).catch((err) => {
       console.error("error", err);
     })
@@ -139,22 +139,22 @@ export class ViewDeatailsComponent implements OnInit {
       // console.log("itineries", res.data[0].day_wise_details);
       this.itenaries = res.data[0].day_wise_details;
     }).catch((err) => {
-      console.log("error", err);
+      console.error("error", err);
     })
   }
 
   trans: any = [];
   gettransport(id: any) {
     this.as_.getTransport(id).then((res) => {
-      console.log("Trasports", res.data);
+      // console.log("Trasports", res.data);
       this.trans = res.data[0].mode;
       
       
-      console.log("Mode", res.data[0].mode);
+      // console.log("Mode", res.data[0].mode);
       this.availableModes = this.getAvailableModes();
-      console.log("available modes", this.availableModes);
+      // console.log("available modes", this.availableModes);
     }).catch((err) => {
-      console.log("error", err);
+      console.error("error", err);
     })
   }
   
@@ -210,11 +210,11 @@ export class ViewDeatailsComponent implements OnInit {
     if (Array.isArray(this.trans)) {
       if (typeof this.trans[0] === 'object') {
         let transKeys = this.trans.map((t: any) => t.key);
-        console.log("trans key:", transKeys);
+        // console.log("trans key:", transKeys);
         return this.transportModes.filter(mode => transKeys.includes(mode.key));
       } else {
         let transKeys = (this.trans as string[]).map(t => t.toLowerCase());
-        console.log("trans:", transKeys);
+        // console.log("trans:", transKeys);
         return this.transportModes.filter(mode => transKeys.includes(mode.key));
       }
     } else {
@@ -406,7 +406,7 @@ export class ViewDeatailsComponent implements OnInit {
     if (!date) return '';
     const [year, month, day] = date.split('-').map(Number);
     const datee = new Date(year, month - 1, day);
-    console.log("convert month date:", datee)
+    // console.log("convert month date:", datee)
     // return datee.toLocaleString('default',{month:'short'},{year:'numer'});
     return datee.toLocaleString('default', { month: 'short', year: 'numeric' });
     
@@ -438,13 +438,13 @@ export class ViewDeatailsComponent implements OnInit {
     if (this.validateForm()) {
       this.slip = !this.slip;
       this.avoidSlip = !this.avoidSlip;
-      console.log("chck")
+      // console.log("chck")
       this.showPopup11 = false;
       this.nameOfUser = sessionStorage.getItem('name');
      
 
         this.as_.setorder(this.order).then((res)=>{
-      console.log("data has come successfully set",res);
+      // console.log("data has come successfully set",res);
     }).catch((err)=>{
       console.error(err)
     })
@@ -453,7 +453,7 @@ export class ViewDeatailsComponent implements OnInit {
   user_order_mail.append('name',sessionStorage.getItem('name'))
   user_order_mail.append('email',sessionStorage.getItem('email'));
 this.as_.orderEmail(user_order_mail).then((res:any)=>{
-  console.log("email api has been work");
+  // console.log("email api has been work");
 }).catch((erro:any)=>{
   console.error(erro);
 })
@@ -489,7 +489,7 @@ this.as_.orderEmail(user_order_mail).then((res:any)=>{
 
 
     for (const pair of this.order.entries()) {
-      console.log("order data", `${pair[0]}: ${pair[1]}`);
+      // console.log("order data", `${pair[0]}: ${pair[1]}`);
       
       // ******************************************************************************************************************** upadete form
     }
@@ -618,7 +618,7 @@ this.as_.orderEmail(user_order_mail).then((res:any)=>{
 
    submitInquiry(form: NgForm) {
     if (form.valid) {
-      console.log('Form Values:', form.value);
+      // console.log('Form Values:', form.value);
 
       // You can access each field like:
     

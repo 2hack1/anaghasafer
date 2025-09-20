@@ -48,6 +48,7 @@ export class HotelListComponent implements OnInit {
   constructor(private route: ActivatedRoute, private service: AxiosService, private router: Router) { }
 
   ngOnInit(): void {
+    this.gethotelcity();
 this.getDataForShowSearch()
   
     window.addEventListener('scroll', this.onScroll, true);
@@ -74,7 +75,7 @@ this.getDataForShowSearch()
         && !localStorage.getItem('checkout') && !localStorage.getItem('rooms')) {
 
         this.service.getHotelRoomsWithCombo(filter).then((res: any) => {
-          console.log("res Combo", res.data.non_matched_rooms)
+          // console.log("res Combo", res.data.non_matched_rooms)
           this.combohotelRooms = res.data.non_matched_rooms
             // remove records with calculated_needed_rooms == 1
             .filter((room: any) => room.calculated_needed_rooms !== 1)
@@ -85,7 +86,7 @@ this.getDataForShowSearch()
             }));
         }).catch((err: any) => {
           if (err?.notfound || err?.status === 404) {
-            console.log("Error:", err);
+            console.error("Error:", err);
            
           }
          
@@ -93,7 +94,7 @@ this.getDataForShowSearch()
 
 
         this.service.getHotelRoomsWithExact(filter).then((res: any) => {
-          console.log("res exact", res.data.rooms)
+          // console.log("res exact", res.data.rooms)
           this.execthotelRooms = res.data.rooms;
           this.execthotelRooms = res.data.rooms.map((room: any) => ({
             ...room,
@@ -102,7 +103,7 @@ this.getDataForShowSearch()
         }).catch((err: any) => {
           
            if (err?.notfound || err?.status === 404) {
-            console.log("Error:", err);
+            console.error("Error:", err);
        
          
           }
@@ -122,7 +123,7 @@ this.getDataForShowSearch()
         }
 
         this.service.getHotelRoomsWithCombo(this.searchOnIt).then((res: any) => {
-          console.log("res Combo", res.data.non_matched_rooms)
+          // console.log("res Combo", res.data.non_matched_rooms)
           this.combohotelRooms = [];
           this.combohotelRooms = res.data.non_matched_rooms
             // remove records with calculated_needed_rooms == 1
@@ -134,12 +135,12 @@ this.getDataForShowSearch()
             }));
         }).catch((err: any) => {
           if (err?.notfound || err?.status === 404) {
-            console.log("Error:", err);
+            console.error("Error:", err);
           
           }
         })
         this.service.getHotelRoomsWithExact(this.searchOnIt).then((res: any) => {
-          console.log("res exact", res.data.rooms)
+          // console.log("res exact", res.data.rooms)
           this.execthotelRooms = [];
           this.execthotelRooms = res.data.rooms;
           this.execthotelRooms = res.data.rooms.map((room: any) => ({
@@ -148,7 +149,7 @@ this.getDataForShowSearch()
           }));
         }).catch((err: any) => {
          if (err?.notfound || err?.status === 404) {
-            console.log("Error:", err);
+            console.error("Error:", err);
            
           }
         })
@@ -180,7 +181,7 @@ this.getDataForShowSearch()
 
   this.tempChecin = `${checkIn}`;
     this.tempCheckout=`${checkOut}`;
-    console.log("chckin:",this.tempChecin,"this.chkeout:",this.tempCheckout)
+    // console.log("chckin:",this.tempChecin,"this.chkeout:",this.tempCheckout)
 
 }
 
@@ -188,8 +189,8 @@ this.getDataForShowSearch()
   rendercombo(hotelid: any, roomid: any, calculate_rooms: any, roomtype: any, checkin: any,
     checkout: any, readults: any, rechildrens: any) {
 
-    console.log("combo data:", hotelid, roomid, calculate_rooms, roomtype,
-      checkin, checkout, readults, rechildrens);
+    // console.log("combo data:", hotelid, roomid, calculate_rooms, roomtype,
+    //   checkin, checkout, readults, rechildrens);
 
     this.router.navigate(['/room-info',], {
       queryParams: {
@@ -208,7 +209,7 @@ this.getDataForShowSearch()
     // console.log()
   }
   rendervalue(roomid: any, roomType: any, hotelid: any, checkin: any, checkout: any, requireroom: any, readults: any, rechildrens: any) {
-    console.log("exact data:", hotelid, roomid, requireroom, roomType, checkin, checkout, readults, rechildrens);
+    // console.log("exact data:", hotelid, roomid, requireroom, roomType, checkin, checkout, readults, rechildrens);
 
 
     this.router.navigate(['/room-info',], {
@@ -304,8 +305,8 @@ this.getDataForShowSearch()
       this.maxPrice = null;
     }
 
-    console.log("Selected Prices:", this.selectedPrices);
-    console.log("Min Price:", this.minPrice, "Max Price:", this.maxPrice);
+    // console.log("Selected Prices:", this.selectedPrices);
+    // console.log("Min Price:", this.minPrice, "Max Price:", this.maxPrice);
 
     // ✅ Call API when price changes
     if (this.selectedPrices.length > 0 || this.selectedPlaceType) {
@@ -325,7 +326,7 @@ this.getDataForShowSearch()
 
   onSelectPlaceType(type: string) {
     this.selectedPlaceType = type;
-    console.log("Selected Place Type:", this.selectedPlaceType);
+    // console.log("Selected Place Type:", this.selectedPlaceType);
 
     if (this.selectedPlaceType) {
       this.applyFilters();
@@ -349,7 +350,7 @@ this.getDataForShowSearch()
       if (this.maxPrice !== null) filter.max_price = this.maxPrice;
       // if (this.selectedPlaceType) filter.place_type = this.selectedPlaceType;
 
-      console.log('Final Filter:', filter);
+      // console.log('Final Filter:', filter);
 
       this.service.getHotelRoomsWithCombo(filter).then((res: any) => {
         this.combohotelRooms = res.data.non_matched_rooms
@@ -360,7 +361,7 @@ this.getDataForShowSearch()
           }));
       }).catch((err: any) => {
         if (err?.notfound || err?.status === 404) {
-            console.log("Error:", err);
+            console.error("Error:", err);
          
           }
       
@@ -374,7 +375,7 @@ this.getDataForShowSearch()
         }));
       }).catch((err: any) => {
       if (err?.notfound || err?.status === 404) {
-            console.log("Error:", err);
+            console.error("Error:", err);
             
           }
       });
@@ -399,7 +400,7 @@ this.getDataForShowSearch()
   tempCheckOut: string = '';
 
 
-  destination = ['gwalior', 'indore', 'bhopal', 'Ujjain,Madhya Pradesh, India', 'Chambal', "sdfsd"];
+  destination = [ ];
   hotel = {
     destination: '', checkIn: '', checkOut: '',
 
@@ -422,7 +423,7 @@ this.getDataForShowSearch()
 
   selectCity(city: string) {
     this.hotel.destination = city;
-    console.log('city', city);
+    // console.log('city', city);
     this.closeCityModal();
   }
 
@@ -445,10 +446,10 @@ this.getDataForShowSearch()
     this.formattedCheckIn = this.formatDate(this.tempCheckIn);
     this.formattedCheckOut = this.formatDate(this.tempCheckOut);
 
-    console.log('CheckIn (raw):', this.hotel.checkIn);
-    console.log('CheckOut (raw):', this.hotel.checkOut);
-    console.log('CheckIn (formatted):', this.formattedCheckIn);
-    console.log('CheckOut (formatted):', this.formattedCheckOut);
+    // console.log('CheckIn (raw):', this.hotel.checkIn);
+    // console.log('CheckOut (raw):', this.hotel.checkOut);
+    // console.log('CheckIn (formatted):', this.formattedCheckIn);
+    // console.log('CheckOut (formatted):', this.formattedCheckOut);
   }
 
   // manual date formatter
@@ -489,105 +490,13 @@ this.getDataForShowSearch()
     this.hotel.extra.childrens = this.tempChildrens;
     this.hotel.extra.rooms = this.tempRooms;
     this.showGuestsModal = false; // ✅ Correct modal
-    console.log('adults', this.tempAdults);
-    console.log('childrens', this.tempChildrens);
-    console.log('rooms', this.tempRooms);
+    // console.log('adults', this.tempAdults);
+    // console.log('childrens', this.tempChildrens);
+    // console.log('rooms', this.tempRooms);
   }
   isSearching: boolean = false;
-
-
-  // search() {
-  //   // check destination
-  //   if (!this.hotel.destination) {
-
-  //     alert("Please select again a locations");
-  //     return;
-  //   }
-
-  //   // check dates
-  //   if (!this.hotel.checkIn || !this.hotel.checkOut) {
-  //     alert("Please select check-in and check-out dates again")
-  //     return;
-  //   }
-
-  //   // check adults
-  //   if (!this.hotel.extra.adults) {
-  //     alert("Please select number of adults again")
-  //     return;
-  //   }
-  //   if (!this.hotel.extra.childrens) {
-  //     this.hotel.extra.childrens = '0';
-  //   }
-  //   // check rooms
-  //   if (!this.hotel.extra.rooms) {
-  //     alert("Please select number of rooms again")
-  //     return;
-  //   }
-
-  //   this.searchOnIt = {
-  //     city: this.hotel.destination,
-  //     adults: this.hotel.extra.adults,
-  //     children: this.hotel.extra.childrens || '0',
-  //     checkin: this.hotel.checkIn,
-  //     checkout: this.hotel.checkOut,
-  //     rooms: this.hotel.extra.rooms,
-  //   }
-
-  //   console.log("check again");
-
-  //   if (this.searchOnIt && Object.keys(this.searchOnIt).length > 0) {
-  //     localStorage.setItem('city', this.hotel.destination)
-  //     localStorage.setItem('adults', this.hotel.extra.adults)
-  //     localStorage.setItem('children', this.hotel.extra.childrens || '0')
-  //     localStorage.setItem('checkin', this.hotel.checkIn)
-  //     localStorage.setItem('checkout', this.hotel.checkOut)
-  //     localStorage.setItem('rooms', this.hotel.extra.rooms)
-  //   }
-
-
-
-  //   if (localStorage.getItem('city') && localStorage.getItem('adults') && localStorage.getItem('children') && localStorage.getItem('checkin') && localStorage.getItem('checkout') && localStorage.getItem('rooms')) {
-
-  //     this.searchOnIt = {
-  //       city: localStorage.getItem('city'),
-  //       adults: localStorage.getItem('adults'),
-  //       children: localStorage.getItem('children'),
-  //       checkin: localStorage.getItem('checkin'),
-  //       checkout: localStorage.getItem('checkout'),
-  //       rooms: localStorage.getItem('rooms'),
-  //     }
-
-  //     this.service.getHotelRoomsWithCombo(this.searchOnIt).then((res: any) => {
-  //       console.log("res Combo", res.data.non_matched_rooms)
-  //       // this.combohotelRooms = [];
-  //       this.combohotelRooms = res.data.non_matched_rooms
-  //         // remove records with calculated_needed_rooms == 1
-  //         .filter((room: any) => room.calculated_needed_rooms !== 1)
-  //         // map for main image
-  //         .map((room: any) => ({
-  //           ...room,
-  //           mainImageUrlcombo: room.room?.rooms_image?.[0] || ''
-  //         }));
-  //     }).catch((err: any) => {
-  //       console.log("err", err);
-  //     })
-  //     this.service.getHotelRoomsWithExact(this.searchOnIt).then((res: any) => {
-  //       console.log("res exact", res.data.rooms)
-  //       // this.execthotelRooms = [];
-  //       this.execthotelRooms = res.data.rooms;
-  //       this.execthotelRooms = res.data.rooms.map((room: any) => ({
-  //         ...room,
-  //         mainImage: room.rooms_image?.[0] || '' // take first image as main
-  //       }));
-  //     }).catch((err: any) => {
-  //       console.log("err", err);
-  //     })
-  //   }
-
-  //   console.log("Searching hotels with filters:", this.hotel);
+ 
   //   // *************************************************  dekho baad main *************************************
-
-  // }
 
 
   // ✅ Inside your component
@@ -671,8 +580,35 @@ this.getDataForShowSearch()
   closePriceModal() { this.showPriceModal = false; }
   selectPrice(price: string) { this.selectedPrice = price; this.showPriceModal = false; }
 
+ cityList: string[] = [];        // 👉 only city names
+cityStateCombo: string[] = [];  // 👉 city + state strings
+  // got hotel city
+gethotelcity() {
+  this.service.getHotelcityData()
+    .then((res: any) => {
+      // console.log("Full data:", res.data);
 
+      // ✅ Unique city–state pairs first
+      const seen = new Set();
+      const uniquePairs = res.data.filter((item: any) => {
+        const key = `${item.city}|${item.state}`;
+        return !seen.has(key) && seen.add(key);
+      });
 
+      // ✅ Fill the two new variables
+      this.destination = uniquePairs.map((item: any) => item.city);
+    //   this.cityList = uniquePairs.map((item: any) => item.city);
+      this.cityStateCombo = uniquePairs.map(
+        (item: any) => `${item.state}`
+      );
+
+      // console.log("City only:", this.cityList);
+      // console.log("City + State:", this.cityStateCombo);
+    })
+    .catch((error: any) => {
+      console.error("get hotel city error:", error);
+    });
+}
 
 
 }

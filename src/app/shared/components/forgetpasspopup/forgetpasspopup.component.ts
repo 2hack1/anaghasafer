@@ -195,10 +195,10 @@ export class ForgetpasspopupComponent {
     }
 
     const enteredOtp = this.otp.join('');
-    console.log('Email:', this.email);
-    console.log('OTP:', enteredOtp);
-    console.log('New Password:', this.newPassword);
-    console.log('Confirm Password:', this.confirmPassword);
+    // console.log('Email:', this.email);
+    // console.log('OTP:', enteredOtp);
+    // console.log('New Password:', this.newPassword);
+    // console.log('Confirm Password:', this.confirmPassword);
     if (this.newPassword !== this.confirmPassword) {
       alert("Passwords do not match!"); return;
     }

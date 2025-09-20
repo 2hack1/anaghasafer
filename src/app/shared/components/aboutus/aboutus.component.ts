@@ -21,7 +21,7 @@ export class AboutusComponent implements OnInit {
   getmess() {
     this.as_.getGreeting()
       .then(res => {
-        console.log('API Response:', res.data);
+        // console.log('API Response:', res.data);
         // You can bind res.data.message to a variable if needed
       })
       .catch(err => {

@@ -73,7 +73,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     if (this.filter) {
       this.service.getinfo(this.filter.hotel_vendor_id,
         this.filter.hotel_roomId).then((res: any) => {
-          console.log("infodata", res.data.data);
+          // console.log("infodata", res.data.data);
           this.infodata = res.data.data;
           this.checkin = this.infodata.checkInTime;
           this.checkout = this.infodata.checkOutTime
@@ -95,7 +95,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
 
   ngOnInit(): void {
     // this.persion = Number(localStorage.getItem('adults'));
-    console.log('avrooms:', this.avrooms)
+    // console.log('avrooms:', this.avrooms)
   }
 
   private isValidEmail(email: string): boolean {
@@ -138,7 +138,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     if (!this.guest.firstName || !this.guest.lastName || !this.guest.email || !this.guest.mobile1 || !this.guest.mobile2) {
      
       
-      console.log("sjfdojsdof",this.guest)
+      // console.log("sjfdojsdof",this.guest)
       this.errorMessage = 'Please fill all required fields!';
       alert("Fill all required details");
       this.isLoading = false;
@@ -173,7 +173,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
 
       this.userservice.userRegister(a).subscribe({
         next: (res: any) => {
-          console.log('Register Success:', res);
+          // console.log('Register Success:', res);
           this.isLoading = false;
           this.isSuccess = true;
           this.userid=res.user.id;
@@ -184,7 +184,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
           sessionStorage.setItem('role', res.user.role);
 
           setTimeout(() => {
-            console.log('Guest Registered:', this.guest);
+            // console.log('Guest Registered:', this.guest);
             // this.isModalOpen = false;
           }, 2000);
           this.isModalOpen = true;
@@ -266,8 +266,8 @@ export class ParticularHotelRoomDataComponent implements OnInit {
 
   selectMethod(method: any) {
     this.selectedMethod = method;
-    console.log("selected method", method);
-    console.log("transition id", this.transaction_id);
+    // console.log("selected method", method);
+    // console.log("transition id", this.transaction_id);
 
   }
   // *************************************************************************************************
@@ -304,13 +304,13 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     }
  
 
-     console.log('lsdhfshdfsd',booking)
+    //  console.log('lsdhfshdfsd',booking)
 
     const data = new FormData();
     Object.entries(booking).forEach(([key, value]) => {
       data.append(key, value as any);
     });
-    console.log('FormData entries:');
+    // console.log('FormData entries:');
 
     const txnId = booking.transaction_id?.trim();
 
@@ -324,7 +324,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
 
       this.service.booking(data).then((res: any) => {
           
-        console.log("bookingg",this.userid);
+        // console.log("bookingg",this.userid);
         this.router.navigate(['/profile',this.userid]);
         // this.router.navigate(['/profile', 1]);
      
@@ -332,7 +332,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
 // this.router.navigate(['/profile', encryptedId]);
         // sessionStorage.clear();
       }).catch((err: any) => {
-        console.log(err, "errror");
+        console.error(err);
       })
     } else {
       this.errorMessage = 'Please enter the transaction ID to proceed with the payment.';

@@ -11,6 +11,7 @@ import { Form } from '@angular/forms';
 export class AxiosService {
   api: AxiosInstance;
 
+hotelCityData: any = null;   // ✅ store shared data here
 
   // for  set in the order in backand db  of this variable date 
 
@@ -32,7 +33,6 @@ export class AxiosService {
       }
     });
   }
-
 
   //  pakageprice:any;
   getGreeting() {
@@ -189,10 +189,14 @@ export class AxiosService {
     
     return this.api.post(`pass-update`,data);
   }
+  getHotelcityData(){
+    return this.api.get(`vendors`);
+  }
 
 // createQR(): Observable<any> {
 //     return this.api.get<any>('');
 //   }
+
 
   createQR(){
     return this.api.get('create-qr');

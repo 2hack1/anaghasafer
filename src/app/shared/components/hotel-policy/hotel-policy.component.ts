@@ -21,7 +21,7 @@ export class HotelPolicyComponent implements OnInit, OnDestroy {
   // Step 1: Generate QR
   genrated() {
     this.paymentService.createQR().then((res: any) => {
-      console.log("Qr code data", res.data);
+      // console.log("Qr code data", res.data);
       this.qrImageUrl = res.data.qr_code.image_url;
       this.qrId = res.data.qr_code.id;
       this.showQR = true;
@@ -37,7 +37,7 @@ export class HotelPolicyComponent implements OnInit, OnDestroy {
       if (!this.qrId) return;
 
       this.paymentService.checkQR(this.qrId).then((res: any) => {
-        console.log("QR Status:", res.data);
+        // console.log("QR Status:", res.data);
 
         // If payment happened, hide QR
         if (res.data.payments > 0 || res.data.status === 'closed') {
