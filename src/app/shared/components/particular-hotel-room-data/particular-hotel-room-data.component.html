@@ -1,4 +1,4 @@
-<div class="booking-container">
+<div class="booking-container"  *ngIf="topPageShow">
   <div class="left-content">
     <div class="booking-card">
       <div class="header">
@@ -198,24 +198,35 @@
     <div class="price-card">
       <h4>Price Breakup</h4>
       <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
-          style="color: #000000; font-size: 16px;"><b>Entire Rooms In ₹ {{infodata.finalPrice * persion}}<br>1 Night
+          style="color: #000000; font-size: 16px;"><b>Entire Rooms In ₹ {{total_paid_amount}}<br>1 Night
           </b></span>
       </div>
       <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
-          style="font-size: 16px;">Base Price x {{filter.rooms_required}}Rooms</span> <span>₹ {{infodata.basePrice *
-          persion}}</span> </div>
+          style="font-size: 16px;">Base Price x {{filter.rooms_required}}Rooms</span> <span>₹ 
+            <!-- {{infodata.basePrice *
+          persion}} -->
+          {{this.basePrice}}
+          </span> </div>
 
       <div class="row total-discount" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
-          style="font-size: 16px;">Total Discount <i class="info-icon"></i></span> <span>- ₹ {{(infodata.basePrice *
-          persion)/infodata.discount}}</span> </div>
+          style="font-size: 16px;">Total Discount <i class="info-icon"></i></span> <span>- ₹ 
+            <!-- {{(infodata.basePrice * persion)/infodata.discount}} -->
+             {{this.total_discount}}
+          </span> </div>
 
       <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
-          style="font-size: 16px;">Price after Discount</span> <span>₹ {{infodata.finalPrice * persion }}</span> </div>
+          style="font-size: 16px;">Price after Discount</span> <span>₹ 
+            <!-- {{infodata.finalPrice * persion }} -->
+             {{this.price_after_discount}}
+          </span> </div>
 
       <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
           style="font-size: 16px;">Taxes & Service Fees</span> <span>₹ 0</span> </div>
-      <div class="row total"> <span style="font-size: 16px;">Total Amount to be paid</span> <span>₹
-          {{infodata.finalPrice * persion}}</span> </div>
+      <div class="row total"> <span style="font-size: 16px;">Total Amount to be paid</span> 
+        <span>₹
+          <!-- {{infodata.finalPrice * persion}} -->
+           {{total_paid_amount}}
+        </span> </div>
     </div>
 
 

@@ -27,28 +27,28 @@ export class HotelroominfoComponent implements OnInit {
   pertions: any;
   child: any;
   available: boolean = false;
-totelroom:any;
+  totelroom: any;
   mainImage = 'https://r2imghtlak.mmtcdn.com/r2-mmt-htl-image/htl-imgs/202410211734063978-3075721f-29bd-42d6-ae75-ac8bfb9fea77.jpg';
 
   images = ['https://r1imghtlak.mmtcdn.com/0f00d12b-9701-420b-b944-7cf35bc4d064.jpg?&output-quality=75&crop=520:350;2,0&output-format=jpg&downsize=540:*',
     'https://r1imghtlak.mmtcdn.com/2d382902-8cb2-49f3-9d60-ecb7572deb44.jpg',
     'https://r1imghtlak.mmtcdn.com/887a2539-a471-45d1-ad8d-5643260068f7.jpg',
   ];
-   env = environment
+  env = environment
   toggleFilters() { this.showFilters = !this.showFilters; }
 
   onThumbnailHover(img: string) { this.mainImage = img; }
   activeTab: 'description' | 'reviews' = 'description';
 
-  hotelimageCombo:any;
-  hotelimageExact:any;
-   
+  hotelimageCombo: any;
+  hotelimageExact: any;
+
   constructor(private route: ActivatedRoute, private service: AxiosService, private router: Router) {
 
 
     this.route.queryParamMap.subscribe(query => {
-      this.pertions=query.get('adults');
-      this.child=query.get('childrens');
+      this.pertions = query.get('adults');
+      this.child = query.get('childrens');
       if (query.get('combo')) {
         const hotelid = query.get('hotel_vendor_id');
         const room_id = query.get('hotel_roomId')
@@ -59,14 +59,14 @@ totelroom:any;
           roomType: query.get('roomType'),
           hotel_roomId: query.get('hotel_roomId'),
           hotel_vendor_id: query.get('hotel_vendor_id'),
-           childrens:query.get('childrens'),
-          adults:query.get('adults'),
+          childrens: query.get('childrens'),
+          adults: query.get('adults'),
         };
 
         this.service.checavailability(this.filter).then((res: any) => {
           const availlibllity = res.data;
           const comboavailable = availlibllity.available;
-         
+
           if (comboavailable) {
             this.available = true;
 
@@ -79,8 +79,10 @@ totelroom:any;
           // console.log("availablity check:", comboavailable)
 
           this.requirerooms = availlibllity.require_room
+          
           // console.log("availability", availlibllity.require_room)
-          // console.log("availability", availlibllity)
+          console.log("availability", this.requirerooms)
+          sessionStorage.setItem('roomtype',this.requirerooms);
         }).catch((err: any) => {
           console.error(err);
         });
@@ -92,30 +94,32 @@ totelroom:any;
           this.combo = true;
           this.exact = false;
           console.log("this.combovalue:", this.combovalue)
-      this.hotelimageCombo=this.combovalue.hotel.hotel_images[0].url;
-          
-          if(!this.exactvalue){
-                 const charges = parseFloat(this.combovalue?.cancellation_charges || "0");
-           if (charges === 0) {
-            this.combo_check = "with Free Cancellation";
-            // console.log("charges",charges)
+          console.log("this.combovalue.basePrice:", this.combovalue.basePrice)
+          this.hotelimageCombo = this.combovalue.hotel.hotel_images[0];
+          // this.service.basePrice=this.combovalue.basePrice*this.requirerooms
+          // this.service.basePrice=this.combovalue.basePrice
+          if (!this.exactvalue) {
+            const charges = parseFloat(this.combovalue?.cancellation_charges || "0");
+            if (charges === 0) {
+              this.combo_check = "with Free Cancellation";
+              // console.log("charges",charges)
+            } else {
+              this.combo_check = "with More features";
+              //  console.log("charges",charges)
+            }     // run this
+
           } else {
-            this.combo_check = "with More features";
-                //  console.log("charges",charges)
-          }     // run this
-       
-          } else{
- const charges = parseFloat(this.exactvalue?.cancellation_charges || "0");
-           if (charges === 0) {
-            this.combo_check = "with Free Cancellation";
-            // console.log("charges",charges)
-          } else {
-            this.combo_check = "with More features";
-                //  console.log("charges",charges)
-          }
+            const charges = parseFloat(this.exactvalue?.cancellation_charges || "0");
+            if (charges === 0) {
+              this.combo_check = "with Free Cancellation";
+              // console.log("charges",charges)
+            } else {
+              this.combo_check = "with More features";
+              //  console.log("charges",charges)
+            }
           }
 
-          
+
 
 
           if (this.combovalue.rooms_image) {
@@ -129,7 +133,7 @@ totelroom:any;
           this.notfound = true;
         })
 
-  // console.log("lsdjfj",this.filter)
+        // console.log("lsdjfj",this.filter)
       } else {
         // run thsi
 
@@ -143,16 +147,16 @@ totelroom:any;
           roomType: query.get('roomType'),
           hotel_roomId: query.get('hotel_roomId'),
           hotel_vendor_id: query.get('hotel_vendor_id'),
-          childrens:query.get('childrens'),
-          adults:query.get('adults'),
+          childrens: query.get('childrens'),
+          adults: query.get('adults'),
 
         };
 
         this.service.checavailability(this.filter).then((res: any) => {
           const availability = res.data;
           const exactavailable = availability.available;
-              this.totelroom=availability.totalRooms;
-                //  console.log("totelroom", this.totelroom);
+          this.totelroom = availability.totalRooms;
+          //  console.log("totelroom", this.totelroom);
           if (exactavailable) {
             this.available = true;
 
@@ -163,12 +167,12 @@ totelroom:any;
           // console.log("availablity check:", exactavailable);
           this.requirerooms = availability.require_room
           // console.log("availability", availability);
-       
-      
+
+
 
         }).catch((err: any) => {
           console.error(err);
-          
+
         });
 
         this.service.getinfo(hotelid, room_id).then((res: any) => {
@@ -178,7 +182,7 @@ totelroom:any;
           this.combo = false;
           this.exact = true;
           console.log("this.exactvalue:", this.exactvalue)
-          this.hotelimageExact=this.exactvalue.hotel.hotel_images[0].url;
+          this.hotelimageExact = this.exactvalue.hotel.hotel_images[0].url;
           const charges = parseFloat(this.exactvalue?.cancellation_charges || "0");
 
           if (charges === 0) {
@@ -201,9 +205,15 @@ totelroom:any;
 
 
   }
-  comboRender() { 
+  comboRender(roomtype:any) {
+    // this.service.roomtype=roomtype;
+
+    sessionStorage.setItem('type',roomtype)
+
+    console.log('room type check', roomtype)
+    console.log("required", this.requirerooms);
     // console.log("smnfdkdsnkjfn",this.totelroom )    
-    this.router.navigate(['/paricular-hotel-room-data',], { 
+    this.router.navigate(['/paricular-hotel-room-data',], {
       queryParams: {
         hotel_vendor_id: this.filter.hotel_vendor_id,
         hotel_roomId: this.filter.hotel_roomId,
@@ -211,9 +221,9 @@ totelroom:any;
         check_in_date: this.filter.check_in_date,
         check_out_date: this.filter.check_out_date,
         rooms: this.filter.rooms_required,
-        adutls:this.filter.adults,
-        children:this.filter.childrens,
-        avrooms:this.totelroom
+        adutls: this.filter.adults,
+        children: this.filter.childrens,
+        avrooms: this.totelroom
       }
     })
     // console.log('its working');
@@ -271,7 +281,7 @@ totelroom:any;
         // console.log('Password:', this.password);
 
         this.loading = false;
-
+        alert('not match try again');
       }, 1000); // FAKE TWO SECOND DELAY
 
     } else {

@@ -24,6 +24,7 @@
             <h6 class="location">Fits {{pertions}} Adults</h6>
             <p class="location">Per night for {{requirerooms}} Rooms:</p>
             <div style="display: flex;">
+              <!-- <h2>₹ {{combovalue.finalPrice * requirerooms}}</h2> <sup>+792</sup> -->
               <h2>₹ {{combovalue.finalPrice * requirerooms}}</h2> <sup>+792</sup>
             </div>
             <div class="tabs"> <button [class.active]="activeTab === 'description'"
@@ -41,7 +42,7 @@
         
                         <div class="card-actions"> 
                           <button class="flight"  *ngIf="available" style="background-color: orange; font-weight: 400; font-size:20px;" 
-                          (click)="comboRender()" >Book know </button> </div>
+                          (click)="comboRender('combo')" >Book know </button> </div>
             <div class="card-actions">
                <button class="flight" *ngIf="!available" style="background-color: rgb(173, 172, 169); font-weight: 400; font-size:20px;"  >Booking full </button> </div>
           </div>
@@ -89,7 +90,7 @@
           <a href="#" class="more-link">+ More Amenities</a>
         </div>
 
-        <div class="login-box">
+        <div class="login-box desktop-only">
           <h4>Login to unlock deals & manage your bookings!</h4>
           <div class="login-form">
             <div class="input-row">
@@ -106,6 +107,31 @@
             </div>
           </div>
         </div>
+      
+      <div class="auth-container mobile-only">
+  <h4 class="auth-title">Login to unlock deals & manage your bookings!</h4>
+  
+  <div class="auth-form">
+    <div class="auth-input-row">
+      
+      <label class="auth-label">Email</label>
+      <input type="email" placeholder="Enter Email" [(ngModel)]="email" required />
+
+      <label class="auth-label">Password</label>
+      <input type="password" placeholder="Enter Password" [(ngModel)]="password" required />
+
+      <button class="auth-btn" (click)="login()" *ngIf="!loading; else loadingSpinner">
+        Login Now
+      </button>
+
+      <ng-template #loadingSpinner>
+        <span class="loading-indicator"></span> Loading...
+      </ng-template>
+
+    </div>
+  </div>
+     </div>
+
       </div>
     </div>
   </div>
@@ -146,7 +172,7 @@
             <!-- <span>not Available</span> -->
             <p class="location">Per night for {{requirerooms}} Rooms:</p>
             <div style="display: flex;">
-              <h2>₹ {{exactvalue.finalPrice * requirerooms}}</h2> <sup>+792</sup>
+              <h2>₹ {{exactvalue.finalPrice}}</h2> <sup>+792</sup>
             </div>
             <div class="tabs"> <button [class.active]="activeTab === 'description'"
                 (click)="activeTab = 'description'">Description</button> <button
@@ -160,7 +186,7 @@
                 <p>Not Availble</p>
               </div>
             </div>
-            <div class="card-actions"> <button class="flight"  *ngIf="available"  style="background-color: orange; font-weight: 400; font-size:20px; "  (click)="comboRender()" >Book know </button> </div>
+            <div class="card-actions"> <button class="flight"  *ngIf="available"  style="background-color: orange; font-weight: 400; font-size:20px; "  (click)="comboRender('exact')" >Book know </button> </div>
             <div class="card-actions"> <button class="flight" *ngIf="!available" style="background-color: rgb(173, 172, 169); font-weight: 400; font-size:20px;"  >Booking full </button> </div>
           </div>
         </div>

@@ -23,6 +23,17 @@ hotelCityData: any = null;   // ✅ store shared data here
   user_id: any;
 
 
+
+
+  // ***************************  last page;
+  roomtype:'';
+//  basePrice=''; 
+//  total_discount='';
+//  price_after_discount='';
+//  tex='';
+//  total_paid_amount='';
+  // ***********************
+
   constructor() {
     this.api = axios.create({
       baseURL: environment.base_url, // Laravel API base URL

@@ -29,12 +29,12 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     hasGST: false,
     fullName: ''   // 👈 added fullName
   };
-  env=environment
-  userid:any;
+  env = environment
+  userid: any;
   avrooms: any;
-  isLoading :boolean = false;
+  isLoading: boolean = false;
 
-  isSuccess :boolean= false;
+  isSuccess: boolean = false;
   chek = "dekhte hai";
   infodata: any;
   filter: any;
@@ -50,6 +50,9 @@ export class ParticularHotelRoomDataComponent implements OnInit {
   checkOutTimeFormatted: string = '';
   persion: any;
   checkCharges: any;
+  // **********************************
+
+  // *************************************
   errorMessage = '';
   isModalOpen = false;
   transaction_id: string = '';
@@ -73,8 +76,9 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     if (this.filter) {
       this.service.getinfo(this.filter.hotel_vendor_id,
         this.filter.hotel_roomId).then((res: any) => {
-          // console.log("infodata", res.data.data);
+          console.log("infodata", res.data.data);
           this.infodata = res.data.data;
+          this.amountcalc();
           this.checkin = this.infodata.checkInTime;
           this.checkout = this.infodata.checkOutTime
           this.formatDates(this.checkin, this.checkout);
@@ -92,10 +96,54 @@ export class ParticularHotelRoomDataComponent implements OnInit {
 
   }
 
+  basePrice: any;
+  total_discount: any;
+  price_after_discount: any;
+
+  total_paid_amount: any;
+  topPageShow = true;
+  amountcalc() {
+    // if(sessionStorage.getItem('type') && sessionStorage.getItem('roomtype')){
+    if (
+      (sessionStorage.getItem('type') === 'combo' ||
+        sessionStorage.getItem('type') === 'exact') &&
+      sessionStorage.getItem('roomtype')
+    ) {
+      if (sessionStorage.getItem('type') === 'combo') {
+   
+        this.basePrice = this.infodata.basePrice * Number(sessionStorage.getItem('roomtype'))
+        this.total_discount = (this.infodata.basePrice) / (this.infodata.discount) * Number(sessionStorage.getItem('roomtype'))
+        this.price_after_discount = this.basePrice - this.total_discount;
+        this.total_paid_amount = this.basePrice - this.total_discount;
+        console.log("this.basePrice", this.basePrice)
+        console.log("total_discount", this.total_discount)
+        console.log("price_after_discount", this.price_after_discount)
+        console.log("total_paid_amount", this.total_paid_amount)
+
+      } else {
+        this.basePrice = this.infodata.basePrice 
+        // this.basePrice = this.infodata.basePrice;
+        this.total_discount =  (this.basePrice * (this.infodata.discount / 100));
+        this.price_after_discount = this.basePrice - this.total_discount;
+        this.total_paid_amount = this.basePrice - this.total_discount;
+        console.log("this.basePrice", this.basePrice)
+        console.log("total_discount", this.total_discount)
+        console.log("price_after_discount", this.price_after_discount)
+        console.log("total_paid_amount", this.total_paid_amount)
+
+      }
+
+
+    } else {
+      console.log("lskhfdklshlfsds sdfjslkdj")
+      this.topPageShow = false;
+    }
+  }
 
   ngOnInit(): void {
     // this.persion = Number(localStorage.getItem('adults'));
     // console.log('avrooms:', this.avrooms)
+
   }
 
   private isValidEmail(email: string): boolean {
@@ -136,8 +184,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
 
     // Validation checks
     if (!this.guest.firstName || !this.guest.lastName || !this.guest.email || !this.guest.mobile1 || !this.guest.mobile2) {
-     
-      
+
       // console.log("sjfdojsdof",this.guest)
       this.errorMessage = 'Please fill all required fields!';
       alert("Fill all required details");
@@ -168,7 +215,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
         role: 'user',
         mob1: this.guest.mobile1,
         mob2: this.guest.mobile2,
-        
+
       };
 
       this.userservice.userRegister(a).subscribe({
@@ -176,7 +223,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
           // console.log('Register Success:', res);
           this.isLoading = false;
           this.isSuccess = true;
-          this.userid=res.user.id;
+          this.userid = res.user.id;
           sessionStorage.setItem('i', res.user.id)
           sessionStorage.setItem('token', res.access_token);
           sessionStorage.setItem('name', res.user.name);
@@ -204,16 +251,16 @@ export class ParticularHotelRoomDataComponent implements OnInit {
   }
 
   paymentMethodss() {
-    if(sessionStorage.getItem('name') && sessionStorage.getItem('token') && sessionStorage.getItem('email')){
+    if (sessionStorage.getItem('name') && sessionStorage.getItem('token') && sessionStorage.getItem('email')) {
       this.isModalOpen = true;
-    }else{
-     alert("Kindly complete your REGISTRATION or LOGIN before proceeding.");
+    } else {
+      alert("Kindly complete your REGISTRATION or LOGIN before proceeding.");
       // return
     }
   }
 
- showInclusions = false;
-   toggleInclusions() {
+  showInclusions = false;
+  toggleInclusions() {
     this.showInclusions = !this.showInclusions;
   }
 
@@ -276,7 +323,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
 
 
 
-    
+
 
     const booking = {
       user_id: sessionStorage.getItem('i'),
@@ -298,11 +345,11 @@ export class ParticularHotelRoomDataComponent implements OnInit {
       total_amount: (this.infodata.finalPrice * this.filter.rooms_required),
       rooms_available: this.avrooms,
 
-       room_no:this.filter.rooms_required && this.filter.rooms_required.length > 0 
-              ? this.filter.rooms_required 
-              : []   // ✅ safe default
+      room_no: this.filter.rooms_required && this.filter.rooms_required.length > 0
+        ? this.filter.rooms_required
+        : []   // ✅ safe default
     }
- 
+
 
     //  console.log('lsdhfshdfsd',booking)
 
@@ -320,16 +367,16 @@ export class ParticularHotelRoomDataComponent implements OnInit {
 
     // console.log("booking:",booking);
     if (txnId && txnRegex.test(txnId)) {
-    // if (booking.transaction_id) {
+      // if (booking.transaction_id) {
 
       this.service.booking(data).then((res: any) => {
-          
+
         // console.log("bookingg",this.userid);
-        this.router.navigate(['/profile',this.userid]);
+        this.router.navigate(['/profile', this.userid]);
         // this.router.navigate(['/profile', 1]);
-     
-//         const encryptedId = btoa(this.userid.toString()); // convert to Base64
-// this.router.navigate(['/profile', encryptedId]);
+
+        //         const encryptedId = btoa(this.userid.toString()); // convert to Base64
+        // this.router.navigate(['/profile', encryptedId]);
         // sessionStorage.clear();
       }).catch((err: any) => {
         console.error(err);

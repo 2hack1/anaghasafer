@@ -56,7 +56,7 @@
     <div class="search-card sticky-header">
       <div class="search-bar">
         <!-- City -->
-<!-- 
+        <!-- 
         <div class="search-section" (click)="openCityModal()">
            <i class="bi bi-building"></i> <span class="search-text">
             {{ hotel.destination || (combohotelRooms[0]?.city+',Madhya Pradesh, India') }}, </span> 
@@ -64,30 +64,30 @@
 
 
         <div class="search-section" (click)="openCityModal()">
-           <i class="bi bi-building">
+          <i class="bi bi-building">
 
-           </i> <span class="search-text">
-            {{ hotel.destination || tempCity }}, </span> 
-          </div>  
-          <!-- Date -->
+          </i> <span class="search-text">
+            {{ hotel.destination || tempCity }}, </span>
+        </div>
+        <!-- Date -->
 
-     
-  <div class="search-section" (click)="openDateModal()"> 
-          <i class="bi bi-calendar-event"></i> 
+
+        <div class="search-section" (click)="openDateModal()">
+          <i class="bi bi-calendar-event"></i>
           <span class="search-text"> {{ formattedCheckIn || tempChecin }} — {{ formattedCheckOut ||
             tempCheckout }} </span>
-        </div> 
+        </div>
 
-          <div class="search-section line" (click)="openGuestsModal()"> 
-  <i class="bi bi-people"></i> 
-  <span class="search-text"> 
-    {{ hotel?.extra?.adults || tempAdult}} adults - 
-    {{ hotel?.extra?.childrens || tempChildren}} children 
-    <span class="mobile-break"></span> 
-    - {{ hotel?.extra?.rooms || tempsRooms}} rooms 
-   </span> 
- </div>
-            <!-- Guests Modal -->
+        <div class="search-section line" (click)="openGuestsModal()">
+          <i class="bi bi-people"></i>
+          <span class="search-text">
+            {{ hotel?.extra?.adults || tempAdult}} adults -
+            {{ hotel?.extra?.childrens || tempChildren}} children
+            <span class="mobile-break"></span>
+            - {{ hotel?.extra?.rooms || tempsRooms}} rooms
+          </span>
+        </div>
+        <!-- Guests Modal -->
         <button class="search-btn" (click)="search()" [disabled]="isSearching">
           <span *ngIf="!isSearching">Search</span>
           <span *ngIf="isSearching">
@@ -97,7 +97,7 @@
       </div>
     </div>
 
-     <!-- Guests Modal -->
+    <!-- Guests Modal -->
     <div class="modal-backdrop" *ngIf="showGuestsModal">
       <div class="modal-box">
         <h3>Select Guests</h3>
@@ -119,8 +119,8 @@
       </div>
     </div>
 
-     
-       <!-- Date Modal -->
+
+    <!-- Date Modal -->
     <div class="modal-backdrop" *ngIf="showDateModal">
       <div class="modal-box date-modal">
         <h3>Select Dates</h3> <label> Check-in: <input type="date" [(ngModel)]="tempCheckIn"> </label> <label>
@@ -180,7 +180,7 @@
           <!-- Show See More if images > 4 -->
           <div class="thumbnail-wrapper see-more" *ngIf="card?.rooms_image.length > 4" (click)="onSeeMoreClick()">
             <img [src]="`${env.backend_url}/storage/${card?.rooms_image[4]}`" class="thumbnail" />
-            <div class="overlay">+{{ card?.rooms_image.length - 4 }} more</div>
+            <div class="overlay">+{{ card?.rooms_image.length - 4}} more</div>
           </div>
         </div>
       </div>
@@ -228,14 +228,14 @@
         <div class="card-price">
           <div class="rating">Very Good 4.0 (2574 Ratings)</div>
           <div class="old-price">₹ {{ card?.basePrice }}</div>
-          <div class="price">₹ {{ card?.finalPrice * card?.requiredRooms}}</div>
+          <div class="price">₹ {{ card?.finalPrice }}</div>
           <small *ngIf="card?.taxIncluded">+ Taxes Included & fees Per Night</small>
         </div>
       </div>
 
     </div>
 
-
+    <!-- *****************************************************  divided ***************************** -->
 
     <div class="hotel-card" *ngFor="let card of combohotelRooms" (click)="rendercombo(card?.hotel?.hotel_vendor_id,card?.room?.hotel_roomId,card?.calculated_needed_rooms
     ,card?.room?.roomType,card?.checkin,card?.checkout,card?.adult,card?.children
@@ -253,7 +253,8 @@
           </div>
 
           <!-- Show See More if images > 4 -->
-          <div class="thumbnail-wrapper see-more" *ngIf="card?.room?.rooms_image?.length > 4" (click)="onSeeMoreClick()">
+          <div class="thumbnail-wrapper see-more" *ngIf="card?.room?.rooms_image?.length > 4"
+            (click)="onSeeMoreClick()">
             <img [src]="`${env.backend_url}/storage/${card?.room?.rooms_image[4]}`" class="thumbnail" />
             <div class="overlay">+{{ card?.room?.rooms_image.length - 4 }} more</div>
           </div>
@@ -314,7 +315,7 @@
   </div>
 
   <div class="cards-container" *ngIf="showNoHotels">
-    <div class="no-hotels-card" 
+    <div class="no-hotels-card"
       style="background-color: #eef4fa; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 250px; max-height: 400px;">
       <i class="bi bi-exclamation-circle" style="font-size: 2.5rem; color: #c4310d; margin-bottom: 12px;"></i>
       <h3 style="margin: 0 0 8px 0; color: #333;">No hotels found</h3>
@@ -329,15 +330,15 @@
 
 
   <div class="overlay" *ngIf="isLoading">
-  <div class="loader-wrapper">
-  
-    <div class="cube cube1"></div>
-   
-    <div class="cube cube2"></div>
+    <div class="loader-wrapper">
 
-    <div class="cube cube3"></div>
-    
-    
-    <div class="brand-name">AnaghaSafar <span class="dots"></span> </div>
+      <div class="cube cube1"></div>
+
+      <div class="cube cube2"></div>
+
+      <div class="cube cube3"></div>
+
+
+      <div class="brand-name">AnaghaSafar <span class="dots"></span> </div>
+    </div>
   </div>
-</div>

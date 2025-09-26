@@ -17,7 +17,7 @@ export class HotelListComponent implements OnInit {
   execthotelRooms: any[] = [];
   combohotelRooms: any[] = [];
   // room: any;
-  
+   
 
   searchOnIt: {
     city?: string;
