@@ -1,0 +1,31 @@
+.payment-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.timer {
+  font-size: 18px;
+  font-weight: bold;
+  color: #e74c3c;
+  margin-top: 10px;
+}
+
+button {
+  margin-bottom: 15px;
+}
+
+/* Loader Spinner */
+.loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 10px auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

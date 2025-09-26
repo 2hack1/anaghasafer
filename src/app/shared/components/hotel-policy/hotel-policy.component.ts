@@ -4,15 +4,21 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-hotel-policy',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './hotel-policy.component.html',
-  styleUrl: './hotel-policy.component.scss'
+  styleUrls: ['./hotel-policy.component.scss']
 })
 export class HotelPolicyComponent implements OnInit, OnDestroy {
   qrImageUrl: string | null = null;
   qrId: string | null = null;
   showQR: boolean = false;
+  isLoading: boolean = false;
+
   interval: any;
+  countdownInterval: any;
+  timeLeft: number = 0; // seconds
+  formattedTime: string = '05:00'; // mm:ss display
 
   constructor(private paymentService: AxiosService) {}
 
@@ -20,35 +26,71 @@ export class HotelPolicyComponent implements OnInit, OnDestroy {
 
   // Step 1: Generate QR
   genrated() {
-    this.paymentService.createQR().then((res: any) => {
-      // console.log("Qr code data", res.data);
+    this.isLoading = true;
+    
+    const a= new FormData();
+    a.append('amount','1')
+    this.paymentService.createQR(a).then((res: any) => {
       this.qrImageUrl = res.data.qr_code.image_url;
       this.qrId = res.data.qr_code.id;
       this.showQR = true;
+      this.isLoading = false;
+
+      // Start 5 min timer (300 seconds)
+      this.startCountdown(300);
 
       // Step 2: Start polling
       this.startPolling();
+    }).catch(() => {
+      this.isLoading = false;
     });
   }
 
-  // Step 2: Poll backend for QR status
+  // Countdown timer for 5 min
+  startCountdown(seconds: number) {
+    this.timeLeft = seconds;
+    this.updateFormattedTime(); // show immediately
+    clearInterval(this.countdownInterval);
+    this.countdownInterval = setInterval(() => {
+      this.timeLeft--;
+      this.updateFormattedTime();
+      if (this.timeLeft <= 0) {
+        this.expireQR();
+      }
+    }, 1000);
+  }
+
+  // Format seconds → mm:ss
+  updateFormattedTime() {
+    const m = Math.floor(this.timeLeft / 60);
+    const s = this.timeLeft % 60;
+    this.formattedTime =
+      `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+  }
+
+  // Poll backend for QR status
   startPolling() {
+    clearInterval(this.interval);
     this.interval = setInterval(() => {
       if (!this.qrId) return;
 
       this.paymentService.checkQR(this.qrId).then((res: any) => {
-        // console.log("QR Status:", res.data);
-
-        // If payment happened, hide QR
         if (res.data.payments > 0 || res.data.status === 'closed') {
-          this.showQR = false;
-          clearInterval(this.interval);
+          this.expireQR();
         }
       });
-    }, 5000); // check every 5 sec
+    }, 5000);
+  }
+
+  // Handle QR expiration or payment
+  expireQR() {
+    this.showQR = false;
+    clearInterval(this.interval);
+    clearInterval(this.countdownInterval);
   }
 
   ngOnDestroy() {
     clearInterval(this.interval);
+    clearInterval(this.countdownInterval);
   }
 }

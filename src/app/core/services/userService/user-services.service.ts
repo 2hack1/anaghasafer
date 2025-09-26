@@ -16,8 +16,8 @@ export class UserServicesService {
      }
 
   userRegister(data:any) {
-  let path = `${this.baseUrl}/register-user`;
-    return this.http.post(path,data);
+  // let path = `${this.baseUrl}/register-user`;
+    return this.http.post(`${this.baseUrl}/register-user`,data);
   }
   userLogin(data:any){
     let path = `${this.baseUrl}/login`;

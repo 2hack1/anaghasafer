@@ -198,8 +198,8 @@ hotelCityData: any = null;   // ✅ store shared data here
 //   }
 
 
-  createQR(){
-    return this.api.get('create-qr');
+  createQR(data:FormData){
+    return this.api.post('create-qr',data);
   }
   checkQR(id:any){
      return this.api.get(`check/${id}`);
