@@ -17,7 +17,10 @@ export class MobileViewBigWhiteCardComponent implements OnInit {
   rooms = 1; maxadults = 5; maxchildren = 5; maxRooms = 5;
   // Other fields
   city = 'Gwalior';
-  cityOptions: string[] = ['Gwalior', 'Indore', 'Bhopal', 'Goa'];
+// **************************************************************
+// CITY OPTION SHWO ON THIS VARIABLE
+  cityOptions: string[] = [];
+  // *****************************************************************
   country = 'India';
    checkIn:'';
    checkOut:'';
@@ -27,14 +30,14 @@ export class MobileViewBigWhiteCardComponent implements OnInit {
   showGuestsModal = false;
  
   showPriceModal = false;
-  // tempCheckIn: string = ''; 
-  // // tempCheckOut: string = '';
+ 
   isMobile = false;
 
 
   // for tour
   
   ngOnInit(): void {
+    this.gethotelcity(); 
     document.addEventListener("click", () => {
     this.check = false;
     this.checkHotel=false;
@@ -543,7 +546,37 @@ openDropdownHotel(event: Event) {
   this.checkHotel = true; // always open when clicked
   event.stopPropagation(); // don’t bubble to document
 }
+// ***************** temp used *****************************
+capitalize(str: string): string {
+  return str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : '';
+}
+// ************************
+gethotelcity() {
+  this.service.getHotelcityData()
+    .then((res: any) => {
+      // ✅ Make sure we have an array
+      const rows = Array.isArray(res.data)
+        ? res.data
+        : Array.isArray(res.data?.data)
+          ? res.data.data
+          : [];
 
+      console.log("API rows:", rows);
 
+      // ✅ Get unique city names only 
+      const seen = new Set<string>(); 
+       this.cityOptions = rows
+        .filter((item: any) => {
+          const city = item.city?.trim();
+          return city && !seen.has(city) && seen.add(city);
+        })
+        .map((item: any) => item.city);
+      // this.destinations=this.cityList;
+      // console.log("City only:", this.cityList);
+    })
+    .catch((error: any) => {
+      console.error("get hotel city error:", error);
+    });
+}
 
 }

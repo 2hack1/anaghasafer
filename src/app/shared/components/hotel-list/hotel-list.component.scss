@@ -836,3 +836,94 @@
     height: 0; /* ensures it's just a break, no extra spacing */
   }
 }
+
+// **********************************************   loader show on the  first ************
+
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  // background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loader-wrapper {
+  position: relative;
+
+  width: 280px;
+  height: 160px;
+  
+}
+
+.cube {
+  position: absolute;
+  // for the mobile view
+  width: 170px;
+  height: 125px;
+  // for the system view
+  // width: 50px;
+  // height: 50px;
+  background: linear-gradient(45deg, #1e90ff, #4facfe);
+  opacity: 0.85;
+  border-radius: 8px;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+.cube1 {
+  animation: rotateCube1 2s linear infinite;
+}
+.cube2 {
+  animation: rotateCube2 2.5s linear infinite;
+}
+.cube3 {
+  animation: rotateCube3 3s linear infinite;
+}
+
+.brand-name {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-shadow: 0 0 10px #1e90ff, 0 0 20px #4facfe;
+  pointer-events: none;
+}
+
+/* Animations for three cubes */
+@keyframes rotateCube1 {
+  0% { transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg); }
+  100% { transform: translate(-50%, -50%) rotateX(360deg) rotateY(360deg); }
+}
+
+@keyframes rotateCube2 {
+  0% { transform: translate(-50%, -50%) rotateX(0deg) rotateZ(0deg); }
+  100% { transform: translate(-50%, -50%) rotateX(360deg) rotateZ(360deg); }
+}
+
+@keyframes rotateCube3 {
+  0% { transform: translate(-50%, -50%) rotateY(0deg) rotateZ(0deg); }
+  100% { transform: translate(-50%, -50%) rotateY(360deg) rotateZ(360deg); }
+}
+/* Animated dots */
+.dots::after {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  text-align: left;
+  animation: dotsAnim 1.5s steps(3,end) infinite;
+}
+
+@keyframes dotsAnim {
+  0% { content: ''; }
+  33% { content: '.'; }
+  66% { content: '..'; }
+  100% { content: '...'; }
+}

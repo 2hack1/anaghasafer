@@ -40,6 +40,9 @@ totelroom:any;
   onThumbnailHover(img: string) { this.mainImage = img; }
   activeTab: 'description' | 'reviews' = 'description';
 
+  hotelimageCombo:any;
+  hotelimageExact:any;
+   
   constructor(private route: ActivatedRoute, private service: AxiosService, private router: Router) {
 
 
@@ -88,10 +91,8 @@ totelroom:any;
           this.amenities = this.combovalue.amenities;
           this.combo = true;
           this.exact = false;
-          // console.log("infor id base:", this.combovalue)
-
-          
-        
+          console.log("this.combovalue:", this.combovalue)
+      this.hotelimageCombo=this.combovalue.hotel.hotel_images[0].url;
           
           if(!this.exactvalue){
                  const charges = parseFloat(this.combovalue?.cancellation_charges || "0");
@@ -176,7 +177,8 @@ totelroom:any;
           this.amenities = this.exactvalue.amenities;
           this.combo = false;
           this.exact = true;
-          // console.log("infor id base:", this.exactvalue)
+          console.log("this.exactvalue:", this.exactvalue)
+          this.hotelimageExact=this.exactvalue.hotel.hotel_images[0].url;
           const charges = parseFloat(this.exactvalue?.cancellation_charges || "0");
 
           if (charges === 0) {

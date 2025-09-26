@@ -311,13 +311,9 @@
       </div>
 
     </div>
-
-
-
-
   </div>
 
-  <div class="cards-container" *ngIf="!(combohotelRooms?.length > 0) && !(execthotelRooms?.length > 0) ">
+  <div class="cards-container" *ngIf="showNoHotels">
     <div class="no-hotels-card" 
       style="background-color: #eef4fa; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 250px; max-height: 400px;">
       <i class="bi bi-exclamation-circle" style="font-size: 2.5rem; color: #c4310d; margin-bottom: 12px;"></i>
@@ -329,3 +325,19 @@
       </button>
     </div>
   </div>
+
+
+
+  <div class="overlay" *ngIf="isLoading">
+  <div class="loader-wrapper">
+  
+    <div class="cube cube1"></div>
+   
+    <div class="cube cube2"></div>
+
+    <div class="cube cube3"></div>
+    
+    
+    <div class="brand-name">AnaghaSafar <span class="dots"></span> </div>
+  </div>
+</div>

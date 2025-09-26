@@ -30,15 +30,15 @@
                      justify-content: center; width: 100%; box-sizing: border-box; margin-top: 20px;">
 
                                 <!-- City Dropdown -->
-                               <div class="hotel-search-field city-dropdown"
+                                <div class="hotel-search-field city-dropdown"
                                     style="width: 90%; max-width: 400px; margin-bottom: 1rem;"
                                     (click)="openDropdown($event)">
 
                                     <i class="bi bi-geo-alt"></i>
-                       
+
                                     <div style="flex: 1; position: relative;">
                                         <label class="field-label">Enter City or Location</label>
-                                                          <h4>{{cityTour}}</h4>
+                                        <h4>{{cityTour}}</h4>
                                         <!-- DROPDOWN -->
                                         <div class="custom-dropdown" *ngIf="check" (click)="$event.stopPropagation()">
                                             <input type="text" [(ngModel)]="citySearch" placeholder="Search city..."
@@ -128,24 +128,28 @@
                                 </div> -->
 
 
-                                      <div class="hotel-search-field city-dropdown"
+                                <div class="hotel-search-field city-dropdown"
                                     style="width: 90%; max-width: 400px; margin-bottom: 1rem;"
                                     (click)="openDropdownHotel($event)">
 
                                     <i class="bi bi-geo-alt"></i>
-                       
+
                                     <div style="flex: 1; position: relative;">
                                         <label class="field-label">Enter City or Location</label>
-                                                          <h4>{{city}}</h4>
+                                        <!-- <h4>{{city}}</h4> -->
+                                        <h4>{{capitalize(city)}}</h4>
+                                        
                                         <!-- DROPDOWN -->
-                                        <div class="custom-dropdown" *ngIf="checkHotel" (click)="$event.stopPropagation()">
-                                            <input type="text" [(ngModel)]="citySearchHotel" placeholder="Search city..."
-                                                class="city-search-input" />
+                                        <div class="custom-dropdown" *ngIf="checkHotel"
+                                            (click)="$event.stopPropagation()">
+                                            <input type="text" [(ngModel)]="citySearchHotel"
+                                                placeholder="Search city..." class="city-search-input" />
 
                                             <ul class="city-list">
                                                 <li *ngFor="let c of filteredCityOptionsHotel()"
                                                     (click)="selectCityHotel(c)" [class.active]="c === city">
-                                                    {{ c }}
+                                                    <!-- {{ c }} -->
+                                                    {{capitalize(c)}}
                                                 </li>
                                             </ul>
                                         </div>

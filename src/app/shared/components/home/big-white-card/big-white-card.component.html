@@ -20,9 +20,9 @@ position: relative;">
     <!-- contianer -->
     <div class="container">
         <!-- White Centere Card -->
-        <div class="__bg_white_menu" >
+        <div class="__bg_white_menu">
             <!-- menus -->
-             
+
             <div class="menu_options cus-shadow">
                 <!-- First Button -->
                 <button class="icon-btn" (click)="setActive('destination')">
@@ -65,7 +65,8 @@ position: relative;">
                                     <h4>City or Location</h4>
                                     <p class="destination" id="destination-name" style="margin-top: 5px">
                                         <strong style="text-transform: capitalize">
-                                            {{ hotel.destination || 'Select destination' }}
+                                            <!-- {{ hotel.destination || 'Select destination' }} -->
+                                            {{ capitalize(hotel.destination || 'Select destination')}}
                                         </strong>
                                     </p>
                                 </div>
@@ -83,7 +84,8 @@ position: relative;">
                                     <ng-container *ngFor="let i of filteredDestinations1">
                                         <button type="button" class="select-destionation-button"
                                             (click)="closeAllModalForhotel(i)">
-                                            {{ i }}
+                                            <!-- {{ i }} -->
+                                          {{ capitalize(i)}}
                                         </button>
                                     </ng-container>
 
@@ -500,7 +502,5 @@ position: relative;">
 
         </div>
     </div>
-    
+
 </div>
-
-

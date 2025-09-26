@@ -100,7 +100,9 @@ export class BigWhiteCardComponent implements OnInit, AfterViewInit {
         guests: 1
     };
 
+    // *********************** that is show in in the modal hotel destionatipon
     destinations = [];
+//  ****************************************** 
     destination = ['gwalior'];
 
     // ------------------------------------------------
@@ -413,34 +415,66 @@ selectPrice(price: string) {
     cityList: string[] = [];        // 👉 only city names
 cityStateCombo: string[] = [];  // 👉 city + state strings
 
+// gethotelcity() {
+//    this.service.getHotelcityData()
+//     .then((res: any) => {
+//       console.log("Full data:", res.data);
+
+//       // ✅ Unique city–state pairs first
+//       const seen = new Set();
+//       const uniquePairs = res.data.filter((item: any) => {
+//         const key = `${item.city}|${item.state}`;
+//         return !seen.has(key) && seen.add(key);
+//       });
+
+//       // ✅ Fill the two new variables
+//       this.destinations = uniquePairs.map((item: any) => item.city);
+//       console.log("detionation of  ",this.destination)
+//     //   this.cityList = uniquePairs.map((item: any) => item.city);
+//       this.cityStateCombo = uniquePairs.map(
+//         (item: any) => `${item.city}, ${item.state}`
+//       );
+
+//     //   console.log("City only:", this.cityList);
+//     //   console.log("City + State:", this.cityStateCombo);
+//     })
+//     .catch((error: any) => {
+//       console.error("get hotel city error:", error);
+//     });
+//   }
+
 gethotelcity() {
   this.service.getHotelcityData()
     .then((res: any) => {
-    //   console.log("Full data:", res.data);
+      // ✅ Make sure we have an array
+      const rows = Array.isArray(res.data)
+        ? res.data
+        : Array.isArray(res.data?.data)
+          ? res.data.data
+          : [];
 
-      // ✅ Unique city–state pairs first
-      const seen = new Set();
-      const uniquePairs = res.data.filter((item: any) => {
-        const key = `${item.city}|${item.state}`;
-        return !seen.has(key) && seen.add(key);
-      });
+      console.log("API rows:", rows);
 
-      // ✅ Fill the two new variables
-      this.destinations = uniquePairs.map((item: any) => item.city);
-    //   this.cityList = uniquePairs.map((item: any) => item.city);
-      this.cityStateCombo = uniquePairs.map(
-        (item: any) => `${item.city}, ${item.state}`
-      );
-
-    //   console.log("City only:", this.cityList);
-    //   console.log("City + State:", this.cityStateCombo);
+      // ✅ Get unique city names only
+      const seen = new Set<string>();
+      this.cityList = rows
+        .filter((item: any) => {
+          const city = item.city?.trim();
+          return city && !seen.has(city) && seen.add(city);
+        })
+        .map((item: any) => item.city);
+      this.destinations=this.cityList;
+      console.log("City only:", this.cityList);
     })
     .catch((error: any) => {
       console.error("get hotel city error:", error);
     });
 }
-
-
+// ***************** temp used *****************************
+capitalize(str: string): string {
+  return str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : '';
+}
+// ************************
     // ------------------------------------------------
     // 🔹 DATE CHANGE HANDLER
     // ------------------------------------------------

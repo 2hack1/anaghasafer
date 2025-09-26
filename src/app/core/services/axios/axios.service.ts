@@ -190,7 +190,7 @@ hotelCityData: any = null;   // ✅ store shared data here
     return this.api.post(`pass-update`,data);
   }
   getHotelcityData(){
-    return this.api.get(`vendors`);
+    return this.api.get(`vendors/hotel/city`);
   }
 
 // createQR(): Observable<any> {

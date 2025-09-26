@@ -44,10 +44,49 @@ export class HotelListComponent implements OnInit {
 
   ];
 
+  private intervalId: any;
+  private timeoutId: any;
 
   constructor(private route: ActivatedRoute, private service: AxiosService, private router: Router) { }
-
+ isLoading: boolean = true; 
+  showNoHotels: boolean = false; 
   ngOnInit(): void {
+ 
+      // if (this.combohotelRooms.length === 0 && this.execthotelRooms.length === 0) {
+        
+      //      setTimeout(() => {
+      //       this.isLoading = false;
+      //   this.showNoHotels = true;
+      //       }, 10000);
+             
+      //   else if(this.combohotelRooms.length === 0 && this.execthotelRooms.length === 0){
+      //               this.isLoading = true;
+      //   this.showNoHotels = false;
+      //   }esle{
+      //      this.isLoading = false;
+      //   this.showNoHotels = false;
+      //   }
+      // }else{
+      //   this.isLoading = false;
+      //   this.showNoHotels = false;
+      // }
+        this.intervalId = setInterval(() => {
+      if (this.combohotelRooms.length > 0 || this.execthotelRooms.length > 0) {
+        // Data arrived
+        this.isLoading = false;
+        this.showNoHotels = false;
+        this.clearTimers();
+      }
+    }, 1000); // every second
+    this.timeoutId = setTimeout(() => {
+      if (this.combohotelRooms.length === 0 && this.execthotelRooms.length === 0) {
+        this.isLoading = false;
+        this.showNoHotels = true;
+        this.clearTimers();
+      }
+    }, 10000);
+     // after 10 seconds
+     // 10 seconds
     this.gethotelcity();
 this.getDataForShowSearch()
   
@@ -158,6 +197,11 @@ this.getDataForShowSearch()
 
  
   }
+   clearTimers() {
+    if (this.intervalId) clearInterval(this.intervalId);
+    if (this.timeoutId) clearTimeout(this.timeoutId);
+  }
+
     tempAdult:any
     tempChecin:any
     tempCheckout:any
@@ -228,7 +272,10 @@ this.getDataForShowSearch()
 
   }
 
-  ngOnDestroy() { window.removeEventListener('scroll', this.onScroll, true); } onScroll = () => {
+
+  ngOnDestroy() { 
+    this.clearTimers();
+    window.removeEventListener('scroll', this.onScroll, true); } onScroll = () => {
     const header = document.querySelector('.sticky-header');
     if (window.scrollY > 0) {
       header?.classList.add('scrolled');
