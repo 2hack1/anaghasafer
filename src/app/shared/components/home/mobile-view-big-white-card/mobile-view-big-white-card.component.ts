@@ -484,7 +484,7 @@ const formattedCheckOut = checkOutDate.toISOString().split('T')[0];
 
         if (this.maxPrice) {
             this.route.navigate(['/Hotel-Rooms'], { queryParams: params });
-             alert("Please fill the fields");
+            //  alert("Please fill the fields");
         } else {
             alert("Please fill the fields");
         }

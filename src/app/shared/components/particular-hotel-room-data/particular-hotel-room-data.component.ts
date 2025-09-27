@@ -16,6 +16,7 @@ import { environment } from '../../../../environments/environment.development';
   //  styleUrls: ['./particular-hotel-room-data.component.scss'] 
 })
 export class ParticularHotelRoomDataComponent implements OnInit {
+  totalnight:any;
   guest = {
     title: 'Mr',
     firstName: '',
@@ -61,6 +62,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     this.route.queryParams.subscribe(query => {
       this.persion = query['adutls'];
       this.avrooms = query['avrooms'];
+      this.calculateDays(query['check_in_date'],query['check_out_date'])
       this.filter = {
         check_in_date: query['check_in_date'],
         check_out_date: query['check_out_date'],
@@ -103,6 +105,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
   total_paid_amount: any;
   topPageShow = true;
   requireroom:any;
+  pernightprice:any;
   amountcalc() {
 
     const stored = sessionStorage.getItem('roomtype');
@@ -132,7 +135,8 @@ if (stored) {
       this.requireroom
     ) {
       if (sessionStorage.getItem('type') === 'combo') {
-   
+        this.pernightprice=this.infodata.basePrice;
+        // console.log("this.pernightprice",this.pernightprice)
         this.basePrice = this.infodata.basePrice * Number(this.requireroom)
         this.total_discount = (this.infodata.basePrice) / (this.infodata.discount) * Number(this.requireroom)
         this.price_after_discount = this.basePrice - this.total_discount;
@@ -145,6 +149,7 @@ if (stored) {
       } else {
         this.basePrice = this.infodata.basePrice 
         // this.basePrice = this.infodata.basePrice;
+         this.pernightprice=this.infodata.basePrice
         this.total_discount =  (this.basePrice * (this.infodata.discount / 100));
         this.price_after_discount = this.basePrice - this.total_discount;
         this.total_paid_amount = this.basePrice - this.total_discount;
@@ -341,11 +346,10 @@ if (stored) {
   }
   // *************************************************************************************************
 
-  submitPayment( ) {
-
-
-
-
+  submitPayment( booked_rooms:any,pernightprice:any,totalamount:any) {
+    console.log("booked_rooms",booked_rooms);
+    console.log("pernightprice",pernightprice);
+    console.log("totalamount",totalamount);
 
     const booking = {
       user_id: sessionStorage.getItem('i'),
@@ -355,7 +359,8 @@ if (stored) {
       check_out_date: this.filter.check_out_date,
       adults: this.persion,
       children: this.filter.children,
-      rooms_booked: this.filter.rooms_required,
+      // rooms_booked: this.filter.rooms_required,
+      rooms_booked: String(booked_rooms),
       roomType: this.infodata.roomType,
       // payment_status:"pending",
       
@@ -363,8 +368,10 @@ if (stored) {
       transaction_id: this.transaction_id,
       // status:"",
       // special_requests:"",
-      price_per_night: this.infodata.finalPrice,   //per night price
-      total_amount: (this.infodata.finalPrice * this.filter.rooms_required), //total amount
+      // price_per_night: this.infodata.finalPrice,   //per night price
+      price_per_night: pernightprice,   //per night price
+      // total_amount: (this.infodata.finalPrice * this.filter.rooms_required), //total amount
+      total_amount: totalamount, //total amount
       rooms_available: this.avrooms,
 
       room_no: this.filter.rooms_required && this.filter.rooms_required.length > 0
@@ -408,4 +415,17 @@ if (stored) {
       alert('Please enter the  valid transaction ID ');
     }
   }
+
+  calculateDays(checkin: any, checkout: any) {
+  const start = new Date(checkin);
+  const end   = new Date(checkout);
+
+  // Difference in milliseconds
+  const diff = end.getTime() - start.getTime();
+
+  // Convert to days
+  this.totalnight = diff / (1000 * 60 * 60 * 24);
+  console.log("diffrence",this.totalnight)
+}
+
 }

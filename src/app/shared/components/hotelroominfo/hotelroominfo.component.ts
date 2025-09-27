@@ -14,6 +14,9 @@ import { environment } from '../../../../environments/environment.development';
   styleUrl: './hotelroominfo.component.scss'
 })
 export class HotelroominfoComponent implements OnInit {
+  // this is for prive calculated
+   totalnight:any;
+ // this is for prive calculated
   combo_check: any;
   filter: any;
   combo: boolean = false;
@@ -49,6 +52,7 @@ export class HotelroominfoComponent implements OnInit {
     this.route.queryParamMap.subscribe(query => {
       this.pertions = query.get('adults');
       this.child = query.get('childrens');
+      this.calculateDays(query.get('check_in_date'),query.get('check_out_date'))
       if (query.get('combo')) {
         const hotelid = query.get('hotel_vendor_id');
         const room_id = query.get('hotel_roomId')
@@ -145,7 +149,7 @@ export class HotelroominfoComponent implements OnInit {
 
         const hotelid = query.get('hotel_vendor_id');
         const room_id = query.get('hotel_roomId')
-
+ this.calculateDays(query.get('check_in_date'),query.get('check_out_date'))
         this.filter = {
           check_in_date: query.get('check_in_date'),
           check_out_date: query.get('check_out_date'),
@@ -298,5 +302,18 @@ export class HotelroominfoComponent implements OnInit {
     // Simulate API call
 
   }
+
+
+   calculateDays(checkin: any, checkout: any) {
+  const start = new Date(checkin);
+  const end   = new Date(checkout);
+
+  // Difference in milliseconds
+  const diff = end.getTime() - start.getTime();
+
+  // Convert to days
+  this.totalnight = diff / (1000 * 60 * 60 * 24);
+  console.log("diffrence",this.totalnight)
+}
 
 }

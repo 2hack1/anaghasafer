@@ -193,6 +193,9 @@
           <!-- <h3> cancellation_charges {{ card.cancellation_charges }}</h3> -->
 
           <p><a href="#">{{ card?.hotel?.city }}</a> - {{ card?.hotel?.address }}</p>
+          <p> <span style="font-weight:600px ;"> Available: </span>
+        <a  style="color: #551abb;">{{ card.checkin }}</a> - <a style="color: #551abb;"> {{ card.checkout }}</a>
+           </p> 
           <p>
 
             <span *ngIf="card?.cancellation_charges == 0; else hasCharge">
@@ -227,8 +230,8 @@
 
         <div class="card-price">
           <div class="rating">Very Good 4.0 (2574 Ratings)</div>
-          <div class="old-price">₹ {{ card?.basePrice }}</div>
-          <div class="price">₹ {{ card?.finalPrice }}</div>
+          <div class="old-price">₹ {{ card?.basePrice * totalnight }}</div>
+          <div class="price">₹ {{ card?.finalPrice * totalnight }}</div>
           <small *ngIf="card?.taxIncluded">+ Taxes Included & fees Per Night</small>
         </div>
       </div>
@@ -271,8 +274,10 @@
 
           <p>
             <a href="#">{{ card?.hotel?.city }}</a> - {{ card?.hotel?.address }}
-          </p>
-
+          </p> 
+         <p> <span style="font-weight:600px ;"> Available: </span>
+        <a  style="color: #551abb;">{{ card.checkin }}</a> - <a style="color: #551abb;"> {{ card.checkout }}</a>
+           </p>   
           <!-- Cancellation Charges -->
           <p>
             <span *ngIf="card?.room?.cancellation_charges == 0; else hasCharge">
@@ -305,8 +310,8 @@
         <!-- PRICE SECTION -->
         <div class="card-price">
           <div class="rating">Very Good 4.0 (2574 Ratings)</div>
-          <div class="old-price">₹ {{ card?.room?.basePrice*card?.calculated_needed_rooms }}</div>
-          <div class="price">₹ {{ card?.room?.finalPrice * card?.calculated_needed_rooms }}</div>
+          <div class="old-price">₹ {{ (card?.room?.basePrice*card?.calculated_needed_rooms)*totalnight}}</div>
+          <div class="price">₹ {{ (card?.room?.finalPrice * card?.calculated_needed_rooms)*totalnight }}</div>
           <small *ngIf="card?.room?.taxIncluded">+ Taxes Included & fees Per Night</small>
         </div>
       </div>

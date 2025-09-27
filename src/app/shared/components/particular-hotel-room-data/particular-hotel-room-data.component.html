@@ -163,7 +163,7 @@
           <!-- Total Amount -->
           <div style="display: flex; align-items: center;">
             <p style="color: #050505; font-size: 20px; font-family: monospace;">Total Amount :</p>
-            <p style="font-size: 24px; font-family: monospace; margin-left: 8px;">₹ {{infodata.finalPrice * persion }}</p>
+            <p style="font-size: 24px; font-family: monospace; margin-left: 8px;">₹ {{total_paid_amount * totalnight}}</p>
           </div>
 
           <!-- Payment Options -->
@@ -187,7 +187,7 @@
             </div>
 
             <div class="qr-box">
-              <button (click)="submitPayment()"> Submit Payment ID</button>
+              <button (click)="submitPayment(totalnight,(pernightprice /filter.rooms_required)-((pernightprice /filter.rooms_required)* (this.infodata.discount / 100)),total_paid_amount * totalnight)"> Submit Payment ID</button>
             </div>
           </div>
         </div>
@@ -198,26 +198,26 @@
     <div class="price-card">
       <h4>Price Breakup</h4>
       <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
-          style="color: #000000; font-size: 16px;"><b>Entire Rooms In ₹ {{total_paid_amount}}<br>1 Night
+          style="color: #000000; font-size: 16px;"><b>Entire Rooms In ₹ {{(pernightprice /filter.rooms_required)-((pernightprice /filter.rooms_required)* (this.infodata.discount / 100))}}<br>1 Night
           </b></span>
       </div>
       <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
-          style="font-size: 16px;">Base Price x {{filter.rooms_required}}Rooms</span> <span>₹ 
+          style="font-size: 16px;">Base Price x {{filter.rooms_required }}Rooms x {{totalnight}}Days</span> <span>₹ 
             <!-- {{infodata.basePrice *
           persion}} -->
-          {{this.basePrice}}
+          {{this.basePrice * totalnight}}
           </span> </div>
 
       <div class="row total-discount" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
           style="font-size: 16px;">Total Discount <i class="info-icon"></i></span> <span>- ₹ 
             <!-- {{(infodata.basePrice * persion)/infodata.discount}} -->
-             {{this.total_discount}}
+             {{this.total_discount * totalnight}}
           </span> </div>
 
       <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
           style="font-size: 16px;">Price after Discount</span> <span>₹ 
             <!-- {{infodata.finalPrice * persion }} -->
-             {{this.price_after_discount}}
+             {{this.price_after_discount * totalnight}}
           </span> </div>
 
       <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
@@ -225,7 +225,7 @@
       <div class="row total"> <span style="font-size: 16px;">Total Amount to be paid</span> 
         <span>₹
           <!-- {{infodata.finalPrice * persion}} -->
-           {{total_paid_amount}}
+           {{total_paid_amount * totalnight}}
         </span> </div>
     </div>
 

@@ -18,6 +18,10 @@ export class HotelListComponent implements OnInit {
   combohotelRooms: any[] = [];
   // room: any;
    
+  // for price calculaions*********
+  totalnight:any;
+  // for price calculaions*********
+
 
   searchOnIt: {
     city?: string;
@@ -52,25 +56,7 @@ export class HotelListComponent implements OnInit {
   showNoHotels: boolean = false; 
   ngOnInit(): void {
  
-      // if (this.combohotelRooms.length === 0 && this.execthotelRooms.length === 0) {
-        
-      //      setTimeout(() => {
-      //       this.isLoading = false;
-      //   this.showNoHotels = true;
-      //       }, 10000);
-             
-      //   else if(this.combohotelRooms.length === 0 && this.execthotelRooms.length === 0){
-      //               this.isLoading = true;
-      //   this.showNoHotels = false;
-      //   }esle{
-      //      this.isLoading = false;
-      //   this.showNoHotels = false;
-      //   }
-      // }else{
-      //   this.isLoading = false;
-      //   this.showNoHotels = false;
-      // }
-        this.intervalId = setInterval(() => {
+   this.intervalId = setInterval(() => {
       if (this.combohotelRooms.length > 0 || this.execthotelRooms.length > 0) {
         // Data arrived
         this.isLoading = false;
@@ -93,9 +79,7 @@ this.getDataForShowSearch()
     window.addEventListener('scroll', this.onScroll, true);
     this.route.queryParams.subscribe(params => {
       this.originalParams = { ...params }; // ✅ store original params
-      //  localStorage.setItem('adults',this.originalParams.adults);
-      //  localStorage.setItem('children',this.originalParams.children);
-      // this.room = this.originalParams.children;
+  
 
       const filter = {
         city: params['city'],
@@ -114,7 +98,9 @@ this.getDataForShowSearch()
         && !localStorage.getItem('checkout') && !localStorage.getItem('rooms')) {
 
         this.service.getHotelRoomsWithCombo(filter).then((res: any) => {
-          console.log("res Combo", res.data.non_matched_rooms)
+          console.log("res Combo1", res.data.non_matched_rooms[0])
+             
+                 this.calculateDays(res.data.non_matched_rooms[0].checkin,res.data.non_matched_rooms[0].checkout);
           this.combohotelRooms = res.data.non_matched_rooms
             // remove records with calculated_needed_rooms == 1
             .filter((room: any) => room.calculated_needed_rooms !== 1)
@@ -133,12 +119,13 @@ this.getDataForShowSearch()
 
 
         this.service.getHotelRoomsWithExact(filter).then((res: any) => {
-          console.log("res exact", res.data.rooms)
+          console.log("res exact1", res.data.rooms)
           this.execthotelRooms = res.data.rooms;
           this.execthotelRooms = res.data.rooms.map((room: any) => ({
             ...room,
             mainImage: room.rooms_image?.[0] || '' // take first image as main
           }));
+          this.calculateDays(res.data.rooms[0].checkin,res.res.data.rooms[0].checkout);
         }).catch((err: any) => {
           
            if (err?.notfound || err?.status === 404) {
@@ -163,9 +150,10 @@ this.getDataForShowSearch()
 
         this.service.getHotelRoomsWithCombo(this.searchOnIt).then((res: any) => {
           console.log("res Combo", res.data.non_matched_rooms)
+           this.calculateDays(res.data.non_matched_rooms[0].checkin,res.data.non_matched_rooms[0].checkout);
           this.combohotelRooms = [];
           this.combohotelRooms = res.data.non_matched_rooms
-            // remove records with calculated_needed_rooms == 1
+           
             .filter((room: any) => room.calculated_needed_rooms !== 1)
             // map for main image
             .map((room: any) => ({
@@ -179,13 +167,15 @@ this.getDataForShowSearch()
           }
         })
         this.service.getHotelRoomsWithExact(this.searchOnIt).then((res: any) => {
-          console.log("res exact", res.data.rooms)
+           
+          console.log("res exact2", res.data.rooms)
           this.execthotelRooms = [];
           this.execthotelRooms = res.data.rooms;
           this.execthotelRooms = res.data.rooms.map((room: any) => ({
             ...room,
             mainImage: room.rooms_image?.[0] || '' // take first image as main
           }));
+          this.calculateDays(res.data.rooms[0].checkin,res.res.data.rooms[0].checkout);
         }).catch((err: any) => {
          if (err?.notfound || err?.status === 404) {
             console.error("Error:", err);
@@ -197,6 +187,8 @@ this.getDataForShowSearch()
 
  
   }
+
+  
    clearTimers() {
     if (this.intervalId) clearInterval(this.intervalId);
     if (this.timeoutId) clearTimeout(this.timeoutId);
@@ -217,6 +209,18 @@ this.getDataForShowSearch()
      this.tempFormattedDate()
   }
 
+
+ calculateDays(checkin: any, checkout: any) {
+  const start = new Date(checkin);
+  const end   = new Date(checkout);
+
+  // Difference in milliseconds
+  const diff = end.getTime() - start.getTime();
+
+  // Convert to days
+  this.totalnight = diff / (1000 * 60 * 60 * 24);
+  console.log("diffrence",this.totalnight)
+}
 
   tempFormattedDate() {
   const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short', year: '2-digit' };  
@@ -395,17 +399,19 @@ this.getDataForShowSearch()
 
       if (this.minPrice !== null) filter.min_price = this.minPrice;
       if (this.maxPrice !== null) filter.max_price = this.maxPrice;
-      // if (this.selectedPlaceType) filter.place_type = this.selectedPlaceType;
+      
 
       // console.log('Final Filter:', filter);
 
       this.service.getHotelRoomsWithCombo(filter).then((res: any) => {
         this.combohotelRooms = res.data.non_matched_rooms
+        
           .filter((room: any) => room.calculated_needed_rooms !== 1)
           .map((room: any) => ({
             ...room,
             mainImageUrlcombo: room.room?.rooms_image?.[0] || ''
           }));
+           this.calculateDays(res.data.non_matched_rooms[0].checkin,res.data.non_matched_rooms[0].checkout);
       }).catch((err: any) => {
         if (err?.notfound || err?.status === 404) {
             console.error("Error:", err);
@@ -416,10 +422,12 @@ this.getDataForShowSearch()
       });
 
       this.service.getHotelRoomsWithExact(filter).then((res: any) => {
+        console.log("res exact3", res.data.rooms)
         this.execthotelRooms = res.data.rooms.map((room: any) => ({
           ...room,
           mainImage: room.rooms_image?.[0] || ''
         }));
+        this.calculateDays(res.data.rooms[0].checkin,res.res.data.rooms[0].checkout);
       }).catch((err: any) => {
       if (err?.notfound || err?.status === 404) {
             console.error("Error:", err);

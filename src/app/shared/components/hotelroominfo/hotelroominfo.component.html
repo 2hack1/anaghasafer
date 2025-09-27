@@ -25,7 +25,7 @@
             <p class="location">Per night for {{requirerooms}} Rooms:</p>
             <div style="display: flex;">
               <!-- <h2>₹ {{combovalue.finalPrice * requirerooms}}</h2> <sup>+792</sup> -->
-              <h2>₹ {{combovalue.finalPrice * requirerooms}}</h2> <sup>+792</sup>
+              <h2>₹ {{(combovalue.finalPrice * requirerooms)*totalnight}}</h2> <sup>+792</sup>
             </div>
             <div class="tabs"> <button [class.active]="activeTab === 'description'"
                 (click)="activeTab = 'description'">Description</button> <button
@@ -172,7 +172,7 @@
             <!-- <span>not Available</span> -->
             <p class="location">Per night for {{requirerooms}} Rooms:</p>
             <div style="display: flex;">
-              <h2>₹ {{exactvalue.finalPrice}}</h2> <sup>+792</sup>
+              <h2>₹ {{exactvalue.finalPrice * totalnight}}</h2> <sup>+792</sup>
             </div>
             <div class="tabs"> <button [class.active]="activeTab === 'description'"
                 (click)="activeTab = 'description'">Description</button> <button
