@@ -102,17 +102,39 @@ export class ParticularHotelRoomDataComponent implements OnInit {
 
   total_paid_amount: any;
   topPageShow = true;
+  requireroom:any;
   amountcalc() {
+
+    const stored = sessionStorage.getItem('roomtype');
+let decodedValue: any = null;
+
+if (stored) {
+  try {
+    decodedValue = JSON.parse(
+      decodeURIComponent(escape(atob(stored)))
+    );
+    this.requireroom = decodedValue;
+    console.log('✅ Decoded roomtype:', this.requireroom);
+    this.topPageShow = true;  // value is valid
+  } catch (err) {
+    console.error('❌ Invalid or tampered value:', err);
+    this.topPageShow = false;   // user changed or corrupted the data
+  }
+} else {
+  this.topPageShow = false;    // nothing stored
+}
+
+
     // if(sessionStorage.getItem('type') && sessionStorage.getItem('roomtype')){
     if (
       (sessionStorage.getItem('type') === 'combo' ||
         sessionStorage.getItem('type') === 'exact') &&
-      sessionStorage.getItem('roomtype')
+      this.requireroom
     ) {
       if (sessionStorage.getItem('type') === 'combo') {
    
-        this.basePrice = this.infodata.basePrice * Number(sessionStorage.getItem('roomtype'))
-        this.total_discount = (this.infodata.basePrice) / (this.infodata.discount) * Number(sessionStorage.getItem('roomtype'))
+        this.basePrice = this.infodata.basePrice * Number(this.requireroom)
+        this.total_discount = (this.infodata.basePrice) / (this.infodata.discount) * Number(this.requireroom)
         this.price_after_discount = this.basePrice - this.total_discount;
         this.total_paid_amount = this.basePrice - this.total_discount;
         console.log("this.basePrice", this.basePrice)
@@ -319,7 +341,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
   }
   // *************************************************************************************************
 
-  submitPayment() {
+  submitPayment( ) {
 
 
 
@@ -335,14 +357,14 @@ export class ParticularHotelRoomDataComponent implements OnInit {
       children: this.filter.children,
       rooms_booked: this.filter.rooms_required,
       roomType: this.infodata.roomType,
-      price_per_night: this.infodata.finalPrice,
       // payment_status:"pending",
-
+      
       payment_method: this.selectedMethod,
       transaction_id: this.transaction_id,
       // status:"",
       // special_requests:"",
-      total_amount: (this.infodata.finalPrice * this.filter.rooms_required),
+      price_per_night: this.infodata.finalPrice,   //per night price
+      total_amount: (this.infodata.finalPrice * this.filter.rooms_required), //total amount
       rooms_available: this.avrooms,
 
       room_no: this.filter.rooms_required && this.filter.rooms_required.length > 0

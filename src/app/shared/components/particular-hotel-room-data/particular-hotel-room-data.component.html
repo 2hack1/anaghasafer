@@ -249,3 +249,20 @@
     </div>
   </div>
 </div>
+
+
+
+
+<div *ngIf="!topPageShow"class="error-box"  style="margin:200px 200px;">
+  <h2>⚠️ Something Went Wrong</h2>
+  <p>The data seems to be missing or altered.</p>
+  
+</div>
+
+<ng-template #validContent>
+  <!-- ✅ Normal page content here when data is valid -->
+  <div>
+    <h3>Room Type Details</h3>
+    <p>{{ requireroom }}</p>
+  </div>
+</ng-template>

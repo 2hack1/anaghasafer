@@ -1,0 +1,41 @@
+<div class="blog-container">
+
+  <h1>Travel & Hotel Blog</h1>
+  <p class="intro">Discover travel tips, hotel reviews, and destination guides to make your trips unforgettable.</p>
+
+  <!-- Featured Slider -->
+  <div class="featured-slider">
+    <div class="featured-card" *ngFor="let post of featuredPosts">
+      <img [src]="post.img" alt="{{post.title}}">
+      <div class="featured-overlay">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.excerpt }}</p>
+        <a [routerLink]="post.link" class="read-more">Read More</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blog Categories -->
+  <div class="blog-categories">
+    <span class="category" *ngFor="let cat of categories">{{ cat }}</span>
+  </div>
+
+  <!-- Secondary Posts Grid -->
+  <div class="blog-grid">
+    <div class="blog-card" *ngFor="let post of blogPosts">
+      <img [src]="post.img" alt="{{post.title}}">
+      <div class="card-content">
+        <h2>{{ post.title }}</h2>
+        <p class="date">Posted on {{ post.date }} by {{ post.author }}</p>
+        <p class="excerpt">{{ post.excerpt }}</p>
+        <div class="meta">
+          <span>{{ post.readTime }} min read</span>
+          <span>👍 {{ post.likes }}</span>
+          <span>💬 {{ post.comments }}</span>
+        </div>
+        <a [routerLink]="post.link" class="read-more">Read More</a>
+      </div>
+    </div>
+  </div>
+
+</div>

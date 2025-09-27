@@ -82,7 +82,13 @@ export class HotelroominfoComponent implements OnInit {
           
           // console.log("availability", availlibllity.require_room)
           console.log("availability", this.requirerooms)
-          sessionStorage.setItem('roomtype',this.requirerooms);
+          // sessionStorage.setItem('roomtype',this.requirerooms);
+          // endcrpt 
+          sessionStorage.setItem(
+  'roomtype',
+  btoa(unescape(encodeURIComponent(JSON.stringify(this.requirerooms))))
+);
+
         }).catch((err: any) => {
           console.error(err);
         });

@@ -15,6 +15,11 @@ import { HotelroominfoComponent } from './shared/components/hotelroominfo/hotelr
 import { UserprofileComponent } from './shared/components/userprofile/userprofile.component';
 import { ForgetpasspopupComponent } from './shared/components/forgetpasspopup/forgetpasspopup.component';
 import { HotelPolicyComponent } from './shared/components/hotel-policy/hotel-policy.component';
+import { TermsAndConditionOfAnaghaComponent } from './shared/components/terms-and-condition-of-anagha/terms-and-condition-of-anagha.component';
+import { PrivacypolicyAnaghaComponent } from './shared/components/privacypolicy-anagha/privacypolicy-anagha.component';
+import { SocialImpactComponent } from './shared/components/social-impact/social-impact.component';
+import { BlogComponent } from './shared/components/blog/blog.component';
+import { AllreviewsComponent } from './shared/components/allreviews/allreviews.component';
 
 
 export const routes: Routes = [
@@ -26,7 +31,6 @@ export const routes: Routes = [
         path: 'dss',
         component: FilterpackagesComponent
     },
-
     {
         path: 'states/:id',
         component: StatestoursComponent
@@ -73,5 +77,21 @@ export const routes: Routes = [
     },{
         path:"qrcode/q",
         component:HotelPolicyComponent
+    },{
+        path:'Terms&condition',
+        component:TermsAndConditionOfAnaghaComponent
+    },{
+        path:'userprivacypolicy',
+        component:PrivacypolicyAnaghaComponent
+    },{
+        path:'socialimpact',
+        component:SocialImpactComponent
+    },{
+        path:'blog',
+        component:BlogComponent
+    },{
+        path:'reviews',
+        component:AllreviewsComponent
     }
+
 ]

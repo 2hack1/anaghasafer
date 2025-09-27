@@ -1,0 +1,43 @@
+.terms-container {
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fdfdfd;
+  border-radius: 6px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.terms-container h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.terms-container h2 {
+  color: #3c9ae7;
+  margin-top: 15px;
+  font-size: 1.1em;
+}
+
+.terms-container p {
+  margin: 8px 0;
+}
+
+.terms-container ul {
+  margin: 5px 0 10px 20px;
+}
+
+.effective-date {
+  text-align: center;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.acknowledgement {
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: center;
+}

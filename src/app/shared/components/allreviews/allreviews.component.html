@@ -1,0 +1,33 @@
+<div class="reviews-container">
+  <h1>Traveler & Hotel Reviews</h1>
+  <p class="intro">
+    Read real feedback from our customers about their trips and hotel stays with AnaghaSafar.com.
+  </p>
+
+  <!-- Reviews List -->
+  <div class="review-list">
+    <div class="review-card" *ngFor="let review of reviews; let i = index">
+      <div class="review-header">
+        <!-- <img [src]="review.img" alt="{{ review.name }}"> -->
+         <img [src]="review.img" alt="{{ review.name }}" width="70" height="70">
+
+        <div>
+          <h3>{{ review.name }}</h3>
+          <p class="trip-info">{{ review.tripName }} | {{ review.hotelName }} | {{ review.place }}</p>
+          <div class="rating">
+            <span *ngFor="let star of [].constructor(review.rating)">★</span>
+            <span *ngFor="let star of [].constructor(5 - review.rating)">☆</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Review message with Read More/Less -->
+      <p class="review-message">
+        {{ review.expanded ? review.message : (review.message | slice:0:120) + '...' }}
+        <span class="toggle" (click)="toggleRead(i)">
+          {{ review.expanded ? 'less' : 'more' }}
+        </span>
+      </p>
+    </div>
+  </div>
+</div>

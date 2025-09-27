@@ -230,10 +230,11 @@
             </div>
           </div>
 
-          <a href="#" class="more-link">+ More Amenities</a>
+          <a  class="more-link">+ More Amenities</a>
         </div>
 
-        <div class="login-box">
+
+ <div class="login-box desktop-only">
           <h4>Login to unlock deals & manage your bookings!</h4>
           <div class="login-form">
             <div class="input-row">
@@ -250,6 +251,34 @@
             </div>
           </div>
         </div>
+      
+      <div class="auth-container mobile-only">
+  <h4 class="auth-title">Login to unlock deals & manage your bookings!</h4>
+  
+  <div class="auth-form">
+    <div class="auth-input-row">
+      
+      <label class="auth-label">Email</label>
+      <input type="email" placeholder="Enter Email" [(ngModel)]="email" required />
+
+      <label class="auth-label">Password</label>
+      <input type="password" placeholder="Enter Password" [(ngModel)]="password" required />
+
+      <button class="auth-btn" (click)="login()" *ngIf="!loading; else loadingSpinner">
+        Login Now
+      </button>
+
+      <ng-template #loadingSpinner>
+        <span class="loading-indicator"></span> Loading...
+      </ng-template>
+
+    </div>
+  </div>
+     </div>
+
+
+
+
       </div>
     </div>
   </div>
@@ -264,7 +293,7 @@
 
 
 
-<div class="not-found-container" *ngIf="notfound">
+<div class="not-found-container"  *ngIf="notfound">
   <div class="content">
     <h1 class="error-code">500</h1>
     <h2 class="error-message">Oops! Somthing want worn</h2>

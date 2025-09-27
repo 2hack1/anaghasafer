@@ -105,13 +105,18 @@ decMaxPrice() {
    
    }
 setDates() {
-    const today = new Date();
+  if(!this.hotel.checkIn && !this.hotel.checkOut){
+ const today = new Date();
     const tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1);
 
     // Format YYYY-MM-DD
     this.hotel.checkIn = today.toISOString().split('T')[0];
     this.hotel.checkOut = tomorrow.toISOString().split('T')[0];
+  }else{
+        console.log("nothing to work");
+  }
+   
   }
   togglePriceModal() { this.showPriceModal = !this.showPriceModal; }
   search() { 
@@ -202,13 +207,13 @@ setDates() {
   showDateModal: boolean = false;
   constructor(private service:AxiosService,private route:Router) {
 
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1); 
-    this.hotel.checkIn = this.formatDate(today); 
-    this.hotel.checkOut = this.formatDate(tomorrow);
-     this.tempCheckIn = this.hotel.checkIn;
-      this.tempCheckOut = this.hotel.checkOut;
+    // const today = new Date();
+    // const tomorrow = new Date(today);
+    // tomorrow.setDate(today.getDate() + 1); 
+    // this.hotel.checkIn = this.formatDate(today); 
+    // this.hotel.checkOut = this.formatDate(tomorrow);
+    //  this.tempCheckIn = this.hotel.checkIn;
+    //   this.tempCheckOut = this.hotel.checkOut;
   } /** Open date selection modal */
   openDateModal(): void {
      this.showDateModal = true;
@@ -217,6 +222,7 @@ setDates() {
      } /** Close date modal without saving changes */ 
      closeDateModal(): void { 
       this.showDateModal = false;
+      
      } /** Close modal from "X" button */
       PriceModal(): void { 
         this.showDateModal = false; 
@@ -228,6 +234,8 @@ setDates() {
     // Update hotel dates 
     this.hotel.checkIn = this.tempCheckIn;
     this.hotel.checkOut = this.tempCheckOut;
+    // console.log('this.hotel.checkIn',this.hotel.checkIn);
+    // console.log('this.hotel.checkOut',this.hotel.checkOut);
     // Close modal after applying 
     this.showDateModal = false;
   }

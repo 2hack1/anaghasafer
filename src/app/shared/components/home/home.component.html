@@ -438,7 +438,7 @@
 					&#10095;
 				</button> -->
 			</div>
-			<button class="see-all-btn">See All</button>
+			<button class="see-all-btn"><a style="text-decoration: none; color: rgb(255, 255, 255);" [routerLink]="['/reviews']">See All</a></button>
 		</section>
 	</div>
 	<!-- ********************* contect form*************************  -->
@@ -494,19 +494,19 @@
 					</li>
 					<li><strong>Phone:</strong><br />+9755-54-97-33</li>
 					<li>
-						<strong>Email:</strong><br /><a [href]="'mailto:' + email">Anaghasolutions1.gmail.com</a>
+						<strong>Email:</strong><br /><a [href]="'mailto:' + email">{{ email }}</a>
 					</li>
 					<li>
 						<strong>instagram:</strong><br /><a class="social-link"
 							[href]="'https://www.instagram.com/' + instagramUsername" target="_blank">
 							<!-- {{ instagramUsername }} -->
-							AnaghaSafar
+							AnaghaSafar.instagram
 						</a>
 					</li>
 					<li>
 						<strong>facbook:</strong><br /><a [href]="'https://www.facebook.com/' + facebookUsername"
 							target="_blank">
-							AnaghaSafar
+							AnaghaSafar.facebook
 						</a>
 					</li>
 				</ul>
@@ -517,7 +517,7 @@
 					<i class="fab fa-google-plus-g1"></i>
 				</div>
 			</div>
-			-->
+	
 		</div>
 	</div>
 	<!-- ************************** footer************************************** -->

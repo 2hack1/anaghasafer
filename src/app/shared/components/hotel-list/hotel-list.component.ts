@@ -114,7 +114,7 @@ this.getDataForShowSearch()
         && !localStorage.getItem('checkout') && !localStorage.getItem('rooms')) {
 
         this.service.getHotelRoomsWithCombo(filter).then((res: any) => {
-          // console.log("res Combo", res.data.non_matched_rooms)
+          console.log("res Combo", res.data.non_matched_rooms)
           this.combohotelRooms = res.data.non_matched_rooms
             // remove records with calculated_needed_rooms == 1
             .filter((room: any) => room.calculated_needed_rooms !== 1)
@@ -133,7 +133,7 @@ this.getDataForShowSearch()
 
 
         this.service.getHotelRoomsWithExact(filter).then((res: any) => {
-          // console.log("res exact", res.data.rooms)
+          console.log("res exact", res.data.rooms)
           this.execthotelRooms = res.data.rooms;
           this.execthotelRooms = res.data.rooms.map((room: any) => ({
             ...room,
@@ -162,7 +162,7 @@ this.getDataForShowSearch()
         }
 
         this.service.getHotelRoomsWithCombo(this.searchOnIt).then((res: any) => {
-          // console.log("res Combo", res.data.non_matched_rooms)
+          console.log("res Combo", res.data.non_matched_rooms)
           this.combohotelRooms = [];
           this.combohotelRooms = res.data.non_matched_rooms
             // remove records with calculated_needed_rooms == 1
@@ -179,7 +179,7 @@ this.getDataForShowSearch()
           }
         })
         this.service.getHotelRoomsWithExact(this.searchOnIt).then((res: any) => {
-          // console.log("res exact", res.data.rooms)
+          console.log("res exact", res.data.rooms)
           this.execthotelRooms = [];
           this.execthotelRooms = res.data.rooms;
           this.execthotelRooms = res.data.rooms.map((room: any) => ({

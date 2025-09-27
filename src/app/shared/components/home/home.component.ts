@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   totalSlides = 3;
   facebookUsername = "anaghasafer";
   instagramUsername = "anaghasafer";
-  email = 'anaghasafer21@mail.com';
+  email = 'info@anaghasafar.com';
   stores: any;
   international: any;
   destinationsid: any[] = [];

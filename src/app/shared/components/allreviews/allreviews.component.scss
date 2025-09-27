@@ -1,0 +1,128 @@
+.reviews-container {
+  width: 95%;
+  max-width: 900px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.reviews-container h1 {
+  text-align: center;
+  font-size: 2.5em;
+  color: #3c8ee7;
+  margin-bottom: 10px;
+}
+
+.reviews-container .intro {
+  text-align: center;
+  font-size: 1.1em;
+  color: #555;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+/* Review Cards */
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.review-card {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.review-header img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.review-header h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #a471e5;
+}
+
+.review-header .trip-info {
+  font-size: 0.9em;
+  color: #555;
+  margin: 3px 0;
+}
+
+.rating {
+  color: #f39c12;
+  font-size: 0.9em;
+}
+
+.review-message {
+  font-size: 1em;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .review-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .review-header img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 8px;
+  }
+
+  .review-card {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reviews-container h1 {
+    font-size: 2em;
+  }
+
+  .review-card {
+    padding: 12px;
+  }
+
+  .review-header h3 {
+    font-size: 1.1em;
+  }
+
+  .review-message {
+    font-size: 0.95em;
+  }
+}
+.review-message {
+  font-size: 1em;
+  color: #444;
+  line-height: 1.5;
+}
+
+.review-message .toggle {
+  color: #e74c3c;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 5px;
+  user-select: none;
+}
