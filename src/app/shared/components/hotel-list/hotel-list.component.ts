@@ -120,12 +120,15 @@ this.getDataForShowSearch()
 
         this.service.getHotelRoomsWithExact(filter).then((res: any) => {
           console.log("res exact1", res.data.rooms)
+          //  console.log("that proble not have valu ",res.data.rooms[0].checkin,res.data.rooms[0].checkout)
           this.execthotelRooms = res.data.rooms;
           this.execthotelRooms = res.data.rooms.map((room: any) => ({
             ...room,
             mainImage: room.rooms_image?.[0] || '' // take first image as main
           }));
-          this.calculateDays(res.data.rooms[0].checkin,res.res.data.rooms[0].checkout);
+      
+          
+          this.calculateDays(res.data.rooms[0].checkin,res.data.rooms[0].checkout);
         }).catch((err: any) => {
           
            if (err?.notfound || err?.status === 404) {
@@ -175,7 +178,7 @@ this.getDataForShowSearch()
             ...room,
             mainImage: room.rooms_image?.[0] || '' // take first image as main
           }));
-          this.calculateDays(res.data.rooms[0].checkin,res.res.data.rooms[0].checkout);
+          this.calculateDays(res.data.rooms[0].checkin,res.data.rooms[0].checkout);
         }).catch((err: any) => {
          if (err?.notfound || err?.status === 404) {
             console.error("Error:", err);
@@ -211,6 +214,8 @@ this.getDataForShowSearch()
 
 
  calculateDays(checkin: any, checkout: any) {
+ 
+  console.log("if contion is run and :", checkin,checkout,this.totalnight)
   const start = new Date(checkin);
   const end   = new Date(checkout);
 
@@ -427,7 +432,7 @@ this.getDataForShowSearch()
           ...room,
           mainImage: room.rooms_image?.[0] || ''
         }));
-        this.calculateDays(res.data.rooms[0].checkin,res.res.data.rooms[0].checkout);
+        this.calculateDays(res.data.rooms[0].checkin,res.data.rooms[0].checkout);
       }).catch((err: any) => {
       if (err?.notfound || err?.status === 404) {
             console.error("Error:", err);

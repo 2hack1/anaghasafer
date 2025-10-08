@@ -1,22 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { UserServicesService } from '../../../core/services/userService/user-services.service';
 import { error } from 'jquery';
 import { environment } from '../../../../environments/environment.development';
 
 
+
 @Component({
   selector: 'app-particular-hotel-room-data',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './particular-hotel-room-data.component.html',
   styleUrl: './particular-hotel-room-data.component.scss'
   //  styleUrls: ['./particular-hotel-room-data.component.scss'] 
 })
 export class ParticularHotelRoomDataComponent implements OnInit {
-  totalnight:any;
+  totalnight: any;
   guest = {
     title: 'Mr',
     firstName: '',
@@ -62,7 +63,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     this.route.queryParams.subscribe(query => {
       this.persion = query['adutls'];
       this.avrooms = query['avrooms'];
-      this.calculateDays(query['check_in_date'],query['check_out_date'])
+      this.calculateDays(query['check_in_date'], query['check_out_date'])
       this.filter = {
         check_in_date: query['check_in_date'],
         check_out_date: query['check_out_date'],
@@ -73,7 +74,6 @@ export class ParticularHotelRoomDataComponent implements OnInit {
         children: query['children'],
       };
     });
-
 
     if (this.filter) {
       this.service.getinfo(this.filter.hotel_vendor_id,
@@ -104,28 +104,28 @@ export class ParticularHotelRoomDataComponent implements OnInit {
 
   total_paid_amount: any;
   topPageShow = true;
-  requireroom:any;
-  pernightprice:any;
+  requireroom: any;
+  pernightprice: any;
   amountcalc() {
 
     const stored = sessionStorage.getItem('roomtype');
-let decodedValue: any = null;
+    let decodedValue: any = null;
 
-if (stored) {
-  try {
-    decodedValue = JSON.parse(
-      decodeURIComponent(escape(atob(stored)))
-    );
-    this.requireroom = decodedValue;
-    console.log('✅ Decoded roomtype:', this.requireroom);
-    this.topPageShow = true;  // value is valid
-  } catch (err) {
-    console.error('❌ Invalid or tampered value:', err);
-    this.topPageShow = false;   // user changed or corrupted the data
-  }
-} else {
-  this.topPageShow = false;    // nothing stored
-}
+    if (stored) {
+      try {
+        decodedValue = JSON.parse(
+          decodeURIComponent(escape(atob(stored)))
+        );
+        this.requireroom = decodedValue;
+        console.log('✅ Decoded roomtype:', this.requireroom);
+        this.topPageShow = true;  // value is valid
+      } catch (err) {
+        console.error('❌ Invalid or tampered value:', err);
+        this.topPageShow = false;   // user changed or corrupted the data
+      }
+    } else {
+      this.topPageShow = false;    // nothing stored
+    }
 
 
     // if(sessionStorage.getItem('type') && sessionStorage.getItem('roomtype')){
@@ -135,7 +135,7 @@ if (stored) {
       this.requireroom
     ) {
       if (sessionStorage.getItem('type') === 'combo') {
-        this.pernightprice=this.infodata.basePrice;
+        this.pernightprice = this.infodata.basePrice;
         // console.log("this.pernightprice",this.pernightprice)
         this.basePrice = this.infodata.basePrice * Number(this.requireroom)
         this.total_discount = (this.infodata.basePrice) / (this.infodata.discount) * Number(this.requireroom)
@@ -147,10 +147,10 @@ if (stored) {
         console.log("total_paid_amount", this.total_paid_amount)
 
       } else {
-        this.basePrice = this.infodata.basePrice 
+        this.basePrice = this.infodata.basePrice
         // this.basePrice = this.infodata.basePrice;
-         this.pernightprice=this.infodata.basePrice
-        this.total_discount =  (this.basePrice * (this.infodata.discount / 100));
+        this.pernightprice = this.infodata.basePrice
+        this.total_discount = (this.basePrice * (this.infodata.discount / 100));
         this.price_after_discount = this.basePrice - this.total_discount;
         this.total_paid_amount = this.basePrice - this.total_discount;
         console.log("this.basePrice", this.basePrice)
@@ -170,6 +170,10 @@ if (stored) {
   ngOnInit(): void {
     // this.persion = Number(localStorage.getItem('adults'));
     // console.log('avrooms:', this.avrooms)
+    if (sessionStorage.getItem('register') === 'true') {
+      this.isModalOpen = true;
+      sessionStorage.removeItem('register')
+    }
 
   }
 
@@ -240,18 +244,19 @@ if (stored) {
         password: this.guest.password,
         password_confirmation: this.guest.confirmPassword,
         role: 'user',
-        mob1: this.guest.mobile1,
-        mob2: this.guest.mobile2,
+        user_mob_no1: Number(this.guest.mobile1),
+        user_mob_no2: Number(this.guest.mobile2),
 
       };
 
       this.userservice.userRegister(a).subscribe({
         next: (res: any) => {
-          // console.log('Register Success:', res);
+          console.log('Register Success:', res);
           this.isLoading = false;
           this.isSuccess = true;
           this.userid = res.user.id;
-          sessionStorage.setItem('i', res.user.id)
+          // sessionStorage.setItem('i', res.user.id)
+          sessionStorage.setItem('userid', res.user.id)
           sessionStorage.setItem('token', res.access_token);
           sessionStorage.setItem('name', res.user.name);
           sessionStorage.setItem('email', res.user.email);
@@ -261,7 +266,12 @@ if (stored) {
             // console.log('Guest Registered:', this.guest);
             // this.isModalOpen = false;
           }, 2000);
-          this.isModalOpen = true;
+          // this.isModalOpen = true;
+          sessionStorage.setItem('register', 'true')
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+
         },
         error: (err: any) => {
           console.error('Register Error:', err);
@@ -346,37 +356,38 @@ if (stored) {
   }
   // *************************************************************************************************
 
-  submitPayment( booked_rooms:any,pernightprice:any,totalamount:any) {
-    console.log("booked_rooms",booked_rooms);
-    console.log("pernightprice",pernightprice);
-    console.log("totalamount",totalamount);
+  isLoadings = false;
+  submitPayment(booked_rooms: any, pernightprice: any, totalamount: any) {
+    this.isLoadings = true;
+    console.log("booked_rooms", booked_rooms);
+    console.log("pernightprice", pernightprice);
+    console.log("totalamount", totalamount);
 
     const booking = {
-      user_id: sessionStorage.getItem('i'),
+      user_id: sessionStorage.getItem('userid'),
+      rooms_available: (this.avrooms - this.filter.rooms_required),//************************************************************* */
       hotel_vendor_id: this.infodata.hotel_vendor_id,
       hotel_roomId: this.infodata.hotel_roomId,
       check_in_date: this.filter.check_in_date,
       check_out_date: this.filter.check_out_date,
       adults: this.persion,
       children: this.filter.children,
-      // rooms_booked: this.filter.rooms_required,
-      rooms_booked: String(booked_rooms),
+      rooms_booked: String(this.filter.rooms_required),
       roomType: this.infodata.roomType,
-      // payment_status:"pending",
-      
       payment_method: this.selectedMethod,
       transaction_id: this.transaction_id,
+      // price_per_night: pernightprice,   //per night price
+      price_per_night: this.total_paid_amount,   //per night price
+      total_amount: totalamount, //total amount
+      // rooms_booked: this.filter.rooms_required,
+      payment_status: "pending",
+
       // status:"",
       // special_requests:"",
       // price_per_night: this.infodata.finalPrice,   //per night price
-      price_per_night: pernightprice,   //per night price
       // total_amount: (this.infodata.finalPrice * this.filter.rooms_required), //total amount
-      total_amount: totalamount, //total amount
-      rooms_available: this.avrooms,
 
-      room_no: this.filter.rooms_required && this.filter.rooms_required.length > 0
-        ? this.filter.rooms_required
-        : []   // ✅ safe default
+      // room_no: // ✅ safe default
     }
 
 
@@ -399,33 +410,31 @@ if (stored) {
       // if (booking.transaction_id) {
 
       this.service.booking(data).then((res: any) => {
-
-        // console.log("bookingg",this.userid);
-        this.router.navigate(['/profile', this.userid]);
-        // this.router.navigate(['/profile', 1]);
-
-        //         const encryptedId = btoa(this.userid.toString()); // convert to Base64
-        // this.router.navigate(['/profile', encryptedId]);
+        const encryptedId = btoa((sessionStorage.getItem('userid')).toString()); // convert to Base64
+        this.router.navigate(['/profile', encryptedId]);
         // sessionStorage.clear();
+        this.isLoadings = false;
       }).catch((err: any) => {
         console.error(err);
+        this.isLoadings = false;
       })
     } else {
       this.errorMessage = 'Please enter the transaction ID to proceed with the payment.';
       alert('Please enter the  valid transaction ID ');
+      this.isLoadings = false;
     }
   }
 
   calculateDays(checkin: any, checkout: any) {
-  const start = new Date(checkin);
-  const end   = new Date(checkout);
+    const start = new Date(checkin);
+    const end = new Date(checkout);
 
-  // Difference in milliseconds
-  const diff = end.getTime() - start.getTime();
+    // Difference in milliseconds
+    const diff = end.getTime() - start.getTime();
 
-  // Convert to days
-  this.totalnight = diff / (1000 * 60 * 60 * 24);
-  console.log("diffrence",this.totalnight)
-}
+    // Convert to days
+    this.totalnight = diff / (1000 * 60 * 60 * 24);
+    console.log("diffrence", this.totalnight)
+  }
 
 }

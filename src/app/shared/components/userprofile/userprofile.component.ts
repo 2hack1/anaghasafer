@@ -1,25 +1,11 @@
-// import { CommonModule } from '@angular/common';
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-userprofile',
-//   imports: [CommonModule],
-//   templateUrl: './userprofile.component.html',
-//   styleUrl: './userprofile.component.scss'
-// })
-// export class UserprofileComponent {
-
-//   selectedTab = 0;
-
-//   selectTab(index: number) {
-//     this.selectedTab = index;
-//   }
-// }
-
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
+import { UserServicesService } from '../../../core/services/userService/user-services.service';
+
+
+
 
 @Component({
   selector: 'app-userprofile',
@@ -28,23 +14,22 @@ import { AxiosService } from '../../../core/services/axios/axios.service';
   styleUrl: './userprofile.component.scss'
 })
 export class UserprofileComponent implements OnInit {
-
+  check=true;
   nothavebooking:boolean=false
   nothaveoder:boolean=false
   selectedTab = 0;
    booking :any={}
    userdata:any;
+   
   selectTab(index: number) {
     this.selectedTab = index;
   }
 
-  constructor(private router:ActivatedRoute,private service:AxiosService){
-
-  }
+  constructor(private router:ActivatedRoute,private service:AxiosService,private userservice:UserServicesService){}
 
   
   ngOnInit(): void {
-    
+
 const encryptedId = this.router.snapshot.paramMap.get('id');
   const id = atob(encryptedId!);
 
@@ -75,14 +60,17 @@ getBookingdata(id:any){
   this.bookingData=res.data;
 if (!res.data || res.data.length === 0) {
   this.nothavebooking = true;
+  console.log("data not have")
 } else {
   this.nothavebooking = false;
+    console.log("data have")
   // this.booking = res.data[0];
   this.booking=res.data
 
 }
 
   }).catch((err:any)=>{
+      this.nothavebooking = true;
     // console.log(err);
     
   })
@@ -108,16 +96,23 @@ this.service.getOrderDataOnUserProfile(id).then((res:any)=>{
   // console.log('packageData ',this.packageData)
 if (!res.data || res.data.length === 0) {
   this.nothaveoder = true;
+  console.log("data not have order")
 } else {
+  console.log("data  have order" )
   this.nothaveoder = false;
   // this.booking = res.data[0];
   
 
 }
 }).catch((err:any)=>{
-  
+   this.nothaveoder = true;
   console.error(err)
 })
 }
 
+  onClickCallProfile() {
+    this.userservice.callProfileFunction();
+    this.check=!this.check;
+    console.log("onClickCallProfile  on profile",this.check);
+  }
 }

@@ -1,4 +1,4 @@
-<div class="booking-container"  *ngIf="topPageShow">
+<div class="booking-container" *ngIf="topPageShow">
   <div class="left-content">
     <div class="booking-card">
       <div class="header">
@@ -7,18 +7,18 @@
           <div class="tags"> <span class="tag blue">{{infodata.hotel.hoteltype}}</span> <span class="tag grey">Couple
               Friendly</span>
           </div>
-          <p class="hotel-address" style="color: black; text-transform: capitalize; ">{{infodata.hotel.address}},{{infodata.hotel.city}} -  {{infodata.hotel.pincode}},{{infodata.hotel.state}} ,India</p>
+          <p class="hotel-address" style="color: black; text-transform: capitalize; ">
+            {{infodata.hotel.address}},{{infodata.hotel.city}} - {{infodata.hotel.pincode}},{{infodata.hotel.state}}
+            ,India</p>
         </div>
-         <img 
-          [src]="`${env.backend_url}/storage/${infodata.rooms_image[0]}`"
-          alt="Hotel" class="hotel-img"
-          >
-         
+        <img [src]="`${env.backend_url}/storage/${infodata.rooms_image[0]}`" alt="Hotel" class="hotel-img">
+
       </div>
       <div class="stay-info">
-        <div class="checkin"> <span class="label">CHECK IN</span> <span class="date">{{checkInDay}} <b>{{checkInDateFormatted }}
+        <div class="checkin"> <span class="label">CHECK IN</span> <span class="date">{{checkInDay}}
+            <b>{{checkInDateFormatted }}
 
-        </b></span> <span class="time">{{ checkInTimeFormatted }}</span> </div>
+            </b></span> <span class="time">{{ checkInTimeFormatted }}</span> </div>
         <div class="night-count"> <span class="nights">1 NIGHT</span> </div>
         <div class="checkout"> <span class="label">CHECK OUT</span> <span class="date">{{ checkOutDay }} <b>{{
               checkOutDateFormatted }}</b></span>
@@ -36,43 +36,44 @@
           </ul>
           <h3 style="font-size: 18px;">{{checkCharges}}</h3>
           <p class="policy">Refund is applicable for this booking</p>
-          <a href="" class="policy-link">Cancellation policy details</a>
+          <a [routerLink]="['/terms&condition/1']" class="policy-link">Cancellation policy details</a>
           <!-- amenaties   guest.amenties-->
-              
-           <div *ngIf="showInclusions">
-             <p class="policy" >features included</p>
-             <li *ngFor="let amenity of infodata.amenities" >{{ amenity }}</li>
-            </div>
-            </div> 
-          <a href="javascript:void(0)" class="see-inclusions" (click)="toggleInclusions()">
-    {{ showInclusions ? 'Hide Inclusions' : 'See Inclusions' }}
-  </a>
+
+          <div *ngIf="showInclusions">
+            <p class="policy">features included</p>
+            <li *ngFor="let amenity of infodata.amenities">{{ amenity }}</li>
+          </div>
+        </div>
+        <a href="javascript:void(0)" class="see-inclusions" (click)="toggleInclusions()">
+          {{ showInclusions ? 'Hide Inclusions' : 'See Inclusions' }}
+        </a>
 
 
-  
-    <!-- <a href="#" class="see-inclusions">  See Inclusions</a> -->
+
+        <!-- <a href="#" class="see-inclusions">  See Inclusions</a> -->
 
       </div>
     </div>
- 
+
     <div class="info-card">
-  <h2>Important information</h2>
-  <ul style="margin-top: 10px;">
-    <li style="margin-left: 20px;">Primary Guest should be atleast 18 years of age.</li>
-    <li style="margin-left: 20px;">Passport, Aadhaar, Driving License and Govt. ID are accepted as ID proof(s)</li>
-    <li style="margin-left: 20px;">Unmarried couples allowed</li>
-    <li style="margin-left: 20px;">Unmarried couples are not allowed in hourly stay rooms</li>
+      <h2>Important information</h2>
+      <ul style="margin-top: 10px;">
+        <li style="margin-left: 20px;">Primary Guest should be atleast 18 years of age.</li>
+        <li style="margin-left: 20px;">Passport, Aadhaar, Driving License and Govt. ID are accepted as ID proof(s)</li>
+        <li style="margin-left: 20px;">Unmarried couples allowed</li>
+        <li style="margin-left: 20px;">Unmarried couples are not allowed in hourly stay rooms</li>
 
-    <!-- Extra items shown only if expanded -->
-    <li *ngIf="showMore" style="margin-left: 20px;">Check-in time is {{ checkInTimeFormatted }}, Check-out time is {{ checkOutTimeFormatted }}</li>
-    <li *ngIf="showMore" style="margin-left: 20px;">Pets are not allowed inside the property</li>
-  </ul>
+        <!-- Extra items shown only if expanded -->
+        <li *ngIf="showMore" style="margin-left: 20px;">Check-in time is {{ checkInTimeFormatted }}, Check-out time is
+          {{ checkOutTimeFormatted }}</li>
+        <li *ngIf="showMore" style="margin-left: 20px;">Pets are not allowed inside the property</li>
+      </ul>
 
-  <!-- Toggle link -->
-  <a href="javascript:void(0)" class="link" (click)="toggleMore()" style="margin-top: 10px; display:block;">
-    {{ showMore ? 'View Less' : 'View More' }}
-  </a>
-</div>
+      <!-- Toggle link -->
+      <a href="javascript:void(0)" class="link" (click)="toggleMore()" style="margin-top: 10px; display:block;">
+        {{ showMore ? 'View Less' : 'View More' }}
+      </a>
+    </div>
 
 
     <div class="guest-form">
@@ -131,8 +132,8 @@
         </div>
 
         <!-- Submit -->
-        <button type="button" class="regis-btn" (click)="registerNow()" >
-                 <!-- <span *ngIf="!check"><b>Submit Now!</b></span>  -->
+        <button type="button" class="regis-btn" (click)="registerNow()">
+          <!-- <span *ngIf="!check"><b>Submit Now!</b></span>  -->
           <ng-container *ngIf="!isLoading"><b>Submit Now!</b></ng-container>
           <ng-container *ngIf="isLoading"><span class="loader"></span> Loading...</ng-container>
         </button>
@@ -163,12 +164,13 @@
           <!-- Total Amount -->
           <div style="display: flex; align-items: center;">
             <p style="color: #050505; font-size: 20px; font-family: monospace;">Total Amount :</p>
-            <p style="font-size: 24px; font-family: monospace; margin-left: 8px;">₹ {{total_paid_amount * totalnight}}</p>
+            <p style="font-size: 24px; font-family: monospace; margin-left: 8px;">₹ {{total_paid_amount * totalnight}}
+            </p>
           </div>
 
           <!-- Payment Options -->
           <div class="payment-options">
-        
+
             <div class="payment-card" *ngFor="let method of paymentMethods" (click)="selectMethod(method.name)"
               [class.selected]="selectedMethod === method.name">
               <div class="logo-circle">
@@ -186,9 +188,25 @@
               <input type="text" [(ngModel)]="transaction_id" placeholder="Enter payment ID" />
             </div>
 
-            <div class="qr-box">
+            <!-- <div class="qr-box">
               <button (click)="submitPayment(totalnight,(pernightprice /filter.rooms_required)-((pernightprice /filter.rooms_required)* (this.infodata.discount / 100)),total_paid_amount * totalnight)"> Submit Payment ID</button>
+            </div> -->
+
+            <div class="qr-box">
+              <button [disabled]="isLoadings"
+                (click)="submitPayment(totalnight, (pernightprice / filter.rooms_required) - ((pernightprice / filter.rooms_required) * (this.infodata.discount / 100)), total_paid_amount * totalnight)">
+
+                <ng-container *ngIf="!isLoadings; else loadingSpinner">
+                  Submit Payment ID
+                </ng-container>
+
+                <ng-template #loadingSpinner>
+                  <span class="loader"></span> Processing...
+                </ng-template>
+
+              </button>
             </div>
+
           </div>
         </div>
       </div>
@@ -197,40 +215,43 @@
   <div class="right-sidebar">
     <div class="price-card">
       <h4>Price Breakup</h4>
-      <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
-          style="color: #000000; font-size: 16px;"><b>Entire Rooms In ₹ {{(pernightprice /filter.rooms_required)-((pernightprice /filter.rooms_required)* (this.infodata.discount / 100))}}<br>1 Night
+      <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;">
+        <!-- <span style="color: #000000; font-size: 16px;"><b>Entire Rooms In ₹ {{(pernightprice /filter.rooms_required)-((pernightprice /filter.rooms_required)*(this.infodata.discount / 100))}}<br>1 Night
+          </b></span> -->
+        <span style="color: #000000; font-size: 16px;"><b>Entire Rooms In ₹ {{total_paid_amount}}<br>Per 1 Night
           </b></span>
       </div>
       <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
-          style="font-size: 16px;">Base Price x {{filter.rooms_required }}Rooms x {{totalnight}}Days</span> <span>₹ 
-            <!-- {{infodata.basePrice *
+          style="font-size: 16px;">Base Price x {{filter.rooms_required }}Rooms x {{totalnight}}Days</span> <span>₹
+          <!-- {{infodata.basePrice *
           persion}} -->
           {{this.basePrice * totalnight}}
-          </span> </div>
+        </span> </div>
 
       <div class="row total-discount" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
-          style="font-size: 16px;">Total Discount <i class="info-icon"></i></span> <span>- ₹ 
-            <!-- {{(infodata.basePrice * persion)/infodata.discount}} -->
-             {{this.total_discount * totalnight}}
-          </span> </div>
+          style="font-size: 16px;">Total Discount <i class="info-icon"></i></span> <span>- ₹
+          <!-- {{(infodata.basePrice * persion)/infodata.discount}} -->
+          {{this.total_discount * totalnight}}
+        </span> </div>
 
       <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
-          style="font-size: 16px;">Price after Discount</span> <span>₹ 
-            <!-- {{infodata.finalPrice * persion }} -->
-             {{this.price_after_discount * totalnight}}
-          </span> </div>
+          style="font-size: 16px;">Price after Discount</span> <span>₹
+          <!-- {{infodata.finalPrice * persion }} -->
+          {{this.price_after_discount * totalnight}}
+        </span> </div>
 
       <div class="row" style="border-bottom: 1px solid #d8d8d8; margin-bottom: 20px;"> <span
           style="font-size: 16px;">Taxes & Service Fees</span> <span>₹ 0</span> </div>
-      <div class="row total"> <span style="font-size: 16px;">Total Amount to be paid</span> 
+      <div class="row total"> <span style="font-size: 16px;">Total Amount to be paid</span>
         <span>₹
           <!-- {{infodata.finalPrice * persion}} -->
-           {{total_paid_amount * totalnight}}
-        </span> </div>
+          {{total_paid_amount * totalnight}}
+        </span>
+      </div>
     </div>
 
 
-    
+
     <div class="coupon-card">
       <h4>Coupon</h4>
       <div class="coupon active"> <input type="radio" checked> <label>MMTHOMESTAYS... <span class="discount">₹
@@ -253,10 +274,10 @@
 
 
 
-<div *ngIf="!topPageShow"class="error-box"  style="margin:200px 200px;">
+<div *ngIf="!topPageShow" class="error-box" style="margin:200px 200px;">
   <h2>⚠️ Something Went Wrong</h2>
   <p>The data seems to be missing or altered.</p>
-  
+
 </div>
 
 <ng-template #validContent>

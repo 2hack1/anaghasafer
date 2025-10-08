@@ -70,7 +70,8 @@ export class HotelroominfoComponent implements OnInit {
         this.service.checavailability(this.filter).then((res: any) => {
           const availlibllity = res.data;
           const comboavailable = availlibllity.available;
-
+                  this.totelroom = availlibllity.totalRooms;
+          //  console.log("totelroom1111", availlibllity.totalRooms);
           if (comboavailable) {
             this.available = true;
 
@@ -166,7 +167,7 @@ export class HotelroominfoComponent implements OnInit {
           const availability = res.data;
           const exactavailable = availability.available;
           this.totelroom = availability.totalRooms;
-          //  console.log("totelroom", this.totelroom);
+           console.log("totelroom", availability.totalRooms);
           if (exactavailable) {
             this.available = true;
 
@@ -240,9 +241,14 @@ export class HotelroominfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+if (this.showAllAmenities) {
+    this.visibleAmenitiesCount = this.amenities.length;
+  } else {
+    this.visibleAmenitiesCount = 12;
+  }
 
   }
+
 
 
   // Example amenities coming from backend
@@ -316,4 +322,15 @@ export class HotelroominfoComponent implements OnInit {
   console.log("diffrence",this.totalnight)
 }
 
+// Controls how many amenities are visible initially
+visibleAmenitiesCount: number = 12;  
+showAllAmenities: boolean = false;
+
+toggleAmenities() {
+
+   this.showAllAmenities = !this.showAllAmenities;
+  this.visibleAmenitiesCount = this.showAllAmenities
+    ? this.amenities.length
+    : 12;
+}
 }

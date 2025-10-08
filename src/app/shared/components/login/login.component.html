@@ -11,7 +11,7 @@
   <ng-container *ngIf="!isSignup">
     <h2 class="title">Login.</h2>
     <p style="color: red;  margin-bottom: 1 rem; " *ngIf="check"> Please fill in all required fields. </p>
-    <p style="color: red;  margin-bottom: 1 rem; " *ngIf="check1"> Please check again youre data</p>
+    <p style="color: red;  margin-bottom: 1 rem; " *ngIf="check1"> Please check again your details</p>
     <form [formGroup]="formModel">
       <input type="email" placeholder="Email" class="input" formControlName="email" />
       <input type="password" placeholder="Password" class="input" formControlName="password" />

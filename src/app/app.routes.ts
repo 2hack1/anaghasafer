@@ -75,7 +75,7 @@ export const routes: Routes = [
         path:"forgetPassword",
         component:ForgetpasspopupComponent
     },{
-        path:"qrcode/q",
+        path:"terms&condition/:id",
         component:HotelPolicyComponent
     },{
         path:'Terms&condition',

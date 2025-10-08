@@ -215,7 +215,7 @@
     </section>
 </div> -->
 
-<div class="dashboard-container">
+<div class="dashboard-container" *ngIf="check">
     <header class="profile-header">
         <div class="profile-banner"></div>
         <div class="profile-container">
@@ -225,8 +225,8 @@
             <!-- Info Section -->
             <div class="info-section">
                 <h2 class="profile-name">{{ userdata?.name }}</h2>
-                <a href="#" class="reset-link">
-                    <i class="fa fa-undo"></i> Reset Password
+                <a  class="reset-link"(click)="onClickCallProfile()">
+                    <i class="fa fa-undo" ></i> Reset Password
                 </a>
             </div>
             <!-- Contact Section -->
@@ -269,7 +269,7 @@
             <div class="tab-content">
                 <!-- TAB 0 Booking -->
                 <div *ngIf="selectedTab === 0">
-                    <div class="card">
+                    <div class="card" *ngIf="!nothavebooking">
                         <div class="card-header">
                             <h3>Personal Details</h3>
                         </div>
@@ -346,11 +346,16 @@
                             </div>
                         </div>
                     </div>
+                    <div *ngIf="nothavebooking" style="justify-content: center; align-items: center; 
+                       align-items: center; display: flex; height: 200px; color: rgb(171, 172, 173); ">
+                        <p style="font-family: system-ui;">No Booking Found, please HOTEL & TOORS Booked Know </p>
+                    </div>
+                          <button class="cancel-btn" (click)="cancelBooking()" *ngIf="!nothavebooking" >Cancel Booking</button>
                 </div>
 
                 <!-- TAB 1 Package -->
                 <div *ngIf="selectedTab === 1">
-                    <div class="card">
+                    <div class="card" *ngIf="!nothaveoder">
                         <div class="card-header">
                             <h3>Trip Package Details</h3>
                         </div>
@@ -447,6 +452,11 @@
                             </div>
                         </div>
                     </div>
+                     <div *ngIf="nothaveoder" style="justify-content: center; align-items: center; 
+                       align-items: center; display: flex; height: 200px; color: rgb(171, 172, 173); ">
+                        <p style="font-family: system-ui;">No Booking Found, please HOTEL & TOORS Booked Know </p>
+                    </div>
+                    <button class="cancel-btn" (click)="cancelBooking()" *ngIf="!nothaveoder" >Cancel Booking</button>
                 </div>
 
                 <!-- TAB 2 Example -->
@@ -470,8 +480,11 @@
                     </div>
                 </div> -->
 
-                <button class="cancel-btn" (click)="cancelBooking()">Cancel Booking</button>
+                <!-- <button class="cancel-btn" (click)="cancelBooking()"  >Cancel Booking</button> -->
             </div>
         </div>
     </section>
 </div>
+
+
+<!-- <app-forgetpasspopup></app-forgetpasspopup> -->

@@ -188,7 +188,7 @@
       <!-- RIGHT SECTION -->
       <div class="right">
         <div class="card-content">
-          <h2> Hotel {{ card?.hotel.hotelname }} With luxurious {{ card?.roomType }} Room</h2>
+          <h2> Hotel {{ card?.hotel.hotelname }} With luxurious  <a style="color: #4545f7;"> {{card?.requiredRooms}} Room For {{totalnight}} Night</a></h2>
           <h3> Room Type {{ card?.roomType }}</h3>
           <!-- <h3> cancellation_charges {{ card.cancellation_charges }}</h3> -->
 
@@ -230,7 +230,7 @@
 
         <div class="card-price">
           <div class="rating">Very Good 4.0 (2574 Ratings)</div>
-          <div class="old-price">₹ {{ card?.basePrice * totalnight }}</div>
+          <div class="old-price">₹ {{ (card?.basePrice)*(totalnight)}}</div>
           <div class="price">₹ {{ card?.finalPrice * totalnight }}</div>
           <small *ngIf="card?.taxIncluded">+ Taxes Included & fees Per Night</small>
         </div>
@@ -268,7 +268,7 @@
       <div class="right">
         <div class="card-content">
           <h2>Hotel {{ card?.hotel?.hotelname }},Luxurious Combo Plan With <span
-              style=" color: rgb(69, 69, 247);">{{card?.calculated_needed_rooms}} Rooms</span></h2>
+              style=" color: rgb(69, 69, 247);">{{card?.calculated_needed_rooms}} Rooms For {{totalnight}} Night</span></h2>
 
           <h3>Room Type: {{ card?.room?.roomType }}</h3>
 
@@ -311,7 +311,7 @@
         <div class="card-price">
           <div class="rating">Very Good 4.0 (2574 Ratings)</div>
           <div class="old-price">₹ {{ (card?.room?.basePrice*card?.calculated_needed_rooms)*totalnight}}</div>
-          <div class="price">₹ {{ (card?.room?.finalPrice * card?.calculated_needed_rooms)*totalnight }}</div>
+          <div class="price">₹ {{ (card?.room?.finalPrice * card?.calculated_needed_rooms)*totalnight}}</div>
           <small *ngIf="card?.room?.taxIncluded">+ Taxes Included & fees Per Night</small>
         </div>
       </div>

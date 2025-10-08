@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,14 @@ export class UserServicesService {
     constructor(private http:HttpClient) {
         console.log('API Base URL:', this.baseUrl); // Example usage
      }
+  private triggerProfileFunction = new Subject<void>(); // <-- changed
+profileFunction$ = this.triggerProfileFunction.asObservable();
+
+
+  callProfileFunction() {
+    console.log("callProfileFunction  on service");
+    this.triggerProfileFunction.next();
+  }
 
   userRegister(data:any) {
   // let path = `${this.baseUrl}/register-user`;

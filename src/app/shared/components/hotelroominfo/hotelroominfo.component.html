@@ -39,12 +39,16 @@
                 <p>Not Availble</p>
               </div>
             </div>
-        
-                        <div class="card-actions"> 
-                          <button class="flight"  *ngIf="available" style="background-color: orange; font-weight: 400; font-size:20px;" 
-                          (click)="comboRender('combo')" >Book know </button> </div>
+
             <div class="card-actions">
-               <button class="flight" *ngIf="!available" style="background-color: rgb(173, 172, 169); font-weight: 400; font-size:20px;"  >Booking full </button> </div>
+              <button class="flight" *ngIf="available"
+                style="background-color: orange; font-weight: 400; font-size:20px;" (click)="comboRender('combo')">Book
+                know </button>
+            </div>
+            <div class="card-actions">
+              <button class="flight" *ngIf="!available"
+                style="background-color: rgb(173, 172, 169); font-weight: 400; font-size:20px;">Booking full </button>
+            </div>
           </div>
         </div>
       </div>
@@ -73,7 +77,7 @@
               class="tab-icon" /> <span>Activities & Nearby Attractions</span> </div>
         </div> <!-- Amenities -->
 
-        <div class="amenities">
+        <!-- <div class="amenities">
           <h3 class="amenities-title">Amenities</h3>
           <p class="amenities-subtitle">
             <img src="https://promos.makemytrip.com/altaccoimages/ugc/ugc_amenities2.webp" alt="" style="width: 20px;">
@@ -88,6 +92,25 @@
           </div>
 
           <a href="#" class="more-link">+ More Amenities</a>
+        </div> -->
+        <div class="amenities">
+          <h3 class="amenities-title">Amenities</h3>
+          <p class="amenities-subtitle">
+            <img src="https://promos.makemytrip.com/altaccoimages/ugc/ugc_amenities2.webp" alt="" style="width: 20px;">
+            Amenities rated <span class="highlight">3.8</span> by guests
+          </p>
+
+          <div class="amenities-list">
+            <div class="amenity-item" *ngFor="let item of amenities | slice:0:visibleAmenitiesCount">
+              <img *ngIf="amenityIcons[item]" [src]="amenityIcons[item]" width="24" height="24" />
+              <span>{{ item }}</span>
+            </div>
+          </div>
+
+          <!-- Show More / Show Less Button -->
+          <a class="more-link" *ngIf="amenities.length > 12" (click)="toggleAmenities()">
+            {{ showAllAmenities ? '- Less Amenities' : '+ More Amenities' }}
+          </a>
         </div>
 
         <div class="login-box desktop-only">
@@ -107,30 +130,30 @@
             </div>
           </div>
         </div>
-      
-      <div class="auth-container mobile-only">
-  <h4 class="auth-title">Login to unlock deals & manage your bookings!</h4>
-  
-  <div class="auth-form">
-    <div class="auth-input-row">
-      
-      <label class="auth-label">Email</label>
-      <input type="email" placeholder="Enter Email" [(ngModel)]="email" required />
 
-      <label class="auth-label">Password</label>
-      <input type="password" placeholder="Enter Password" [(ngModel)]="password" required />
+        <div class="auth-container mobile-only">
+          <h4 class="auth-title">Login to unlock deals & manage your bookings!</h4>
 
-      <button class="auth-btn" (click)="login()" *ngIf="!loading; else loadingSpinner">
-        Login Now
-      </button>
+          <div class="auth-form">
+            <div class="auth-input-row">
 
-      <ng-template #loadingSpinner>
-        <span class="loading-indicator"></span> Loading...
-      </ng-template>
+              <label class="auth-label">Email</label>
+              <input type="email" placeholder="Enter Email" [(ngModel)]="email" required />
 
-    </div>
-  </div>
-     </div>
+              <label class="auth-label">Password</label>
+              <input type="password" placeholder="Enter Password" [(ngModel)]="password" required />
+
+              <button class="auth-btn" (click)="login()" *ngIf="!loading; else loadingSpinner">
+                Login Now
+              </button>
+
+              <ng-template #loadingSpinner>
+                <span class="loading-indicator"></span> Loading...
+              </ng-template>
+
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -186,12 +209,16 @@
                 <p>Not Availble</p>
               </div>
             </div>
-            <div class="card-actions"> <button class="flight"  *ngIf="available"  style="background-color: orange; font-weight: 400; font-size:20px; "  (click)="comboRender('exact')" >Book know </button> </div>
-            <div class="card-actions"> <button class="flight" *ngIf="!available" style="background-color: rgb(173, 172, 169); font-weight: 400; font-size:20px;"  >Booking full </button> </div>
+            <div class="card-actions"> <button class="flight" *ngIf="available"
+                style="background-color: orange; font-weight: 400; font-size:20px; " (click)="comboRender('exact')">Book
+                know </button> </div>
+            <div class="card-actions"> <button class="flight" *ngIf="!available"
+                style="background-color: rgb(173, 172, 169); font-weight: 400; font-size:20px;">Booking full </button>
+            </div>
           </div>
         </div>
       </div>
-    </div> 
+    </div>
 
     <div class="apartment-info">
       <h4>Entire Serviced Apartment</h4>
@@ -223,66 +250,78 @@
             Amenities rated <span class="highlight">3.8</span> by guests
           </p>
 
-          <div class="amenities-list">
-            <div class="amenity-item" *ngFor="let item of amenities">
-              <img *ngIf="amenityIcons[item]" [src]="amenityIcons[item]" width="24" height="24" />
-              <span>{{ item }}</span>
+          <div class="amenities">
+            <h3 class="amenities-title">Amenities</h3>
+            <p class="amenities-subtitle">
+              <img src="https://promos.makemytrip.com/altaccoimages/ugc/ugc_amenities2.webp" alt=""
+                style="width: 20px;">
+              Amenities rated <span class="highlight">3.8</span> by guests
+            </p>
+
+            <div class="amenities-list">
+              <div class="amenity-item" *ngFor="let item of amenities | slice:0:visibleAmenitiesCount">
+                <img *ngIf="amenityIcons[item]" [src]="amenityIcons[item]" width="24" height="24" />
+                <span>{{ item }}</span>
+              </div>
+            </div>
+
+            <!-- Show More / Show Less Button -->
+            <a class="more-link" *ngIf="amenities.length > 12" (click)="toggleAmenities()">
+              {{ showAllAmenities ? '- Less Amenities' : 'More Amenities' }}
+            </a>
+          </div>
+
+
+
+          <div class="login-box desktop-only">
+            <h4>Login to unlock deals & manage your bookings!</h4>
+            <div class="login-form">
+              <div class="input-row">
+                <span class="country-code">Email</span> <input equired="true" type="text" placeholder="Enter Email"
+                  [(ngModel)]="email" />
+                <span> & </span>
+                <span class="country-code">Password</span> <input required="true" type="text"
+                  placeholder="Enter Password" [(ngModel)]="password" />
+                <button style="margin-left: 10px; width: 9rem; height: 2rem; background-color: orange; "
+                  (click)="login()" *ngIf="!loading else spinner">Login now</button>
+
+                <ng-template #spinner>
+                  <span class="spinner"></span> Loading... </ng-template>
+              </div>
             </div>
           </div>
 
-          <a  class="more-link">+ More Amenities</a>
-        </div>
+          <div class="auth-container mobile-only">
+            <h4 class="auth-title">Login to unlock deals & manage your bookings!</h4>
 
+            <div class="auth-form">
+              <div class="auth-input-row">
 
- <div class="login-box desktop-only">
-          <h4>Login to unlock deals & manage your bookings!</h4>
-          <div class="login-form">
-            <div class="input-row">
-              <span class="country-code">Email</span> <input equired="true" type="text" placeholder="Enter Email"
-                [(ngModel)]="email" />
-              <span> & </span>
-              <span class="country-code">Password</span> <input required="true" type="text" placeholder="Enter Password"
-                [(ngModel)]="password" />
-              <button style="margin-left: 10px; width: 9rem; height: 2rem; background-color: orange; " (click)="login()"
-                *ngIf="!loading else spinner">Login now</button>
+                <label class="auth-label">Email</label>
+                <input type="email" placeholder="Enter Email" [(ngModel)]="email" required />
 
-              <ng-template #spinner>
-                <span class="spinner"></span> Loading... </ng-template>
+                <label class="auth-label">Password</label>
+                <input type="password" placeholder="Enter Password" [(ngModel)]="password" required />
+
+                <button class="auth-btn" (click)="login()" *ngIf="!loading; else loadingSpinner">
+                  Login Now
+                </button>
+
+                <ng-template #loadingSpinner>
+                  <span class="loading-indicator"></span> Loading...
+                </ng-template>
+
+              </div>
             </div>
           </div>
+
+
+
+
         </div>
-      
-      <div class="auth-container mobile-only">
-  <h4 class="auth-title">Login to unlock deals & manage your bookings!</h4>
-  
-  <div class="auth-form">
-    <div class="auth-input-row">
-      
-      <label class="auth-label">Email</label>
-      <input type="email" placeholder="Enter Email" [(ngModel)]="email" required />
-
-      <label class="auth-label">Password</label>
-      <input type="password" placeholder="Enter Password" [(ngModel)]="password" required />
-
-      <button class="auth-btn" (click)="login()" *ngIf="!loading; else loadingSpinner">
-        Login Now
-      </button>
-
-      <ng-template #loadingSpinner>
-        <span class="loading-indicator"></span> Loading...
-      </ng-template>
-
-    </div>
-  </div>
-     </div>
-
-
-
-
       </div>
     </div>
   </div>
-</div>
 
 
 
@@ -293,13 +332,13 @@
 
 
 
-<div class="not-found-container"  *ngIf="notfound">
-  <div class="content">
-    <h1 class="error-code">500</h1>
-    <h2 class="error-message">Oops! Somthing want worn</h2>
-    <p class="error-description">
-      you are looking for might have been get problem temporarily unavailable.
-    </p>
-    <button routerLink="/" class="home-btn">Go Back Home</button>
+  <div class="not-found-container" *ngIf="notfound">
+    <div class="content">
+      <h1 class="error-code">500</h1>
+      <h2 class="error-message">Oops! Somthing want worn</h2>
+      <p class="error-description">
+        you are looking for might have been get problem temporarily unavailable.
+      </p>
+      <button routerLink="/" class="home-btn">Go Back Home</button>
+    </div>
   </div>
-</div>

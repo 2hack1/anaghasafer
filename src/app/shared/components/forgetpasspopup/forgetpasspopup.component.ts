@@ -3,12 +3,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { UserServicesService } from '../../../core/services/userService/user-services.service';
 
 
 @Component({
   selector: 'app-forgetpasspopup',
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule],
   templateUrl: './forgetpasspopup.component.html',
   styleUrl: './forgetpasspopup.component.scss'
 })
@@ -35,7 +36,7 @@ export class ForgetpasspopupComponent {
   errorOcure: boolean = false;
   success:boolean=false;
   // *****************
-  constructor(private service: AxiosService, private router: Router) { }
+  constructor(private service: AxiosService, private router: Router,private userservice:UserServicesService) { }
 
 
 
@@ -208,5 +209,11 @@ export class ForgetpasspopupComponent {
   showNewPassword = false;
   showConfirmPassword = false;
 
+  onClickCallProfile() {
+    this.userservice.callProfileFunction();
+    // this.check=!this.check;
+    console.log("onClickCallProfile  on  forget_passwordcomponent");
+   window.location.reload();
 
+  }
 }

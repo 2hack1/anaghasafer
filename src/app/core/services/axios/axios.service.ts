@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios, { AxiosInstance } from 'axios';
 import { environment } from '../../../../environments/environment.development';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { data } from 'jquery';
 import { Form } from '@angular/forms';
 
@@ -27,11 +27,6 @@ hotelCityData: any = null;   // ✅ store shared data here
 
   // ***************************  last page;
   roomtype:'';
-//  basePrice=''; 
-//  total_discount='';
-//  price_after_discount='';
-//  tex='';
-//  total_paid_amount='';
   // ***********************
 
   constructor() {
@@ -44,6 +39,16 @@ hotelCityData: any = null;   // ✅ store shared data here
       }
     });
   }
+  //  private toggleForgetPasswordSubject = new Subject<void>();
+
+  // // Observable for other components to subscribe
+  // toggleForgetPassword$ = this.toggleForgetPasswordSubject.asObservable();
+
+  // // Call this to trigger the event
+  // triggerToggleForgetPassword() {
+  //   this.toggleForgetPasswordSubject.next();
+  //   console.log("service");
+  // }
 
   //  pakageprice:any;
   getGreeting() {
@@ -214,5 +219,8 @@ hotelCityData: any = null;   // ✅ store shared data here
   }
   checkQR(id:any){
      return this.api.get(`check/${id}`);
+  }
+  getvendoralldata(id: any) {
+    return this.api.get(`/vendor/alldata/${id}`);
   }
 }

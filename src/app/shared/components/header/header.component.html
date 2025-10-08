@@ -1,4 +1,4 @@
-<nav id="top" [class.hidden]="isHidden">
+<nav id="top" [class.hidden]="isHidden" *ngIf="!forgetpass">
   <div class="nav-upper-part">
     <div class="right-part">
       <div class="tolls">
@@ -72,8 +72,6 @@
   </span>
 </div>
 
-
-         
             <div class="profile-header">
             <div class="profile-avatar"></div>
             <div class="profile-details">
@@ -143,3 +141,16 @@
     <app-login [(isLogin)]="isLogin"></app-login>
   </div>
 </ng-container>
+
+
+  <div *ngIf="forgetpass">
+   <app-forgetpasspopup></app-forgetpasspopup>
+  </div>
+
+  <!-- thsi create problem to login show -->
+<!-- <div *ngIf="forgetpass" class="modal-overlay">
+  <div class="modal-content">
+    <app-forgetpasspopup></app-forgetpasspopup>
+  </div>
+</div> -->
+

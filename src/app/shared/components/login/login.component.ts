@@ -101,6 +101,7 @@ setTimeout(() => {
     this.all_data = {
       name: name,
       email: formValue.email,
+      role:'user',
       password: formValue.pass,
       password_confirmation: formValue.confirm,
      
@@ -117,8 +118,6 @@ this.passwordTooShort = f.length !== 6;
     if ( !this.passwordMismatch && !this.passwordTooShort) {
       // this.passwordMismatch = false;
 
-      // console.log("This is the data:", this.all_data);
-
       this.us_.userRegister(this.all_data).subscribe((res: any) => {
 
         this.us_.login(res.access_token,res.user.email,res.user.name,res.user.id);
@@ -129,8 +128,6 @@ this.passwordTooShort = f.length !== 6;
 
       });
     } else {
-    //  console.log("6 charactor",this.passwordTooShort);
-    //  console.log("confire",this.passwordMismatch)
      console.log("confire")
     }
   }
