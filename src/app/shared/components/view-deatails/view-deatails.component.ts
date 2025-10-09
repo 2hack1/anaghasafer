@@ -1,9 +1,8 @@
 import { CommonModule, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
-import { error } from 'jquery';
 import { environment } from '../../../../environments/environment.development';
 
 
@@ -33,7 +32,7 @@ export class ViewDeatailsComponent implements OnInit {
   ];
   currentIndex = 0;
   autoSlideInterval: any;
-  constructor(private Route: ActivatedRoute, private as_: AxiosService, private Fb: FormBuilder) {
+  constructor(private Route: ActivatedRoute, private as_: AxiosService, private Fb: FormBuilder,private route:Router) {
     
     // this.userOrder = Fb.group({
       
@@ -418,6 +417,7 @@ export class ViewDeatailsComponent implements OnInit {
   
   nameOfUser: any;
   order: any
+  encryptedAmount:any;
   submitForm() {
     if (!sessionStorage.getItem('token')) {
       alert('please firstly login or signUp')
@@ -434,29 +434,47 @@ export class ViewDeatailsComponent implements OnInit {
     this.order.append('dateId', this.as_.date_id);
     this.order.append('userId', this.as_.user_id);
     
-
+  
     if (this.validateForm()) {
-      this.slip = !this.slip;
-      this.avoidSlip = !this.avoidSlip;
-      // console.log("chck")
-      this.showPopup11 = false;
-      this.nameOfUser = sessionStorage.getItem('name');
+      this.totalAmount  
+      // Encrypt totalAmount 3 times
+      
+      for (let i = 0; i < 3; i++) {
+        
+      this.encryptedAmount = btoa(this.totalAmount.toString());
+      }
+      // Encrypt again with ((this.packageDetails.place_name).length - 1) times
+      const encryptTimes = ((this.packageDetails.place_name)?.length ?? 1) - 1;
+      let encrypted = this.encryptedAmount;
+      for (let i = 0; i < encryptTimes; i++) {
+        encrypted = btoa(encrypted);
+      }
+      this.encryptedAmount = encrypted;
+      // Send the encrypted value
+           this.route.navigate([`/${this.totalAmount}/payment/${this.packageDetails.place_name}/${this.encryptedAmount}`])
+      
+// ******************************************i am comment this in 09/10/25  for add payment option  page******
+      // this.slip = !this.slip;
+      // this.avoidSlip = !this.avoidSlip;
+      // // console.log("chck")
+      // this.showPopup11 = false;
+      // this.nameOfUser = sessionStorage.getItem('name');
      
 
-        this.as_.setorder(this.order).then((res)=>{
-      // console.log("data has come successfully set",res);
-    }).catch((err)=>{
-      console.error(err)
-    })
+      //   this.as_.setorder(this.order).then((res)=>{
+      // // console.log("data has come successfully set",res);
+    // }).catch((err)=>{
+    //   console.error(err)
+    // })
    // ************** EMAIL FOR THE USER  WHEN DO iT ORDER ******************************  
-    const user_order_mail =new FormData;
-  user_order_mail.append('name',sessionStorage.getItem('name'))
-  user_order_mail.append('email',sessionStorage.getItem('email'));
-this.as_.orderEmail(user_order_mail).then((res:any)=>{
-  // console.log("email api has been work");
-}).catch((erro:any)=>{
-  console.error(erro);
-})
+//     const user_order_mail =new FormData;
+//   user_order_mail.append('name',sessionStorage.getItem('name'));
+//   user_order_mail.append('email',sessionStorage.getItem('email'));
+// this.as_.orderEmail(user_order_mail).then((res:any)=>{
+//   // console.log("email api has been work");
+// }).catch((erro:any)=>{
+//   console.error(erro);
+// })
     }
   }
 

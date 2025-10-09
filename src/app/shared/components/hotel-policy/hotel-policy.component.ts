@@ -12,21 +12,23 @@ import { error } from 'jquery';
   styleUrls: ['./hotel-policy.component.scss']
 })
 export class HotelPolicyComponent implements OnInit {
-
+  vendorData: any = null;
 ngOnInit(): void {
-this.a();
+this.fatchVendorData();
 }
 constructor(private service:AxiosService){}
 
+fatchVendorData(){
+    this.service.getvendoralldata(1)
+      .then((res: any) => {
+        console.log('res :', res);
+        this.vendorData = res.data;  // store vendor data
+      })
+      .catch((err: any) => {
+        console.error('error :', err);
+      });
+  }
 
-
-a(){
-  this.service.getvendoralldata(1).then((res:any)=>{
-                 console.log('res :',res)
-  }).catch((err:any)=>{
-              console.log('error :',error)
-  })
-}
 
   // qrImageUrl: string | null = null;
   // qrId: string | null = null;

@@ -1,27 +1,47 @@
-<!-- <p>hotel-policy works!</p>
+<div class="terms-container" *ngIf="vendorData">
+  <h1>Hotel Policy</h1>
+  <p class="effective-date">Effective Date: {{ vendorData.updated_at | date:'longDate' }}</p>
 
-<div class="payment-container"> -->
+  <!-- Terms & Conditions -->
+  <section *ngIf="vendorData.terms_conditions">
+    <h2>Terms & Conditions</h2>
+    <p>{{ vendorData.terms_conditions }}</p>
+  </section>
 
-  <!-- Loader while creating QR -->
-  <!-- <div *ngIf="isLoading" class="loader"></div> -->
+  <!-- Payment Policy -->
+  <section *ngIf="vendorData.payment_policy">
+    <h2>Payment Policy</h2>
+    <p>{{ vendorData.payment_policy }}</p>
+  </section>
 
-  <!-- Generate button -->
-  <!-- <button (click)="genrated()" [disabled]="isLoading">Generate QR Code</button> -->
+  <!-- Cancellation / Refund Policy -->
+  <section *ngIf="vendorData.cancellation_refund_policy">
+    <h2>Cancellation & Refund Policy</h2>
+    <p>{{ vendorData.cancellation_refund_policy }}</p>
+  </section>
 
-  <!-- QR Section -->
-  <!-- <div *ngIf="showQR; else expired"> -->
-    <!-- <h3>Scan to Pay</h3> -->
-    <!-- <img [src]="qrImageUrl" alt="UPI QR Code" width="250" /> -->
+  <!-- Privacy Policy -->
+  <section *ngIf="vendorData.privacy_policy">
+    <h2>Privacy Policy</h2>
+    <p>{{ vendorData.privacy_policy}}</p>
+  </section>
 
-    <!-- Countdown timer -->
-    <!-- <p class="timer">Time left: {{ formattedTime }}</p> -->
-  <!-- </div> -->
+  <!-- GST Info -->
+  <section *ngIf="vendorData.gstnumber">
+    <h2>GST Information</h2>
+    <p>GST Number: {{ vendorData.gstnumber }}</p>
+  </section>
 
-  <!-- Message when expired or not generated -->
-  <!-- <ng-template #expired> -->
-    <!-- <p *ngIf="!isLoading">QR expired or not generated. Please click **Generate QR Code** again.</p> -->
-  <!-- </ng-template> -->
-<!-- </div> -->
+  <!-- Address Info -->
+  <section *ngIf="vendorData.address">
+    <h2>Address</h2>
+    <p>{{ vendorData.address }}, {{ vendorData.city }}, {{ vendorData.state }} - {{ vendorData.pincode }}</p>
+  </section>
 
+  <p class="acknowledgement">
+    By booking with {{ vendorData.hotelname }}, you agree to the applicable policies listed above.
+  </p>
+</div>
 
-<h1>hellow</h1>
+<!-- Loader if no data yet -->
+<div *ngIf="!vendorData" class="loader">Loading...</div>

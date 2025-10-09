@@ -20,6 +20,7 @@ import { PrivacypolicyAnaghaComponent } from './shared/components/privacypolicy-
 import { SocialImpactComponent } from './shared/components/social-impact/social-impact.component';
 import { BlogComponent } from './shared/components/blog/blog.component';
 import { AllreviewsComponent } from './shared/components/allreviews/allreviews.component';
+import { PaymentDestinationComponent } from './shared/components/payment-destination/payment-destination.component';
 
 
 export const routes: Routes = [
@@ -75,7 +76,7 @@ export const routes: Routes = [
         path:"forgetPassword",
         component:ForgetpasspopupComponent
     },{
-        path:"terms&condition/:id",
+         path: ':hotelname/terms&condition/:id',
         component:HotelPolicyComponent
     },{
         path:'Terms&condition',
@@ -92,6 +93,9 @@ export const routes: Routes = [
     },{
         path:'reviews',
         component:AllreviewsComponent
+    },{
+        path:':amount/payment/:tour/:touramount',
+       component:PaymentDestinationComponent
     }
 
 ]

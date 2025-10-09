@@ -22,16 +22,16 @@ export class LoginComponent implements OnInit {
   showPassword: boolean = false;
   showPassworda: boolean = false;
   showConfirmPassword: boolean = false;
-  check:boolean=false;
-  check1:boolean=false;
-loading = false;
-signupLoading = false;
+  check: boolean = false;
+  check1: boolean = false;
+  loading = false;
+  signupLoading = false;
 
   constructor(private FB_: FormBuilder, private us_: UserServicesService, private route: Router) {
 
     this.formModel = this.FB_.group({
       email: [null, Validators.required],
-      password: [null, Validators.required]  
+      password: [null, Validators.required]
     })
 
 
@@ -51,33 +51,35 @@ signupLoading = false;
   login() {
 
     const formData = new FormData();
-  formData.append('password', this.formModel.get('password')?.value);
-  formData.append('email', this.formModel.get('email')?.value);
-  formData.append('role', "user"); // For a file input
+    formData.append('password', this.formModel.get('password')?.value);
+    formData.append('email', this.formModel.get('email')?.value);
+    formData.append('role', "user"); // For a file input
 
-   this.check=false;
+    this.check = false;
 
-  if(!this.formModel.get('password').value &&  !this.formModel.get('email').value){
-     this.loading = true;
-     setTimeout(() => {
-       this.loading = false;
-       //  alert("check true");
+    if (!this.formModel.get('password').value && !this.formModel.get('email').value) {
+      this.loading = true;
+      setTimeout(() => {
+        this.loading = false;
+        //  alert("check true");
       }, 500);
-      this.check=true;
-     
+      this.check = true;
       return;
-  }
-  this.loading = true;
-setTimeout(() => {
-  this.loading = false;
-  // proceed with login logic
-}, 2000);
-    this.us_.userLogin(formData).subscribe({next:(res: any) => {
-      this.us_.login(res.access_token,res.user.email,res.user.name,res.user.id);
+    }
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+      // proceed with login logic
+    }, 2000);
+    this.us_.userLogin(formData).subscribe({
+      next: (res: any) => {
+        this.us_.login(res.access_token, res.user.email, res.user.name, res.user.id);
 
-      this.closeLogin();
-      this.route.navigateByUrl('/home');},error: (err:any)=>{
-      this.check1=true;
+        this.closeLogin();
+        // this.route.navigateByUrl('/home');
+        window.location.reload();
+      }, error: (err: any) => {
+        this.check1 = true;
       }
 
     })
@@ -86,14 +88,14 @@ setTimeout(() => {
 
 
   passwordMismatch: boolean = false;
-  passwordTooShort:boolean=false;
-  
-  signUp() {
-     this.signupLoading = true;
+  passwordTooShort: boolean = false;
 
-     setTimeout(() => {
-    this.signupLoading = false;
-  }, 2000);
+  signUp() {
+    this.signupLoading = true;
+
+    setTimeout(() => {
+      this.signupLoading = false;
+    }, 2000);
     const formValue = this.myform.value; // use the correct form group
 
     const name = `${formValue.nfa} ${formValue.name} ${formValue.last_name}`;
@@ -101,55 +103,53 @@ setTimeout(() => {
     this.all_data = {
       name: name,
       email: formValue.email,
-      role:'user',
+      role: 'user',
       password: formValue.pass,
       password_confirmation: formValue.confirm,
-     
+
     };
 
- 
-// formValue.confirm === formValue.pass && formValue.pass.length === 6
- 
-const f = formValue.pass || '';  // Ensure it's a string
 
-this.passwordMismatch = f !== formValue.confirm;
-this.passwordTooShort = f.length !== 6;
-    
-    if ( !this.passwordMismatch && !this.passwordTooShort) {
+    // formValue.confirm === formValue.pass && formValue.pass.length === 6
+
+    const f = formValue.pass || '';  // Ensure it's a string
+
+    this.passwordMismatch = f !== formValue.confirm;
+    this.passwordTooShort = f.length !== 6;
+
+    if (!this.passwordMismatch && !this.passwordTooShort) {
       // this.passwordMismatch = false;
 
       this.us_.userRegister(this.all_data).subscribe((res: any) => {
 
-        this.us_.login(res.access_token,res.user.email,res.user.name,res.user.id);
-        
+        this.us_.login(res.access_token, res.user.email, res.user.name, res.user.id);
+
         this.closeLogin();
 
-        this.route.navigateByUrl('/home');
-
+        // this.route.navigateByUrl('/home');
+        window.location.reload();
       });
     } else {
-     console.log("confire")
+      console.log("confire")
     }
   }
 
 
 
   ngOnInit(): void {
-
   }
+
   closeLogin() {
     this.isLoginChange.emit(false)
   }
 
 
-  onsubmit() {
+  onsubmit() { }
 
+
+  randorForgot() {
+    // console.log("check",this.isSignup);
+    this.isLoginChange.emit(false)
   }
-
-  
-          randorForgot(){
-            // console.log("check",this.isSignup);
-            this.isLoginChange.emit(false)
-          }
 
 }

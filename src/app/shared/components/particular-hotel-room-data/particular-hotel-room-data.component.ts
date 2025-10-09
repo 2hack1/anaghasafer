@@ -1,17 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { UserServicesService } from '../../../core/services/userService/user-services.service';
-import { error } from 'jquery';
 import { environment } from '../../../../environments/environment.development';
 
 
 
 @Component({
   selector: 'app-particular-hotel-room-data',
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule],
   templateUrl: './particular-hotel-room-data.component.html',
   styleUrl: './particular-hotel-room-data.component.scss'
   //  styleUrls: ['./particular-hotel-room-data.component.scss'] 
@@ -31,6 +30,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     hasGST: false,
     fullName: ''   // 👈 added fullName
   };
+
   env = environment
   userid: any;
   avrooms: any;
@@ -63,6 +63,7 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     this.route.queryParams.subscribe(query => {
       this.persion = query['adutls'];
       this.avrooms = query['avrooms'];
+
       this.calculateDays(query['check_in_date'], query['check_out_date'])
       this.filter = {
         check_in_date: query['check_in_date'],
@@ -166,8 +167,21 @@ export class ParticularHotelRoomDataComponent implements OnInit {
       this.topPageShow = false;
     }
   }
-
+  showcensellation: boolean = false;
   ngOnInit(): void {
+
+    //  for policy shwo  or not****************
+    this.service.getvendoralldata(this.filter.hotel_vendor_id).then((res) => {
+      if (res.data.terms_conditions || res.data.payment_policy || res.data.cancellation_refund_policy || res.data.privacy_policy) {
+        this.showcensellation = true;
+      } else {
+        this.showcensellation = false;
+      }
+    }).catch((error: any) => {
+      console.error('error', error);
+      this.showcensellation = false;
+    })
+    // console.log("check to vendor id",this.filter.hotel_vendor_id)
     // this.persion = Number(localStorage.getItem('adults'));
     // console.log('avrooms:', this.avrooms)
     if (sessionStorage.getItem('register') === 'true') {
@@ -437,4 +451,9 @@ export class ParticularHotelRoomDataComponent implements OnInit {
     console.log("diffrence", this.totalnight)
   }
 
+  randor() {
+    // [routerLink]="['/terms&condition/1']"
+        console.log("diffrence")
+    this.router.navigate([`/${this.filter.hotelname}/terms&condition/${this.filter.hotel_vendor_id}`])
+  }
 }

@@ -36,9 +36,9 @@
           </ul>
           <h3 style="font-size: 18px;">{{checkCharges}}</h3>
           <p class="policy">Refund is applicable for this booking</p>
-          <a [routerLink]="['/terms&condition/1']" class="policy-link">Cancellation policy details</a>
+          <a  class="policy-link" *ngIf="showcensellation" (click)="randor()">Cancellation policy details</a>
+          
           <!-- amenaties   guest.amenties-->
-
           <div *ngIf="showInclusions">
             <p class="policy">features included</p>
             <li *ngFor="let amenity of infodata.amenities">{{ amenity }}</li>

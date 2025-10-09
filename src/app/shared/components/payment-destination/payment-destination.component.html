@@ -1,0 +1,227 @@
+<div class="checkout-container"> <!-- Header -->
+    <!-- <div class="checkout-header d-flex align-items-center justify-content-between px-4 py-3 shadow-sm border-bottom">
+      
+        <div>
+            <h4 class="brand-name mb-0 fw-bold text-primary">Anaghar Safar</h4> <small
+                class="sub-text text-muted">Trusted Business</small>
+        </div> 
+     
+        <div class="user-icon d-flex align-items-center"> <i class="bi bi-person-circle fs-3 text-secondary"></i> </div>
+    </div> -->
+
+    <!-- Title -->
+    <h5 class="section-title">All Payment Options</h5> <!-- Accordion -->
+     <div class="payment-messages" *ngIf="showpaymess">
+   <div style="display: flex; align-items: center; justify-content: center;">
+
+     <p style="color: red;">
+  This payment option is temporarily unavailable.
+</p>
+    </div>
+<div style="display: flex; align-items: center; justify-content: center;">
+<p style="color: rgb(0, 38, 255);" >Currently, only UPI payment methods are available. Please use one of the supported UPI options to proceed.
+</p>
+</div>
+    
+    </div>
+    <div class="accordion"> <!-- UPI -->
+        <div class="accordion-item"> <button class="accordion-header d-flex justify-content-between align-items-center"
+                (click)="toggleAccordion('upi')" [ngClass]="{ 'active': openSection === 'upi' }"> <i
+                    class="bi bi-upc-scan "></i> UPI <!-- Left side: Icon + Text --> <span
+                    class="d-flex align-items-center"> </span> <!-- Right side: Chevron --> <i class="bi"
+                    style="margin-left: 64rem;"
+                    [ngClass]="{ 'bi-chevron-down': openSection !== 'upi', 'bi-chevron-up': openSection === 'upi' }"></i>
+            </button>
+            <div class="accordion-body" *ngIf="openSection === 'upi'">
+                <div class="button-row"> <button class="option-btn" [class.selected]="selectedPayment === 'GooglePay'"
+                        (click)="paymentMethod('GooglePay')">
+                        <img src="https://png.pngtree.com/png-vector/20230817/ourmid/pngtree-google-pay-software-vector-png-image_9183297.png"
+                            alt="Google Pay">
+                        <span>Google Pay</span> </button>
+                    <button class="option-btn" [class.selected]="selectedPayment === 'PhonePe'"
+                        (click)="paymentMethod('PhonePe')"> <img
+                            src="https://exchange4media.gumlet.io/news-photo/121036-phonepemain.jpg" alt="PhonePe"
+                            style="width: 40px;"> <span>PhonePe</span> </button>
+                    <button class="option-btn" [class.selected]="selectedPayment === 'Paytm'"
+                        (click)="paymentMethod('Paytm')"> <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/4/42/Paytm_logo.png" alt="PayTM"
+                            style="width: 30px;"> <span>PAYTM</span> </button>
+                    <button class="option-btn" [class.selected]="selectedPayment === 'AmazonPay'"
+                        (click)="paymentMethod('AmazonPay')"> <img
+                            src="https://download.logo.wine/logo/Amazon_Pay/Amazon_Pay-Logo.wine.png"
+                            style="width: 70px;"> <span>Amazon Pay</span> </button>
+                </div>
+            </div>
+        </div> <!-- Cards -->
+        <div class="accordion-item"> <button class="accordion-header" (click)="toggleAccordion('cards')"
+                [ngClass]="{ 'active': openSection === 'cards' }"> <i class="bi bi-credit-card"></i> Cards
+                <!-- Right side: Chevron --> <i class="bi" style="margin-left: 63.4rem;"
+                    [ngClass]="{ 'bi-chevron-down': openSection !== 'cards', 'bi-chevron-up': openSection === 'cards' }"></i>
+            </button>
+            <div class="accordion-body" *ngIf="openSection === 'cards'">
+                <form [formGroup]="cardForm" (ngSubmit)="submitCard()" class="card-form"> <!-- Card Holder Name -->
+                    <div class="form-group"> <label for="cardHolder"><i class="bi bi-credit-card-2-front"></i> Card
+                            Holder Name</label> <input type="text" id="cardHolder" formControlName="cardHolder"
+                            placeholder="John Doe"> <small
+                            *ngIf="cardForm.get('cardHolder')?.invalid && cardForm.get('cardHolder')?.touched"> Enter
+                            valid name </small> </div> <!-- Card Number -->
+                    <div class="form-group form-group col"> <label for="cardNumber">Card Number</label> <input
+                            type="text" id="cardNumber" formControlName="cardNumber" placeholder="1234 5678 9012 3456">
+                        <small *ngIf="cardForm.get('cardNumber')?.invalid && cardForm.get('cardNumber')?.touched"> Enter
+                            valid 16-digit card number </small>
+                    </div> <!-- Expiry & CVV -->
+                    <div class="form-row">
+                        <div class="form-group col"> <label for="expiryMonth">Expiry Month</label> <input type="text"
+                                id="expiryMonth" formControlName="expiryMonth" placeholder="MM"> </div>
+                        <div class="form-group col"> <label for="expiryYear">Expiry Year</label> <input type="text"
+                                id="expiryYear" formControlName="expiryYear" placeholder="YY"> </div>
+                        <div class="form-group col"> <label for="cvv">CVV</label> <input type="password" id="cvv"
+                                formControlName="cvv" placeholder="123"> </div>
+                    </div> <!-- Submit Button --> <button type="submit" [disabled]="cardForm.invalid">Pay Now</button>
+                </form>
+            </div>
+        </div> <!-- Netbanking -->
+        <div class="accordion-item"> 
+            <button class="accordion-header" (click)="toggleAccordionnet('netbanking')"
+                [ngClass]="{ 'active': openSectionnet === 'netbanking' }"> <i class="bi bi-bank"></i> Netbanking
+                <!-- Right side: Chevron --> <i class="bi" style="margin-left: 60.8rem;"
+                    [ngClass]="{ 'bi-chevron-down': openSectionnet !== 'netbanking', 'bi-chevron-up': openSectionnet === 'netbanking' }"></i>
+            </button>
+            <div class="accordion-body" *ngIf="openSectionnet === 'netbanking'">
+                <div class="button-row"> <button class="option-btn" [class.selected]="selectedPayment === 'SBIBank'"
+                        (click)="paymentMethod('SBIBank')"> <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/c/cc/SBI-logo.svg" alt="">
+                        <span>SBI</span> </button> <button class="option-btn" [class.selected]="selectedPayment === 'BOBBank'"
+                        (click)="paymentMethod('BOBBank')"> <img
+                            src="https://1000logos.net/wp-content/uploads/2021/06/Bank-of-Baroda-icon.png" alt="">
+                        <span>BOB</span> </button> <button class="option-btn" [class.selected]="selectedPayment === 'BOIBank'"
+                        (click)="paymentMethod('BOIBank')"> <img
+                            src="https://i.pinimg.com/564x/ef/db/35/efdb3546b5e212c7c7bb73a6aa7640f5.jpg" alt="">
+                        <span>BOI</span> </button> <button class="option-btn" [class.selected]="selectedPayment === 'ICICIBank'"
+                        (click)="paymentMethod('ICICIBank')"> <img
+                            src="https://i.pinimg.com/736x/ff/d5/31/ffd531a6a78464512a97848e14506738.jpg" alt="">
+                        <span>ICICI Bank</span> </button> <!-- Show More button --> <button class="option-btn"
+                        (click)="toggleMoreBanks()"> <span *ngIf="!showMoreBanks">More..</span> <span
+                            *ngIf="showMoreBanks">..Less</span> </button> </div>
+                <div class="button-row" *ngIf="showMoreBanks" style="margin-top: 1rem;"> <button class="option-btn" [class.selected]="selectedPayment === 'HDFCBank'"
+                        (click)="paymentMethod('HDFCBank')">
+                        <img src="https://static-asset.inc42.com/logo/hdfc-bank.png" alt=""> <span>HDFC Bank</span>
+                    </button> <button class="option-btn" [class.selected]="selectedPayment === 'AxisBank'"
+                        (click)="paymentMethod('AxisBank')"> <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJKwiunXSlKRQu418aqvvFdO67-gP9aIKCeA&s"
+                            alt=""> <span>Axis Bank</span> </button> <button class="option-btn" [class.selected]="selectedPayment === 'KotakMahindraBank'"
+                        (click)="paymentMethod('KotakMahindraBank')"> <img
+                            src="https://e7.pngegg.com/pngimages/20/41/png-clipart-kotak-mahindra-bank-logo-thumbnail-bank-logos-thumbnail.png"
+                            alt=""> <span>Kotak Mahindra Bank</span> </button> </div>
+            </div>
+        </div> <!-- Wallet -->
+        <div class="accordion-item"> <button class="accordion-header" (click)="toggleAccordion('wallet')"
+                [ngClass]="{ 'active': openSection === 'wallet' }"> <i class="bi bi-wallet2"></i> Wallet
+                <!-- Right side: Chevron --> <i class="bi" style="margin-left: 63.4rem;"
+                    [ngClass]="{ 'bi-chevron-down': openSection !== 'upi', 'bi-chevron-up': openSection === 'upi' }"></i>
+            </button>
+            <div class="accordion-body" *ngIf="openSection === 'wallet'">
+                <p>Pay using wallets like PhonePe, PayTM, etc.</p>
+            </div>
+        </div> <!-- Pay Later Section -->
+        <div class="accordion-item"> <button class="accordion-header" (click)="toggleAccordionpay('paylater')"
+                [ngClass]="{ 'active': openSectionpay === 'paylater' }"> <i class="bi bi-clock-history"></i>Pay Later <i
+                    class="bi" style="margin-left: 62rem;"
+                    [ngClass]="{ 'bi-chevron-down': openSectionpay !== 'paylater', 'bi-chevron-up': openSectionpay === 'paylater' }"></i>
+            </button>
+            <div class="accordion-body" *ngIf="openSectionpay === 'paylater'">
+                <div class="button-row"> <button class="option-btn"  [class.selected]="selectedPayment === 'Simpl'"
+                        (click)="paymentMethod('Simpl')"> <img
+                            src="https://play-lh.googleusercontent.com/a5o6KbDMO2e6UgPClbV6gblwXDFIW3wYK87iP1iEsceZkanhx4SO8UN4ySMF4TmdLA"
+                            alt="Simpl"> <span>Simpl</span> </button> 
+                            <button class="option-btn"  [class.selected]="selectedPayment === 'LazyPay'"
+                        (click)="paymentMethod('LazyPay')"> <img
+                            src="https://pbs.twimg.com/profile_images/1300724353198206976/FBE75Was_400x400.jpg"
+                            alt="PhonePe"> <span>Lazy Pay</span> </button>  </div>
+            </div>
+        </div>
+    </div >  <!-- Footer -->
+    <div class="checkout-footer" *ngIf="!showpaymess">
+        <h4>{{ decryptpayment | currency:'INR':'symbol':'1.0-0' }}</h4>
+        <button class="continue-btn" (click)="genQRcode()">
+            <a  class="pay-link" >Pay</a>
+        </button>
+    </div>
+   
+ 
+
+</div>
+
+
+<!-- QR Code Modal -->
+
+<div 
+  class="modal-backdrop" 
+  *ngIf="showQrModal" 
+ 
+  >
+  <!--<div 
+  class="modal-backdrop" 
+  *ngIf="showQrModal" 
+  (click)="closeQrModal()" 
+  >   that is used for close the  Qrmodel  when you can when click on any out side  -->
+</div>
+
+<!-- <div class="qr-modal" *ngIf="showQrModal">
+  <button class="close-btn" (click)="closeQrModal()" style="font-size: 1.5rem;">×</button>
+  <h5>Scan to Pay</h5>
+  
+  <img [src]="qrImageUrl" alt="UPI QR Code" class="qr-image">
+ <p class="timer">Time left: {{ formattedTime }}</p>
+  <p class="qr-note">
+    ⚠️ Please do not close or remove this QR code while completing your payment.
+  </p>
+</div> -->
+
+
+<div class="qr-modal" *ngIf="showQrModal" (click)="$event.stopPropagation()">
+  <button class="close-btn" (click)="closeQrModal()" style="font-size: 1.5rem;">×</button>
+  <h5>Scan to Pay</h5>
+
+  <!-- Loader shown while QR image is not ready -->
+  <div *ngIf="!qrImageUrl; else qrContent" class="qr-loader">
+    <div class="spinner"></div>
+    <p>Generating QR Code, please wait...</p>
+  </div>
+
+  <!-- Actual QR Content -->
+  <ng-template #qrContent>
+    <img [src]="qrImageUrl" alt="UPI QR Code" class="qr-image" />
+    <p class="timer">Time left: {{ formattedTime }}</p>
+    <p class="qr-note">
+      ⚠️ Please do not close or remove this QR code while completing your payment.
+    </p>
+  </ng-template>
+</div>
+
+
+
+<!-- **************************** -->
+ <!-- <p>hotel-policy works!</p>
+
+<div class="payment-container">
+
+ 
+  <div *ngIf="isLoading" class="loader"></div>
+
+  
+  <button (click)="genrated()" [disabled]="isLoading">Generate QR Code</button>
+
+  
+  <div *ngIf="showQR; else expired">
+    <h3>Scan to Pay</h3>
+    <img [src]="qrImageUrl" alt="UPI QR Code" width="250" />
+
+    <p class="timer">Time left: {{ formattedTime }}</p>
+  </div>
+
+
+  <ng-template #expired>
+    <p *ngIf="!isLoading">QR expired or not generated. Please click **Generate QR Code** again.</p>
+  </ng-template>
+</div> -->
