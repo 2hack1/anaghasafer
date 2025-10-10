@@ -32,6 +32,13 @@ export class ViewDeatailsComponent implements OnInit {
   ];
   currentIndex = 0;
   autoSlideInterval: any;
+
+
+    destinationId:any
+    subdesId:any;
+    packagesId:any;
+    
+
   constructor(private Route: ActivatedRoute, private as_: AxiosService, private Fb: FormBuilder,private route:Router) {
     
     // this.userOrder = Fb.group({
@@ -80,6 +87,7 @@ export class ViewDeatailsComponent implements OnInit {
     this.getiteraries(this.packageId);
     this.gettransport(this.packageId);
     this.getGallary(this.packageId);
+    this.getpackAndes(this.packageId);
     // console.log("++++++++++", this.selectMonth);
     this.autoSlideInterval = setInterval(() => {
       this.nextSlide();
@@ -411,6 +419,18 @@ export class ViewDeatailsComponent implements OnInit {
     
   }
   
+  getpackAndes(id:any){
+     this.as_.usedinviewforgetpackdata(id).then((res:any)=>{
+      console.log("get data for the payment",res)
+      this.destinationId=res.data.sub_destination.destination_id;
+      this.subdesId=res.data.sub_destination.sub_destination_id;
+      this.packagesId=res.data.package.package_id;  
+     }).catch((err:any)=>{
+      console.error("error comes:",err);
+     })
+  }
+
+
   closePopup11(): void {
     this.showPopup11 = false;
   }
@@ -433,8 +453,9 @@ export class ViewDeatailsComponent implements OnInit {
     this.order.append('monthId', this.as_.month_id);
     this.order.append('dateId', this.as_.date_id);
     this.order.append('userId', this.as_.user_id);
-    
   
+    
+
     if (this.validateForm()) {
       this.totalAmount  
       // Encrypt totalAmount 3 times
@@ -450,9 +471,33 @@ export class ViewDeatailsComponent implements OnInit {
         encrypted = btoa(encrypted);
       }
       this.encryptedAmount = encrypted;
-      // Send the encrypted value
-           this.route.navigate([`/${this.totalAmount}/payment/${this.packageDetails.place_name}/${this.encryptedAmount}`])
       
+          //  this.route.navigate([`/${this.totalAmount}/payment/${this.packageDetails.place_name}/${this.encryptedAmount}`])
+      // Suppose encryptedAmount is already calculated
+      
+this.route.navigate(
+  [
+    `/${this.totalAmount}/payment/${this.packageDetails.place_name}/${this.encryptedAmount}`
+  ],
+  { //  destinationId=undefined&subdesId=undefined
+    queryParams: {
+      destinationId: this.destinationId,
+      subdes: this.subdesId,
+      package:this.packagesId,
+      month: this.order.get('monthId'),
+      date: this.order.get('dateId'),
+      adult: this.order.get('adult'),
+      children: this.order.get('children'),
+      infant: this.order.get('infant')
+    }
+  }
+);
+
+
+
+
+
+
 // ******************************************i am comment this in 09/10/25  for add payment option  page******
       // this.slip = !this.slip;
       // this.avoidSlip = !this.avoidSlip;

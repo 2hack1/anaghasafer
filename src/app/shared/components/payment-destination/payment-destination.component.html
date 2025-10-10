@@ -191,7 +191,11 @@
 
   <!-- Actual QR Content -->
   <ng-template #qrContent>
-    <img [src]="qrImageUrl" alt="UPI QR Code" class="qr-image" />
+    <img [src]="qrImageUrl" alt="UPI QR Code" class="qr-image"  *ngIf="!shwomesswhenexpireQRcode" />
+    <p *ngIf="shwomesswhenexpireQRcode" class="qr-expired-message" style="color: red; font-weight: bold;">
+        QR Code has expired. Please generate a new QR code to continue your payment.<br>
+        If you are paying, please do not refresh, close, or navigate away from this page.
+    </p>
     <p class="timer">Time left: {{ formattedTime }}</p>
     <p class="qr-note">
       ⚠️ Please do not close or remove this QR code while completing your payment.

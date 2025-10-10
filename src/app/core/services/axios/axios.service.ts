@@ -157,6 +157,7 @@ hotelCityData: any = null;   // ✅ store shared data here
 
   }
 
+
   orderEmail(data: FormData) {
 
     return this.api.post('/order-send-mail', data);
@@ -218,9 +219,23 @@ hotelCityData: any = null;   // ✅ store shared data here
     return this.api.post('create-qr',data);
   }
   checkQR(id:any){
-     return this.api.get(`check/${id}`);
+    return this.api.get(`check/${id}`);
+  }
+  QRexpire(qrid:any){
+    return this.api.post('expire',{ qr_id: qrid });
+    
   }
   getvendoralldata(id: any) {
     return this.api.get(`/vendor/alldata/${id}`);
   }
+  
+  sendwithpaymentDetails(data:FormData ){
+    
+    return this.api.post('/order/with/payment/details',data);
+  }
+  usedinviewforgetpackdata(id:any){
+    
+    return this.api.get(`/view/getfor/payment/${id}`);
+    }
+
 }
