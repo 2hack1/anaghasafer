@@ -32,7 +32,7 @@ export const routes: Routes = [
         canActivate: [authGuard]
     }, {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent, 
     },
     {
         path: 'dss',
@@ -53,11 +53,14 @@ export const routes: Routes = [
     },
     {
         path: "home/contact",
-        component: ContactusComponent
+        component: ContactusComponent,
+         canActivate: [authGuard]
     },
     {
         path: "home/about",
-        component: AboutusComponent
+        component: AboutusComponent,
+           canActivate: [authGuard]
+         
 
     }, 
     {

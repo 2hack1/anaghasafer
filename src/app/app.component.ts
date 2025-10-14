@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     
     const role = sessionStorage.setItem('role','user');
+    // this.router.navigate(['/home']);
   }
 
 }
