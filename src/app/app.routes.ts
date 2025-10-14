@@ -21,20 +21,28 @@ import { SocialImpactComponent } from './shared/components/social-impact/social-
 import { BlogComponent } from './shared/components/blog/blog.component';
 import { AllreviewsComponent } from './shared/components/allreviews/allreviews.component';
 import { PaymentDestinationComponent } from './shared/components/payment-destination/payment-destination.component';
+import { NotfoundpageComponent } from './shared/components/notfoundpage/notfoundpage.component';
+import { authGuard } from './core/services/auth.guard';
 
 
 export const routes: Routes = [
     {
         path: '',
         component: HomeComponent,
+        canActivate: [authGuard]
+    }, {
+        path: 'home',
+        component: HomeComponent
     },
     {
         path: 'dss',
-        component: FilterpackagesComponent
+        component: FilterpackagesComponent,
+
     },
     {
         path: 'states/:id',
-        component: StatestoursComponent
+        component: StatestoursComponent,
+
     },
     {
         path: 'des/:id',
@@ -44,58 +52,60 @@ export const routes: Routes = [
         component: ViewDeatailsComponent
     },
     {
-        path: "contact",
+        path: "home/contact",
         component: ContactusComponent
     },
     {
-        path: "about",
+        path: "home/about",
         component: AboutusComponent
 
-    }, {
-        path: "home",
-        component: HomeComponent
-    },
+    }, 
     {
         path: "ReviewSliderComponent",
         component: ReviewSliderComponent
-    },{
-        path:'Hotel-Rooms',
-        component:HotelListComponent
+    }, {
+        path: 'Hotel-Rooms',
+        component: HotelListComponent
     },
     {
-        path:'paricular-hotel-room-data',
-         component: ParticularHotelRoomDataComponent
-
-    },{
-        path:'room-info',
-         component: HotelroominfoComponent
-    },{
-        path:'profile/:id',
-        component:UserprofileComponent
-    },{
-        path:"forgetPassword",
-        component:ForgetpasspopupComponent
-    },{
-         path: ':hotelname/terms&condition/:id',
-        component:HotelPolicyComponent
-    },{
-        path:'Terms&condition',
-        component:TermsAndConditionOfAnaghaComponent
-    },{
-        path:'userprivacypolicy',
-        component:PrivacypolicyAnaghaComponent
-    },{
-        path:'socialimpact',
-        component:SocialImpactComponent
-    },{
-        path:'blog',
-        component:BlogComponent
-    },{
-        path:'reviews',
-        component:AllreviewsComponent
-    },{
-        path:':amount/payment/:tour/:touramount',
-       component:PaymentDestinationComponent
+        path: 'paricular-hotel-room-data',
+        component: ParticularHotelRoomDataComponent
+    }, {
+        path: 'room-info',
+        component: HotelroominfoComponent
+    }, {
+        path: 'profile/:id',
+        component: UserprofileComponent
+    }, {
+        path: "forgetPassword",
+        component: ForgetpasspopupComponent
+    }, {
+        path: ':hotelname/terms&condition/:id',
+        component: HotelPolicyComponent
+    }, {
+        path: 'notfounderror404',
+        component: NotfoundpageComponent
+    }, {
+        path: 'Terms&condition',
+        component: TermsAndConditionOfAnaghaComponent
+    }, {
+        path: 'userprivacypolicy',
+        component: PrivacypolicyAnaghaComponent
+    }, {
+        path: 'socialimpact',
+        component: SocialImpactComponent
+    }, {
+        path: 'blog',
+        component: BlogComponent
+    }, {
+        path: 'reviews',
+        component: AllreviewsComponent
+    }, {
+        path: ':amount/payment/:tour/:touramount',
+        component: PaymentDestinationComponent
+    }, {
+        path: '**',
+        component: NotfoundpageComponent
     }
 
 ]

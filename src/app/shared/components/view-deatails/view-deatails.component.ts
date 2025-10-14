@@ -34,15 +34,15 @@ export class ViewDeatailsComponent implements OnInit {
   autoSlideInterval: any;
 
 
-    destinationId:any
-    subdesId:any;
-    packagesId:any;
-    
+  destinationId: any
+  subdesId: any;
+  packagesId: any;
 
-  constructor(private Route: ActivatedRoute, private as_: AxiosService, private Fb: FormBuilder,private route:Router) {
-    
+
+  constructor(private Route: ActivatedRoute, private as_: AxiosService, private Fb: FormBuilder, private route: Router) {
+
     // this.userOrder = Fb.group({
-      
+
     //   phoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
     //   email: ['', [Validators.required, Validators.email]],
     //   startdate: [''],
@@ -53,7 +53,7 @@ export class ViewDeatailsComponent implements OnInit {
     //   insect: ['']
     // })
   }
- env=environment
+  env = environment
   galleryImages: any;
   isnotgallary: any;
   packageId: any | null = null;
@@ -62,7 +62,7 @@ export class ViewDeatailsComponent implements OnInit {
   slip = false;
   avoidSlip = true;
   // startdate: string = '';
-  
+
   packageDetails: any = [];
   packag: any[] = [];
   monthDate: any = [];
@@ -72,9 +72,9 @@ export class ViewDeatailsComponent implements OnInit {
   termsAccepted: boolean = false;
   startdate: any;
   getEmailsesstion: any
-  
+
   // userOrder!: FormGroup;
-  
+
 
   // afterpay=false;
   ngOnInit() {
@@ -93,24 +93,24 @@ export class ViewDeatailsComponent implements OnInit {
       this.nextSlide();
     }, 4000);
   }
-  
+
   getpackagesdetails(id: any) {
     this.as_.getPackagesDetails(id).then((res) => {
       this.packageDetails = res.data[0];
       // console.log("pakage data", this.packageDetails);
       this.packageprice = this.packageDetails.price_trip;
-      
+
       this.adultPrice = this.packageprice;
       this.childPrice = (this.packageprice / 2);
-      
+
       // console.log("pakage price", this.packageprice)
       this.packag = res.data[0].images;
-      
+
     }).catch((err) => {
       console.error("error", err);
     })
   }
-  
+
   getmonthAndDate(packagesId: any) {
     this.as_.getMonthandDate(packagesId).then((res) => {
       // console.log("chaek:", res.data);
@@ -118,7 +118,7 @@ export class ViewDeatailsComponent implements OnInit {
     }).catch((err) => {
       console.error("error", err);
     })
-    
+
   }
   selectMonth(key: any): void {
     this.selectedMonth = key;
@@ -127,11 +127,11 @@ export class ViewDeatailsComponent implements OnInit {
     this.getdate(this.selectedMonth);
 
   }
-  
+
   date: any[] = [];
   availableModes: any[] = [];
   getdate(id: any) {
-    
+
     this.as_.getdate(id).then((res) => {
       // console.log("dates", res.data);
       this.date = res.data;
@@ -140,7 +140,7 @@ export class ViewDeatailsComponent implements OnInit {
       console.error("error", err);
     })
   }
-  
+
   getiteraries(id: any) {
     this.as_.getIteries(id).then((res) => {
       // console.log("itineries", res.data[0].day_wise_details);
@@ -155,8 +155,8 @@ export class ViewDeatailsComponent implements OnInit {
     this.as_.getTransport(id).then((res) => {
       // console.log("Trasports", res.data);
       this.trans = res.data[0].mode;
-      
-      
+
+
       // console.log("Mode", res.data[0].mode);
       this.availableModes = this.getAvailableModes();
       // console.log("available modes", this.availableModes);
@@ -164,31 +164,33 @@ export class ViewDeatailsComponent implements OnInit {
       console.error("error", err);
     })
   }
-  
-  
+
+
   ngOnDestroy() {
     clearInterval(this.autoSlideInterval);
   }
-  
+
   nextSlide() {
     this.currentIndex = (this.currentIndex + 1) % this.images.length;
   }
-  
+
   prevSlide() {
     this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
   }
-  
+
   getTransform(): string {
     return `translateX(-${this.currentIndex * 100}%)`;
   }
+
+
   opens: boolean = false;
-  
+
   showPopup: boolean = false;
-  
+
   openPopup(): void {
     this.showPopup = true;
   }
-  
+
   closePopup(): void {
     this.showPopup = false;
   }
@@ -203,7 +205,7 @@ export class ViewDeatailsComponent implements OnInit {
       ]
     }
   ];
-  
+
   transportModes = [
     { key: 'train', amount: 0, icon: 'fi fi-ts-subway' },
     { key: 'bus', amount: 0, icon: 'fi fi-ts-bus-alt' },
@@ -211,9 +213,9 @@ export class ViewDeatailsComponent implements OnInit {
     { key: 'car', amount: 0, icon: 'fi fi-ts-car-side' }
   ];
 
-  
+
   getAvailableModes(): any[] {
-    
+
     if (Array.isArray(this.trans)) {
       if (typeof this.trans[0] === 'object') {
         let transKeys = this.trans.map((t: any) => t.key);
@@ -228,7 +230,7 @@ export class ViewDeatailsComponent implements OnInit {
       console.warn("Invalid value for 'trans':", this.trans);
       return [];
     }
-    
+
   }
 
   selectedTransport: string = '';
@@ -241,65 +243,65 @@ export class ViewDeatailsComponent implements OnInit {
 
     this.calculateTotalAmount();  // 💡 Update total when transport changes
   }
-  
-  
+
+
   totalAmount: number = 0;
   showPopup1: boolean = false;
-  
+
   // Fix random prices once when component is loaded
   adultPrice: any;
   childPrice: any;
   // roomCharge = 2000;
-  
-  
+
+
   // addRoom(): void {
   //   this.rooms.push({
-    //     travellers: [
-      //       { type: 'Adult', ageGroup: '(12+ yrs)', count: 1 },
-      //       { type: 'Child ', ageGroup: '(12- yrs)', count: 0 },
-      //       { type: 'Infant', ageGroup: '(5- yrs)', count: 0 }
-      //     ]
-      //   });
-      //   this.calculateTotalAmount();  // Important!
-      // }
+  //     travellers: [
+  //       { type: 'Adult', ageGroup: '(12+ yrs)', count: 1 },
+  //       { type: 'Child ', ageGroup: '(12- yrs)', count: 0 },
+  //       { type: 'Infant', ageGroup: '(5- yrs)', count: 0 }
+  //     ]
+  //   });
+  //   this.calculateTotalAmount();  // Important!
+  // }
 
-      // removeRoom(index: number): void {
+  // removeRoom(index: number): void {
   //   this.rooms.splice(index, 1);
   //   this.calculateTotalAmount();
   // }
-  
+
   increaseCount(roomIndex: number, traveller: any): void {
     const label = traveller.type.toLowerCase();
     const currentCount = traveller.count;
 
     // if (label.includes('adult') && currentCount >= 2) {
-      //   alert('Maximum 2 Adults allowed per room.');
-      //   return;
+    //   alert('Maximum 2 Adults allowed per room.');
+    //   return;
     // }
     // if (label.includes('child') && currentCount >= 1) {
-      //   alert('Maximum 1 Child (with bed) allowed per room.');
-      //   return;
-      // }
-      // if (label.includes('infant') && currentCount >= 2) {
-        //   alert('Maximum 2 Infants allowed per room.');
-        //   return;
-        // }
-        
-        traveller.count++;
-        this.calculateTotalAmount();
-      }
-      
-      decreaseCount(roomIndex: number, traveller: any): void {
-        if (traveller.count > 0) {
-          traveller.count--;
-          this.calculateTotalAmount();
-        }
-      }
-      
-      randomRange(min: number, max: number): number {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+    //   alert('Maximum 1 Child (with bed) allowed per room.');
+    //   return;
+    // }
+    // if (label.includes('infant') && currentCount >= 2) {
+    //   alert('Maximum 2 Infants allowed per room.');
+    //   return;
+    // }
+
+    traveller.count++;
+    this.calculateTotalAmount();
   }
-  
+
+  decreaseCount(roomIndex: number, traveller: any): void {
+    if (traveller.count > 0) {
+      traveller.count--;
+      this.calculateTotalAmount();
+    }
+  }
+
+  randomRange(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   calculateTotalAmount(): void {
     let totalAdults = 0;
     let totalChildren = 0;
@@ -313,34 +315,34 @@ export class ViewDeatailsComponent implements OnInit {
         if (traveller.type.toLowerCase().includes('child')) {
           totalChildren += traveller.count;
         }
-        
+
       });
     });
     if (totalAdults === 0 && totalChildren === 0) {
       // totalRooms = 0;
     }
-    
+
     const totalAmount = (totalAdults * this.adultPrice) + (totalChildren * this.childPrice) + (this.transportPrice);
     this.totalAmount = totalAmount;
   }
-  
+
   // payment validation
-  
+
   validateForm(): boolean {
     // for (const room of this.rooms) {
-      //   for (const traveller of room.travellers) {
-        //     if (!traveller.count || traveller.count < 1) {
-          //       alert("Each traveller must have a count of at least 1.");
-          //       return false;
-          //     }
-          //   }
-          // }
-          for (let i = 0; i < this.rooms.length; i++) {
+    //   for (const traveller of room.travellers) {
+    //     if (!traveller.count || traveller.count < 1) {
+    //       alert("Each traveller must have a count of at least 1.");
+    //       return false;
+    //     }
+    //   }
+    // }
+    for (let i = 0; i < this.rooms.length; i++) {
       const room = this.rooms[i];
-      
+
       // Check if any traveller has count >= 1
       const hasValidTraveller = room.travellers.some(traveller => traveller.count && traveller.count >= 1);
-      
+
       if (!hasValidTraveller) {
         alert(`Room ${i + 1} must have at least one traveller (Adult, Child, or Infant).`);
         return false;
@@ -353,24 +355,24 @@ export class ViewDeatailsComponent implements OnInit {
       return false;
     }
 
-    
+
     const email = this.getEmailsesstion?.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
+
     if (!email || !emailRegex.test(email)) {
       alert("Please enter a valid email address.");
       return false;
     }
 
     const phone = this.phoneNumber;
-    
+
     const phoneRegex = /^\d{10}$/;
 
     if (!phone || !phoneRegex.test(phone.trim())) {
       alert("Please enter a valid 10-digit phone number.");
       return false;
     }
-    
+
     if (!this.termsAccepted) {
       alert("You must accept the terms and conditions.");
       return false;
@@ -400,69 +402,69 @@ export class ViewDeatailsComponent implements OnInit {
     this.showstartdate = starttourdate;
     this.endtdate = endtourdate;
     this.convertmonth = this.converMonth(starttourdate);
-    
+
     // console.log("dateid",id);
     // console.log("tourdate",this.startdate);
     // console.log("tourmonth",endtourdate);
     // console.log("tourmonth",this.selectedMonth);
   }
-  
+
   // conver month  no. to string 
   converMonth(date: string): string {
-    
+
     if (!date) return '';
     const [year, month, day] = date.split('-').map(Number);
     const datee = new Date(year, month - 1, day);
     // console.log("convert month date:", datee)
     // return datee.toLocaleString('default',{month:'short'},{year:'numer'});
     return datee.toLocaleString('default', { month: 'short', year: 'numeric' });
-    
+
   }
-  
-  getpackAndes(id:any){
-     this.as_.usedinviewforgetpackdata(id).then((res:any)=>{
-      console.log("get data for the payment",res)
-      this.destinationId=res.data.sub_destination.destination_id;
-      this.subdesId=res.data.sub_destination.sub_destination_id;
-      this.packagesId=res.data.package.package_id;  
-     }).catch((err:any)=>{
-      console.error("error comes:",err);
-     })
+
+  getpackAndes(id: any) {
+    this.as_.usedinviewforgetpackdata(id).then((res: any) => {
+      console.log("get data for the payment", res)
+      this.destinationId = res.data.sub_destination.destination_id;
+      this.subdesId = res.data.sub_destination.sub_destination_id;
+      this.packagesId = res.data.package.package_id;
+    }).catch((err: any) => {
+      console.error("error comes:", err);
+    })
   }
 
 
   closePopup11(): void {
     this.showPopup11 = false;
   }
-  
+
   nameOfUser: any;
   order: any
-  encryptedAmount:any;
+  encryptedAmount: any;
   submitForm() {
     if (!sessionStorage.getItem('token')) {
       alert('please firstly login or signUp')
       return;
     }
     this.order = new FormData;
-     this.countTravler();
-  this.as_.user_id = Number(sessionStorage.getItem('userid'));          
-    
+    this.countTravler();
+    this.as_.user_id = Number(sessionStorage.getItem('userid'));
+
     this.order.append('destinationId', this.as_.destination_id);
     this.order.append('subdesId', this.as_.subdes_id);
     this.order.append('packagesId', this.as_.package_id);
     this.order.append('monthId', this.as_.month_id);
     this.order.append('dateId', this.as_.date_id);
     this.order.append('userId', this.as_.user_id);
-  
-    
+
+
 
     if (this.validateForm()) {
-      this.totalAmount  
+      this.totalAmount
       // Encrypt totalAmount 3 times
-      
+
       for (let i = 0; i < 3; i++) {
-        
-      this.encryptedAmount = btoa(this.totalAmount.toString());
+
+        this.encryptedAmount = btoa(this.totalAmount.toString());
       }
       // Encrypt again with ((this.packageDetails.place_name).length - 1) times
       const encryptTimes = ((this.packageDetails.place_name)?.length ?? 1) - 1;
@@ -471,55 +473,55 @@ export class ViewDeatailsComponent implements OnInit {
         encrypted = btoa(encrypted);
       }
       this.encryptedAmount = encrypted;
-      
-          //  this.route.navigate([`/${this.totalAmount}/payment/${this.packageDetails.place_name}/${this.encryptedAmount}`])
+
+      //  this.route.navigate([`/${this.totalAmount}/payment/${this.packageDetails.place_name}/${this.encryptedAmount}`])
       // Suppose encryptedAmount is already calculated
-      
-this.route.navigate(
-  [
-    `/${this.totalAmount}/payment/${this.packageDetails.place_name}/${this.encryptedAmount}`
-  ],
-  { //  destinationId=undefined&subdesId=undefined
-    queryParams: {
-      destinationId: this.destinationId,
-      subdes: this.subdesId,
-      package:this.packagesId,
-      month: this.order.get('monthId'),
-      date: this.order.get('dateId'),
-      adult: this.order.get('adult'),
-      children: this.order.get('children'),
-      infant: this.order.get('infant')
-    }
-  }
-);
+
+      this.route.navigate(
+        [
+          `/${this.totalAmount}/payment/${this.packageDetails.place_name}/${this.encryptedAmount}`
+        ],
+        { //  destinationId=undefined&subdesId=undefined
+          queryParams: {
+            destinationId: this.destinationId,
+            subdes: this.subdesId,
+            package: this.packagesId,
+            month: this.order.get('monthId'),
+            date: this.order.get('dateId'),
+            adult: this.order.get('adult'),
+            children: this.order.get('children'),
+            infant: this.order.get('infant')
+          }
+        }
+      );
 
 
 
 
 
 
-// ******************************************i am comment this in 09/10/25  for add payment option  page******
+      // ******************************************i am comment this in 09/10/25  for add payment option  page******
       // this.slip = !this.slip;
       // this.avoidSlip = !this.avoidSlip;
       // // console.log("chck")
       // this.showPopup11 = false;
       // this.nameOfUser = sessionStorage.getItem('name');
-     
+
 
       //   this.as_.setorder(this.order).then((res)=>{
       // // console.log("data has come successfully set",res);
-    // }).catch((err)=>{
-    //   console.error(err)
-    // })
-   // ************** EMAIL FOR THE USER  WHEN DO iT ORDER ******************************  
-//     const user_order_mail =new FormData;
-//   user_order_mail.append('name',sessionStorage.getItem('name'));
-//   user_order_mail.append('email',sessionStorage.getItem('email'));
-// this.as_.orderEmail(user_order_mail).then((res:any)=>{
-//   // console.log("email api has been work");
-// }).catch((erro:any)=>{
-//   console.error(erro);
-// })
+      // }).catch((err)=>{
+      //   console.error(err)
+      // })
+      // ************** EMAIL FOR THE USER  WHEN DO iT ORDER ******************************  
+      //     const user_order_mail =new FormData;
+      //   user_order_mail.append('name',sessionStorage.getItem('name'));
+      //   user_order_mail.append('email',sessionStorage.getItem('email'));
+      // this.as_.orderEmail(user_order_mail).then((res:any)=>{
+      //   // console.log("email api has been work");
+      // }).catch((erro:any)=>{
+      //   console.error(erro);
+      // })
     }
   }
 
@@ -527,7 +529,7 @@ this.route.navigate(
     let totalAdults = 0;
     let totalChildren = 0;
     let totalInfants = 0;
-    
+
     for (const room of this.rooms) {
       for (const traveller of room.travellers) {
         const type = traveller.type.trim().toLowerCase(); // Normalize string
@@ -535,44 +537,44 @@ this.route.navigate(
           case 'adult':
             totalAdults += traveller.count || 0;
             break;
-            case 'child':
-              totalChildren += traveller.count || 0;
-              break;
-              case 'infant':
-                totalInfants += traveller.count || 0;
-                break;
-              }
-            }
-          }
+          case 'child':
+            totalChildren += traveller.count || 0;
+            break;
+          case 'infant':
+            totalInfants += traveller.count || 0;
+            break;
+        }
+      }
+    }
 
     this.order.append("adult", totalAdults);
     this.order.append("children", totalChildren);
     this.order.append("infant", totalInfants);
-  
+
 
 
     for (const pair of this.order.entries()) {
       // console.log("order data", `${pair[0]}: ${pair[1]}`);
-      
+
       // ******************************************************************************************************************** upadete form
     }
   }
-  
+
   printSlip() {
     const printContents = document.getElementById('printArea')?.innerHTML;
     if (!printContents) return;
-    
-    
+
+
     const popupWin = document.createElement('iframe');
     popupWin.style.position = 'absolute';
     popupWin.style.top = '-1000px';
     popupWin.style.left = '-1000px';
-    
+
     document.body.appendChild(popupWin);
     const doc = popupWin.contentWindow?.document;
     if (!doc) return;
 
-   
+
 
     doc.open();
     doc.write(`
@@ -636,28 +638,28 @@ this.route.navigate(
             </body>
             </html>
             `);
-            doc.close();
-          }
+    doc.close();
+  }
 
-          
-          getGallary(packageId: number) {
-            
-            this.as_.getGallaryForImage(packageId).then((res: any) => {
-              
+
+  getGallary(packageId: number) {
+
+    this.as_.getGallaryForImage(packageId).then((res: any) => {
+
       this.galleryImages = res.data.data[0].images;
-      
+
       if (!this.galleryImages) {
-        
+
         this.isnotgallary = false
         return;
       }
-      
+
       this.isnotgallary = true;
     }).catch((err) => {
       console.error("error:", err);
     })
   }
-  
+
 
 
 
@@ -666,32 +668,32 @@ this.route.navigate(
   openGallery() {
     this.showGallery = true;
   }
-  
+
   closeGallery() {
     this.showGallery = false;
   }
-  
+
   selectedImage: string | null = null;
-  
+
   viewImage(imageUrl: string) {
     this.selectedImage = imageUrl;
   };
 
 
 
-   submitInquiry(form: NgForm) {
+  submitInquiry(form: NgForm) {
     if (form.valid) {
       // console.log('Form Values:', form.value);
 
       // You can access each field like:
-    
-           form.reset();
-           alert("Inquiry submitted successfully!");
+
+      form.reset();
+      alert("Inquiry submitted successfully!");
       // TODO: Send this data to backend API
     } else {
       console.log('Form is invalid!');
     }
   }
 
-  
+
 }

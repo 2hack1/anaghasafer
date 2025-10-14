@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from "./shared/components/login/login.component";
@@ -13,7 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrl: './app.component.scss'
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -27,4 +27,10 @@ export class AppComponent {
   onActivate(event: any) {
     document.body.scrollTop = 0;
   }
+
+  ngOnInit(): void {
+    
+    const role = sessionStorage.setItem('role','user');
+  }
+
 }

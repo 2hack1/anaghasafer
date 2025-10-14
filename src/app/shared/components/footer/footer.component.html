@@ -15,6 +15,13 @@
   
       <div class="footer-column">
         <h3>TOP DESTINATIONS</h3>
+        <p *ngFor="let place of footerdata">
+          <a (click)="randorwithid(place.package_id)">{{ place.place_name }}</a>
+        </p>
+        <p><a href="https://admin.anaghasafar.com">Admin pannel</a></p>
+      </div>
+      <!-- <div class="footer-column">
+        <h3>TOP DESTINATIONS</h3>
         <p><a >Darjeeling, West Bengal</a></p>
         <p><a >Rishikesh, Uttarakhand</a></p>
     
@@ -24,7 +31,7 @@
         <p><a >Goa</a></p>
         <p><a href="#">Udaipur</a></p>
         <p><a href="https://admin.anaghasafar.com">Admin pannel</a></p>
-      </div>
+      </div> -->
   
       <div class="footer-column">
         <h3>RESPONSIBLE TOURISM AWARDS</h3>
@@ -32,11 +39,16 @@
   
         <div class="newsletter">
           <h3>NEWSLETTER</h3>
-          <div style="display: flex; gap: 5px; align-items: center;">
+          <!-- <div style="display: flex; gap: 5px; align-items: center;">
             <input type="email" placeholder="Email Address" />
             <button>SUBMIT</button>
-          </div>
-  
+          </div> -->
+  <div style="display: flex; gap: 5px; align-items: center;">
+  <input type="email" placeholder="Email Address" [(ngModel)]="email" />
+  <button (click)="submitEmail()">SUBMIT</button>
+</div>
+<p *ngIf="message" style="color: green">{{ message }}</p>
+
         </div>
   
         <h3>FOLLOW US</h3>

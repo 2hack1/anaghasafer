@@ -76,6 +76,7 @@ export class HomeComponent implements OnInit {
       // this.getSubLimit(this.international);
     })()
 this.checkScreenSize();
+
   }
 
 
@@ -290,7 +291,7 @@ this.checkScreenSize();
     this.router.navigate(['/view', package_id]);
     //  console.log("subdesid",subdesid);
   }
-}
 
+}
 
 

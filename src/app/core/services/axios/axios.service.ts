@@ -28,6 +28,10 @@ hotelCityData: any = null;   // ✅ store shared data here
   // ***************************  last page;
   roomtype:'';
   // ***********************
+// for can acative guard  ************************
+utilization:any;
+tokenization:any;
+// *******************
 
   constructor() {
     this.api = axios.create({
@@ -238,4 +242,8 @@ hotelCityData: any = null;   // ✅ store shared data here
     return this.api.get(`/view/getfor/payment/${id}`);
     }
 
+    footerShowPackageName(){
+      // http://localhost:8000/api/footer/packages
+      return this.api.get('/footer/packages');
+    }
 }
