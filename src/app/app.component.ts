@@ -5,7 +5,6 @@ import { LoginComponent } from "./shared/components/login/login.component";
 
 import { Router, NavigationEnd } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AxiosService } from './core/services/axios/axios.service';
 
 @Component({
   selector: 'app-root',
@@ -15,43 +14,13 @@ import { AxiosService } from './core/services/axios/axios.service';
 })
 
 export class AppComponent implements OnInit {
-   isLoginPage: boolean = false;   // ✅ Add this
-    status: 'active' | 'deactive' = 'deactive';
-  constructor(private router: Router ,private user:AxiosService) {
-    // this.router.events.subscribe(event => {
-    //   if (event instanceof NavigationEnd) {
-    //     window.scroll(0, 0);
-    //   }
-    // });
+  constructor(private router: Router) {
     this.router.events.subscribe(event => {
-          const role = sessionStorage.setItem('role','user');
-  if (event instanceof NavigationEnd) {
-    const url = event.urlAfterRedirects;
-
-    const loginLikePages = ['/home', '/login', '/hotelVendorForm'];
-    this.isLoginPage = loginLikePages.some(page => url.startsWith(page));
-
-    const role = sessionStorage.getItem('role');
-
-    const isDeskboard = url.startsWith('/home');
-
-    // 🔒 Example role handling
-    if ( role === 'user') {
-      if (!isDeskboard) {
-        this.router.navigate(['/home']);
-        return;
+      if (event instanceof NavigationEnd) {
+        window.scroll(0, 0);
       }
-    }
-
-    // Handle other roles...
-  }
-});
-
-this.user.state$.subscribe(state => {
-      this.status = state as 'active' | 'deactive';
     });
 
- 
   }
 
   // Handle scroll-top issue
@@ -61,15 +30,11 @@ this.user.state$.subscribe(state => {
 
   ngOnInit(): void {
     
-
+    const role = sessionStorage.setItem('role','user');
     // Redirect only if user is at the root ("/")
   // if (this.router.url === '/' || this.router.url === '') {
   //   this.router.navigate(['/home']);
   // }
   }
-    
-    
-
-
 
 }

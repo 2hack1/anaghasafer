@@ -9,12 +9,12 @@ import { provideHttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 export const appConfig: ApplicationConfig = {
   providers: [
-    // provideRouter(routes, withHashLocation()),
+    provideRouter(routes, withHashLocation()),
     provideHttpClient(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideBrowserGlobalErrorListeners(),
     provideAnimations(),
-    provideRouter(routes),
+    // provideRouter(routes),
     {
       provide: APP_BASE_HREF,
       useValue: '/'
