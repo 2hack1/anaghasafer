@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios, { AxiosInstance } from 'axios';
 import { environment } from '../../../../environments/environment.development';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { data } from 'jquery';
 import { Form } from '@angular/forms';
 
@@ -32,7 +32,13 @@ hotelCityData: any = null;   // ✅ store shared data here
 utilization:any;
 tokenization:any;
 // *******************
+  private stateSubject = new BehaviorSubject<string>('deactive');
+  state$ = this.stateSubject.asObservable();
 
+  toggle() {
+    const newState = this.stateSubject.getValue() === 'active' ? 'deactive' : 'active';
+    this.stateSubject.next(newState);
+  }
   constructor() {
     this.api = axios.create({
       baseURL: environment.base_url, // Laravel API base URL

@@ -59,8 +59,6 @@ export const routes: Routes = [
         path: "home/about",
         component: AboutusComponent,
         //    canActivate: [authGuard]
-         
-
     }, 
     {
         path: "ReviewSliderComponent",
