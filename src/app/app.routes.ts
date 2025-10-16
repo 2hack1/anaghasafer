@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 import { HomeComponent } from './shared/components/home/home.component';
-
 import { StatestoursComponent } from './shared/components/statestours/statestours.component';
 import { DestinationtourComponent } from './shared/components/destinationtour/destinationtour.component';
 import { ViewDeatailsComponent } from './shared/components/view-deatails/view-deatails.component';
@@ -22,15 +20,16 @@ import { BlogComponent } from './shared/components/blog/blog.component';
 import { AllreviewsComponent } from './shared/components/allreviews/allreviews.component';
 import { PaymentDestinationComponent } from './shared/components/payment-destination/payment-destination.component';
 import { NotfoundpageComponent } from './shared/components/notfoundpage/notfoundpage.component';
-import { authGuard } from './core/services/auth.guard';
+
 
 
 export const routes: Routes = [
     {
         path: '',
         component: HomeComponent,
-        canActivate: [authGuard]
-    }, {
+        // canActivate: [authGuard]
+    },
+     {
         path: 'home',
         component: HomeComponent, 
     },
@@ -54,12 +53,12 @@ export const routes: Routes = [
     {
         path: "home/contact",
         component: ContactusComponent,
-         canActivate: [authGuard]
+        //  canActivate: [authGuard]
     },
     {
         path: "home/about",
         component: AboutusComponent,
-           canActivate: [authGuard]
+        //    canActivate: [authGuard]
          
 
     }, 
