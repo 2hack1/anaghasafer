@@ -14,6 +14,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 
 export class AppComponent implements OnInit {
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -32,9 +35,9 @@ export class AppComponent implements OnInit {
     
     const role = sessionStorage.setItem('role','user');
     // Redirect only if user is at the root ("/")
-  // if (this.router.url === '/' || this.router.url === '') {
-  //   this.router.navigate(['/home']);
-  // }
+//   if (this.router.url === '/' || this.router.url === '') {
+//     this.router.navigate(['/home']);
+//   }
   }
 
 }
