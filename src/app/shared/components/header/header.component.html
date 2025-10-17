@@ -115,7 +115,7 @@
      
       </div>
     </div>
-
+<!-- 
     <div class="right-part menu">
       <div *ngFor="let item of [1]" style="display: flex;">
         <a [routerLink]="['/']" style="text-decoration: none; color: black;">
@@ -127,12 +127,31 @@
         <a [routerLink]="['/about']" style="text-decoration: none; color: black;">
           <p class="menu-items">About</p>
         </a>
-        <a [routerLink]="['/states']" style="text-decoration: none; color: black;">
-          <p class="menu-items">Tour & Trips</p>
+        <a [routerLink]="['/socialimpact']"  style="text-decoration: none; color: black;">
+          <p class="menu-items">Social Impact</p>
         </a>
        
       </div>
-    </div>
+    </div> -->
+  
+  <div class="right-part menu">
+  <div style="display: flex;">
+    <a [routerLink]="['/']" [ngClass]="{'active-menu': isActive('/')}" style="text-decoration: none; color: black;">
+      <p class="menu-items">Home</p>
+    </a>
+    <a [routerLink]="['/contact']" [ngClass]="{'active-menu': isActive('/contact')}" style="text-decoration: none; color: black;">
+      <p class="menu-items">Contact</p>
+    </a>
+    <a [routerLink]="['/about']" [ngClass]="{'active-menu': isActive('/about')}" style="text-decoration: none; color: black;">
+      <p class="menu-items">About</p>
+    </a>
+    <a [routerLink]="['/socialimpact']" [ngClass]="{'active-menu': isActive('/socialimpact')}" style="text-decoration: none; color: black;">
+      <p class="menu-items">Social Impact</p>
+    </a>
+  </div>
+</div>
+
+
   </div>
 </nav>
 

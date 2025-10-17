@@ -89,4 +89,13 @@ footer {
     }
   }
   
-  
+  a {
+  color: #000;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.active-menu {
+  color: #ff6600; /* Highlight for active link */
+  font-weight: bold;
+}

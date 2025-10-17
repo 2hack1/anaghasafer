@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { AxiosService } from '../../../core/services/axios/axios.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,12 +15,20 @@ export class FooterComponent implements OnInit {
 
   email: string = '';
   message: string = '';
+   activeRoute: string = '';
   constructor(private as_: AxiosService, private route: Router) { }
   ngOnInit(): void {
+    this.route.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.activeRoute = event.urlAfterRedirects;
+      }
+    });
     this.footerData();
     this.pushDataForGuard();
   }
-
+isActive(route: string): boolean {
+    return this.activeRoute === route;
+  }
   pushDataForGuard(){
 
   // Generate two random long values and encrypt them (simple base64 encoding for demonstration)

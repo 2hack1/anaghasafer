@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { LoginComponent } from "../login/login.component";
 import { trigger, animate, style, state, transition } from "@angular/animations"
-import { Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { UserServicesService } from '../../../core/services/userService/user-services.service';
 import { ForgetpasspopupComponent } from '../forgetpasspopup/forgetpasspopup.component';
 
@@ -56,8 +56,16 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn: boolean = false;
 
-
+activeRoute: string = '';
   ngOnInit(): void {
+       this.route.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.activeRoute = event.urlAfterRedirects;
+      }
+    });
+  
+
+
     // const token = localStorage.getItem('token');
     // this.isLoggedIn = !!token;  
     this.name=sessionStorage.getItem('name')
@@ -72,7 +80,10 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-
+  isActive(route: string): boolean {
+    return this.activeRoute === route;
+  }
+  
   someFunction() {
     console.log("Function in UserProfileComponent called from Header!");
     this.forgetpass=!this.forgetpass;

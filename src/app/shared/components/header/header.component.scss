@@ -486,3 +486,15 @@ nav {
 //   width: 90%;
 //   position: relative;    /* needed for z-index inside overlay if needed */
 }
+
+
+.menu-items {
+  color: black;
+  transition: color 0.3s;
+}
+
+.active-menu .menu-items {
+  color: #ff6600; /* Highlight color for selected menu */
+  font-weight: bold;
+}
+

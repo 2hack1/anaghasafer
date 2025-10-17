@@ -1389,3 +1389,23 @@ table {
   opacity: 0.5;
   pointer-events: none; /* Prevents click */
 }
+
+
+/* Hide mobile slider on desktop */
+.desktop-slider {
+    display: block;
+}
+
+.mobile-slider {
+    display: none;
+}
+
+/* Show mobile slider and hide desktop on small screens */
+@media (max-width: 768px) {
+    .desktop-slider {
+        display: none;
+    }
+    .mobile-slider {
+        display: block;
+    }
+}
