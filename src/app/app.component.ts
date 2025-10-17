@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     
-    const role = sessionStorage.setItem('role','user');
+    // const role = sessionStorage.setItem('role','user');
     // Redirect only if user is at the root ("/")
 //   if (this.router.url === '/' || this.router.url === '') {
 //     this.router.navigate(['/home']);

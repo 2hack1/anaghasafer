@@ -29,10 +29,6 @@ export const routes: Routes = [
         component: HomeComponent,
         // canActivate: [authGuard]
     },
-     {
-        path: 'home',
-        component: HomeComponent, 
-    },
     {
         path: 'dss',
         component: FilterpackagesComponent,

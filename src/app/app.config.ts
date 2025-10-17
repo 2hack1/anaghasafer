@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     // provideRouter(routes, withHashLocation()),
     provideHttpClient(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideBrowserGlobalErrorListeners(),
+    // provideBrowserGlobalErrorListeners(),
     provideAnimations(),
     provideRouter(routes),
     {
