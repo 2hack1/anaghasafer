@@ -24,14 +24,22 @@ import { NotfoundpageComponent } from './shared/components/notfoundpage/notfound
 
 
 export const routes: Routes = [
+    // {
+    //     path: '/',
+    //     component: HomeComponent,
+    //     // canActivate: [authGuard]
+    // },
+    //  {
+    //     path: 'home',
+    //     component: HomeComponent, 
+    // },
     {
         path: '',
-        component: HomeComponent,
-        // canActivate: [authGuard]
-    },
-     {
+        redirectTo: 'home',
+        pathMatch: 'full'
+    }, {
         path: 'home',
-        component: HomeComponent, 
+        component: HomeComponent,
     },
     {
         path: 'dss',
@@ -59,7 +67,7 @@ export const routes: Routes = [
         path: "home/about",
         component: AboutusComponent,
         //    canActivate: [authGuard]
-    }, 
+    },
     {
         path: "ReviewSliderComponent",
         component: ReviewSliderComponent
