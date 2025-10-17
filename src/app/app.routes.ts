@@ -51,12 +51,12 @@ export const routes: Routes = [
         component: ViewDeatailsComponent
     },
     {
-        path: "home/contact",
+        path: "contact",
         component: ContactusComponent,
         //  canActivate: [authGuard]
     },
     {
-        path: "home/about",
+        path: "about",
         component: AboutusComponent,
         //    canActivate: [authGuard]
     }, 
